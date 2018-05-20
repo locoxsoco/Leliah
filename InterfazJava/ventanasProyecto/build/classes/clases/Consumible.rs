@@ -1,0 +1,2 @@
+Categoria_Consumible
+Consumible
