@@ -5,6 +5,9 @@
  */
 package AccesoDatos;
 
+import clases.Servicio;
+import java.util.ArrayList;
+
 /**
  *
  * @author Andres
@@ -12,5 +15,10 @@ package AccesoDatos;
 public class ServicioDA {
     public ServicioDA(){
         
+    }
+    
+    public ArrayList<Servicio> listarServicios(){
+        ArrayList<Servicio> l = new ArrayList<Servicio>();
+        return l;
     }
 }

@@ -1,3 +1,4 @@
+package clases;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,6 @@ public class Libreria{
 	private List<Venta> listVenta;
 	private List<Compra> listCompra;
 	private List<Proveedor> listProveedor;
-	private List<Proyecto> listProyecto;
 	private List<Trabajador> listTrabajador;
 
 	public String getNombre(){
@@ -81,14 +81,6 @@ public class Libreria{
 		this.listProveedor=_listProveedor;
 	}
 
-	public List<Proyecto> getListProyecto(){
-		return listProyecto;
-	}
-
-	public void setListProyecto (List<Proyecto> _listProyecto){
-		this.listProyecto=_listProyecto;
-	}
-
 	public List<Trabajador> getListTrabajador(){
 		return listTrabajador;
 	}
@@ -105,7 +97,6 @@ public class Libreria{
 		this.listCliente=new ArrayList<Cliente>();
 		this.listCompra=new ArrayList<Compra>();
 		this.listProveedor=new ArrayList<Proveedor>();
-		this.listProyecto=new ArrayList<Proyecto>();
 		this.listTrabajador=new ArrayList<Trabajador>();
 		this.listVenta=new ArrayList<Venta>();
 	}

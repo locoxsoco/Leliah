@@ -6,6 +6,8 @@
 package LogicaNegocio;
 
 import AccesoDatos.ServicioDA;
+import clases.Servicio;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +18,11 @@ public class ServicioBL {
     
     public ServicioBL(){
         accesoDatos = new ServicioDA();
+    }
+    
+    
+    public ArrayList<Servicio> listarServicios(){
+        return accesoDatos.listarServicios();
     }
     
 }

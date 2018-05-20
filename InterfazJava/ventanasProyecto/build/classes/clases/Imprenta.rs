@@ -1,3 +1,0 @@
-TipoImprenta
-TipoColor
-Imprenta

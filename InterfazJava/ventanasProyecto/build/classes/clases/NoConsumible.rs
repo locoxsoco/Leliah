@@ -1,2 +1,0 @@
-Categoria_NoConsumible
-NoConsumible
