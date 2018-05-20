@@ -25,7 +25,7 @@ public class ServicioDA {
     public ArrayList<Servicio> listarServicios() throws ClassNotFoundException, SQLException{
         ArrayList<Servicio> lista = new ArrayList<Servicio>();
         Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/a20152131?useSSL=false","a20152131","9ygVHD");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
         String sql = "{call CANT_NOMBRE_MED_ESP()}";
         CallableStatement stmt = con.prepareCall(sql);
         
