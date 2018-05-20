@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.util.Date;
 public class Servicio {
     private String nombre;
-    private float precioxUnit;
+    private double precioxUnit;
     private int id;
 	
     public int getId(){
@@ -27,15 +27,19 @@ public class Servicio {
         this.nombre = nombre;
     }
 	
-	public float getprecioxUnit() {
+	public double getprecioxUnit() {
         return precioxUnit;
     }
-    public void setprecioxUnit(float precioxUnit) {
-        this.nombre = nombre;
+    public void setprecioxUnit(double precioxUnit) {
+        this.precioxUnit = precioxUnit;
     }
 	
     public Servicio(String nombre,float precioxUnit){
         this.nombre=nombre;
 		this.precioxUnit=precioxUnit;
+    }
+    
+    public Servicio(){
+        
     }
 }

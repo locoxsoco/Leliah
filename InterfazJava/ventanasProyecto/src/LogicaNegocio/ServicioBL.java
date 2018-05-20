@@ -7,6 +7,7 @@ package LogicaNegocio;
 
 import AccesoDatos.ServicioDA;
 import clases.Servicio;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +22,7 @@ public class ServicioBL {
     }
     
     
-    public ArrayList<Servicio> listarServicios(){
+    public ArrayList<Servicio> listarServicios() throws ClassNotFoundException, SQLException{
         return accesoDatos.listarServicios();
     }
     

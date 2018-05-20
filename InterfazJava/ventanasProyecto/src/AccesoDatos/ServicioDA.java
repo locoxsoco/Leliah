@@ -6,6 +6,11 @@
 package AccesoDatos;
 
 import clases.Servicio;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -17,8 +22,23 @@ public class ServicioDA {
         
     }
     
-    public ArrayList<Servicio> listarServicios(){
-        ArrayList<Servicio> l = new ArrayList<Servicio>();
-        return l;
+    public ArrayList<Servicio> listarServicios() throws ClassNotFoundException, SQLException{
+        ArrayList<Servicio> lista = new ArrayList<Servicio>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/a20152131?useSSL=false","a20152131","9ygVHD");
+        String sql = "{call CANT_NOMBRE_MED_ESP()}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            //agregar elementos a lista
+            Servicio s = new Servicio();
+            s.SetId(rs.getInt("ID_SERVICIO"));
+            s.setNombre(rs.getString("NOMBRE"));
+            s.setprecioxUnit(rs.getDouble("PRECIO_U"));
+        }
+        con.close();
+        return lista;
     }
 }

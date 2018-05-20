@@ -1,3 +1,0 @@
-TipoDocumento
-Venta
-TipoPago
