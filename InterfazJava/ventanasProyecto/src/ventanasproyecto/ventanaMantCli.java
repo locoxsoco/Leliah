@@ -119,66 +119,66 @@ public class ventanaMantCli extends javax.swing.JFrame {
         dirtxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         dirtxt.setText("Direccion:");
         getContentPane().add(dirtxt);
-        dirtxt.setBounds(330, 180, 64, 16);
+        dirtxt.setBounds(10, 250, 64, 16);
 
         emailtxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         emailtxt.setText("Correo:");
         getContentPane().add(emailtxt);
-        emailtxt.setBounds(330, 210, 49, 16);
+        emailtxt.setBounds(10, 280, 49, 16);
 
         tlftxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         tlftxt.setText("Telefono:");
         getContentPane().add(tlftxt);
-        tlftxt.setBounds(330, 240, 60, 16);
+        tlftxt.setBounds(10, 310, 60, 16);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("Tipo Cliente:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(10, 60, 79, 16);
         getContentPane().add(dir);
-        dir.setBounds(460, 180, 200, 20);
+        dir.setBounds(140, 250, 200, 22);
         getContentPane().add(email);
-        email.setBounds(460, 210, 200, 20);
+        email.setBounds(140, 280, 200, 22);
         getContentPane().add(tlf);
-        tlf.setBounds(460, 240, 200, 20);
+        tlf.setBounds(140, 310, 200, 22);
 
         Tdni.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Tdni.setText("DNI:");
         getContentPane().add(Tdni);
-        Tdni.setBounds(334, 65, 27, 16);
+        Tdni.setBounds(10, 130, 27, 16);
 
         TapPat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TapPat.setText("Apellido Paterno:");
         getContentPane().add(TapPat);
-        TapPat.setBounds(334, 94, 112, 16);
+        TapPat.setBounds(10, 190, 112, 16);
 
         TapMat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TapMat.setText("Apellido Materno:");
         getContentPane().add(TapMat);
-        TapMat.setBounds(330, 120, 115, 16);
+        TapMat.setBounds(10, 220, 115, 16);
         getContentPane().add(dni);
-        dni.setBounds(459, 62, 200, 20);
+        dni.setBounds(140, 130, 200, 22);
         getContentPane().add(apPat);
-        apPat.setBounds(459, 91, 200, 20);
+        apPat.setBounds(140, 190, 200, 22);
         getContentPane().add(apMat);
-        apMat.setBounds(459, 120, 200, 20);
+        apMat.setBounds(140, 220, 200, 22);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel10.setText("Datos Personales:");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(334, 33, 135, 19);
+        jLabel10.setBounds(10, 100, 135, 19);
 
         Truc.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Truc.setText("RUC:");
         getContentPane().add(Truc);
-        Truc.setBounds(690, 60, 30, 16);
+        Truc.setBounds(390, 130, 30, 16);
 
         Trazon.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Trazon.setText("Razon Social:");
         getContentPane().add(Trazon);
-        Trazon.setBounds(690, 90, 90, 16);
+        Trazon.setBounds(390, 160, 90, 16);
         getContentPane().add(ruc);
-        ruc.setBounds(810, 60, 200, 20);
+        ruc.setBounds(510, 130, 200, 22);
 
         razon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +186,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(razon);
-        razon.setBounds(810, 90, 200, 20);
+        razon.setBounds(510, 160, 200, 20);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -194,7 +194,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Tipo Cliente", "Nombre", "DNI", "Apellido Paterno", "Apellido Materno", "RUC", "Razon Social", "Direccion", "Telefono", "Correo"
+                "ID", "Tipo Cliente", "DNI/RUC", "Nombre", "Direccion", "Telefono", "Correo"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -205,12 +205,12 @@ public class ventanaMantCli extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(9, 347, 1067, 170);
+        jScrollPane1.setBounds(9, 347, 700, 170);
 
         namaetxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         namaetxt.setText("Nombre:");
         getContentPane().add(namaetxt);
-        namaetxt.setBounds(330, 150, 80, 20);
+        namaetxt.setBounds(10, 160, 80, 20);
 
         namae.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +218,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(namae);
-        namae.setBounds(460, 150, 200, 20);
+        namae.setBounds(140, 160, 200, 22);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -229,7 +229,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(750, 290, 100, 40);
+        registrar.setBounds(390, 290, 100, 40);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
         modificar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -240,7 +240,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(870, 290, 95, 40);
+        modificar.setBounds(510, 290, 95, 40);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -253,7 +253,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(980, 290, 90, 40);
+        eliminar.setBounds(620, 290, 90, 40);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
         jButton4.setText("Volver");
@@ -263,7 +263,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(799, 570, 120, 29);
+        jButton4.setBounds(440, 540, 120, 29);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
         jButton5.setText("Cerrar Sesión");
@@ -273,7 +273,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(931, 570, 140, 29);
+        jButton5.setBounds(570, 540, 140, 29);
 
         tipoCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja...", "Persona", "Empresa" }));
         tipoCli.addActionListener(new java.awt.event.ActionListener() {
@@ -282,17 +282,17 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipoCli);
-        tipoCli.setBounds(100, 60, 201, 20);
+        tipoCli.setBounds(100, 60, 201, 22);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel7.setText("Datos Empresa:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(686, 33, 130, 19);
+        jLabel7.setBounds(390, 100, 130, 19);
 
         tlf1txt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         tlf1txt.setText("Telefono:");
         getContentPane().add(tlf1txt);
-        tlf1txt.setBounds(690, 180, 70, 20);
+        tlf1txt.setBounds(390, 250, 70, 20);
 
         dir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,7 +300,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dir1);
-        dir1.setBounds(810, 120, 200, 20);
+        dir1.setBounds(510, 190, 200, 20);
 
         email1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,17 +308,17 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(email1);
-        email1.setBounds(810, 150, 200, 20);
+        email1.setBounds(510, 220, 200, 22);
 
         dir1txt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         dir1txt.setText("Direccion:");
         getContentPane().add(dir1txt);
-        dir1txt.setBounds(690, 120, 70, 20);
+        dir1txt.setBounds(390, 190, 70, 20);
 
         email1txt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         email1txt.setText("Correo:");
         getContentPane().add(email1txt);
-        email1txt.setBounds(690, 150, 70, 20);
+        email1txt.setBounds(390, 220, 70, 20);
 
         tlf1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,7 +326,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tlf1);
-        tlf1.setBounds(810, 180, 200, 20);
+        tlf1.setBounds(510, 250, 200, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -358,15 +358,6 @@ public class ventanaMantCli extends javax.swing.JFrame {
         razon.setText("");
         
     }//GEN-LAST:event_registrarActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
-        if(YesOrNo == 0){
-            anterior.setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private boolean validarInput(){
         String s = this.dir.getText();
@@ -728,6 +719,15 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private void tlf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlf1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tlf1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            anterior.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

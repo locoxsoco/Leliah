@@ -69,27 +69,27 @@ public class ventanaManProv extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 45, 41, 14);
+        jLabel2.setBounds(30, 45, 80, 16);
 
         jLabel3.setText("RUC:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 74, 25, 14);
+        jLabel3.setBounds(30, 74, 80, 16);
 
         jLabel4.setText("Dirección:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 103, 47, 14);
+        jLabel4.setBounds(30, 103, 80, 16);
 
         jLabel5.setText("Correo:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 132, 37, 14);
+        jLabel5.setBounds(30, 132, 80, 16);
 
         jLabel6.setText("Telefono:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(30, 161, 46, 14);
+        jLabel6.setBounds(30, 161, 80, 16);
 
         jLabel7.setText("Día Visita:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(30, 190, 47, 14);
+        jLabel7.setBounds(30, 190, 80, 16);
 
         dir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,13 +97,13 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dir);
-        dir.setBounds(106, 100, 200, 20);
+        dir.setBounds(120, 100, 200, 22);
         getContentPane().add(ruc);
-        ruc.setBounds(106, 71, 200, 20);
+        ruc.setBounds(120, 70, 200, 22);
         getContentPane().add(nombre);
-        nombre.setBounds(106, 42, 200, 20);
+        nombre.setBounds(120, 40, 200, 22);
         getContentPane().add(tlf);
-        tlf.setBounds(106, 158, 200, 20);
+        tlf.setBounds(120, 160, 200, 22);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -181,9 +181,9 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dia);
-        dia.setBounds(106, 187, 118, 20);
+        dia.setBounds(120, 190, 118, 22);
         getContentPane().add(email);
-        email.setBounds(106, 129, 200, 20);
+        email.setBounds(120, 130, 200, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
