@@ -11,7 +11,16 @@ public class Servicio {
     private String nombre;
     private double precioxUnit;
     private int id;
+    private String moneda;
 	
+    public String getMoneda(){
+        return moneda;
+    }
+    
+    public void SetMoneda(String moneda){
+        this.moneda = moneda;
+    }
+    
     public int getId(){
         return id;
     }

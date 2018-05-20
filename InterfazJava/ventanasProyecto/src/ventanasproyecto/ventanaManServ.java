@@ -61,7 +61,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         registrar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        moneda = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(450, 520));
@@ -163,9 +163,9 @@ public class ventanaManServ extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(15, 110, 110, 16);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja..", "Soles", "Dólares" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(135, 110, 70, 22);
+        moneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja..", "Soles", "Dólares" }));
+        getContentPane().add(moneda);
+        moneda.setBounds(135, 110, 70, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -224,6 +224,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         Servicio s = new Servicio();
         s.setNombre(nombre.getText());
         s.setprecioxUnit(Double.parseDouble(pu.getText()));
+        s.SetMoneda(moneda.getSelectedItem().toString());
         try {
             LogicaNegocio.registrarServicio(s);
         } catch (ClassNotFoundException ex) {
@@ -231,7 +232,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Object o[] = {s.getId(), s.getNombre(), s.getprecioxUnit()};
+        Object o[] = {s.getId(), s.getNombre(), s.getprecioxUnit(), s.getMoneda()};
         model.addRow(o);
         nombre.setText("");
         pu.setText("");
@@ -286,13 +287,13 @@ public class ventanaManServ extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
+    private javax.swing.JComboBox<String> moneda;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField pu;
     private javax.swing.JButton registrar;

@@ -50,6 +50,7 @@ public class ServicioDA {
         
         stmt.setString("_nombre", s.getNombre());
         stmt.setDouble("_precioUnitario", s.getprecioxUnit());
+        stmt.setString("_moneda", s.getMoneda());
         stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
