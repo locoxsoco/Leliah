@@ -26,4 +26,8 @@ public class ServicioBL {
         return accesoDatos.listarServicios();
     }
     
+    public void registrarServicio(Servicio s) throws ClassNotFoundException, SQLException{
+        accesoDatos.registrarServicio(s);
+    }
+    
 }

@@ -26,7 +26,7 @@ public class ServicioDA {
         ArrayList<Servicio> lista = new ArrayList<Servicio>();
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call CANT_NOMBRE_MED_ESP()}";
+        String sql = "{call LISTAR_SERVICIO()}";
         CallableStatement stmt = con.prepareCall(sql);
         
         
@@ -40,5 +40,22 @@ public class ServicioDA {
         }
         con.close();
         return lista;
+    }
+    
+    public void registrarServicio(Servicio s) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call REGISTRAR_SERVICIO(?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_nombre", s.getNombre());
+        stmt.setDouble("_precioUnitario", s.getprecioxUnit());
+        stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
+        
+        stmt.executeUpdate();
+        
+        s.SetId(stmt.getInt("_id"));
+        
+        con.close();
     }
 }

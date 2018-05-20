@@ -5,6 +5,11 @@
  */
 package ventanasproyecto;
 
+import LogicaNegocio.ServicioBL;
+import clases.Servicio;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +23,7 @@ public class ventanaManServ extends javax.swing.JFrame {
      */
     public ventanaManServ() {
         initComponents();
-        
+        LogicaNegocio = new ServicioBL();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(210);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(30);
@@ -31,6 +36,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         idU = 0;
     }
     int idU;
+    private ServicioBL LogicaNegocio;
     ventanaAdmin ventanaAnterior;
     ventanaLogin ventanaHome;
     /**
@@ -164,6 +170,8 @@ public class ventanaManServ extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    
+    
     private boolean isDouble(String cadena) {
 
         boolean resultado;
@@ -213,9 +221,18 @@ public class ventanaManServ extends javax.swing.JFrame {
         boolean a = validarInput();
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        idU++;
-        Object s[] = {idU, nombre.getText(), pu.getText()};
-        model.addRow(s);
+        Servicio s = new Servicio();
+        s.setNombre(nombre.getText());
+        s.setprecioxUnit(Double.parseDouble(pu.getText()));
+        try {
+            LogicaNegocio.registrarServicio(s);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Object o[] = {s.getId(), s.getNombre(), s.getprecioxUnit()};
+        model.addRow(o);
         nombre.setText("");
         pu.setText("");
     }//GEN-LAST:event_registrarActionPerformed
