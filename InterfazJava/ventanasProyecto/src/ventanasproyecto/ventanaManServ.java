@@ -77,9 +77,9 @@ public class ventanaManServ extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(15, 85, 110, 16);
         getContentPane().add(nombre);
-        nombre.setBounds(135, 55, 200, 20);
+        nombre.setBounds(135, 55, 200, 22);
         getContentPane().add(pu);
-        pu.setBounds(135, 82, 70, 20);
+        pu.setBounds(135, 82, 70, 22);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -130,7 +130,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(220, 150, 80, 23);
+        modificar.setBounds(180, 150, 90, 25);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setText("Registrar");
@@ -140,7 +140,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(120, 150, 80, 23);
+        registrar.setBounds(60, 150, 90, 25);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setText("Eliminar");
@@ -150,16 +150,16 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(320, 150, 80, 23);
+        eliminar.setBounds(300, 150, 90, 25);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel4.setText("Tipo de Moneda:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(15, 110, 110, 16);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja..", "S/", "$" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja..", "Soles", "Dólares" }));
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(135, 110, 70, 20);
+        jComboBox1.setBounds(135, 110, 70, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
