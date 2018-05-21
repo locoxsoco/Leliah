@@ -1,4 +1,0 @@
-clases.NoConsumible
-Categoria_NoConsumible
-NoConsumible
-clases.Categoria_NoConsumible

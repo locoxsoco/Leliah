@@ -1,4 +1,0 @@
-clases.Consumible
-Categoria_Consumible
-Consumible
-clases.Categoria_Consumible
