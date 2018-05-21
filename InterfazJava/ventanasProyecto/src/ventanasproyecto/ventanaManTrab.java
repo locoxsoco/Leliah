@@ -252,32 +252,32 @@ public class ventanaManTrab extends javax.swing.JFrame {
         getContentPane().add(jButton5);
         jButton5.setBounds(749, 500, 110, 29);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/fondo2.jpg"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
         jLabel11.setText("jLabel4");
         getContentPane().add(jLabel11);
         jLabel11.setBounds(-90, 0, 470, 270);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/fondo2.jpg"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
         jLabel9.setText("jLabel4");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(-90, 260, 470, 310);
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/fondo2.jpg"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
         jLabel13.setText("jLabel4");
         getContentPane().add(jLabel13);
         jLabel13.setBounds(320, 0, 500, 270);
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/fondo2.jpg"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
         jLabel12.setText("jLabel4");
         getContentPane().add(jLabel12);
         jLabel12.setBounds(760, 0, 320, 270);
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/fondo2.jpg"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
         jLabel14.setText("jLabel4");
         getContentPane().add(jLabel14);
         jLabel14.setBounds(320, 260, 500, 310);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/fondo2.jpg"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
         jLabel10.setText("jLabel4");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(770, 260, 300, 310);

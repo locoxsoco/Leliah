@@ -65,7 +65,7 @@ public class ventanaLogin extends javax.swing.JFrame {
         getContentPane().add(pass);
         pass.setBounds(180, 370, 155, 30);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logan.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logan.png"))); // NOI18N
         getContentPane().add(jLabel5);
         jLabel5.setBounds(50, 30, 256, 290);
 

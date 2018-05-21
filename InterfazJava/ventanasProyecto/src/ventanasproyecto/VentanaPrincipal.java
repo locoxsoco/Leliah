@@ -112,7 +112,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(nomb1);
         nomb1.setBounds(220, 40, 77, 29);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton6.setText("Cerrar Sesión");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jButton6);
         jButton6.setBounds(220, 370, 150, 29);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/jefe.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/jefe.png"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(170, 130, 220, 220);
 
