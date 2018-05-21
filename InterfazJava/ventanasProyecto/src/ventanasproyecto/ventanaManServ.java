@@ -107,7 +107,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         jScrollPane1.setBounds(20, 190, 410, 179);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton1.setText("Cerrar Sesión");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +118,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         jButton1.setBounds(300, 380, 117, 29);
 
         volver.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
+        volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

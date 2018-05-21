@@ -255,7 +255,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         getContentPane().add(eliminar);
         eliminar.setBounds(620, 290, 90, 40);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton4.setText("Volver");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +265,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(440, 540, 120, 29);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton5.setText("Cerrar Sesión");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -80,12 +80,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1060, 570));
@@ -232,7 +226,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(12, 282, 1029, 193);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +236,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(880, 500, 140, 29);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton5.setText("Volver");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,36 +245,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         });
         getContentPane().add(jButton5);
         jButton5.setBounds(749, 500, 110, 29);
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
-        jLabel11.setText("jLabel4");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(-90, 0, 470, 270);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
-        jLabel9.setText("jLabel4");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(-90, 260, 470, 310);
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
-        jLabel13.setText("jLabel4");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(320, 0, 500, 270);
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
-        jLabel12.setText("jLabel4");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(760, 0, 320, 270);
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
-        jLabel14.setText("jLabel4");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(320, 260, 500, 310);
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo2.jpg"))); // NOI18N
-        jLabel10.setText("jLabel4");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(770, 260, 300, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -629,11 +593,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -641,7 +600,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
     private javax.swing.JComboBox<String> moneda;

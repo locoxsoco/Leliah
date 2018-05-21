@@ -97,13 +97,13 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(154, 48, 200, 20);
+        nombre.setBounds(154, 48, 200, 22);
         getContentPane().add(precio);
-        precio.setBounds(154, 77, 200, 20);
+        precio.setBounds(154, 77, 200, 22);
         getContentPane().add(cantMin);
-        cantMin.setBounds(154, 106, 200, 20);
+        cantMin.setBounds(154, 106, 200, 22);
         getContentPane().add(marca);
-        marca.setBounds(154, 135, 200, 20);
+        marca.setBounds(154, 135, 200, 22);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -154,7 +154,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         getContentPane().add(eliminar);
         eliminar.setBounds(300, 220, 100, 50);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +164,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(260, 430, 140, 29);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton5.setText("Volver");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +181,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(154, 164, 95, 20);
+        tipo.setBounds(154, 164, 112, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

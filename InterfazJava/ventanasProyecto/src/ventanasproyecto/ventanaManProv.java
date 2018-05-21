@@ -124,7 +124,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(30, 301, 452, 130);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton1.setText("Cerrar Sesión");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +134,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(341, 450, 140, 29);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton2.setText("Volver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

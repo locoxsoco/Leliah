@@ -120,7 +120,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
         getContentPane().add(jButton5);
         jButton5.setBounds(220, 180, 167, 60);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton6.setText("Cerrar Sesión");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,12 +130,12 @@ public class ventanaAdmin extends javax.swing.JFrame {
         getContentPane().add(jButton6);
         jButton6.setBounds(250, 380, 140, 29);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/admin.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/admin.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(250, 40, 130, 140);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton7.setText("Volver");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
