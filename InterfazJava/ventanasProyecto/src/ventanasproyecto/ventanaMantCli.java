@@ -107,7 +107,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
         jLabel8.setText("jLabel8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1150, 700));
+        setMinimumSize(new java.awt.Dimension(750, 620));
+        setPreferredSize(new java.awt.Dimension(750, 620));
         setResizable(false);
         getContentPane().setLayout(null);
 

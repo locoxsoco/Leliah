@@ -93,7 +93,7 @@ public class ventanaManServ extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "P.U.", "Tipo de Moneda"
+                "Id", "Nombre", "P.U.", "Moneda"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
