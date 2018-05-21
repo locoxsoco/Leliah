@@ -167,7 +167,7 @@ public class VentanaCompras extends javax.swing.JFrame {
 
         TotalMostradoCmp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
-        CmpCerrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/volver.png"))); // NOI18N
+        CmpCerrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         CmpCerrarButton.setText("Volver");
         CmpCerrarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -197,7 +197,7 @@ public class VentanaCompras extends javax.swing.JFrame {
             }
         });
 
-        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ventanasproyecto/logout.png"))); // NOI18N
+        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         logout.setText("Cerrar Sesión");
         logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

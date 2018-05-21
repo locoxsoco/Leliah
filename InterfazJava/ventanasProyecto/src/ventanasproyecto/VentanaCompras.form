@@ -231,7 +231,7 @@
     <Component class="javax.swing.JButton" name="CmpCerrarButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/ventanasproyecto/volver.png"/>
+          <Image iconType="3" name="/imagenes/volver.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Volver"/>
       </Properties>
@@ -277,7 +277,7 @@
     <Component class="javax.swing.JButton" name="logout">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/ventanasproyecto/logout.png"/>
+          <Image iconType="3" name="/imagenes/logout.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n"/>
       </Properties>
