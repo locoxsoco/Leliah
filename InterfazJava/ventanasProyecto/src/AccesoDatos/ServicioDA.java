@@ -45,7 +45,7 @@ public class ServicioDA {
     public void registrarServicio(Servicio s) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_SERVICIO(?,?,?)}";
+        String sql = "{call REGISTRAR_SERVICIO(?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         stmt.setString("_nombre", s.getNombre());

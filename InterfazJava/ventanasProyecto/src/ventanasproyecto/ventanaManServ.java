@@ -236,6 +236,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         model.addRow(o);
         nombre.setText("");
         pu.setText("");
+        moneda.setSelectedItem(moneda.getItemAt(0));
     }//GEN-LAST:event_registrarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
