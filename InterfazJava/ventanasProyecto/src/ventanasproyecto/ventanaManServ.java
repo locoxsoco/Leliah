@@ -8,6 +8,7 @@ package ventanasproyecto;
 import LogicaNegocio.ServicioBL;
 import clases.Servicio;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,13 +22,14 @@ public class ventanaManServ extends javax.swing.JFrame {
     /**
      * Creates new form ventanaManServ
      */
-    public ventanaManServ() {
+    public ventanaManServ() throws ClassNotFoundException, SQLException {
         initComponents();
         LogicaNegocio = new ServicioBL();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(210);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(30);
         //tabla.getColumnModel().getColumn(3).setPreferredWidth(30);
+        listarServicios();
         this.setLocationRelativeTo(null);
         this.setTitle("Ventana Manejar Servicios");
         registrar.setEnabled(true);
@@ -216,6 +218,21 @@ public class ventanaManServ extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
     javax.swing.table.DefaultTableModel model;
+    
+    private void listarServicios() throws ClassNotFoundException, SQLException{
+        ArrayList<Servicio> arr = LogicaNegocio.listarServicios();
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = arr.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit(), arr.get(i).getMoneda()};
+            model.addRow(o);
+        }
+    }
+    
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
         boolean a = validarInput();
@@ -232,8 +249,15 @@ public class ventanaManServ extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Object o[] = {s.getId(), s.getNombre(), s.getprecioxUnit(), s.getMoneda()};
-        model.addRow(o);
+        try {
+            //Object o[] = {s.getId(), s.getNombre(), s.getprecioxUnit(), s.getMoneda()};
+            //model.addRow(o);
+            listarServicios();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nombre.setText("");
         pu.setText("");
         moneda.setSelectedItem(moneda.getItemAt(0));
