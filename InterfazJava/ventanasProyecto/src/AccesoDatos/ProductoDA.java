@@ -67,4 +67,74 @@ public class ProductoDA {
         return lista;
     }
     
+    public void registrarProducto(Producto p) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call REGISTRAR_PRODUCTO(?,?,?,?,?,?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        if(p instanceof Consumible){
+            stmt.setInt("_consumible", 1);
+            stmt.setString("_categoria", ((Consumible) p).getCategoria().toString());
+        }else if(p instanceof NoConsumible){
+            stmt.setInt("_consumible", 0);
+            stmt.setString("_categoria", ((NoConsumible) p).getCategoria().toString());
+        }
+        
+        stmt.setString("_nombre", p.getNombre());        
+        stmt.setDouble("_precioUnitario", p.getPrecio());
+        stmt.setInt("_cantidadMinima", p.getCantMinima());
+        stmt.setString("_marca", p.getMarca());
+        stmt.setString("_descripcion", p.getDescripcion());
+        stmt.setString("_moneda", p.getMoneda());
+        
+        stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
+        
+        stmt.executeUpdate();
+        
+        p.setIdProducto(stmt.getInt("_id"));
+        
+        con.close();
+    }
+    
+    public void modificarProducto(Producto p) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call MODIFICAR_PRODUCTO(?,?,?,?,?,?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        if(p instanceof Consumible){
+            stmt.setInt("_consumible", 1);
+            stmt.setString("_categoria", ((Consumible) p).getCategoria().toString());
+        }else if(p instanceof NoConsumible){
+            stmt.setInt("_consumible", 0);
+            stmt.setString("_categoria", ((NoConsumible) p).getCategoria().toString());
+        }
+        
+        stmt.setString("_nombre", p.getNombre());        
+        stmt.setDouble("_precioUnitario", p.getPrecio());
+        stmt.setInt("_cantidadMinima", p.getCantMinima());
+        stmt.setString("_marca", p.getMarca());
+        stmt.setString("_descripcion", p.getDescripcion());
+        stmt.setString("_moneda", p.getMoneda());
+        stmt.setInt("_id", p.getIdProducto());
+        
+        stmt.executeUpdate();
+        
+        con.close();
+    }
+    
+    public void eliminarProducto(int id) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call ELIMINAR_PRODUCTO(?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setInt("_id", id);
+        
+        stmt.executeUpdate();
+        
+        con.close();
+    }
+    
 }

@@ -13,7 +13,15 @@ public class Producto{
     private int cantMinima;
     private String marca;
     private String moneda;
+    private String descripcion;
 
+    public String getDescripcion(){
+	return descripcion;
+    }
+
+    public void setDescripcion (String _descripcion){
+        this.descripcion=_descripcion;
+    }
     
     public String getMoneda(){
         return moneda;

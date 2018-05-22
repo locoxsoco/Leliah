@@ -24,6 +24,7 @@ public class ventanaManServ extends javax.swing.JFrame {
      */
     public ventanaManServ() throws ClassNotFoundException, SQLException {
         initComponents();
+        this.setTitle("Mantener Servicios");
         LogicaNegocio = new ServicioBL();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(210);

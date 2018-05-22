@@ -6,6 +6,9 @@
 package ventanasproyecto;
 
 import LogicaNegocio.ProductoBL;
+import clases.Producto;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +24,10 @@ public class ventanaManProd extends javax.swing.JFrame {
     private ProductoBL LogicaNegocio;
       
     public ventanaManProd() {
+        this.setTitle("Mantener Productos");
         this.setLocationRelativeTo(null);
         initComponents();
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         LogicaNegocio = new ProductoBL();
         registrar.setEnabled(false);
         modificar.setEnabled(false);
@@ -61,9 +66,13 @@ public class ventanaManProd extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         consum = new javax.swing.JRadioButton();
         no_consum = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        desc = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        categoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(470, 510));
+        setMinimumSize(new java.awt.Dimension(440, 550));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -95,7 +104,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel6.setText("Tipo Producto:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(12, 167, 100, 16);
+        jLabel6.setBounds(12, 196, 100, 16);
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +126,7 @@ public class ventanaManProd extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Cant Min", "Marca", "Tipo"
+                "ID", "Nombre", "Precio", "Marca", "Tipo", "Categoria"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,7 +137,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(22, 287, 380, 130);
+        jScrollPane1.setBounds(30, 310, 380, 130);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setText("Registrar");
@@ -138,7 +147,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(40, 220, 100, 50);
+        registrar.setBounds(40, 270, 90, 30);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
         modificar.setText("Modificar");
@@ -148,7 +157,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(170, 220, 100, 50);
+        modificar.setBounds(180, 270, 90, 30);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setText("Eliminar");
@@ -158,7 +167,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(300, 220, 100, 50);
+        eliminar.setBounds(310, 270, 90, 30);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
@@ -168,7 +177,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(260, 430, 140, 29);
+        jButton4.setBounds(270, 460, 140, 29);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton5.setText("Volver");
@@ -178,7 +187,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(130, 430, 110, 29);
+        jButton5.setBounds(140, 460, 110, 29);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +196,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(150, 170, 95, 25);
+        consum.setBounds(150, 193, 95, 25);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +205,22 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(250, 170, 120, 25);
+        no_consum.setBounds(250, 193, 120, 25);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel7.setText("Descripción:");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(12, 167, 130, 16);
+        getContentPane().add(desc);
+        desc.setBounds(154, 164, 200, 22);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel8.setText("Categoria:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(12, 225, 110, 16);
+
+        getContentPane().add(categoria);
+        categoria.setBounds(154, 222, 200, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -259,8 +283,18 @@ public class ventanaManProd extends javax.swing.JFrame {
         return true;
     }
     
-    private void listarProductos(){
-        
+    private void listarProductos() throws ClassNotFoundException, SQLException{
+        ArrayList<Producto> arr = LogicaNegocio.listarProductos();
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = arr.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            //Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit(), arr.get(i).getMoneda()};
+            //model.addRow(o);
+        }
     }
     
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
@@ -384,7 +418,9 @@ public class ventanaManProd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cantMin;
+    private javax.swing.JComboBox<String> categoria;
     private javax.swing.JRadioButton consum;
+    private javax.swing.JTextField desc;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -394,6 +430,8 @@ public class ventanaManProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField marca;
     private javax.swing.JButton modificar;
