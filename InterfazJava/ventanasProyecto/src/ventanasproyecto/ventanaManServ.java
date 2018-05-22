@@ -277,6 +277,8 @@ public class ventanaManServ extends javax.swing.JFrame {
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         nombre.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 1)));
         pu.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
+        moneda.setSelectedItem(String.valueOf(model.getValueAt(tabla.getSelectedRow() ,3)));
+        
         registrar.setEnabled(true);
         modificar.setEnabled(true);
         eliminar.setEnabled(true);
@@ -344,7 +346,7 @@ public class ventanaManServ extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             ventanaHome.regresar();
             this.dispose();

@@ -29,7 +29,7 @@ public class ventanaManProd extends javax.swing.JFrame {
      */
     
     private ProductoBL LogicaNegocio;
-      
+    private int idMod;
     public ventanaManProd() throws ClassNotFoundException, SQLException {
         this.setTitle("Mantener Productos");
         this.setLocationRelativeTo(null);
@@ -333,7 +333,7 @@ public class ventanaManProd extends javax.swing.JFrame {
                 con = "Consumible";
                 cat = ((Consumible) list.get(i)).getCategoria().toString();
             }else if(list.get(i) instanceof NoConsumible){
-                con = "NoConsumible";
+                con = "No Consumible";
                 cat = ((NoConsumible) list.get(i)).getCategoria().toString();
             }
             Object o[] = {list.get(i).getIdProducto(), list.get(i).getNombre(), list.get(i).getPrecio(), list.get(i).getMarca(), con, cat};
@@ -351,18 +351,18 @@ public class ventanaManProd extends javax.swing.JFrame {
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         //idU++;
-        String tipo = "";
+        //String tipo = "";
         Producto p = null;
         if(consum.isSelected()){
             p = new Consumible();
             Categoria_Consumible c = Categoria_Consumible.valueOf(categoria.getSelectedItem().toString());
             ((Consumible) p).setCategoria(Categoria_Consumible.Snack);
-            tipo = "Consumible";
+            //tipo = "Consumible";
         }else if(no_consum.isSelected()){
             p = new NoConsumible();
             Categoria_NoConsumible c = Categoria_NoConsumible.valueOf(categoria.getSelectedItem().toString());
             ((NoConsumible) p).setCategoria(c);
-            tipo = "No Consumible";
+            //tipo = "No Consumible";
         }
         p.setNombre(nombre.getText());
         p.setPrecio(Double.parseDouble(precio.getText()));
@@ -403,26 +403,60 @@ public class ventanaManProd extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean a = validarInput();
         if(!a) return;
-        Producto p;
+        Producto p = null;
+        if(consum.isSelected()){
+            p = new Consumible();
+            Categoria_Consumible c = Categoria_Consumible.valueOf(categoria.getSelectedItem().toString());
+            ((Consumible) p).setCategoria(Categoria_Consumible.valueOf(categoria.getSelectedItem().toString()));
+            //tipo = "Consumible";
+        }else if(no_consum.isSelected()){
+            p = new NoConsumible();
+            Categoria_NoConsumible c = Categoria_NoConsumible.valueOf(categoria.getSelectedItem().toString());
+            ((NoConsumible) p).setCategoria(c);
+            //tipo = "No Consumible";
+        }
+        p.setIdProducto(idMod);
+        p.setNombre(nombre.getText());
+        p.setPrecio(Double.parseDouble(precio.getText()));
+        p.setCantMinima(Integer.parseInt(cantMin.getText()));
+        p.setMarca(marca.getText());
+        p.setDescripcion(desc.getText());
+        p.setMoneda(moneda.getSelectedItem().toString());
         
-        model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
-        model.setValueAt(precio.getText(), tabla.getSelectedRow(), 2);
-        model.setValueAt(cantMin.getText(), tabla.getSelectedRow(), 3);
-        model.setValueAt(marca.getText(), tabla.getSelectedRow(), 4);
-        //model.setValueAt(tipo.getSelectedItem().toString(), tabla.getSelectedRow(), 5);
+        try {
+            LogicaNegocio.modificarProducto(p);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            listarProductos();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         nombre.setText("");
         precio.setText("");
         cantMin.setText("");
         marca.setText("");
+        desc.setText("");
         consum.setSelected(true);
         no_consum.setSelected(false);
+        categoria.removeAllItems();
+        moneda.setSelectedItem(moneda.getItemAt(0));
     }//GEN-LAST:event_modificarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        ventanaAnterior.setVisible(true);
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            ventanaAnterior.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -442,10 +476,11 @@ public class ventanaManProd extends javax.swing.JFrame {
             no_consum.setSelected(true);
             inicializarComboCon(2);
         }
-        
+        idMod = list.get(tabla.getSelectedRow()).getIdProducto();
+        System.out.println(idMod);
         categoria.setSelectedItem(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
         moneda.setSelectedItem(list.get(tabla.getSelectedRow()).getMoneda());
-            
+        desc.setText(list.get(tabla.getSelectedRow()).getDescripcion());
         
         registrar.setEnabled(true);
         modificar.setEnabled(true);
@@ -454,8 +489,23 @@ public class ventanaManProd extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
-        model.removeRow(tabla.getSelectedRow());
+        try {
+            // TODO add your handling code here:
+            LogicaNegocio.eliminarProducto(idMod);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            listarProductos();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         eliminar.setEnabled(false);
         modificar.setEnabled(false);
         nombre.setText("");
@@ -469,8 +519,11 @@ public class ventanaManProd extends javax.swing.JFrame {
     ventanaLogin ventanaHome;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ventanaHome.regresar();
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            ventanaHome.regresar();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void inicializarComboCon(int tipo){
