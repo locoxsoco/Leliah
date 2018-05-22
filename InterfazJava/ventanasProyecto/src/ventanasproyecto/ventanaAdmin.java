@@ -2,6 +2,9 @@ package ventanasproyecto;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -182,12 +185,18 @@ public class ventanaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        ventanaManServ vp = new ventanaManServ();
-        vp.ventanaAnterior = this;
-        vp.ventanaHome = this.ventanaHome;
-        vp.setVisible(true);
-        this.setVisible(false);
+        try {
+            // TODO add your handling code here:
+            ventanaManServ vp = new ventanaManServ();
+            vp.ventanaAnterior = this;
+            vp.ventanaHome = this.ventanaHome;
+            vp.setVisible(true);
+            this.setVisible(false);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

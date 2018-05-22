@@ -282,20 +282,53 @@ public class ventanaManServ extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean a = validarInput();
         if(!a) return;
-        model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
-        model.setValueAt(pu.getText(), tabla.getSelectedRow(), 2);
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        Servicio s = new Servicio();
+        s.setNombre(nombre.getText());
+        s.setprecioxUnit(Double.parseDouble(pu.getText()));
+        s.SetMoneda(moneda.getSelectedItem().toString());
+        
+        try {
+            LogicaNegocio.modificarServicio(s);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            listarServicios();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
+        //model.setValueAt(pu.getText(), tabla.getSelectedRow(), 2);
         
         nombre.setText("");
         pu.setText("");
+        moneda.setSelectedItem(moneda.getItemAt(0));
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        try {
+            LogicaNegocio.eliminarServicio(Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0))));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         model.removeRow(tabla.getSelectedRow());
         eliminar.setEnabled(false);
         modificar.setEnabled(false);
+        
         nombre.setText("");
         pu.setText("");
+        moneda.setSelectedItem(moneda.getItemAt(0));
     }//GEN-LAST:event_eliminarActionPerformed
     
     

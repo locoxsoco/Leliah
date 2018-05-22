@@ -59,4 +59,35 @@ public class ServicioDA {
         
         con.close();
     }
+    
+    public void modificarServicio(Servicio s) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call MODIFICAR_SERVICIO(?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_nombre", s.getNombre());
+        stmt.setDouble("_precioUnitario", s.getprecioxUnit());
+        stmt.setString("_moneda", s.getMoneda());
+        stmt.setInt("_id", s.getId());
+        
+        stmt.executeUpdate();
+        
+        con.close();
+    }
+    
+    public void eliminarServicio(int id) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call ELIMINAR_SERVICIO(?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setInt("_id", id);
+        
+        stmt.executeUpdate();
+        
+        con.close();
+        
+    }
+    
 }
