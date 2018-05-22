@@ -117,7 +117,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(300, 380, 117, 29);
+        jButton1.setBounds(300, 380, 130, 29);
 
         volver.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
@@ -128,7 +128,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(volver);
-        volver.setBounds(190, 380, 90, 29);
+        volver.setBounds(180, 380, 90, 29);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
         modificar.setText("Modificar");
@@ -214,8 +214,11 @@ public class ventanaManServ extends javax.swing.JFrame {
     
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         // TODO add your handling code here:
-        ventanaAnterior.setVisible(true);
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            ventanaAnterior.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_volverActionPerformed
     javax.swing.table.DefaultTableModel model;
     
@@ -335,8 +338,11 @@ public class ventanaManServ extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ventanaHome.regresar();
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            ventanaHome.regresar();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
