@@ -86,9 +86,9 @@ public class ventanaManServ extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(15, 85, 110, 16);
         getContentPane().add(nombre);
-        nombre.setBounds(135, 55, 200, 22);
+        nombre.setBounds(135, 55, 200, 20);
         getContentPane().add(pu);
-        pu.setBounds(135, 82, 70, 22);
+        pu.setBounds(135, 82, 70, 20);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -139,7 +139,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(180, 150, 90, 25);
+        modificar.setBounds(180, 150, 90, 23);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setText("Registrar");
@@ -149,7 +149,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(60, 150, 90, 25);
+        registrar.setBounds(60, 150, 90, 23);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setText("Eliminar");
@@ -159,7 +159,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(300, 150, 90, 25);
+        eliminar.setBounds(300, 150, 90, 23);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel4.setText("Tipo de Moneda:");
@@ -167,8 +167,13 @@ public class ventanaManServ extends javax.swing.JFrame {
         jLabel4.setBounds(15, 110, 110, 16);
 
         moneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja..", "Soles", "Dólares" }));
+        moneda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monedaActionPerformed(evt);
+            }
+        });
         getContentPane().add(moneda);
-        moneda.setBounds(135, 110, 70, 22);
+        moneda.setBounds(135, 110, 70, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -345,6 +350,15 @@ public class ventanaManServ extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void monedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monedaActionPerformed
+        // TODO add your handling code here:
+        if (moneda.getSelectedItem().equals(moneda.getItemAt(0))){
+            registrar.setEnabled(false);
+            modificar.setEnabled(false);
+            eliminar.setEnabled(false);
+        }
+    }//GEN-LAST:event_monedaActionPerformed
 
     /**
      * @param args the command line arguments

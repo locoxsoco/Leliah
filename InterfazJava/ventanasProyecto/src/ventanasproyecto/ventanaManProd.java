@@ -35,6 +35,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         initComponents();
+        list = new ArrayList<Producto>();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         LogicaNegocio = new ProductoBL();
         listarProductos();
@@ -46,6 +47,7 @@ public class ventanaManProd extends javax.swing.JFrame {
     }
     ventanaAdmin ventanaAnterior;
     int idU;
+    private ArrayList<Producto> list;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,6 +81,8 @@ public class ventanaManProd extends javax.swing.JFrame {
         desc = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         categoria = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        moneda = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(550, 550));
@@ -121,13 +125,13 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(154, 48, 200, 22);
+        nombre.setBounds(154, 48, 200, 20);
         getContentPane().add(precio);
-        precio.setBounds(154, 77, 200, 22);
+        precio.setBounds(154, 77, 200, 20);
         getContentPane().add(cantMin);
-        cantMin.setBounds(154, 106, 200, 22);
+        cantMin.setBounds(154, 106, 200, 20);
         getContentPane().add(marca);
-        marca.setBounds(154, 135, 200, 22);
+        marca.setBounds(154, 135, 200, 20);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -135,7 +139,7 @@ public class ventanaManProd extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Cant Min", "Marca", "Tipo", "Categoria", "Descripción"
+                "ID", "Nombre", "Precio", "Marca", "Tipo", "Categoria"
             }
         ));
         tabla.getTableHeader().setReorderingAllowed(false);
@@ -147,7 +151,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 310, 500, 130);
+        jScrollPane1.setBounds(30, 330, 500, 130);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setText("Registrar");
@@ -157,7 +161,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(40, 270, 90, 30);
+        registrar.setBounds(40, 290, 90, 30);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
         modificar.setText("Modificar");
@@ -167,7 +171,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(240, 270, 90, 30);
+        modificar.setBounds(240, 290, 90, 30);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setText("Eliminar");
@@ -177,7 +181,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(430, 270, 90, 30);
+        eliminar.setBounds(430, 290, 90, 30);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
@@ -187,7 +191,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(390, 460, 140, 29);
+        jButton4.setBounds(390, 480, 140, 29);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton5.setText("Volver");
@@ -197,7 +201,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(260, 460, 110, 29);
+        jButton5.setBounds(260, 480, 110, 29);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +210,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(150, 193, 95, 25);
+        consum.setBounds(150, 193, 79, 23);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -215,14 +219,14 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(250, 193, 120, 25);
+        no_consum.setBounds(250, 193, 120, 23);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Descripción:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(12, 167, 130, 16);
         getContentPane().add(desc);
-        desc.setBounds(154, 164, 200, 22);
+        desc.setBounds(154, 164, 200, 20);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel8.setText("Categoria:");
@@ -230,7 +234,21 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel8.setBounds(12, 225, 110, 16);
 
         getContentPane().add(categoria);
-        categoria.setBounds(154, 222, 200, 22);
+        categoria.setBounds(154, 222, 200, 20);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel9.setText("Tipo Moneda:");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(12, 254, 100, 16);
+
+        moneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja..", "Soles", "Dólares" }));
+        moneda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monedaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(moneda);
+        moneda.setBounds(154, 251, 100, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -287,6 +305,13 @@ public class ventanaManProd extends javax.swing.JFrame {
             return false;
         }
         
+        if(!consum.isSelected() && !no_consum.isSelected()){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos sin seleccionar", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        
+        
+        
     
         
                           
@@ -294,10 +319,9 @@ public class ventanaManProd extends javax.swing.JFrame {
     }
     
     private void listarProductos() throws ClassNotFoundException, SQLException{
-        ArrayList<Producto> arr = new ArrayList<Producto>();
-        arr = LogicaNegocio.listarProductos();
+        list = LogicaNegocio.listarProductos();
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        int n = arr.size();
+        int n = list.size();
         int r = model.getRowCount();
         for (int j=0; j<r; j++){
             model.removeRow(0);
@@ -305,14 +329,14 @@ public class ventanaManProd extends javax.swing.JFrame {
         for (int i=0; i<n; i++){
             String con = "";
             String cat = "";
-            if(arr.get(i) instanceof Consumible){
+            if(list.get(i) instanceof Consumible){
                 con = "Consumible";
-                cat = ((Consumible) arr.get(i)).getCategoria().toString();
-            }else if(arr.get(i) instanceof NoConsumible){
+                cat = ((Consumible) list.get(i)).getCategoria().toString();
+            }else if(list.get(i) instanceof NoConsumible){
                 con = "NoConsumible";
-                cat = ((NoConsumible) arr.get(i)).getCategoria().toString();
+                cat = ((NoConsumible) list.get(i)).getCategoria().toString();
             }
-            Object o[] = {arr.get(i).getIdProducto(), arr.get(i).getNombre(), arr.get(i).getPrecio(), arr.get(i).getCantMinima(), arr.get(i).getMarca(), con, cat, arr.get(i).getDescripcion()};
+            Object o[] = {list.get(i).getIdProducto(), list.get(i).getNombre(), list.get(i).getPrecio(), list.get(i).getMarca(), con, cat};
             model.addRow(o);
         }
     }
@@ -345,6 +369,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         p.setCantMinima(Integer.parseInt(cantMin.getText()));
         p.setMarca(marca.getText());
         p.setDescripcion(desc.getText());
+        p.setMoneda(moneda.getSelectedItem().toString());
         
         
         try {
@@ -378,6 +403,8 @@ public class ventanaManProd extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean a = validarInput();
         if(!a) return;
+        Producto p;
+        
         model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
         model.setValueAt(precio.getText(), tabla.getSelectedRow(), 2);
         model.setValueAt(cantMin.getText(), tabla.getSelectedRow(), 3);
@@ -403,16 +430,21 @@ public class ventanaManProd extends javax.swing.JFrame {
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         nombre.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 1)));
         precio.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
-        cantMin.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 3)));
-        marca.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 4)));
-        String s = String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5));
+        cantMin.setText(String.valueOf(list.get(tabla.getSelectedRow()).getCantMinima()));
+        marca.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 3)));
+        String s = String.valueOf(model.getValueAt(tabla.getSelectedRow(), 4));
         if( s == "Consumible"){
             consum.setSelected(true);
             no_consum.setSelected(false);
+            inicializarComboCon(1);
         }else if(s == "No Consumible"){
             consum.setSelected(false);
             no_consum.setSelected(true);
+            inicializarComboCon(2);
         }
+        
+        categoria.setSelectedItem(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
+        moneda.setSelectedItem(list.get(tabla.getSelectedRow()).getMoneda());
             
         
         registrar.setEnabled(true);
@@ -480,6 +512,15 @@ public class ventanaManProd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_no_consumActionPerformed
 
+    private void monedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monedaActionPerformed
+        // TODO add your handling code here:
+        if (moneda.getSelectedItem().equals(moneda.getItemAt(0))){
+            registrar.setEnabled(false);
+            modificar.setEnabled(false);
+            eliminar.setEnabled(false);
+        }
+    }//GEN-LAST:event_monedaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -501,9 +542,11 @@ public class ventanaManProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField marca;
     private javax.swing.JButton modificar;
+    private javax.swing.JComboBox<String> moneda;
     private javax.swing.JRadioButton no_consum;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField precio;

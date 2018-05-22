@@ -200,13 +200,19 @@ public class ventanaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        ventanaManProd vp = new ventanaManProd();
-        vp.ventanaHome = this.ventanaHome;
-        vp.ventanaAnterior = this;
-        vp.setLocationRelativeTo(null);
-        vp.setVisible(true);
-        this.setVisible(false);
+        try {
+            // TODO add your handling code here:
+            ventanaManProd vp = new ventanaManProd();
+            vp.ventanaHome = this.ventanaHome;
+            vp.ventanaAnterior = this;
+            vp.setLocationRelativeTo(null);
+            vp.setVisible(true);
+            this.setVisible(false);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
     ventanaLogin ventanaHome;
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
