@@ -5,6 +5,7 @@
  */
 package ventanasproyecto;
 
+import LogicaNegocio.ProductoBL;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,9 +17,13 @@ public class ventanaManProd extends javax.swing.JFrame {
     /**
      * Creates new form ventanaManProd
      */
+    
+    private ProductoBL LogicaNegocio;
+      
     public ventanaManProd() {
         this.setLocationRelativeTo(null);
         initComponents();
+        LogicaNegocio = new ProductoBL();
         registrar.setEnabled(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
@@ -54,7 +59,8 @@ public class ventanaManProd extends javax.swing.JFrame {
         eliminar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        tipo = new javax.swing.JComboBox<>();
+        consum = new javax.swing.JRadioButton();
+        no_consum = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(470, 510));
@@ -111,7 +117,7 @@ public class ventanaManProd extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Cant Min", "Marca", "Tipo Producto"
+                "ID", "Nombre", "Precio", "Cant Min", "Marca", "Tipo"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,14 +180,23 @@ public class ventanaManProd extends javax.swing.JFrame {
         getContentPane().add(jButton5);
         jButton5.setBounds(130, 430, 110, 29);
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Consumible", "No Consumible" }));
-        tipo.addActionListener(new java.awt.event.ActionListener() {
+        consum.setText("Consumible");
+        consum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoActionPerformed(evt);
+                consumActionPerformed(evt);
             }
         });
-        getContentPane().add(tipo);
-        tipo.setBounds(154, 164, 112, 22);
+        getContentPane().add(consum);
+        consum.setBounds(150, 170, 95, 25);
+
+        no_consum.setText("No Consumible");
+        no_consum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                no_consumActionPerformed(evt);
+            }
+        });
+        getContentPane().add(no_consum);
+        no_consum.setBounds(250, 170, 120, 25);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -244,6 +259,10 @@ public class ventanaManProd extends javax.swing.JFrame {
         return true;
     }
     
+    private void listarProductos(){
+        
+    }
+    
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
@@ -254,14 +273,21 @@ public class ventanaManProd extends javax.swing.JFrame {
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         idU++;
-        Object s[] ={idU, nombre.getText(), precio.getText(), cantMin.getText(), marca.getText(),tipo.getSelectedItem().toString()};
-        model.addRow(s);
+        Object o[] ={idU, nombre.getText(), precio.getText(), cantMin.getText(), marca.getText()};
+        model.addRow(o);
 
         nombre.setText("");
         precio.setText("");
         cantMin.setText("");
         marca.setText("");
-        tipo.setSelectedItem(tipo.getItemAt(0));
+        String s = String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5));
+        if( s == "Consumible"){
+            consum.setSelected(true);
+            no_consum.setSelected(false);
+        }else if(s == "No Consumible"){
+            consum.setSelected(false);
+            no_consum.setSelected(true);
+        }
     }//GEN-LAST:event_registrarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
@@ -272,13 +298,20 @@ public class ventanaManProd extends javax.swing.JFrame {
         model.setValueAt(precio.getText(), tabla.getSelectedRow(), 2);
         model.setValueAt(cantMin.getText(), tabla.getSelectedRow(), 3);
         model.setValueAt(marca.getText(), tabla.getSelectedRow(), 4);
-        model.setValueAt(tipo.getSelectedItem().toString(), tabla.getSelectedRow(), 5);
+        //model.setValueAt(tipo.getSelectedItem().toString(), tabla.getSelectedRow(), 5);
         
         nombre.setText("");
         precio.setText("");
         cantMin.setText("");
         marca.setText("");
-        tipo.setSelectedItem(tipo.getItemAt(0));
+        String s = String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5));
+        if( s == "Consumible"){
+            consum.setSelected(true);
+            no_consum.setSelected(false);
+        }else if(s == "No Consumible"){
+            consum.setSelected(false);
+            no_consum.setSelected(true);
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -287,14 +320,6 @@ public class ventanaManProd extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
-        // TODO add your handling code here:
-        if(tipo.getSelectedItem().toString() != "--"){
-           
-            registrar.setEnabled(true);
-        }
-    }//GEN-LAST:event_tipoActionPerformed
-
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
@@ -302,7 +327,15 @@ public class ventanaManProd extends javax.swing.JFrame {
         precio.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
         cantMin.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 3)));
         marca.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 4)));
-        tipo.setSelectedItem(model.getValueAt(tabla.getSelectedRow(), 5));
+        String s = String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5));
+        if( s == "Consumible"){
+            consum.setSelected(true);
+            no_consum.setSelected(false);
+        }else if(s == "No Consumible"){
+            consum.setSelected(false);
+            no_consum.setSelected(true);
+        }
+            
         
         registrar.setEnabled(true);
         modificar.setEnabled(true);
@@ -319,7 +352,9 @@ public class ventanaManProd extends javax.swing.JFrame {
         precio.setText("");
         cantMin.setText("");
         marca.setText("");
-        tipo.setSelectedItem(tipo.getItemAt(0));
+        no_consum.setSelected(false);
+        consum.setSelected(false);
+        
     }//GEN-LAST:event_eliminarActionPerformed
     ventanaLogin ventanaHome;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -328,6 +363,20 @@ public class ventanaManProd extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void consumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consumActionPerformed
+        // TODO add your handling code here:
+        if (consum.isSelected()==true){
+            no_consum.setSelected(false);
+        }
+    }//GEN-LAST:event_consumActionPerformed
+
+    private void no_consumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_no_consumActionPerformed
+        // TODO add your handling code here:
+        if (no_consum.isSelected()==true){
+            consum.setSelected(false);
+        }
+    }//GEN-LAST:event_no_consumActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,6 +384,7 @@ public class ventanaManProd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cantMin;
+    private javax.swing.JRadioButton consum;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -347,10 +397,10 @@ public class ventanaManProd extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField marca;
     private javax.swing.JButton modificar;
+    private javax.swing.JRadioButton no_consum;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField precio;
     private javax.swing.JButton registrar;
     private javax.swing.JTable tabla;
-    private javax.swing.JComboBox<String> tipo;
     // End of variables declaration//GEN-END:variables
 }

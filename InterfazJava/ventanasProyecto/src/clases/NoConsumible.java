@@ -6,10 +6,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
-enum Categoria_NoConsumible {Adorno,Juguete,UtilOficina}
+
 public class NoConsumible extends Producto{
 	private String descripcion;
-	private String categoria;
+	private Categoria_NoConsumible categoria;
 
 	public String getDescripcion(){
 		return descripcion;
@@ -19,18 +19,22 @@ public class NoConsumible extends Producto{
 		this.descripcion=_descripcion;
 	}
 
-	public String getCategoria(){
+	public Categoria_NoConsumible getCategoria(){
 		return categoria;
 	}
 
-	public void setCategoria (String _categoria){
+	public void setCategoria (Categoria_NoConsumible _categoria){
 		this.categoria=_categoria;
 	}
 
-	public NoConsumible(int idProducto,String nombre,float precio,int cantMinima,String marca,String descripcion,String categoria){
+	public NoConsumible(int idProducto,String nombre,float precio,int cantMinima,String marca,String descripcion,Categoria_NoConsumible categoria){
 		super(idProducto,nombre,precio,cantMinima,marca);
 		this.descripcion=descripcion;
 		this.categoria=categoria;
 		
 	}
+        
+        public NoConsumible(){
+            super();
+        }
 }

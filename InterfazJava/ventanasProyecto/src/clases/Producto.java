@@ -7,58 +7,71 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 public class Producto{
-	private int idProducto;
-	private String nombre;
-	private float precio;
-	private int cantMinima;
-	private String marca;
+    private int idProducto;
+    private String nombre;
+    private double precio;
+    private int cantMinima;
+    private String marca;
+    private String moneda;
 
-	public int getIdProducto(){
-		return idProducto;
-	}
+    
+    public String getMoneda(){
+        return moneda;
+    }
+    
+    public void setMoneda(String moneda){
+        this.moneda = moneda;
+    }
+    
+    public int getIdProducto(){
+    	return idProducto;
+    }
 
-	public void setIdProducto (int _idProducto){
-		this.idProducto=_idProducto;
-	}
+    public void setIdProducto (int _idProducto){
+	this.idProducto=_idProducto;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    public String getNombre(){
+    	return nombre;
+    }
 
-	public void setNombre (String _nombre){
-		this.nombre=_nombre;
-	}
+    public void setNombre (String _nombre){
+	this.nombre=_nombre;
+    }
 
-	public float getPrecio(){
-		return precio;
-	}
+    public double getPrecio(){
+	return precio;
+    }
 
-	public void setPrecio (float _precio){
-		this.precio=_precio;
-	}
+    public void setPrecio (double _precio){
+	this.precio=_precio;
+    }
 
-	public int getCantMinima(){
-		return cantMinima;
-	}
+    public int getCantMinima(){
+	return cantMinima;
+    }
 
-	public void setCantMinima (int _cantMinima){
-		this.cantMinima=_cantMinima;
-	}
+    public void setCantMinima (int _cantMinima){
+        this.cantMinima=_cantMinima;
+    }
 
-	public String getMarca(){
-		return marca;
-	}
+    public String getMarca(){
+	return marca;
+    }
 
-	public void setMarca (String _marca){
-		this.marca=_marca;
-	}
+    public void setMarca (String _marca){
+	this.marca=_marca;
+    }
 
-	public Producto(int idProducto,String nombre,float precio,int cantMinima,String marca){
-		this.idProducto=idProducto;
-		this.nombre=nombre;
-		this.precio=precio;
-		this.cantMinima=cantMinima;
-		this.marca=marca;
-		
-	}
+    public Producto(int idProducto,String nombre,double precio,int cantMinima,String marca){
+	this.idProducto=idProducto;
+	this.nombre=nombre;
+	this.precio=precio;
+	this.cantMinima=cantMinima;
+	this.marca=marca;
+	
+    }
+    public Producto(){
+        
+    }
 }
