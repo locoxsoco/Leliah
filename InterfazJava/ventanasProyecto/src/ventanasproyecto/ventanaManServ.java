@@ -194,12 +194,12 @@ public class ventanaManServ extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        for (int i=0; i<s.length(); i++){
+        /*for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
                 JOptionPane.showMessageDialog(null, "campo nombre solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
-        }
+        }*/
         s = this.pu.getText();
         if((s).equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
@@ -284,6 +284,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         if(!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         Servicio s = new Servicio();
+        s.SetId(Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0))));
         s.setNombre(nombre.getText());
         s.setprecioxUnit(Double.parseDouble(pu.getText()));
         s.SetMoneda(moneda.getSelectedItem().toString());
