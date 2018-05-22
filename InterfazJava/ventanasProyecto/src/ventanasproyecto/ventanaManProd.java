@@ -81,7 +81,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         categoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(440, 550));
+        setMinimumSize(new java.awt.Dimension(550, 550));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -135,9 +135,10 @@ public class ventanaManProd extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Marca", "Tipo", "Categoria"
+                "ID", "Nombre", "Precio", "Cant Min", "Marca", "Tipo", "Categoria", "Descripción"
             }
         ));
+        tabla.getTableHeader().setReorderingAllowed(false);
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
@@ -146,7 +147,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 310, 380, 130);
+        jScrollPane1.setBounds(30, 310, 500, 130);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setText("Registrar");
@@ -166,7 +167,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(180, 270, 90, 30);
+        modificar.setBounds(240, 270, 90, 30);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setText("Eliminar");
@@ -176,7 +177,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(310, 270, 90, 30);
+        eliminar.setBounds(430, 270, 90, 30);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
@@ -186,7 +187,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(270, 460, 140, 29);
+        jButton4.setBounds(390, 460, 140, 29);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton5.setText("Volver");
@@ -196,7 +197,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(140, 460, 110, 29);
+        jButton5.setBounds(260, 460, 110, 29);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -311,7 +312,7 @@ public class ventanaManProd extends javax.swing.JFrame {
                 con = "NoConsumible";
                 cat = ((NoConsumible) arr.get(i)).getCategoria().toString();
             }
-            Object o[] = {arr.get(i).getIdProducto(), arr.get(i).getNombre(), arr.get(i).getPrecio(), arr.get(i).getMarca(), con, cat};
+            Object o[] = {arr.get(i).getIdProducto(), arr.get(i).getNombre(), arr.get(i).getPrecio(), arr.get(i).getCantMinima(), arr.get(i).getMarca(), con, cat, arr.get(i).getDescripcion()};
             model.addRow(o);
         }
     }
@@ -354,8 +355,13 @@ public class ventanaManProd extends javax.swing.JFrame {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Object o[] ={p.getIdProducto(), p.getNombre(), p.getPrecio(), p.getMarca(), marca.getText(), tipo, categoria.getSelectedItem().toString()};
-        model.addRow(o);
+        try {
+            listarProductos();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         nombre.setText("");
         precio.setText("");
@@ -382,14 +388,8 @@ public class ventanaManProd extends javax.swing.JFrame {
         precio.setText("");
         cantMin.setText("");
         marca.setText("");
-        String s = String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5));
-        if( s == "Consumible"){
-            consum.setSelected(true);
-            no_consum.setSelected(false);
-        }else if(s == "No Consumible"){
-            consum.setSelected(false);
-            no_consum.setSelected(true);
-        }
+        consum.setSelected(true);
+        no_consum.setSelected(false);
     }//GEN-LAST:event_modificarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

@@ -59,6 +59,7 @@ public class ProductoDA {
             p.setCantMinima(rs.getInt("cantidadMinima"));
             p.setMarca(rs.getString("marca"));
             p.setMoneda(rs.getString("moneda"));
+            p.setDescripcion(rs.getString("descripcion"));
             
             lista.add(p);
         }
