@@ -12,6 +12,14 @@ public class LineaxCompra{
 	private int cantidad;
 	private float precioUnit;
 	private Producto producto;
+        
+        public int getIdLineaxCompra(){
+		return idLineaxCompra;
+	}
+
+	public void setIdLineaxCompra (int _idLineaxCompra){
+		this.idLineaxCompra= _idLineaxCompra;
+	}
 
 	public int getCantidad(){
 		return cantidad;
@@ -21,11 +29,11 @@ public class LineaxCompra{
 		this.cantidad=_cantidad;
 	}
 
-	public float getSubtotal(){
+	public float getPrecioUnit(){
 		return precioUnit;
 	}
 
-	public void setSubtotal (float _subtotal){
+	public void setPrecioUnit (float _subtotal){
 		this.precioUnit=_subtotal;
 	}
 

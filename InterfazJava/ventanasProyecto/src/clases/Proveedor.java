@@ -71,4 +71,7 @@ public class Proveedor{
 		this.correo=correo;
 		this.diaSemana=diaSemana;
 	}
+        public Proveedor(){
+            
+        }
 }

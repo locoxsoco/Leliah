@@ -50,4 +50,7 @@ public class Persona extends Cliente{
 		this.nombre=nombre;
 		this.apPaterno=this.apMaterno;
 	}
+        public Persona(){
+            super();
+        }
 }

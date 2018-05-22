@@ -11,11 +11,11 @@ public class Libreria{
 	private String direccion;
 	private int telefono;
 	private String correo;
-	private List<Cliente> listCliente;
-	private List<Venta> listVenta;
-	private List<Compra> listCompra;
-	private List<Proveedor> listProveedor;
-	private List<Trabajador> listTrabajador;
+	private ArrayList<Cliente> listCliente;
+	private ArrayList<Venta> listVenta;
+	private ArrayList<Compra> listCompra;
+	private ArrayList<Proveedor> listProveedor;
+	private ArrayList<Trabajador> listTrabajador;
 
 	public String getNombre(){
 		return nombre;
@@ -53,39 +53,39 @@ public class Libreria{
 		return listCliente;
 	}
 
-	public void setListCliente (List<Cliente> _listCliente){
+	public void setListCliente (ArrayList<Cliente> _listCliente){
 		this.listCliente=_listCliente;
 	}
 
-	public List<Venta> getListVenta(){
+	public ArrayList<Venta> getListVenta(){
 		return listVenta;
 	}
 
-	public void setListVenta (List<Venta> _listVenta){
+	public void setListVenta (ArrayList<Venta> _listVenta){
 		this.listVenta=_listVenta;
 	}
 
-	public List<Compra> getListCompra(){
+	public ArrayList<Compra> getListCompra(){
 		return listCompra;
 	}
 
-	public void setListCompra (List<Compra> _listCompra){
+	public void setListCompra (ArrayList<Compra> _listCompra){
 		this.listCompra=_listCompra;
 	}
 
-	public List<Proveedor> getListProveedor(){
+	public ArrayList<Proveedor> getListProveedor(){
 		return listProveedor;
 	}
 
-	public void setListProveedor (List<Proveedor> _listProveedor){
+	public void setListProveedor (ArrayList<Proveedor> _listProveedor){
 		this.listProveedor=_listProveedor;
 	}
 
-	public List<Trabajador> getListTrabajador(){
+	public ArrayList<Trabajador> getListTrabajador(){
 		return listTrabajador;
 	}
 
-	public void setListTrabajador (List<Trabajador> _listTrabajador){
+	public void setListTrabajador (ArrayList<Trabajador> _listTrabajador){
 		this.listTrabajador=_listTrabajador;
 	}
 	
@@ -100,6 +100,9 @@ public class Libreria{
 		this.listTrabajador=new ArrayList<Trabajador>();
 		this.listVenta=new ArrayList<Venta>();
 	}
+        public Libreria(){
+            
+        }
 	public void agregarCliente (){
 		
 	}

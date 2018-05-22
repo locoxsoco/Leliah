@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.util.Date;
 public class Empresa extends Cliente{
 	private String ruc;
-	private String nombre;
+	private String razonSocial;
 
 	public String getRuc(){
 		return ruc;
@@ -19,16 +19,19 @@ public class Empresa extends Cliente{
 	}
 
 	public String getNombre(){
-		return nombre;
+		return razonSocial;
 	}
 
 	public void setNombre (String _nombre){
-		this.nombre=_nombre;
+		this.razonSocial=_nombre;
 	}
 
 	public Empresa(int idCliente,String direccion,String correo,String telefono,int dni,String nombre,String apPaterno,String apMaterno){
 		super(direccion,correo,telefono);
 		this.ruc=ruc;
-		this.nombre=nombre;
+		this.razonSocial=nombre;
 	}
+        public Empresa(){
+            super();
+        }
 }

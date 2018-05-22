@@ -35,12 +35,15 @@ public class Vendedor extends Trabajador{
 		this.libreria=_libreria;
 	}
 
-	public Vendedor(String nombre,String apPaterno,String apMaterno,int edad,LogIn login,float sueldo,float horaxSemana,Libreria libreria){
-		super(nombre,apPaterno,apMaterno,edad,login);
+	public Vendedor(String nombre,String apPaterno,String apMaterno,int edad,float sueldo,float horaxSemana,Libreria libreria){
+		super(nombre,apPaterno,apMaterno,edad);
 		this.sueldo=sueldo;
 		this.horaxSemana=horaxSemana;
 		this.libreria=libreria;
 	}
+        public Vendedor(){
+            
+        }
 	public void mantenerVenta (Libreria libreria){
 		
 	}

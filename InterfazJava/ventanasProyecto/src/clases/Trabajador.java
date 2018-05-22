@@ -11,7 +11,6 @@ public class Trabajador{
 	private String apPaterno;
 	private String apMaterno;
 	private int edad;
-	private LogIn login;
 
 	public String getNombre(){
 		return nombre;
@@ -45,20 +44,11 @@ public class Trabajador{
 		this.edad=_edad;
 	}
 
-	public LogIn getLogin(){
-		return login;
-	}
-
-	public void setLogin (LogIn _login){
-		this.login=_login;
-	}
-
-	public Trabajador(String nombre,String apPaterno,String apMaterno,int edad,LogIn login){
+	public Trabajador(String nombre,String apPaterno,String apMaterno,int edad){
 		this.nombre=nombre;
 		this.apPaterno=apPaterno;
 		this.apMaterno=apMaterno;
 		this.edad=edad;
-		this.login=login;
 	}
         public Trabajador(){
             

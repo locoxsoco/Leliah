@@ -31,4 +31,7 @@ public class StockxNoConsumible{
 		this.noConsumible=noConsumible;
 		
 	}
+        public StockxNoConsumible(){
+            
+        }
 }

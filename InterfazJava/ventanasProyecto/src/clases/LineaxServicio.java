@@ -7,10 +7,20 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 public class LineaxServicio{
+        private static int counter=1;
+        private int idLineaxServicio;
 	private Servicio servicio;
 	private float cant;
 	private float montoFinal;
+        
+        public int getIdLineaxServicio(){
+		return idLineaxServicio;
+	}
 
+	public void setIdLineaxServicio (int _idLineaxServicio){
+		this.idLineaxServicio= _idLineaxServicio;
+	}
+        
 	public Servicio getServicio(){
 		return servicio;
 	}
@@ -37,7 +47,11 @@ public class LineaxServicio{
 		this.servicio=servicio;
 		this.cant=cant;
 		this.montoFinal=montoFinal;
+                this.idLineaxServicio=counter++;
 	}
+        public LineaxServicio(){
+            
+        }
 	public void agregarServicio(Servicio servicio){
 		
 	}

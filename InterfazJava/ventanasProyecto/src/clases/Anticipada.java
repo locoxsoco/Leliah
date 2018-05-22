@@ -13,7 +13,7 @@ public class Anticipada extends Venta{
 	private Date fechaEntrega;
 	private float saldoPendiente;
         
-        public int getIdAdministrador(){
+        public int getIdAnticipada(){
 		return idAnticipada;
 	}
 
