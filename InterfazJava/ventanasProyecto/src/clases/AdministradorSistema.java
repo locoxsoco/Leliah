@@ -37,8 +37,8 @@ public class AdministradorSistema extends Trabajador{
 		this.libreria=_libreria;
 	}*/
 
-	public AdministradorSistema(String nombre,String apPaterno,String apMaterno,int edad,LogIn login,float sueldo, Libreria libreria){
-		super(nombre,apPaterno,apMaterno,edad,login);
+	public AdministradorSistema(String nombre,String apPaterno,String apMaterno,int edad,float sueldo, Libreria libreria){
+		super(nombre,apPaterno,apMaterno,edad);
 		this.sueldo=sueldo;
                 this.idAdministrador=counter++;
 		//this.libreria=libreria;
