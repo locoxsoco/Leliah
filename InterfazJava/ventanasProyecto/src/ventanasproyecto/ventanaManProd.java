@@ -6,11 +6,16 @@
 package ventanasproyecto;
 
 import LogicaNegocio.ProductoBL;
+import clases.Categoria_Consumible;
+import clases.Categoria_NoConsumible;
 import clases.Consumible;
 import clases.NoConsumible;
 import clases.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -320,22 +325,47 @@ public class ventanaManProd extends javax.swing.JFrame {
         boolean a = validarInput();
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        idU++;
-        Object o[] ={idU, nombre.getText(), precio.getText(), cantMin.getText(), marca.getText()};
+        //idU++;
+        String tipo = "";
+        Producto p = null;
+        if(consum.isSelected()){
+            p = new Consumible();
+            Categoria_Consumible c = Categoria_Consumible.valueOf(categoria.getSelectedItem().toString());
+            ((Consumible) p).setCategoria(Categoria_Consumible.Snack);
+            tipo = "Consumible";
+        }else if(no_consum.isSelected()){
+            p = new NoConsumible();
+            Categoria_NoConsumible c = Categoria_NoConsumible.valueOf(categoria.getSelectedItem().toString());
+            ((NoConsumible) p).setCategoria(c);
+            tipo = "No Consumible";
+        }
+        p.setNombre(nombre.getText());
+        p.setPrecio(Double.parseDouble(precio.getText()));
+        p.setCantMinima(Integer.parseInt(cantMin.getText()));
+        p.setMarca(marca.getText());
+        p.setDescripcion(desc.getText());
+        
+        
+        try {
+            LogicaNegocio.registrarProducto(p);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Object o[] ={p.getIdProducto(), p.getNombre(), p.getPrecio(), p.getMarca(), marca.getText(), tipo, categoria.getSelectedItem().toString()};
         model.addRow(o);
 
         nombre.setText("");
         precio.setText("");
         cantMin.setText("");
         marca.setText("");
-        String s = String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5));
-        if( s == "Consumible"){
-            consum.setSelected(true);
-            no_consum.setSelected(false);
-        }else if(s == "No Consumible"){
-            consum.setSelected(false);
-            no_consum.setSelected(true);
-        }
+        desc.setText("");
+        categoria.setSelectedItem(categoria.getItemAt(0));
+        consum.setSelected(false);
+        no_consum.setSelected(false);
+        
     }//GEN-LAST:event_registrarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
@@ -411,10 +441,33 @@ public class ventanaManProd extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void inicializarComboCon(int tipo){
+        ArrayList<String> s = new ArrayList<String>();
+        if(tipo == 1){
+            s.add(Categoria_Consumible.Bebida.toString());
+            s.add(Categoria_Consumible.Caramelo.toString());
+            s.add(Categoria_Consumible.Helado.toString());
+            s.add(Categoria_Consumible.Postre.toString());
+            s.add(Categoria_Consumible.Snack.toString());
+        }else if(tipo == 2){
+            s.add(Categoria_NoConsumible.Adorno.toString());
+            s.add(Categoria_NoConsumible.Juguete.toString());
+            s.add(Categoria_NoConsumible.UtilOficina.toString());
+        }
+        int n = s.size();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for(int i=0; i<n; i++){
+            modelo.addElement(s.get(i));
+        }
+        categoria.setModel(modelo);
+    }
+    
     private void consumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consumActionPerformed
         // TODO add your handling code here:
         if (consum.isSelected()==true){
             no_consum.setSelected(false);
+            inicializarComboCon(1);
+            registrar.setEnabled(true);
         }
     }//GEN-LAST:event_consumActionPerformed
 
@@ -422,6 +475,8 @@ public class ventanaManProd extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (no_consum.isSelected()==true){
             consum.setSelected(false);
+            inicializarComboCon(2);
+            registrar.setEnabled(true);
         }
     }//GEN-LAST:event_no_consumActionPerformed
 
