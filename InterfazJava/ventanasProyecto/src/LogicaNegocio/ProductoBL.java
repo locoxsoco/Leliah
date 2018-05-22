@@ -23,6 +23,8 @@ public class ProductoBL {
     
     public ArrayList<Producto> listarProductos() throws ClassNotFoundException, SQLException{
         return accesoDatos.listarProductos();
+        //ArrayList<Producto> l = new ArrayList<Producto>();
+        //return l;
     }
     
     public void registrarProducto(Producto p) throws ClassNotFoundException, SQLException{

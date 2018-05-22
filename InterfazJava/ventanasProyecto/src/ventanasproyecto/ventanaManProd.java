@@ -6,6 +6,8 @@
 package ventanasproyecto;
 
 import LogicaNegocio.ProductoBL;
+import clases.Consumible;
+import clases.NoConsumible;
 import clases.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,12 +25,14 @@ public class ventanaManProd extends javax.swing.JFrame {
     
     private ProductoBL LogicaNegocio;
       
-    public ventanaManProd() {
+    public ventanaManProd() throws ClassNotFoundException, SQLException {
         this.setTitle("Mantener Productos");
         this.setLocationRelativeTo(null);
+        
         initComponents();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         LogicaNegocio = new ProductoBL();
+        listarProductos();
         registrar.setEnabled(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
@@ -284,7 +288,8 @@ public class ventanaManProd extends javax.swing.JFrame {
     }
     
     private void listarProductos() throws ClassNotFoundException, SQLException{
-        ArrayList<Producto> arr = LogicaNegocio.listarProductos();
+        ArrayList<Producto> arr = new ArrayList<Producto>();
+        arr = LogicaNegocio.listarProductos();
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         int n = arr.size();
         int r = model.getRowCount();
@@ -292,8 +297,17 @@ public class ventanaManProd extends javax.swing.JFrame {
             model.removeRow(0);
         }
         for (int i=0; i<n; i++){
-            //Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit(), arr.get(i).getMoneda()};
-            //model.addRow(o);
+            String con = "";
+            String cat = "";
+            if(arr.get(i) instanceof Consumible){
+                con = "Consumible";
+                cat = ((Consumible) arr.get(i)).getCategoria().toString();
+            }else if(arr.get(i) instanceof NoConsumible){
+                con = "NoConsumible";
+                cat = ((NoConsumible) arr.get(i)).getCategoria().toString();
+            }
+            Object o[] = {arr.get(i).getIdProducto(), arr.get(i).getNombre(), arr.get(i).getPrecio(), arr.get(i).getMarca(), con, cat};
+            model.addRow(o);
         }
     }
     
