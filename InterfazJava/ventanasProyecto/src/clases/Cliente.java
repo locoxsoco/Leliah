@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.util.Date;
 public class Cliente{
 	private int idCliente;
+        private static int counter=1;
 	private String direccion;
 	private String correo;
 	private String telefono;
@@ -44,11 +45,14 @@ public class Cliente{
 		this.telefono=_telefono;
 	}
 
-	public Cliente(int idCliente,String direccion,String correo,String telefono){
-		this.idCliente=idCliente;
+	public Cliente(String direccion,String correo,String telefono){
+		this.idCliente=counter++;
 		this.direccion=direccion;
 		this.direccion=direccion;
 		this.telefono=telefono;
 		this.correo=correo;
 	}
+        public Cliente(){
+            
+        }
 }

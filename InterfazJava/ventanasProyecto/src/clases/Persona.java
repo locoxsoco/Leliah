@@ -45,7 +45,7 @@ public class Persona extends Cliente{
 	}
 
 	public Persona(int idCliente,String direccion,String correo,String telefono,int dni,String nombre,String apPaterno,String apMaterno){
-		super(idCliente,direccion,correo,telefono);
+		super(direccion,correo,telefono);
 		this.dni=dni;
 		this.nombre=nombre;
 		this.apPaterno=this.apMaterno;

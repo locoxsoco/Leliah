@@ -27,7 +27,7 @@ public class Empresa extends Cliente{
 	}
 
 	public Empresa(int idCliente,String direccion,String correo,String telefono,int dni,String nombre,String apPaterno,String apMaterno){
-		super(idCliente,direccion,correo,telefono);
+		super(direccion,correo,telefono);
 		this.ruc=ruc;
 		this.nombre=nombre;
 	}

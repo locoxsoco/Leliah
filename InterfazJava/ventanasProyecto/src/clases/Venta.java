@@ -12,8 +12,8 @@ public class Venta{
 	private int idVenta;
 	private Date fechaVenta;
 	private float montoTotal;
-	private List<LineaxServicio> listLineaxServicio;
-	private List<LineaxProducto> listLineaxProducto;
+	private ArrayList<LineaxServicio> listLineaxServicio;
+	private ArrayList<LineaxVenta> listLineaxProducto;
 	private TipoDocumento tipoDocumento;
 	private TipoPago tipoPago;
 	private Cliente cliente;
@@ -46,15 +46,15 @@ public class Venta{
 		return listLineaxServicio;
 	}
 
-	public void setLineaxServicio (List<LineaxServicio> _lineaxServicio){
+	public void setLineaxServicio (ArrayList<LineaxServicio> _lineaxServicio){
 		this.listLineaxServicio=_lineaxServicio;
 	}
 
-	public List<LineaxProducto> getLineaxProducto(){
+	public List<LineaxVenta> getLineaxProducto(){
 		return listLineaxProducto;
 	}
 
-	public void setLineaxProducto (List<LineaxProducto> _lineaxProducto){
+	public void setLineaxProducto (ArrayList<LineaxVenta> _lineaxProducto){
 		this.listLineaxProducto=_lineaxProducto;
 	}
 
@@ -86,12 +86,26 @@ public class Venta{
 		this.fechaVenta=fechaVenta;
 		this.montoTotal=montoTotal;
 		this.listLineaxServicio=new ArrayList<LineaxServicio>();
-		this.listLineaxProducto=new ArrayList<LineaxProducto>();
+		this.listLineaxProducto=new ArrayList<LineaxVenta>();
 		this.tipoDocumento=tipoDocumento;
 		this.tipoPago=tipoPago;
 		this.cliente=cliente;		
 	}
-	public void agregarLineaxProducto(LineaxProducto lineaxProducto){
+        public Venta(int idVenta,Date fechaVenta,float montoTotal,ArrayList<LineaxServicio> listLineaxServicio,ArrayList<LineaxVenta> listLineaxProducto,TipoDocumento tipoDocumento,TipoPago tipoPago,Cliente cliente){
+		this.idVenta=idVenta;
+		this.fechaVenta=fechaVenta;
+		this.montoTotal=montoTotal;
+		this.listLineaxServicio=listLineaxServicio;
+		this.listLineaxProducto=listLineaxProducto;
+		this.tipoDocumento=tipoDocumento;
+		this.tipoPago=tipoPago;
+		this.cliente=cliente;		
+	}
+        
+        public Venta(){
+            
+        }
+	public void agregarLineaxProducto(LineaxVenta lineaxProducto){
 		
 	}
 	public void agregarLineaxServicio(LineaxServicio lineaxServicio){

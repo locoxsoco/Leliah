@@ -60,4 +60,7 @@ public class Trabajador{
 		this.edad=edad;
 		this.login=login;
 	}
+        public Trabajador(){
+            
+        }
 }

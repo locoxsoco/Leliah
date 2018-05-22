@@ -10,7 +10,7 @@ public class Compra{
 	private int idCompra;
 	private float monto;
 	private Proveedor proveedor;
-	private List<LineaxProducto> listLineaxProd;
+	private List<LineaxCompra> listLineaxCompra;
 
 	public int getIdCompra(){
 		return idCompra;
@@ -36,21 +36,24 @@ public class Compra{
 		this.proveedor=_proveedor;
 	}
 
-	public List<LineaxProducto> getListLineaxProd(){
-		return listLineaxProd;
+	public List<LineaxCompra> getListLineaxProd(){
+		return listLineaxCompra;
 	}
 
-	public void setListLineaxProd (List<LineaxProducto> _listLineaxProd){
-		this.listLineaxProd=_listLineaxProd;
+	public void setListLineaxProd (List<LineaxCompra> _listLineaxProd){
+		this.listLineaxCompra=_listLineaxProd;
 	}
 
 	public Compra(int idCompra,float monto,Proveedor proveedor){
 		this.idCompra=idCompra;
 		this.monto=monto;
 		this.proveedor=proveedor;
-		this.listLineaxProd=new ArrayList<LineaxProducto>();
+		this.listLineaxCompra=new ArrayList<LineaxCompra>();
 	}
-	public void agregarLineaxProducto (LineaxProducto lineaxProd){
+        public Compra(){
+            
+        }
+	public void agregarLineaxProducto (LineaxVenta lineaxProd){
 		
 	}
 }

@@ -6,9 +6,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
-public class LineaxProducto{
+public class LineaxCompra{
+        private static int counter=0;
+        private int idLineaxCompra;
 	private int cantidad;
-	private float subtotal;
+	private float precioUnit;
 	private Producto producto;
 
 	public int getCantidad(){
@@ -20,11 +22,11 @@ public class LineaxProducto{
 	}
 
 	public float getSubtotal(){
-		return subtotal;
+		return precioUnit;
 	}
 
 	public void setSubtotal (float _subtotal){
-		this.subtotal=_subtotal;
+		this.precioUnit=_subtotal;
 	}
 
 	public Producto getProducto(){
@@ -34,11 +36,15 @@ public class LineaxProducto{
 	public void setProducto (Producto _producto){
 		this.producto=_producto;
 	}
-	public LineaxProducto(int cantidad,float subtotal,Producto producto){
+	public LineaxCompra(int cantidad,float subtotal,Producto producto){
 		this.cantidad=cantidad;
-		this.subtotal=subtotal;
+		this.precioUnit=subtotal;
 		this.producto=producto;
+                this.idLineaxCompra=counter++;
 	}
+        public LineaxCompra(){
+            
+        }
 	public void agregarProducto(Producto producto){
 		
 	}
