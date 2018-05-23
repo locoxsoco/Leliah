@@ -6,6 +6,7 @@
 package LogicaNegocio;
 
 import AccesoDatos.TrabajadorDA;
+import clases.TipoDocumentoIdentidad;
 import clases.Trabajador;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,5 +23,21 @@ public class TrabajadorBL {
     
     public ArrayList<Trabajador> listarTrabajadores() throws ClassNotFoundException, SQLException{
         return accesoDatos.listarTrabajadores();
+    }
+    
+    public void registrarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
+        accesoDatos.registrarTrabajador(t);
+    }
+    
+    public void modificarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
+        accesoDatos.modificarTrabajador(t);
+    }
+    
+    public void eliminarTrabajador(int id) throws ClassNotFoundException, SQLException{
+        accesoDatos.eliminarTrabajador(id);
+    }
+    
+    public ArrayList<TipoDocumentoIdentidad> listarDocumentos() throws ClassNotFoundException, SQLException{
+        return accesoDatos.listarDocumentos();
     }
 }

@@ -8,21 +8,27 @@ import java.text.ParseException;
 import java.util.Date;
 public class Trabajador{
     private int id;
-    private int numDoc;
+    private String numDoc;
     private String nombre;
     private String apPaterno;
     private String apMaterno;
     private Date fecha;
     private String username;
     private String contrasena;
-    private String tipoDoc;
+    private TipoDocumentoIdentidad tipoDoc;
     
-    public String getTipoDoc(){
+    public TipoDocumentoIdentidad getTipoDoc(){
         return tipoDoc;
     }
     
-    public void setTipoDoc(String tipo){
-        this.tipoDoc = tipo;
+    public void setTipoDoc(TipoDocumentoIdentidad tipo){
+        this.tipoDoc.setIdTipo(tipo.getIdTipo());
+        this.tipoDoc.setNombTipo(tipo.getNombTipo());
+    }
+    
+    public void setTipoDoc(int id, String nomb){
+        this.tipoDoc.setIdTipo(id);
+        this.tipoDoc.setNombTipo(nomb);
     }
     
     public String getUsername(){
@@ -49,11 +55,11 @@ public class Trabajador{
         this.fecha = f;
     }
     
-    public int getNumDoc(){
+    public String getNumDoc(){
         return numDoc;
     }
     
-    public void setNumDoc(int num){
+    public void setNumDoc(String num){
         this.numDoc = num;
     }
     

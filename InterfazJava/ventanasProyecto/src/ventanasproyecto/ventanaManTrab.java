@@ -5,8 +5,12 @@
  */
 package ventanasproyecto;
 
+import LogicaNegocio.TrabajadorBL;
+import clases.TipoDocumentoIdentidad;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,10 +26,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
      * Creates new form ventanaManTrab
      */
     
-    
+    private TrabajadorBL LogicaNegocio;
     public ventanaManTrab() {
         initComponents();
         this.setTitle("Ventana Mantener Trabajadores");
+        LogicaNegocio = new TrabajadorBL();
         sueldo.setVisible(false);
         Tsueldo.setVisible(false);
         Thoras.setVisible(false);
@@ -81,6 +86,10 @@ public class ventanaManTrab extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        tipoDoc = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        numDoc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 620));
@@ -120,7 +129,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Tipo Usuario:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(470, 51, 83, 16);
+        jLabel7.setBounds(460, 121, 83, 16);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel8.setText("Fecha Nacimiento:");
@@ -130,17 +139,17 @@ public class ventanaManTrab extends javax.swing.JFrame {
         Tsueldo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Tsueldo.setText("Pago x Hora");
         getContentPane().add(Tsueldo);
-        Tsueldo.setBounds(470, 86, 90, 16);
+        Tsueldo.setBounds(460, 156, 90, 16);
 
         Thoras.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Thoras.setText("Horas Semanales:");
         getContentPane().add(Thoras);
-        Thoras.setBounds(470, 121, 116, 16);
+        Thoras.setBounds(460, 191, 116, 16);
 
         Ttipo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Ttipo.setText("Tipo Pago:");
         getContentPane().add(Ttipo);
-        Ttipo.setBounds(470, 156, 70, 16);
+        Ttipo.setBounds(460, 226, 70, 16);
         getContentPane().add(nombre);
         nombre.setBounds(142, 48, 200, 22);
         getContentPane().add(apPat);
@@ -156,17 +165,16 @@ public class ventanaManTrab extends javax.swing.JFrame {
 
         moneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S./", "$" }));
         getContentPane().add(moneda);
-        moneda.setBounds(750, 83, 50, 22);
+        moneda.setBounds(750, 153, 50, 22);
 
         sueldo.setMinimumSize(new java.awt.Dimension(850, 650));
         getContentPane().add(sueldo);
-        sueldo.setBounds(600, 83, 140, 22);
+        sueldo.setBounds(600, 153, 140, 22);
 
-        frec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja...", "Semanal", "Mensual" }));
         getContentPane().add(frec);
-        frec.setBounds(600, 153, 140, 22);
+        frec.setBounds(600, 223, 140, 22);
         getContentPane().add(horas);
-        horas.setBounds(600, 118, 200, 22);
+        horas.setBounds(600, 188, 200, 22);
 
         tipoUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja...", "Administrador del Sistema", "Jefe", "Vendedor" }));
         tipoUser.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +183,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipoUser);
-        tipoUser.setBounds(600, 48, 200, 22);
+        tipoUser.setBounds(600, 118, 200, 22);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setText("Registrar");
@@ -224,6 +232,8 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
             tabla.getColumnModel().getColumn(0).setMaxWidth(50);
+            tabla.getColumnModel().getColumn(5).setMinWidth(100);
+            tabla.getColumnModel().getColumn(5).setMaxWidth(100);
         }
 
         getContentPane().add(jScrollPane1);
@@ -249,6 +259,21 @@ public class ventanaManTrab extends javax.swing.JFrame {
         getContentPane().add(jButton5);
         jButton5.setBounds(530, 530, 110, 29);
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel9.setText("Tipo Documento:");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(460, 51, 110, 16);
+
+        getContentPane().add(tipoDoc);
+        tipoDoc.setBounds(600, 48, 200, 22);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel10.setText("Número Documento:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(460, 86, 140, 16);
+        getContentPane().add(numDoc);
+        numDoc.setBounds(600, 83, 200, 22);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private boolean isDouble(String cadena) {
@@ -263,6 +288,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
         }
 
         return resultado;
+    }
+    
+    private void llenarComboBoxDoc() throws ClassNotFoundException, SQLException{
+        ArrayList<TipoDocumentoIdentidad> docs = LogicaNegocio.listarDocumentos();
+        
     }
     
     private boolean validarInput(){
@@ -598,6 +628,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -605,14 +636,17 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
     private javax.swing.JComboBox<String> moneda;
     public static javax.swing.JTextField nombre;
+    private javax.swing.JTextField numDoc;
     public static javax.swing.JTextField pass;
     private javax.swing.JButton registrar;
     public static javax.swing.JTextField sueldo;
     public static javax.swing.JTable tabla;
+    private javax.swing.JComboBox<String> tipoDoc;
     public static javax.swing.JComboBox<String> tipoUser;
     public static javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables

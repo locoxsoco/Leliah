@@ -10,14 +10,22 @@ public class Vendedor extends Trabajador{
 	private double pagoxHora;
 	private int horaxSemana;
         private String moneda;
-        private String tiempoPago;
+        private TiempoPago tiempoPago;
         
-        public String getTiempoPago(){
+        public TiempoPago getTiempoPago(){
             return tiempoPago;
         }
         
-        public void setTiempoPago(String t){
-            this.tiempoPago = t;
+        public void setTiempoPago(TiempoPago t){
+            this.tiempoPago.setIdTiempo(t.getIdTiempo());
+            this.tiempoPago.setNombTiempo(t.getNombTiempo());
+            //this.tiempoPago = t;
+        }
+        
+        public void setTiempoPago(int id, String nomb){
+            this.tiempoPago.setIdTiempo(id);
+            this.tiempoPago.setNombTiempo(nomb);
+            //this.tiempoPago = t;
         }
         
         public String getMoneda(){
