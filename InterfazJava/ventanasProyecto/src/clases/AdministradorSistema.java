@@ -8,24 +8,22 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 public class AdministradorSistema extends Trabajador{
-	private static int counter=1;
-        private int idAdministrador;
-        private float sueldo;
-	//private Libreria libreria;
-
-        public int getIdAdministrador(){
-		return idAdministrador;
-	}
-
-	public void setIdAdministrador (int _idAdministrador){
-		this.idAdministrador= _idAdministrador;
-	}
+        private double sueldo;
+        private String moneda;
         
-	public float getSueldo(){
+        public String getMoneda(){
+            return moneda;
+        }
+        
+        public void setMoneda(String moneda){
+            this.moneda = moneda;
+        }
+        
+	public double getSueldo(){
 		return sueldo;
 	}
 
-	public void setSueldo (float _sueldo){
+	public void setSueldo (double _sueldo){
 		this.sueldo=_sueldo;
 	}
 
@@ -37,10 +35,9 @@ public class AdministradorSistema extends Trabajador{
 		this.libreria=_libreria;
 	}*/
 
-	public AdministradorSistema(String nombre,String apPaterno,String apMaterno,int edad,float sueldo, Libreria libreria){
-		super(nombre,apPaterno,apMaterno,edad);
+	public AdministradorSistema(String nombre,String apPaterno,String apMaterno,double sueldo, Libreria libreria){
+		super(nombre,apPaterno,apMaterno);
 		this.sueldo=sueldo;
-                this.idAdministrador=counter++;
 		//this.libreria=libreria;
 	}
         public AdministradorSistema(){

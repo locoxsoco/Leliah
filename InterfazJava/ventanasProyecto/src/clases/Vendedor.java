@@ -7,39 +7,47 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 public class Vendedor extends Trabajador{
-	private float sueldo;
-	private float horaxSemana;
-	private Libreria libreria;
+	private double pagoxHora;
+	private int horaxSemana;
+        private String moneda;
+        private String tiempoPago;
+        
+        public String getTiempoPago(){
+            return tiempoPago;
+        }
+        
+        public void setTiempoPago(String t){
+            this.tiempoPago = t;
+        }
+        
+        public String getMoneda(){
+            return moneda;
+        }
+        
+        public void setMoneda(String moneda){
+            this.moneda = moneda;
+        }
 
-	public float getSueldo(){
-		return sueldo;
+	public double getPagoxHora(){
+		return pagoxHora;
 	}
 
-	public void setSueldo (float _sueldo){
-		this.sueldo=_sueldo;
+	public void setPagoxHora (double pagoxHora){
+		this.pagoxHora=pagoxHora;
 	}
 
 	public float getHoraxSemana(){
 		return horaxSemana;
 	}
 
-	public void setHoraxSemana (float _horaxSemana){
+	public void setHoraxSemana (int _horaxSemana){
 		this.horaxSemana=_horaxSemana;
 	}
 
-	public Libreria getLibreria(){
-		return libreria;
-	}
-
-	public void setLibreria (Libreria _libreria){
-		this.libreria=_libreria;
-	}
-
-	public Vendedor(String nombre,String apPaterno,String apMaterno,int edad,float sueldo,float horaxSemana,Libreria libreria){
-		super(nombre,apPaterno,apMaterno,edad);
-		this.sueldo=sueldo;
+	public Vendedor(String nombre,String apPaterno,String apMaterno,double pagoxHora,int horaxSemana){
+		super(nombre,apPaterno,apMaterno);
+		this.pagoxHora=pagoxHora;
 		this.horaxSemana=horaxSemana;
-		this.libreria=libreria;
 	}
         public Vendedor(){
             

@@ -7,17 +7,6 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 public class Jefe extends Trabajador{
-    private static int counter=1;
-    private int idJefe;
-    //private Libreria libreria;
-
-    public int getIdJefe(){
-		return idJefe;
-	}
-
-	public void setIdJefe (int _idJefe){
-		this.idJefe= _idJefe;
-	}
     /*public Libreria getLibreria(){
             return libreria;
     }
@@ -26,10 +15,9 @@ public class Jefe extends Trabajador{
             this.libreria=_libreria;
     }*/
 
-    public Jefe(String nombre,String apPaterno,String apMaterno,int edad,Libreria libreria){
-            super(nombre,apPaterno,apMaterno,edad);
-            this.idJefe=counter++;
-            //this.libreria=libreria;
+    public Jefe(String nombre,String apPaterno,String apMaterno,Libreria libreria){
+        super(nombre,apPaterno,apMaterno);
+        //this.libreria=libreria;
     }
     public void mantenerProyecto (Libreria libreria){
 
@@ -56,8 +44,7 @@ public class Jefe extends Trabajador{
 
     }
     public Jefe(){
-        super();
-        this.idJefe=counter++;        
+        super();      
     }
 	
 }

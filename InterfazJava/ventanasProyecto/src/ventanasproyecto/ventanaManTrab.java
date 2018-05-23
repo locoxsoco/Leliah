@@ -26,12 +26,13 @@ public class ventanaManTrab extends javax.swing.JFrame {
     public ventanaManTrab() {
         initComponents();
         this.setTitle("Ventana Mantener Trabajadores");
-        this.Ttipo.setEnabled(false);
-        this.Tsueldo.setEnabled(false);
-        Thoras.setEnabled(false);
-        frec.setEnabled(false);
-        sueldo.setEnabled(false);
-        horas.setEnabled(false);
+        sueldo.setVisible(false);
+        Tsueldo.setVisible(false);
+        Thoras.setVisible(false);
+        horas.setVisible(false);
+        Ttipo.setVisible(false);
+        frec.setVisible(false);
+        moneda.setVisible(false);
         registrar.setEnabled(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
@@ -82,7 +83,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1060, 570));
+        setMinimumSize(new java.awt.Dimension(830, 620));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -94,7 +95,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("Nombre:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 48, 54, 16);
+        jLabel2.setBounds(12, 51, 54, 16);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("Apellido Paterno:");
@@ -109,37 +110,37 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("Usuario:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(12, 161, 53, 16);
+        jLabel5.setBounds(12, 156, 53, 16);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel6.setText("Contraseña:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(12, 196, 80, 16);
+        jLabel6.setBounds(12, 191, 80, 16);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Tipo Usuario:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(470, 50, 83, 16);
+        jLabel7.setBounds(470, 51, 83, 16);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel8.setText("Fecha Nacimiento:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(12, 236, 120, 16);
+        jLabel8.setBounds(12, 226, 120, 16);
 
         Tsueldo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Tsueldo.setText("Pago x Hora");
         getContentPane().add(Tsueldo);
-        Tsueldo.setBounds(470, 90, 90, 16);
+        Tsueldo.setBounds(470, 86, 90, 16);
 
         Thoras.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Thoras.setText("Horas Semanales:");
         getContentPane().add(Thoras);
-        Thoras.setBounds(470, 120, 116, 16);
+        Thoras.setBounds(470, 121, 116, 16);
 
         Ttipo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Ttipo.setText("Tipo Pago:");
         getContentPane().add(Ttipo);
-        Ttipo.setBounds(470, 160, 70, 16);
+        Ttipo.setBounds(470, 156, 70, 16);
         getContentPane().add(nombre);
         nombre.setBounds(142, 48, 200, 22);
         getContentPane().add(apPat);
@@ -147,21 +148,23 @@ public class ventanaManTrab extends javax.swing.JFrame {
         getContentPane().add(apMat);
         apMat.setBounds(142, 118, 200, 22);
         getContentPane().add(user);
-        user.setBounds(142, 158, 200, 22);
+        user.setBounds(142, 153, 200, 22);
         getContentPane().add(fecha);
-        fecha.setBounds(140, 230, 200, 22);
+        fecha.setBounds(140, 223, 200, 22);
         getContentPane().add(pass);
-        pass.setBounds(142, 193, 200, 22);
+        pass.setBounds(142, 188, 200, 22);
 
         moneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S./", "$" }));
         getContentPane().add(moneda);
-        moneda.setBounds(810, 160, 44, 22);
+        moneda.setBounds(750, 83, 50, 22);
+
+        sueldo.setMinimumSize(new java.awt.Dimension(850, 650));
         getContentPane().add(sueldo);
-        sueldo.setBounds(600, 83, 200, 22);
+        sueldo.setBounds(600, 83, 140, 22);
 
         frec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja...", "Semanal", "Mensual" }));
         getContentPane().add(frec);
-        frec.setBounds(600, 160, 200, 22);
+        frec.setBounds(600, 153, 140, 22);
         getContentPane().add(horas);
         horas.setBounds(600, 118, 200, 22);
 
@@ -182,7 +185,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(470, 200, 100, 60);
+        registrar.setBounds(12, 270, 90, 25);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
         modificar.setText("Modificar");
@@ -192,7 +195,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(590, 200, 105, 60);
+        modificar.setBounds(132, 270, 90, 25);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setText("Eliminar");
@@ -202,7 +205,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(710, 200, 105, 60);
+        eliminar.setBounds(252, 270, 90, 25);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -210,7 +213,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Apellido Paterno", "Apellido Materno", "Usuario", "Contraseña", "Fecha", "Tipo Usuario", "Pago x Hora S./", "Horas Semanales", "Tipo Pago"
+                "ID", "Nombre Completo", "Usuario", "Contraseña", "Fecha", "Tipo Usuario"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,7 +227,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(12, 282, 1029, 193);
+        jScrollPane1.setBounds(10, 320, 790, 193);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
@@ -234,7 +237,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(880, 500, 140, 29);
+        jButton4.setBounds(660, 530, 140, 29);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton5.setText("Volver");
@@ -244,7 +247,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(749, 500, 110, 29);
+        jButton5.setBounds(530, 530, 110, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -387,47 +390,49 @@ public class ventanaManTrab extends javax.swing.JFrame {
         // TODO add your handling code here:
         String s = this.tipoUser.getSelectedItem().toString();
         if(s == "Escoja..."){
-            Ttipo.setEnabled(false);
-            Tsueldo.setEnabled(false);
-            Thoras.setEnabled(false);
-            frec.setEnabled(false);
-            sueldo.setEnabled(false);
-            horas.setEnabled(false);
+            Ttipo.setVisible(false);
+            Tsueldo.setVisible(false);
+            Thoras.setVisible(false);
+            frec.setVisible(false);
+            sueldo.setVisible(false);
+            horas.setVisible(false);
+            moneda.setVisible(false);
             registrar.setEnabled(false);
         }else if (s == "Jefe"){
-            Ttipo.setEnabled(false);
-            Tsueldo.setEnabled(false);
-            Thoras.setEnabled(false);
-            frec.setEnabled(true);
-            sueldo.setEnabled(true);
-            horas.setEnabled(true);
-            frec.setSelectedItem(frec.getItemAt(0));
-            sueldo.setText("");
-            horas.setText("");
-            frec.setEnabled(false);
-            sueldo.setEnabled(false);
-            horas.setEnabled(false);
+            Ttipo.setVisible(false);
+            Tsueldo.setVisible(false);
+            Thoras.setVisible(false);
+            frec.setVisible(false);
+            sueldo.setVisible(false);
+            horas.setVisible(false);
             registrar.setEnabled(true);
+            moneda.setVisible(false);
         }else if (s == "Administrador del Sistema"){
-            Ttipo.setEnabled(false);
-            Tsueldo.setEnabled(true);
-            Thoras.setEnabled(false);
-            frec.setEnabled(true);
-            sueldo.setEnabled(true);
-            horas.setEnabled(true);
-            frec.setSelectedItem(frec.getItemAt(0));
-            horas.setText("");
-            frec.setEnabled(false);
-            sueldo.setEnabled(true);
-            horas.setEnabled(false);
+            Ttipo.setVisible(false);
+            Tsueldo.setText("Sueldo");
+            Tsueldo.setVisible(true);
+            Thoras.setVisible(false);
+            frec.setVisible(false);
+            sueldo.setText("");
+            sueldo.setVisible(true);
+            horas.setVisible(false);
+            moneda.setSelectedItem(moneda.getItemAt(0));
+            moneda.setVisible(true);
             registrar.setEnabled(true);
+            
         }else if (s == "Vendedor"){
-            Ttipo.setEnabled(true);
-            Tsueldo.setEnabled(true);
-            Thoras.setEnabled(true);
-            frec.setEnabled(true);
-            sueldo.setEnabled(true);
-            horas.setEnabled(true);
+            Ttipo.setVisible(true);
+            Tsueldo.setText("Pago x Hora");
+            Tsueldo.setVisible(true);
+            Thoras.setVisible(true);
+            frec.setSelectedItem(frec.getItemAt(0));
+            frec.setVisible(true);
+            sueldo.setText("");
+            sueldo.setVisible(true);
+            horas.setText("");
+            horas.setVisible(true);
+            moneda.setSelectedItem(moneda.getItemAt(0));
+            moneda.setVisible(true);
             registrar.setEnabled(true);
         }
     }//GEN-LAST:event_tipoUserActionPerformed

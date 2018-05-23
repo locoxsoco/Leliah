@@ -477,7 +477,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             inicializarComboCon(2);
         }
         idMod = list.get(tabla.getSelectedRow()).getIdProducto();
-        System.out.println(idMod);
+        //System.out.println(idMod);
         categoria.setSelectedItem(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
         moneda.setSelectedItem(list.get(tabla.getSelectedRow()).getMoneda());
         desc.setText(list.get(tabla.getSelectedRow()).getDescripcion());
