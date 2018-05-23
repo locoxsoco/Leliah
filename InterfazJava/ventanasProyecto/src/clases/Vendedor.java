@@ -58,7 +58,9 @@ public class Vendedor extends Trabajador{
 		this.horaxSemana=horaxSemana;
 	}
         public Vendedor(){
-            
+            super();
+            this.tiempoPago = new TiempoPago();
+            //this.tipoDoc = new TipoDocumentoIdentidad();
         }
 	public void mantenerVenta (Libreria libreria){
 		

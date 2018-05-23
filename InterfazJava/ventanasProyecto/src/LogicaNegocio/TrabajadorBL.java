@@ -6,6 +6,7 @@
 package LogicaNegocio;
 
 import AccesoDatos.TrabajadorDA;
+import clases.TiempoPago;
 import clases.TipoDocumentoIdentidad;
 import clases.Trabajador;
 import java.sql.SQLException;
@@ -39,5 +40,9 @@ public class TrabajadorBL {
     
     public ArrayList<TipoDocumentoIdentidad> listarDocumentos() throws ClassNotFoundException, SQLException{
         return accesoDatos.listarDocumentos();
+    }
+    
+    public ArrayList<TiempoPago> listarTiempoPago() throws ClassNotFoundException, SQLException{
+        return accesoDatos.listarTiempoPago();
     }
 }

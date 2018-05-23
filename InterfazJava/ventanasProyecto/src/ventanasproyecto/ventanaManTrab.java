@@ -6,7 +6,12 @@
 package ventanasproyecto;
 
 import LogicaNegocio.TrabajadorBL;
+import clases.AdministradorSistema;
+import clases.Jefe;
+import clases.TiempoPago;
 import clases.TipoDocumentoIdentidad;
+import clases.Trabajador;
+import clases.Vendedor;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,10 +33,14 @@ public class ventanaManTrab extends javax.swing.JFrame {
      */
     
     private TrabajadorBL LogicaNegocio;
-    public ventanaManTrab() {
+    public ventanaManTrab() throws ClassNotFoundException, SQLException {
         initComponents();
         this.setTitle("Ventana Mantener Trabajadores");
         LogicaNegocio = new TrabajadorBL();
+        lista = new ArrayList<Trabajador>();
+        llenarComboBoxDoc();
+        llenarComboBoxPago();
+        listarTrabajadores();
         sueldo.setVisible(false);
         Tsueldo.setVisible(false);
         Thoras.setVisible(false);
@@ -47,7 +57,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
     }
     int idU;
     ventanaAdmin anterior;
-
+    private ArrayList<Trabajador> lista;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,9 +157,9 @@ public class ventanaManTrab extends javax.swing.JFrame {
         Thoras.setBounds(460, 191, 116, 16);
 
         Ttipo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        Ttipo.setText("Tipo Pago:");
+        Ttipo.setText("Frecuencia Pago:");
         getContentPane().add(Ttipo);
-        Ttipo.setBounds(460, 226, 70, 16);
+        Ttipo.setBounds(460, 226, 120, 16);
         getContentPane().add(nombre);
         nombre.setBounds(142, 48, 200, 22);
         getContentPane().add(apPat);
@@ -292,7 +302,43 @@ public class ventanaManTrab extends javax.swing.JFrame {
     
     private void llenarComboBoxDoc() throws ClassNotFoundException, SQLException{
         ArrayList<TipoDocumentoIdentidad> docs = LogicaNegocio.listarDocumentos();
-        
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        int n = docs.size();
+        for(int i=0; i<n; i++){
+            modelo.addElement(docs.get(i));
+        }
+        tipoDoc.setModel(modelo);
+    }
+    
+    private void llenarComboBoxPago() throws ClassNotFoundException, SQLException{
+        ArrayList<TiempoPago> docs = LogicaNegocio.listarTiempoPago();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        int n = docs.size();
+        for(int i=0; i<n; i++){
+            modelo.addElement(docs.get(i));
+        }
+        frec.setModel(modelo);
+    }
+    
+    private void listarTrabajadores() throws ClassNotFoundException, SQLException{
+        lista = LogicaNegocio.listarTrabajadores();
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = lista.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            String tipo = "";
+            if(lista.get(i) instanceof Jefe)
+                tipo = "Jefe";
+            else if(lista.get(i) instanceof AdministradorSistema)
+                tipo = "Administrador del Sistema";
+            else if(lista.get(i) instanceof Vendedor)
+                tipo = "Vendedor";
+            Object o[] = {lista.get(i).getId(), lista.get(i).getNombre()+" "+lista.get(i).getApPaterno()+" "+lista.get(i).getApMaterno() , lista.get(i).getUsername(), lista.get(i).getContrasena(), lista.get(i).getFecha().toString(),tipo};
+            model.addRow(o);
+        }
     }
     
     private boolean validarInput(){

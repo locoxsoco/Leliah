@@ -13,6 +13,11 @@ public class TiempoPago {
     private int idTiempo;
     private String nombTiempo;
 
+    @Override
+    public String toString(){
+        return this.nombTiempo;
+    }
+    
     public String getNombTiempo() {
         return nombTiempo;
     }

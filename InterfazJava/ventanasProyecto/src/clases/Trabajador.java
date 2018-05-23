@@ -99,9 +99,10 @@ public class Trabajador{
         this.nombre=nombre;
         this.apPaterno=apPaterno;
         this.apMaterno=apMaterno;
+        this.tipoDoc = new TipoDocumentoIdentidad();
     }
     
     public Trabajador(){
-            
+        this.tipoDoc = new TipoDocumentoIdentidad();
     }
 }

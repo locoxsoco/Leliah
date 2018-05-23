@@ -7,6 +7,7 @@ package AccesoDatos;
 
 import clases.AdministradorSistema;
 import clases.Jefe;
+import clases.TiempoPago;
 import clases.TipoDocumentoIdentidad;
 import clases.Trabajador;
 import clases.Vendedor;
@@ -51,7 +52,7 @@ public class TrabajadorDA {
                 ((Vendedor) t).setPagoxHora(rs.getDouble("pagoxhora"));
                 ((Vendedor) t).setHoraxSemana(rs.getInt("horasxsemana"));
                 ((Vendedor) t).setMoneda(rs.getString("moneda"));
-                ((Vendedor) t).setTiempoPago(rs.getInt("FidTiempoPago"),"");
+                ((Vendedor) t).setTiempoPago(rs.getInt("FidTiempoPago"),rs.getString("TiempoPago.nombreTiempoPago"));
             }
             t.setId(rs.getInt("idTrabajador"));
             //System.out.println(s.getId());
@@ -62,7 +63,7 @@ public class TrabajadorDA {
             t.setFecha(rs.getDate("fechaNacimiento"));
             t.setUsername(rs.getString("username"));
             t.setContrasena(rs.getString("contrasena"));
-            t.setTipoDoc(rs.getInt("FidDocumentoIdentidad"),"");
+            t.setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("TipoDocumentoIdentidad.nombreDocumentoIdentidad"));
 
             lista.add(t);
         }
@@ -168,12 +169,35 @@ public class TrabajadorDA {
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             TipoDocumentoIdentidad t = new TipoDocumentoIdentidad();
+            
             t.setIdTipo(rs.getInt("idTipoDocumentoIdentidad"));
-            t.setNombTipo(rs.getString("nombre"));
+            t.setNombTipo(rs.getString("nombreDocumentoIdentidad"));
+            
             lista.add(t);
         }
         con.close();
         return lista;
     }
+    
+     public ArrayList<TiempoPago> listarTiempoPago() throws ClassNotFoundException, SQLException{
+        ArrayList<TiempoPago> lista = new ArrayList<TiempoPago>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call LISTAR_TIEMPOS_PAGO()}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            TiempoPago t = new TiempoPago();
+            
+            t.setIdTiempo(rs.getInt("idTiempoPago"));
+            t.setNombTiempo(rs.getString("nombreTiempoPago"));
+            
+            lista.add(t);
+        }
+        con.close();
+        return lista;
+     }
     
 }

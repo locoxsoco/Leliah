@@ -13,6 +13,11 @@ public class TipoDocumentoIdentidad {
     private int idTipo;
     private String nombTipo;
 
+    @Override
+    public String toString(){
+        return this.nombTipo;
+    }
+    
     public TipoDocumentoIdentidad() {
     }
 
