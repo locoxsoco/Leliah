@@ -524,12 +524,40 @@ public class ventanaManTrab extends javax.swing.JFrame {
         boolean a = validarInput();
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        idU++;
-        String num = Integer.toString(idU);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Object s[] ={idU, nombre.getText(), apPat.getText(),apMat.getText(), user.getText(), pass.getText(), sdf.format(fecha.getDate()), tipoUser.getSelectedItem().toString(), sueldo.getText(), horas.getText(), frec.getSelectedItem()};
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Trabajador t = null;
+        String tipo = tipoUser.getSelectedItem().toString();
+        if(tipo == "Jefe"){
+            t = new Jefe();
+        }else if(tipo == "Administrador del Sistema"){
+            t = new AdministradorSistema();
+            ((AdministradorSistema)t).setSueldo(Double.parseDouble(sueldo.getText()));
+            ((AdministradorSistema)t).setMoneda(moneda.getSelectedItem().toString());
+        }else if(tipo == "Vendedor"){
+            t = new Vendedor();
+            ((Vendedor)t).setTiempoPago((TiempoPago) frec.getSelectedItem());
+            ((Vendedor)t).setHoraxSemana(Integer.parseInt(horas.getText()));
+            ((Vendedor)t).setPagoxHora(Double.parseDouble(sueldo.getText()));
+            ((Vendedor)t).setMoneda(moneda.getSelectedItem().toString());
+        }
+        t.setNombre(nombre.getText());
+        t.setApPaterno(apPat.getText());
+        t.setApMaterno(apMat.getText());
+        t.setUsername(user.getText());
+        t.setContrasena(pass.getText());
+        t.setFecha(fecha.getDate());
+        t.setNumDoc(numDoc.getText());
+        t.setTipoDoc((TipoDocumentoIdentidad) tipoDoc.getSelectedItem());
         
-        model.addRow(s);
+        try {
+            LogicaNegocio.registrarTrabajador(t);
+            LogicaNegocio.listarTrabajadores();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         nombre.setText("");
         apPat.setText("");
         apMat.setText("");
@@ -537,11 +565,17 @@ public class ventanaManTrab extends javax.swing.JFrame {
         pass.setText("");
         Date fecha1 = new Date();
         fecha.setDate(fecha1);
+        tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
+        numDoc.setText("");
         tipoUser.setSelectedItem(tipoUser.getItemAt(0));
         sueldo.setText("");
+        moneda.setSelectedItem(moneda.getItemAt(0));
         horas.setText("");
         frec.setSelectedItem(frec.getItemAt(0));
-        
+        registrar.setEnabled(false);
+        modificar.setEnabled(false);
+        eliminar.setEnabled(false);
+
     }//GEN-LAST:event_registrarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed

@@ -95,15 +95,17 @@ public class TrabajadorDA {
         stmt.setString("_nombre", t.getNombre());
         stmt.setString("_apellidoPaterno", t.getApPaterno());
         stmt.setString("_apellidoMaterno", t.getApMaterno());
-        stmt.setDate("_fechaNacimiento", (Date) t.getFecha());
+        java.sql.Timestamp f = new java.sql.Timestamp(t.getFecha().getTime());
+        stmt.setTimestamp("_fechaNacimiento", f);
         stmt.setString("_username", t.getUsername());
-        stmt.setString("_password", t.getContrasena());
-        stmt.setInt("_FidDocumentoIdentidad", t.getTipoDoc().getIdTipo());
+        stmt.setString("_contrasena", t.getContrasena());
+        stmt.setInt("_FidTipoDocumentoIdentidad", t.getTipoDoc().getIdTipo());
         
-        stmt.setInt("_id", t.getId());
+        stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
         
+        t.setId(stmt.getInt("_id"));
         con.close();
     }
     
@@ -133,14 +135,13 @@ public class TrabajadorDA {
         stmt.setString("_apellidoMaterno", t.getApMaterno());
         stmt.setDate("_fechaNacimiento", (Date) t.getFecha());
         stmt.setString("_username", t.getUsername());
-        stmt.setString("_password", t.getContrasena());
-        stmt.setInt("_FidDocumentoIdentidad", t.getTipoDoc().getIdTipo());
+        stmt.setString("_contrasena", t.getContrasena());
+        stmt.setInt("_FidTipoDocumentoIdentidad", t.getTipoDoc().getIdTipo());
         
-        stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
         
+        stmt.setInt("_id", t.getId());
         stmt.executeUpdate();
         
-        t.setId(stmt.getInt("_id"));
         
         con.close();
     }
