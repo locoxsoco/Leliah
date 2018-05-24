@@ -220,7 +220,7 @@ public class ventanaManServ extends javax.swing.JFrame {
     
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         // TODO add your handling code here:
-        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventana anterior?","Volver", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             ventanaAnterior.setVisible(true);
             this.dispose();

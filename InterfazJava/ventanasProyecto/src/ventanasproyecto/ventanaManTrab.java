@@ -514,7 +514,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventana anterior?","Volver", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             anterior.setVisible(true);
             this.dispose();
