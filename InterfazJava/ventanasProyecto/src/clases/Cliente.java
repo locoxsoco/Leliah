@@ -7,52 +7,85 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 public class Cliente{
-	private int idCliente;
-        private static int counter=1;
-	private String direccion;
-	private String correo;
-	private String telefono;
+    private int idCliente;
+    private String correo;
+    private String telefono;
+    private Departamento departamento;
+    private Provincia provincia;
+    private Distrito distrito;
+    private String direccion;
 
-	public int getIdCliente(){
-		return idCliente;
-	}
+    public Departamento getDepartamento() {
+        return departamento;
+    }
 
-	public void setIdCliente (int _idCliente){
-		this.idCliente=_idCliente;
-	}
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+    
+    public void setDepartamento(int id, String nomb) {
+        this.departamento.setIdDep(id);
+        this.departamento.setNombDep(nomb);
+    }
 
-	public String getDireccion(){
-		return direccion;
-	}
+    public Provincia getProvincia() {
+        return provincia;
+    }
 
-	public void setDireccion (String _direccion){
-		this.direccion=_direccion;
-	}
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
+    }
+    
+    public void setProvincia(int id, String nomb) {
+        this.provincia.setIdProv(id);
+        this.provincia.setNombProv(nomb);
+    }
 
-	public String getCorreo(){
-		return correo;
-	}
+    public Distrito getDistrito() {
+        return distrito;
+    }
 
-	public void setCorreo (String _correo){
-		this.correo=_correo;
-	}
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
+    }
 
-	public String getTelefono(){
-		return telefono;
-	}
+    public void setDistrito(int id, String nomb) {
+        this.distrito.setIdDist(id);
+        this.distrito.setNombDist(nomb);
+    }
+    
+    public int getIdCliente(){
+        return idCliente;
+    }
 
-	public void setTelefono (String _telefono){
-		this.telefono=_telefono;
-	}
+    public void setIdCliente (int _idCliente){
+        this.idCliente=_idCliente;
+    }
 
-	public Cliente(String direccion,String correo,String telefono){
-		this.idCliente=counter++;
-		this.direccion=direccion;
-		this.direccion=direccion;
-		this.telefono=telefono;
-		this.correo=correo;
-	}
-        public Cliente(){
+    public String getDireccion(){
+        return direccion;
+    }   
+    public void setDireccion (String _direccion){
+        this.direccion=_direccion;
+    }
+
+    public String getCorreo(){
+        return correo;
+    }
+
+    public void setCorreo (String _correo){
+        this.correo=_correo;
+    }
+
+    public String getTelefono(){
+        return telefono;
+    }
+
+    public void setTelefono (String _telefono){
+        this.telefono=_telefono;
+    }
+        
+    public Cliente(){
             
-        }
+    }
 }

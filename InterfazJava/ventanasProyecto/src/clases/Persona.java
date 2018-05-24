@@ -7,18 +7,11 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 public class Persona extends Cliente{
-	private int dni;
+	private String numDoc;
+        private TipoDocumentoIdentidad tipoDoc;
 	private String nombre;
 	private String apPaterno;
 	private String apMaterno;
-
-	public int getDni(){
-		return dni;
-	}
-
-	public void setDni (int _dni){
-		this.dni=_dni;
-	}
 
 	public String getNombre(){
 		return nombre;
@@ -44,12 +37,6 @@ public class Persona extends Cliente{
 		this.apMaterno=_apMaterno;
 	}
 
-	public Persona(int idCliente,String direccion,String correo,String telefono,int dni,String nombre,String apPaterno,String apMaterno){
-		super(direccion,correo,telefono);
-		this.dni=dni;
-		this.nombre=nombre;
-		this.apPaterno=this.apMaterno;
-	}
         public Persona(){
             super();
         }

@@ -26,11 +26,6 @@ public class Empresa extends Cliente{
 		this.razonSocial=_nombre;
 	}
 
-	public Empresa(int idCliente,String direccion,String correo,String telefono,int dni,String nombre,String apPaterno,String apMaterno){
-		super(direccion,correo,telefono);
-		this.ruc=ruc;
-		this.razonSocial=nombre;
-	}
         public Empresa(){
             super();
         }

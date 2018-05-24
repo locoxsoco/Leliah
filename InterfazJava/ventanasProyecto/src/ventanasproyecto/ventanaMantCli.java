@@ -21,35 +21,24 @@ public class ventanaMantCli extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Ventana Mantener Clientes");
-        Tdni.setEnabled(false);
-        TapPat.setEnabled(false);
-        TapMat.setEnabled(false);
-        Truc.setEnabled(false);
-        Trazon.setEnabled(false);
-        dni.setEnabled(false);
-        apPat.setEnabled(false);
-        apMat.setEnabled(false);
-        ruc.setEnabled(false);
-        razon.setEnabled(false);
-        dir.setEnabled(false);
-        email.setEnabled(false);
-        tlf.setEnabled(false);
-        dirtxt.setEnabled(false);
-        emailtxt.setEnabled(false);
-        tlftxt.setEnabled(false);
-        dir1.setEnabled(false);
-        email1.setEnabled(false);
-        tlf1.setEnabled(false);
-        dir1txt.setEnabled(false);
-        email1txt.setEnabled(false);
-        tlf1txt.setEnabled(false);
-        namae.setEnabled(false);
-        namaetxt.setEnabled(false);
-        registrar.setEnabled(false);
+        
+        Tdni.setVisible(false);
+        TapPat.setVisible(false);
+        TapMat.setVisible(false);
+        dni.setVisible(false);
+        apPat.setVisible(false);
+        apMat.setVisible(false);
+        dir.setVisible(false);
+        email.setVisible(false);
+        tlf.setVisible(false);
+        dirtxt.setVisible(false);
+        emailtxt.setVisible(false);
+        tlftxt.setVisible(false);
+        namae.setVisible(false);
+        namaetxt.setVisible(false);
+        registrar.setVisible(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
-        
-        idU=0;
     }
     int idU;
     ventanaAdmin anterior;
@@ -79,11 +68,6 @@ public class ventanaMantCli extends javax.swing.JFrame {
         dni = new javax.swing.JTextField();
         apPat = new javax.swing.JTextField();
         apMat = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        Truc = new javax.swing.JLabel();
-        Trazon = new javax.swing.JLabel();
-        ruc = new javax.swing.JTextField();
-        razon = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         namaetxt = new javax.swing.JLabel();
@@ -94,13 +78,16 @@ public class ventanaMantCli extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         tipoCli = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        numDoc = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tipoDoc = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        tlf1txt = new javax.swing.JLabel();
-        dir1 = new javax.swing.JTextField();
-        email1 = new javax.swing.JTextField();
-        dir1txt = new javax.swing.JLabel();
-        email1txt = new javax.swing.JLabel();
-        tlf1 = new javax.swing.JTextField();
+        departamento = new javax.swing.JComboBox<>();
+        provincia = new javax.swing.JComboBox<>();
+        distrito = new javax.swing.JComboBox<>();
 
         jTextField2.setText("jTextField2");
 
@@ -120,74 +107,49 @@ public class ventanaMantCli extends javax.swing.JFrame {
         dirtxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         dirtxt.setText("Direccion:");
         getContentPane().add(dirtxt);
-        dirtxt.setBounds(10, 250, 64, 16);
+        dirtxt.setBounds(380, 243, 64, 16);
 
         emailtxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         emailtxt.setText("Correo:");
         getContentPane().add(emailtxt);
-        emailtxt.setBounds(10, 280, 49, 16);
+        emailtxt.setBounds(380, 93, 49, 16);
 
         tlftxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         tlftxt.setText("Telefono:");
         getContentPane().add(tlftxt);
-        tlftxt.setBounds(10, 310, 60, 16);
+        tlftxt.setBounds(380, 123, 60, 16);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("Tipo Cliente:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 60, 79, 16);
+        jLabel5.setBounds(10, 63, 79, 16);
         getContentPane().add(dir);
-        dir.setBounds(140, 250, 200, 22);
+        dir.setBounds(490, 240, 200, 22);
         getContentPane().add(email);
-        email.setBounds(140, 280, 200, 22);
+        email.setBounds(490, 90, 200, 22);
         getContentPane().add(tlf);
-        tlf.setBounds(140, 310, 200, 22);
+        tlf.setBounds(490, 120, 200, 22);
 
         Tdni.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Tdni.setText("DNI:");
         getContentPane().add(Tdni);
-        Tdni.setBounds(10, 130, 27, 16);
+        Tdni.setBounds(10, 93, 27, 16);
 
         TapPat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TapPat.setText("Apellido Paterno:");
         getContentPane().add(TapPat);
-        TapPat.setBounds(10, 190, 112, 16);
+        TapPat.setBounds(10, 153, 112, 16);
 
         TapMat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TapMat.setText("Apellido Materno:");
         getContentPane().add(TapMat);
-        TapMat.setBounds(10, 220, 115, 16);
+        TapMat.setBounds(10, 183, 115, 16);
         getContentPane().add(dni);
-        dni.setBounds(140, 130, 200, 22);
+        dni.setBounds(140, 90, 200, 22);
         getContentPane().add(apPat);
-        apPat.setBounds(140, 190, 200, 22);
+        apPat.setBounds(140, 150, 200, 22);
         getContentPane().add(apMat);
-        apMat.setBounds(140, 220, 200, 22);
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel10.setText("Datos Personales:");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(10, 100, 135, 19);
-
-        Truc.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        Truc.setText("RUC:");
-        getContentPane().add(Truc);
-        Truc.setBounds(390, 130, 30, 16);
-
-        Trazon.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        Trazon.setText("Razon Social:");
-        getContentPane().add(Trazon);
-        Trazon.setBounds(390, 160, 90, 16);
-        getContentPane().add(ruc);
-        ruc.setBounds(510, 130, 200, 22);
-
-        razon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                razonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(razon);
-        razon.setBounds(510, 160, 200, 20);
+        apMat.setBounds(140, 180, 200, 22);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -211,7 +173,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         namaetxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         namaetxt.setText("Nombre:");
         getContentPane().add(namaetxt);
-        namaetxt.setBounds(10, 160, 80, 20);
+        namaetxt.setBounds(10, 123, 80, 20);
 
         namae.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,7 +181,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(namae);
-        namae.setBounds(140, 160, 200, 22);
+        namae.setBounds(140, 120, 200, 22);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -283,51 +245,46 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipoCli);
-        tipoCli.setBounds(100, 60, 201, 22);
+        tipoCli.setBounds(140, 60, 200, 22);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel7.setText("Datos Empresa:");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel2.setText("Num Documento:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 213, 120, 16);
+        getContentPane().add(numDoc);
+        numDoc.setBounds(140, 210, 200, 22);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel3.setText("Tipo Documento:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 243, 120, 16);
+
+        getContentPane().add(tipoDoc);
+        tipoDoc.setBounds(140, 240, 200, 22);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel4.setText("Departamento:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(380, 153, 100, 16);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel6.setText("Provincia:");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(380, 183, 90, 16);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel7.setText("Distrito:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(390, 100, 130, 19);
+        jLabel7.setBounds(380, 213, 80, 16);
 
-        tlf1txt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        tlf1txt.setText("Telefono:");
-        getContentPane().add(tlf1txt);
-        tlf1txt.setBounds(390, 250, 70, 20);
+        getContentPane().add(departamento);
+        departamento.setBounds(490, 150, 200, 22);
 
-        dir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dir1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(dir1);
-        dir1.setBounds(510, 190, 200, 20);
+        getContentPane().add(provincia);
+        provincia.setBounds(490, 180, 200, 22);
 
-        email1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(email1);
-        email1.setBounds(510, 220, 200, 22);
-
-        dir1txt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        dir1txt.setText("Direccion:");
-        getContentPane().add(dir1txt);
-        dir1txt.setBounds(390, 190, 70, 20);
-
-        email1txt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        email1txt.setText("Correo:");
-        getContentPane().add(email1txt);
-        email1txt.setBounds(390, 220, 70, 20);
-
-        tlf1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tlf1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(tlf1);
-        tlf1.setBounds(510, 250, 200, 22);
+        getContentPane().add(distrito);
+        distrito.setBounds(490, 210, 200, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -341,22 +298,17 @@ public class ventanaMantCli extends javax.swing.JFrame {
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         idU++;
         String num = Integer.toString(idU);
-        Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), dni.getText(), apPat.getText(), apMat.getText(), ruc.getText(), razon.getText(), dir.getText(), tlf.getText(), email.getText()};
+        Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), dni.getText(), apPat.getText(), apMat.getText(), dir.getText(), tlf.getText(), email.getText()};
         
         model.addRow(s);
         dir.setText("");
         email.setText("");
         tlf.setText("");
-        dir1.setText("");
-        email1.setText("");
-        tlf1.setText("");
         namae.setText("");
         dni.setText("");
         apPat.setText("");
         tipoCli.setSelectedItem(tipoCli.getItemAt(0));
         apMat.setText("");
-        ruc.setText("");
-        razon.setText("");
         
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -440,7 +392,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 }
             }  
         }else if(this.tipoCli.getSelectedItem().toString() == "Empresa"){
-            s = this.ruc.getText();
+            s = this.dni.getText();
             if((s).equals("")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
                 return false;
@@ -451,7 +403,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
                     return false;
                 }
             }
-            s = this.razon.getText();
+            s = this.namae.getText();
             if((s).equals("")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
                 return false;
@@ -471,111 +423,55 @@ public class ventanaMantCli extends javax.swing.JFrame {
         // TODO add your handling code here:
         String s = this.tipoCli.getSelectedItem().toString();
         if(s == "Escoja..."){
-            Tdni.setEnabled(false);
-            TapPat.setEnabled(false);
-            TapMat.setEnabled(false);
-            Truc.setEnabled(false);
-            Trazon.setEnabled(false);
-            dni.setEnabled(true);
-            apPat.setEnabled(true);
-            apMat.setEnabled(true);
-            ruc.setEnabled(true);
-            razon.setEnabled(true);
-            dni.setText("");
-            apPat.setText("");
-            apMat.setText("");
-            ruc.setText("");
-            razon.setText("");
-            dni.setEnabled(false);
-            apPat.setEnabled(false);
-            apMat.setEnabled(false);
-            ruc.setEnabled(false);
-            razon.setEnabled(false);
-            dir.setEnabled(false);
-            email.setEnabled(false);
-            tlf.setEnabled(false);
-            dirtxt.setEnabled(false);
-            emailtxt.setEnabled(false);
-            tlftxt.setEnabled(false);
-            dir1.setEnabled(false);
-            email1.setEnabled(false);
-            tlf1.setEnabled(false);
-            dir1txt.setEnabled(false);
-            email1txt.setEnabled(false);
-            tlf1txt.setEnabled(false);
-            namae.setEnabled(false);
-            namaetxt.setEnabled(false);
+            Tdni.setVisible(false);
+            TapPat.setVisible(false);
+            TapMat.setVisible(false);
+            dni.setVisible(false);
+            apPat.setVisible(false);
+            apMat.setVisible(false);
+            dir.setVisible(false);
+            email.setVisible(false);
+            tlf.setVisible(false);
+            dirtxt.setVisible(false);
+            emailtxt.setVisible(false);
+            tlftxt.setVisible(false);
+            namae.setVisible(false);
+            namaetxt.setVisible(false);
             registrar.setEnabled(false);
             modificar.setEnabled(false);
             eliminar.setEnabled(false);
             
         }else if (s == "Persona"){
-            Tdni.setEnabled(true);
-            TapPat.setEnabled(true);
-            TapMat.setEnabled(true);
-            Truc.setEnabled(false);
-            Trazon.setEnabled(false);
-            ruc.setEnabled(true);
-            razon.setEnabled(true);
-            dir1.setEnabled(true);
-            email1.setEnabled(true);
-            tlf1.setEnabled(true);
-            dir1.setText("");
-            email1.setText("");
-            tlf1.setText("");
-            ruc.setText("");
-            razon.setText("");
-            dni.setEnabled(true);
-            apPat.setEnabled(true);
-            apMat.setEnabled(true);
-            ruc.setEnabled(false);
-            razon.setEnabled(false);
-            dir.setEnabled(true);
-            email.setEnabled(true);
-            tlf.setEnabled(true);
-            dirtxt.setEnabled(true);
-            emailtxt.setEnabled(true);
-            tlftxt.setEnabled(true);
-            dir1.setEnabled(false);
-            email1.setEnabled(false);
-            tlf1.setEnabled(false);
-            dir1txt.setEnabled(false);
-            email1txt.setEnabled(false);
-            tlf1txt.setEnabled(false);
-            namae.setEnabled(true);
-            namaetxt.setEnabled(true);
+            Tdni.setVisible(true);
+            TapPat.setVisible(true);
+            TapMat.setVisible(true);
+            dni.setVisible(true);
+            apPat.setVisible(true);
+            apMat.setVisible(true);
+            dir.setVisible(true);
+            email.setVisible(true);
+            tlf.setVisible(true);
+            dirtxt.setVisible(true);
+            emailtxt.setVisible(true);
+            tlftxt.setVisible(true);
+            namae.setVisible(true);
+            namaetxt.setVisible(true);
             registrar.setEnabled(true);
         }else if (s == "Empresa"){
-            Tdni.setEnabled(false);
-            TapPat.setEnabled(false);
-            TapMat.setEnabled(false);
-            Truc.setEnabled(true);
-            Trazon.setEnabled(true);
-            dni.setEnabled(true);
-            apPat.setEnabled(true);
-            apMat.setEnabled(true);
-            dni.setText("");
-            apPat.setText("");
-            apMat.setText("");            
-            dni.setEnabled(false);
-            apPat.setEnabled(false);
-            apMat.setEnabled(false);
-            ruc.setEnabled(true);
-            razon.setEnabled(true);
-            dir.setEnabled(false);
-            email.setEnabled(false);
-            tlf.setEnabled(false);
-            dirtxt.setEnabled(false);
-            emailtxt.setEnabled(true);
-            tlftxt.setEnabled(true);
-            dir1.setEnabled(true);
-            email1.setEnabled(true);
-            tlf1.setEnabled(true);
-            dir1txt.setEnabled(true);
-            email1txt.setEnabled(true);
-            tlf1txt.setEnabled(true);
-            namae.setEnabled(false);
-            namaetxt.setEnabled(false);
+            Tdni.setVisible(true);
+            TapPat.setVisible(true);
+            TapMat.setVisible(true);
+            dni.setVisible(true);
+            apPat.setVisible(true);
+            apMat.setVisible(true);
+            dir.setVisible(true);
+            email.setVisible(true);
+            tlf.setVisible(true);
+            dirtxt.setVisible(true);
+            emailtxt.setVisible(true);
+            tlftxt.setVisible(true);
+            namae.setVisible(true);
+            namaetxt.setVisible(true);
             registrar.setEnabled(true);
         }
     }//GEN-LAST:event_tipoCliActionPerformed
@@ -598,8 +494,6 @@ public class ventanaMantCli extends javax.swing.JFrame {
             Tdni.setEnabled(true);
             TapPat.setEnabled(true);
             TapMat.setEnabled(true);
-            Truc.setEnabled(false);
-            Trazon.setEnabled(false);
             namae.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
             dni.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 3)));
             apPat.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 4)));
@@ -609,16 +503,12 @@ public class ventanaMantCli extends javax.swing.JFrame {
             Tdni.setEnabled(false);
             TapPat.setEnabled(false);
             TapMat.setEnabled(false);
-            Truc.setEnabled(true);
-            Trazon.setEnabled(true);
+            Tdni.setEnabled(true);
+            namaetxt.setEnabled(true);
             namae.setEnabled(false);
             dni.setEnabled(false);
             apPat.setEnabled(false);
             apMat.setEnabled(false);
-            ruc.setEnabled(true);
-            razon.setEnabled(true);
-            ruc.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 6)));
-            razon.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 7)));
         }
     }//GEN-LAST:event_tablaMouseClicked
 
@@ -635,8 +525,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             model.setValueAt(tipoCli.getSelectedItem().toString(), tabla.getSelectedRow(), 1);
 
             if(tipoCli.getSelectedItem().toString() == "Persona"){
-                ruc.setText("");
-                razon.setText("");
+
             }else if(tipoCli.getSelectedItem().toString() == "Empresa"){
                 dni.setText("");
                 apPat.setText("");
@@ -646,21 +535,16 @@ public class ventanaMantCli extends javax.swing.JFrame {
             model.setValueAt(dni.getText(), tabla.getSelectedRow(), 3);
             model.setValueAt(apPat.getText(), tabla.getSelectedRow(), 4);
             model.setValueAt(apMat.getText(), tabla.getSelectedRow(), 5);
-            model.setValueAt(ruc.getText(), tabla.getSelectedRow(), 6);
-            model.setValueAt(razon.getText(), tabla.getSelectedRow(), 7);
+            model.setValueAt(dni.getText(), tabla.getSelectedRow(), 6);
+            model.setValueAt(namae.getText(), tabla.getSelectedRow(), 7);
             dir.setText("");
             email.setText("");
             tlf.setText("");
-            dir1.setText("");
-            email1.setText("");
-            tlf1.setText("");
             namae.setText("");
             dni.setText("");
             apPat.setText("");
             tipoCli.setSelectedItem(tipoCli.getItemAt(0));
             apMat.setText("");
-            ruc.setText("");
-            razon.setText("");
         }
         
        
@@ -677,16 +561,11 @@ public class ventanaMantCli extends javax.swing.JFrame {
             dir.setText("");
             email.setText("");
             tlf.setText("");
-            dir1.setText("");
-            email1.setText("");
-            tlf1.setText("");
             namae.setText("");
             dni.setText("");
             apPat.setText("");
             tipoCli.setSelectedItem(tipoCli.getItemAt(0));
             apMat.setText("");
-            ruc.setText("");
-            razon.setText("");
         }
         
     }//GEN-LAST:event_eliminarActionPerformed
@@ -705,22 +584,6 @@ public class ventanaMantCli extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_namaeActionPerformed
 
-    private void dir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dir1ActionPerformed
-
-    private void razonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_razonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_razonActionPerformed
-
-    private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_email1ActionPerformed
-
-    private void tlf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlf1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tlf1ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
@@ -738,25 +601,24 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private javax.swing.JLabel TapMat;
     private javax.swing.JLabel TapPat;
     private javax.swing.JLabel Tdni;
-    private javax.swing.JLabel Trazon;
-    private javax.swing.JLabel Truc;
     private javax.swing.JTextField apMat;
     private javax.swing.JTextField apPat;
+    private javax.swing.JComboBox<String> departamento;
     private javax.swing.JTextField dir;
-    private javax.swing.JTextField dir1;
-    private javax.swing.JLabel dir1txt;
     private javax.swing.JLabel dirtxt;
+    private javax.swing.JComboBox<String> distrito;
     private javax.swing.JTextField dni;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField email;
-    private javax.swing.JTextField email1;
-    private javax.swing.JLabel email1txt;
     private javax.swing.JLabel emailtxt;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
@@ -764,14 +626,13 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private javax.swing.JButton modificar;
     private javax.swing.JTextField namae;
     private javax.swing.JLabel namaetxt;
-    private javax.swing.JTextField razon;
+    private javax.swing.JTextField numDoc;
+    private javax.swing.JComboBox<String> provincia;
     private javax.swing.JButton registrar;
-    private javax.swing.JTextField ruc;
     private javax.swing.JTable tabla;
     private javax.swing.JComboBox<String> tipoCli;
+    private javax.swing.JComboBox<String> tipoDoc;
     private javax.swing.JTextField tlf;
-    private javax.swing.JTextField tlf1;
-    private javax.swing.JLabel tlf1txt;
     private javax.swing.JLabel tlftxt;
     // End of variables declaration//GEN-END:variables
 }
