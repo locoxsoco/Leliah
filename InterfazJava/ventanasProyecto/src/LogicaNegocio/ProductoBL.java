@@ -9,6 +9,7 @@ import AccesoDatos.ProductoDA;
 import clases.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,4 +39,9 @@ public class ProductoBL {
     public void eliminarProducto(int id) throws ClassNotFoundException, SQLException{
         accesoDatos.eliminarProducto(id);
     }
+    
+    public ArrayList<String> listarProdxCat(int tipo){   
+        return accesoDatos.listarProdxCat(tipo);
+    }
+
 }

@@ -15,6 +15,11 @@ public class Producto{
     private String moneda;
     private String descripcion;
 
+    @Override
+    public String toString() {
+        return nombre ;
+    }
+
     public String getDescripcion(){
 	return descripcion;
     }

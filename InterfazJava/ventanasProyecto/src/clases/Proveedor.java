@@ -18,6 +18,11 @@ public class Proveedor{
     private Distrito distrito;
     private String direccion;
 
+    @Override
+    public String toString() {
+        return  nombre ;
+    }
+
     public int getId() {
         return id;
     }
