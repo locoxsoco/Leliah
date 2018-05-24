@@ -44,7 +44,7 @@ public class Vendedor extends Trabajador{
 		this.pagoxHora=pagoxHora;
 	}
 
-	public float getHoraxSemana(){
+	public int getHoraxSemana(){
 		return horaxSemana;
 	}
 

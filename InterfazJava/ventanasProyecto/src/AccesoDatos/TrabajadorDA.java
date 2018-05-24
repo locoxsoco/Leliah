@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -78,30 +79,44 @@ public class TrabajadorDA {
         CallableStatement stmt = con.prepareCall(sql);
         
         if(t instanceof Jefe){
+            //System.out.print("j");
             stmt.setInt("_privilegio", 1);
+            stmt.setNull("_moneda", java.sql.Types.VARCHAR);
+            stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
+            stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
+            stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
+            stmt.setNull("_FidTiempoPago", java.sql.Types.INTEGER);
         }else if(t instanceof AdministradorSistema){
+            //System.out.print("a");
             stmt.setInt("_privilegio", 2);
             stmt.setString("_moneda", ((AdministradorSistema) t).getMoneda());
             stmt.setDouble("_sueldo", ((AdministradorSistema) t).getSueldo());
+            stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
+            stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
+            stmt.setNull("_FidTiempoPago", java.sql.Types.INTEGER);
         }else if(t instanceof Vendedor){
+            //System.out.print("v");
             stmt.setInt("_privilegio", 3);
+            stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
             stmt.setString("_moneda", ((Vendedor) t).getMoneda());
             stmt.setDouble("_pagoxhora", ((Vendedor) t).getPagoxHora());
             stmt.setDouble("_horasxsemana", ((Vendedor) t).getHoraxSemana());
-            stmt.setInt("_FidTiempoPago", ((Vendedor) t).getId());
+            stmt.setInt("_FidTiempoPago", ((Vendedor) t).getTiempoPago().getIdTiempo());
         }
         
-        stmt.setString("_numeroDocumento", t.getNumDoc());
-        stmt.setString("_nombre", t.getNombre());
-        stmt.setString("_apellidoPaterno", t.getApPaterno());
-        stmt.setString("_apellidoMaterno", t.getApMaterno());
-        java.sql.Timestamp f = new java.sql.Timestamp(t.getFecha().getTime());
-        stmt.setTimestamp("_fechaNacimiento", f);
-        stmt.setString("_username", t.getUsername());
-        stmt.setString("_contrasena", t.getContrasena());
+        stmt.setString("_numeroDocumento", t.getNumDoc()); //2
+        stmt.setString("_nombre", t.getNombre()); //3
+        stmt.setString("_apellidoPaterno", t.getApPaterno()); //4
+        stmt.setString("_apellidoMaterno", t.getApMaterno()); //5
+        //java.sql.Timestamp f = new java.sql.Timestamp(t.getFecha().getTime());
+        //stmt.setTimestamp("_fechaNacimiento", f);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        stmt.setString("_fechaNacimiento", sdf.format(t.getFecha())); //6
+        stmt.setString("_username", t.getUsername()); //7
+        stmt.setString("_contrasena", t.getContrasena()); //8
         stmt.setInt("_FidTipoDocumentoIdentidad", t.getTipoDoc().getIdTipo());
         
-        stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
+        stmt.registerOutParameter("_id", java.sql.Types.INTEGER); //1
         
         stmt.executeUpdate();
         
@@ -116,33 +131,46 @@ public class TrabajadorDA {
         CallableStatement stmt = con.prepareCall(sql);
         
         if(t instanceof Jefe){
+            System.out.print("j");
             stmt.setInt("_privilegio", 1);
+            stmt.setNull("_moneda", java.sql.Types.VARCHAR);
+            stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
+            stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
+            stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
+            stmt.setNull("_FidTiempoPago", java.sql.Types.INTEGER);
         }else if(t instanceof AdministradorSistema){
+            System.out.print("a");
             stmt.setInt("_privilegio", 2);
             stmt.setString("_moneda", ((AdministradorSistema) t).getMoneda());
             stmt.setDouble("_sueldo", ((AdministradorSistema) t).getSueldo());
+            stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
+            stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
+            stmt.setNull("_FidTiempoPago", java.sql.Types.INTEGER);
         }else if(t instanceof Vendedor){
+            System.out.print("v");
             stmt.setInt("_privilegio", 3);
+            stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
             stmt.setString("_moneda", ((Vendedor) t).getMoneda());
             stmt.setDouble("_pagoxhora", ((Vendedor) t).getPagoxHora());
             stmt.setDouble("_horasxsemana", ((Vendedor) t).getHoraxSemana());
             stmt.setInt("_FidTiempoPago", ((Vendedor) t).getTiempoPago().getIdTiempo());
         }
         
-        stmt.setString("_numeroDocumento", t.getNumDoc());
-        stmt.setString("_nombre", t.getNombre());
-        stmt.setString("_apellidoPaterno", t.getApPaterno());
-        stmt.setString("_apellidoMaterno", t.getApMaterno());
-        stmt.setDate("_fechaNacimiento", (Date) t.getFecha());
-        stmt.setString("_username", t.getUsername());
-        stmt.setString("_contrasena", t.getContrasena());
+        stmt.setString("_numeroDocumento", t.getNumDoc()); //2
+        stmt.setString("_nombre", t.getNombre()); //3
+        stmt.setString("_apellidoPaterno", t.getApPaterno()); //4
+        stmt.setString("_apellidoMaterno", t.getApMaterno()); //5
+        //java.sql.Timestamp f = new java.sql.Timestamp(t.getFecha().getTime());
+        //stmt.setTimestamp("_fechaNacimiento", f);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        stmt.setString("_fechaNacimiento", sdf.format(t.getFecha())); //6
+        stmt.setString("_username", t.getUsername()); //7
+        stmt.setString("_contrasena", t.getContrasena()); //8
         stmt.setInt("_FidTipoDocumentoIdentidad", t.getTipoDoc().getIdTipo());
-        
-        
         stmt.setInt("_id", t.getId());
+        
         stmt.executeUpdate();
-        
-        
+
         con.close();
     }
     

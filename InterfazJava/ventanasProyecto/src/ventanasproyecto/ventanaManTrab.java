@@ -12,11 +12,11 @@ import clases.TiempoPago;
 import clases.TipoDocumentoIdentidad;
 import clases.Trabajador;
 import clases.Vendedor;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -53,7 +53,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         eliminar.setEnabled(false);
         //this.setTitle("Ventana Mantener Trabajadores");
         this.setLocationRelativeTo(null);
-        idU = 0;
     }
     int idU;
     ventanaAdmin anterior;
@@ -485,7 +484,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             moneda.setVisible(false);
         }else if (s == "Administrador del Sistema"){
             Ttipo.setVisible(false);
-            Tsueldo.setText("Sueldo");
+            Tsueldo.setText("Sueldo:");
             Tsueldo.setVisible(true);
             Thoras.setVisible(false);
             frec.setVisible(false);
@@ -498,7 +497,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             
         }else if (s == "Vendedor"){
             Ttipo.setVisible(true);
-            Tsueldo.setText("Pago x Hora");
+            Tsueldo.setText("Pago x Hora:");
             Tsueldo.setVisible(true);
             Thoras.setVisible(true);
             frec.setSelectedItem(frec.getItemAt(0));
@@ -515,8 +514,12 @@ public class ventanaManTrab extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        anterior.setVisible(true);
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            anterior.setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
     javax.swing.table.DefaultTableModel model;
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
@@ -524,16 +527,17 @@ public class ventanaManTrab extends javax.swing.JFrame {
         boolean a = validarInput();
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
         Trabajador t = null;
         String tipo = tipoUser.getSelectedItem().toString();
-        if(tipo == "Jefe"){
+        if(tipo.equals("Jefe")){
             t = new Jefe();
-        }else if(tipo == "Administrador del Sistema"){
+        }else if(tipo.equals("Administrador del Sistema")){
             t = new AdministradorSistema();
             ((AdministradorSistema)t).setSueldo(Double.parseDouble(sueldo.getText()));
             ((AdministradorSistema)t).setMoneda(moneda.getSelectedItem().toString());
-        }else if(tipo == "Vendedor"){
+        }else if(tipo.equals("Vendedor")){
             t = new Vendedor();
             ((Vendedor)t).setTiempoPago((TiempoPago) frec.getSelectedItem());
             ((Vendedor)t).setHoraxSemana(Integer.parseInt(horas.getText()));
@@ -545,13 +549,15 @@ public class ventanaManTrab extends javax.swing.JFrame {
         t.setApMaterno(apMat.getText());
         t.setUsername(user.getText());
         t.setContrasena(pass.getText());
-        t.setFecha(fecha.getDate());
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getDate().getTime());
+        t.setFecha(sqlDate);
+        //System.out.println(sdf.format(t.getFecha()));
         t.setNumDoc(numDoc.getText());
         t.setTipoDoc((TipoDocumentoIdentidad) tipoDoc.getSelectedItem());
         
         try {
             LogicaNegocio.registrarTrabajador(t);
-            LogicaNegocio.listarTrabajadores();
+            listarTrabajadores();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -563,7 +569,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         apMat.setText("");
         user.setText("");
         pass.setText("");
-        Date fecha1 = new Date();
+        java.util.Date fecha1 = new java.util.Date();
         fecha.setDate(fecha1);
         tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
         numDoc.setText("");
@@ -575,6 +581,13 @@ public class ventanaManTrab extends javax.swing.JFrame {
         registrar.setEnabled(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
+        sueldo.setVisible(false);
+        Tsueldo.setVisible(false);
+        Thoras.setVisible(false);
+        horas.setVisible(false);
+        Ttipo.setVisible(false);
+        frec.setVisible(false);
+        moneda.setVisible(false);
 
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -582,54 +595,130 @@ public class ventanaManTrab extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean a = validarInput();
         if(!a) return;
-        model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
-        model.setValueAt(apPat.getText(), tabla.getSelectedRow(), 2);
-        model.setValueAt(apMat.getText(), tabla.getSelectedRow(), 3);
-        model.setValueAt(user.getText(), tabla.getSelectedRow(), 4);
-        model.setValueAt(pass.getText(), tabla.getSelectedRow(), 5);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        model.setValueAt(sdf.format(fecha.getDate()), tabla.getSelectedRow(), 6);
-        model.setValueAt(tipoUser.getSelectedItem().toString(), tabla.getSelectedRow(), 7);
-        if(tipoUser.getSelectedItem().toString() == "Jefe"){
-            frec.setSelectedItem(frec.getItemAt(0));
-            sueldo.setText("");
-            horas.setText("");
-        }else if(tipoUser.getSelectedItem().toString() == "Administrador del Sistema"){
-            frec.setSelectedItem(frec.getItemAt(0));
-            horas.setText("");
-
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        Trabajador t = null;
+        String tipo = tipoUser.getSelectedItem().toString();
+        if(tipo.equals("Jefe")){
+            t = new Jefe();
+        }else if(tipo.equals("Administrador del Sistema")){
+            t = new AdministradorSistema();
+            ((AdministradorSistema)t).setSueldo(Double.parseDouble(sueldo.getText()));
+            ((AdministradorSistema)t).setMoneda(moneda.getSelectedItem().toString());
+        }else if(tipo.equals("Vendedor")){
+            t = new Vendedor();
+            ((Vendedor)t).setTiempoPago((TiempoPago) frec.getSelectedItem());
+            ((Vendedor)t).setHoraxSemana(Integer.parseInt(horas.getText()));
+            ((Vendedor)t).setPagoxHora(Double.parseDouble(sueldo.getText()));
+            ((Vendedor)t).setMoneda(moneda.getSelectedItem().toString());
         }
-        model.setValueAt(sueldo.getText(), tabla.getSelectedRow(), 8);
-        model.setValueAt(horas.getText(), tabla.getSelectedRow(), 9);
-        model.setValueAt(frec.getSelectedItem().toString(), tabla.getSelectedRow(), 10);
+        t.setNombre(nombre.getText());
+        t.setApPaterno(apPat.getText());
+        t.setApMaterno(apMat.getText());
+        t.setUsername(user.getText());
+        t.setContrasena(pass.getText());
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getDate().getTime());
+        t.setFecha(sqlDate);
+        //System.out.println(sdf.format(t.getFecha()));
+        t.setNumDoc(numDoc.getText());
+        t.setTipoDoc((TipoDocumentoIdentidad) tipoDoc.getSelectedItem());
+        t.setId(idU);
+        try {
+            LogicaNegocio.modificarTrabajador(t);
+            listarTrabajadores();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         nombre.setText("");
         apPat.setText("");
         apMat.setText("");
         user.setText("");
         pass.setText("");
-        Date fecha1 = new Date();
+        java.util.Date fecha1 = new java.util.Date();
         fecha.setDate(fecha1);
+        tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
+        numDoc.setText("");
         tipoUser.setSelectedItem(tipoUser.getItemAt(0));
         sueldo.setText("");
+        moneda.setSelectedItem(moneda.getItemAt(0));
         horas.setText("");
         frec.setSelectedItem(frec.getItemAt(0));
+        registrar.setEnabled(false);
+        modificar.setEnabled(false);
+        eliminar.setEnabled(false);
+        sueldo.setVisible(false);
+        Tsueldo.setVisible(false);
+        Thoras.setVisible(false);
+        horas.setVisible(false);
+        Ttipo.setVisible(false);
+        frec.setVisible(false);
+        moneda.setVisible(false);
 
     }//GEN-LAST:event_modificarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
+        int n = tabla.getSelectedRow();
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        nombre.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 1)));
-        apPat.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
-        apMat.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 3)));
-        user.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 4)));
-        pass.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
+        //nombre.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 1)));
+        //apPat.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
+        //apMat.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 3)));
+        //user.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 4)));
+        //pass.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
+        nombre.setText(lista.get(n).getNombre());
+        apPat.setText(lista.get(n).getApPaterno());
+        apMat.setText(lista.get(n).getApMaterno());
+        user.setText(lista.get(n).getUsername());
+        pass.setText(lista.get(n).getContrasena());
+        fecha.setDate(lista.get(n).getFecha());
+        tipoDoc.setSelectedItem(lista.get(n).getTipoDoc().toString());
+        numDoc.setText(lista.get(n).getNumDoc());
+        if(lista.get(n) instanceof Jefe){
+            sueldo.setVisible(false);
+            Tsueldo.setVisible(false);
+            Thoras.setVisible(false);
+            horas.setVisible(false);
+            Ttipo.setVisible(false);
+            frec.setVisible(false);
+            moneda.setVisible(false);
+            tipoUser.setSelectedItem("Jefe");
+        }else if(lista.get(n) instanceof AdministradorSistema){
+            sueldo.setVisible(true);
+            Tsueldo.setText("Sueldo:");
+            Tsueldo.setVisible(true);
+            Thoras.setVisible(false);
+            horas.setVisible(false);
+            Ttipo.setVisible(false);
+            frec.setVisible(false);
+            moneda.setVisible(true);
+            tipoUser.setSelectedItem("Administrador del Sistema");
+            sueldo.setText(String.valueOf(((AdministradorSistema)lista.get(n)).getSueldo()));
+            moneda.setSelectedItem(((AdministradorSistema)lista.get(n)).getMoneda());
+        }else if(lista.get(n) instanceof Vendedor){
+            sueldo.setVisible(true);
+            Tsueldo.setText("Pago x Hora:");
+            Tsueldo.setVisible(true);
+            Thoras.setVisible(true);
+            horas.setVisible(true);
+            Ttipo.setVisible(true);
+            frec.setVisible(true);
+            moneda.setVisible(true);
+            tipoUser.setSelectedItem("Vendedor");
+            sueldo.setText(String.valueOf(((Vendedor)lista.get(n)).getPagoxHora()));
+            moneda.setSelectedItem(((Vendedor)lista.get(n)).getMoneda());
+            horas.setText(String.valueOf(((Vendedor)lista.get(n)).getHoraxSemana()));
+            frec.setSelectedItem(((Vendedor)lista.get(n)).getTiempoPago().getNombTiempo());
+        }
+        
+        idU = Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0)));
+        /*try {
             fecha.setDate(sdf.parse((model.getValueAt(tabla.getSelectedRow(), 6).toString())));
         } catch (ParseException ex) {
             Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         modificar.setEnabled(true);
         eliminar.setEnabled(true);
         /*ComboItem item;
@@ -637,60 +726,53 @@ public class ventanaManTrab extends javax.swing.JFrame {
             item = tipoUser.getItemAt(i);
             if(item)
         }*/
-        tipoUser.setSelectedItem(model.getValueAt(tabla.getSelectedRow(), 7));
-        if(tipoUser.getSelectedItem().toString() == "Vendedor"){
-
-            Ttipo.setEnabled(true);
-            Tsueldo.setEnabled(true);
-            Thoras.setEnabled(true);
-            frec.setEnabled(true);
-            sueldo.setEnabled(true);
-            horas.setEnabled(true);
-            sueldo.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 8)));
-            horas.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 9)));
-            frec.setSelectedItem(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 10)));
-        }else if(tipoUser.getSelectedItem().toString() == "Administrador del Sistema"){
-
-            Ttipo.setEnabled(false);
-            Tsueldo.setEnabled(true);
-            Thoras.setEnabled(false);
-            frec.setEnabled(false);
-            sueldo.setEnabled(true);
-            horas.setEnabled(false);
-            sueldo.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 8)));
-        }else if(tipoUser.getSelectedItem().toString() == "Jefe"){
-            Ttipo.setEnabled(false);
-            Tsueldo.setEnabled(false);
-            Thoras.setEnabled(false);
-            frec.setEnabled(false);
-            sueldo.setEnabled(false);
-            horas.setEnabled(false);
-        }
-
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
-        model.removeRow(tabla.getSelectedRow());
-        modificar.setEnabled(false);
-        eliminar.setEnabled(false);
+        try {
+            // TODO add your handling code here:
+            LogicaNegocio.eliminarTrabajador(idU);
+            listarTrabajadores();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         nombre.setText("");
         apPat.setText("");
         apMat.setText("");
         user.setText("");
         pass.setText("");
-        Date fecha1 = new Date();
+        java.util.Date fecha1 = new java.util.Date();
         fecha.setDate(fecha1);
+        tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
+        numDoc.setText("");
         tipoUser.setSelectedItem(tipoUser.getItemAt(0));
         sueldo.setText("");
+        moneda.setSelectedItem(moneda.getItemAt(0));
         horas.setText("");
         frec.setSelectedItem(frec.getItemAt(0));
+        registrar.setEnabled(false);
+        modificar.setEnabled(false);
+        eliminar.setEnabled(false);
+        sueldo.setVisible(false);
+        Tsueldo.setVisible(false);
+        Thoras.setVisible(false);
+        horas.setVisible(false);
+        Ttipo.setVisible(false);
+        frec.setVisible(false);
+        moneda.setVisible(false);
     }//GEN-LAST:event_eliminarActionPerformed
     ventanaLogin ventanaHome;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ventanaHome.regresar();
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            ventanaHome.regresar();
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
     
 
