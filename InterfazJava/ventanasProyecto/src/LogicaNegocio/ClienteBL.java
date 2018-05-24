@@ -6,6 +6,7 @@
 package LogicaNegocio;
 
 import AccesoDatos.ClienteDA;
+import clases.Cliente;
 import clases.Departamento;
 import clases.Distrito;
 import clases.Provincia;
@@ -32,5 +33,21 @@ public class ClienteBL {
     
     public ArrayList<Distrito> listarDistritos(int idProv) throws ClassNotFoundException, SQLException{
         return accesoDatos.listarDistritos(idProv);
+    }
+    
+     public ArrayList<Cliente> listarClientes() throws ClassNotFoundException, SQLException{
+        return accesoDatos.listarClientes();
+    }
+    
+    public void registrarCliente(Cliente c) throws ClassNotFoundException, SQLException{
+        accesoDatos.registrarCliente(c);
+    }
+    
+    public void modificarCliente(Cliente c) throws ClassNotFoundException, SQLException{
+        accesoDatos.modificarCliente(c);
+    }
+    
+    public void eliminarCliente(int id) throws ClassNotFoundException, SQLException{
+        accesoDatos.eliminarCliente(id);
     }
 }
