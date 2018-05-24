@@ -131,7 +131,7 @@ public class TrabajadorDA {
         CallableStatement stmt = con.prepareCall(sql);
         
         if(t instanceof Jefe){
-            System.out.print("j");
+            //System.out.print("j");
             stmt.setInt("_privilegio", 1);
             stmt.setNull("_moneda", java.sql.Types.VARCHAR);
             stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
@@ -139,7 +139,7 @@ public class TrabajadorDA {
             stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
             stmt.setNull("_FidTiempoPago", java.sql.Types.INTEGER);
         }else if(t instanceof AdministradorSistema){
-            System.out.print("a");
+            //System.out.print("a");
             stmt.setInt("_privilegio", 2);
             stmt.setString("_moneda", ((AdministradorSistema) t).getMoneda());
             stmt.setDouble("_sueldo", ((AdministradorSistema) t).getSueldo());
@@ -147,7 +147,7 @@ public class TrabajadorDA {
             stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
             stmt.setNull("_FidTiempoPago", java.sql.Types.INTEGER);
         }else if(t instanceof Vendedor){
-            System.out.print("v");
+            //System.out.print("v");
             stmt.setInt("_privilegio", 3);
             stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
             stmt.setString("_moneda", ((Vendedor) t).getMoneda());

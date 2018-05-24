@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -363,6 +364,19 @@ public class ventanaManTrab extends javax.swing.JFrame {
                 return false;
             }
         }
+        
+        s = this.apMat.getText();
+        if((s).equals("")){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        for (int i=0; i<s.length(); i++){
+            if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
+                JOptionPane.showMessageDialog(null, "campo apellido Materno solo puede contener letras", "Error Apellido Paterno", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+        }
+        
         for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
                 JOptionPane.showMessageDialog(null, "campo apellido materno solo puede contener letras", "Error Apellido Materno", JOptionPane.PLAIN_MESSAGE);
@@ -391,6 +405,9 @@ public class ventanaManTrab extends javax.swing.JFrame {
                 tieneNum = true;
             }
         }
+        
+        
+        
         if(s.length()<8){
             JOptionPane.showMessageDialog(null, "Contraseña muy pequeña, mínimo 8 caracteres", "Error Contraseña", JOptionPane.PLAIN_MESSAGE);
             return false;
@@ -407,6 +424,21 @@ public class ventanaManTrab extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Contraseña necesita almenos una minuscula", "Error Contraseña", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        
+        
+        java.util.Date fecha1 = new java.util.Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha1);
+        calendar.add(Calendar.YEAR, -18);
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getDate().getTime());
+        java.sql.Date fechaMin = new java.sql.Date(calendar.getTime().getTime());
+        //System.out.println(fechaMin);
+        //System.out.println(sqlDate);
+        if(fechaMin.before(sqlDate)){
+            JOptionPane.showMessageDialog(null, "Un menor de edad no puede trabajar", "Error Fecha Nacimiento", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        
         s = this.tipoUser.getSelectedItem().toString();
         String s1;
         if(s =="Administrador del Sistema"){
