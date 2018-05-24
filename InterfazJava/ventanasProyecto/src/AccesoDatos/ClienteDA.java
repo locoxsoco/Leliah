@@ -107,8 +107,8 @@ public class ClienteDA {
                 ((Persona) c).setNombre(rs.getString("nombre"));
                 ((Persona) c).setApPaterno(rs.getString("apellidoPaterno"));
                 ((Persona) c).setApMaterno(rs.getString("apellidoMaterno"));
-                ((Persona) c).setNumDoc(rs.getString("Cliente.numeroDocumento,"));
-                ((Persona) c).setTipoDoc(rs.getInt("Cliente.FidTipoDocumentoIdentidad"), rs.getString("nombreDocumentoIdentidad"));
+                ((Persona) c).setNumDoc(rs.getString("numeroDocumento"));
+                ((Persona) c).setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"), rs.getString("nombreDocumentoIdentidad"));
             }else if(priv.equals("J")){
                 c = new Empresa();
                 ((Empresa) c).setNombre(rs.getString("razonSocial"));

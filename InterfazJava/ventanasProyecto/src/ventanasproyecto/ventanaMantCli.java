@@ -6,8 +6,11 @@
 package ventanasproyecto;
 
 import LogicaNegocio.ClienteBL;
+import clases.Cliente;
 import clases.Departamento;
 import clases.Distrito;
+import clases.Empresa;
+import clases.Persona;
 import clases.Provincia;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,12 +29,15 @@ public class ventanaMantCli extends javax.swing.JFrame {
     /**
      * Creates new form ventanaMantCli
      */
+    private ArrayList<Cliente> lista;
     private ClienteBL LogicaNegocio;
     public ventanaMantCli() throws ClassNotFoundException, SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Ventana Mantener Clientes");
         LogicaNegocio = new ClienteBL();
+        lista = new ArrayList<Cliente>();
+        //listarClientes();
         llenarComboBoxDep();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(200);
@@ -314,6 +320,32 @@ public class ventanaMantCli extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     javax.swing.table.DefaultTableModel model;
+    
+    private void listarClientes() throws ClassNotFoundException, SQLException{
+        lista = LogicaNegocio.listarClientes();
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = lista.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            String tipo = "";
+            String doc = "";
+            String nombre ="";
+            if(lista.get(i) instanceof Persona){
+                tipo = "Persona";
+                doc = ((Persona)lista.get(i)).getNumDoc();
+                nombre = ((Persona)lista.get(i)).getNombre()+" "+((Persona)lista.get(i)).getApPaterno()+" "+((Persona)lista.get(i)).getApMaterno();
+            }else if(lista.get(i) instanceof Empresa){
+                tipo = "Empresa";
+                doc = ((Empresa)lista.get(i)).getRuc();
+                nombre = ((Empresa)lista.get(i)).getNombre();
+            }
+            Object o[] = {lista.get(i).getIdCliente(), tipo, doc, nombre, lista.get(i).getTelefono(), lista.get(i).getCorreo(), lista.get(i).getDireccion()+", "+lista.get(i).getDistrito().toString()+", "+lista.get(i).getProvincia().toString()+", "+lista.get(i).getDepartamento().toString()};
+            model.addRow(o);
+        }
+    }
     
     private void llenarComboBoxDep() throws ClassNotFoundException, SQLException{
         ArrayList<Departamento> dep = LogicaNegocio.listarDepartamentos();
