@@ -244,6 +244,12 @@ public class ventanaManServ extends javax.swing.JFrame {
     
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
+        
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea registrar el Servicio?","Registrar Servicio", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         boolean a = validarInput();
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
@@ -291,6 +297,12 @@ public class ventanaManServ extends javax.swing.JFrame {
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
+        
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea modificar la linea seleccionada?","Modificar Servicio", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         boolean a = validarInput();
         if(!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
@@ -325,6 +337,12 @@ public class ventanaManServ extends javax.swing.JFrame {
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la linea seleccionada?","Eliminar Servicio", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         try {
             LogicaNegocio.eliminarServicio(Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0))));

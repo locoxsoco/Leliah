@@ -524,6 +524,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel model;
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea registrar el trabajador?","Registrar Trabajador", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         boolean a = validarInput();
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
@@ -593,6 +598,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea modificar la linea seleccionada?","Modificar Trabajador", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         boolean a = validarInput();
         if(!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
@@ -729,6 +739,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la linea seleccionada?","Eliminar Trabajador", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         try {
             // TODO add your handling code here:
             LogicaNegocio.eliminarTrabajador(idU);
