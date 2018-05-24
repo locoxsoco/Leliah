@@ -150,56 +150,56 @@ public class ProductoDA {
         ResultSet rs;
         switch(tipo){
             case 1:
-                sql = "SELECT nombre FROM Producto where consumible=0 and categoria LIKE '%UtilOficina%';";
+                sql = "SELECT nombre FROM Producto where consumible=0 and activo = 1 and categoria LIKE '%UtilOficina%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){                    
                     lista.add(rs.getString("nombre"));
                 }
                 break;
             case 2:
-                sql = "SELECT nombre FROM Producto where consumible=0 and categoria LIKE '%Juguete%';";
+                sql = "SELECT nombre FROM Producto where consumible=0 and activo = 1 and categoria LIKE '%Juguete%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){
                     lista.add(rs.getString("nombre"));
                 }
                 break;
             case 3:
-                sql = "SELECT nombre FROM Producto where consumible=0 and categoria LIKE '%Adorno%';";
+                sql = "SELECT nombre FROM Producto where consumible=0 and activo = 1 and categoria LIKE '%Adorno%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){
                     lista.add(rs.getString("nombre"));
                 }
                 break;
             case 4:
-                sql = "SELECT nombre FROM Producto where consumible=1 and categoria LIKE '%Bebida%';";
+                sql = "SELECT nombre FROM Producto where consumible=1 and activo = 1 and categoria LIKE '%Bebida%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){
                     lista.add(rs.getString("nombre"));
                 }
                 break;
             case 5:
-                sql = "SELECT nombre FROM Producto where consumible=1 and categoria LIKE '%Caramelo%';";
+                sql = "SELECT nombre FROM Producto where consumible=1 and activo = 1 and categoria LIKE '%Caramelo%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){
                     lista.add(rs.getString("nombre"));
                 }
                 break;
             case 6:
-                sql = "SELECT nombre FROM Producto where consumible=1 and categoria LIKE '%Snack%';";
+                sql = "SELECT nombre FROM Producto where consumible=1 and activo = 1 and categoria LIKE '%Snack%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){
                     lista.add(rs.getString("nombre"));
                 }
                 break;
             case 7:
-                sql = "SELECT nombre FROM Producto where consumible=1 and categoria LIKE '%Postre%';";
+                sql = "SELECT nombre FROM Producto where consumible=1 and activo = 1 and categoria LIKE '%Postre%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){
                     lista.add(rs.getString("nombre"));
                 }
                 break;
             case 8:
-                sql = "SELECT nombre FROM Producto where consumible=1 and categoria LIKE '%Helado%';";
+                sql = "SELECT nombre FROM Producto where consumible=1 and activo = 1 and categoria LIKE '%Helado%';";
                 rs = sentencia.executeQuery(sql);
                 while(rs.next()){
                     lista.add(rs.getString("nombre"));

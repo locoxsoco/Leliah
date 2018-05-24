@@ -31,7 +31,6 @@ public class VentanaReportes extends javax.swing.JFrame {
     ventanaLogin ventanaHome;
     public VentanaReportes() {
         initComponents();
-        
     }
 
     /**
@@ -48,8 +47,8 @@ public class VentanaReportes extends javax.swing.JFrame {
         LabelFechaIni = new javax.swing.JLabel();
         LabelFechaFin = new javax.swing.JLabel();
         AcceptDialog = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        ReporteDate1 = new com.toedter.calendar.JDateChooser();
+        ReporteDate2 = new com.toedter.calendar.JDateChooser();
         ClientesFrameReport = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -88,6 +87,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
 
         jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialog1.setMinimumSize(new java.awt.Dimension(300, 300));
         jDialog1.getContentPane().setLayout(null);
 
         LabelSeleccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -111,10 +111,10 @@ public class VentanaReportes extends javax.swing.JFrame {
         });
         jDialog1.getContentPane().add(AcceptDialog);
         AcceptDialog.setBounds(117, 150, 110, 23);
-        jDialog1.getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(110, 60, 130, 20);
-        jDialog1.getContentPane().add(jDateChooser2);
-        jDateChooser2.setBounds(110, 100, 130, 20);
+        jDialog1.getContentPane().add(ReporteDate1);
+        ReporteDate1.setBounds(110, 60, 130, 20);
+        jDialog1.getContentPane().add(ReporteDate2);
+        ReporteDate2.setBounds(110, 100, 130, 20);
 
         ClientesFrameReport.getContentPane().setLayout(null);
 
@@ -409,32 +409,76 @@ public class VentanaReportes extends javax.swing.JFrame {
         
         switch(n){
             case 1:
-                JasperReport jr = 
+                JasperReport jr1 = 
                 (JasperReport) 
                 JRLoader.loadObjectFromFile
-                (VentanaReportes.class.getResource("D:/2018-1/LP2/TA Git/rLeliah/InterfazJava/ventanasProyecto/src/ventanasproyecto/BalanceReport.jasper").getFile());
+                (VentanaReportes.class.getResource("/ventanasproyecto/ClientesFrecReport.jasper").getFile());
 
-                HashMap hm = new HashMap();
-                hm.put("Reporte de clientes más frecuentes", "j");
+                HashMap hm1 = new HashMap();
+                hm1.put("Reporte de clientes más frecuentes", "j");
         
-                JasperPrint impresion 
+                JasperPrint impresion1 
                  =JasperFillManager.fillReport(
-                    jr, null,new JREmptyDataSource());
+                    jr1, hm1,new JREmptyDataSource());
 
-                JasperViewer viewer = 
-                         new JasperViewer(impresion,false);
-                        viewer.setVisible(true);
-                        viewer.show();
+                JasperViewer viewer1 = 
+                         new JasperViewer(impresion1,false);
+                        viewer1.setVisible(true);
+//                        viewer.show();
 //                ClientesFrameReport.setVisible(true);
                 break;
             case 2:
-                MasVendidoFrameReport.setVisible(true);
+                JasperReport jr2 = 
+                (JasperReport) 
+                JRLoader.loadObjectFromFile
+                (VentanaReportes.class.getResource("/ventanasproyecto/MasVendidosReport.jasper").getFile());
+
+                HashMap hm2 = new HashMap();
+                hm2.put("Reporte de Productos más vendidos", "j");
+        
+                JasperPrint impresion2 
+                 =JasperFillManager.fillReport(
+                    jr2, null,new JREmptyDataSource());
+
+                JasperViewer viewer2 = 
+                         new JasperViewer(impresion2,false);
+                        viewer2.setVisible(true);
+//                        viewer.show();
                 break;
             case 3:
-                VentasFrameReport.setVisible(true);
+                
+                JasperReport jr3 = 
+                (JasperReport) 
+                JRLoader.loadObjectFromFile
+                (VentanaReportes.class.getResource("/ventanasproyecto/VentasReport.jasper").getFile());
+
+                HashMap hm3 = new HashMap();
+                hm3.put("Reporte de Documentos de ventas", "j");
+        
+                JasperPrint impresion3 
+                 =JasperFillManager.fillReport(
+                    jr3, null,new JREmptyDataSource());
+
+                JasperViewer viewer3 = 
+                         new JasperViewer(impresion3,false);
+                        viewer3.setVisible(true);
                 break;
-            case 5:
-                BalanceFrameReport.setVisible(true);
+            case 4:
+                JasperReport jr4 = 
+                (JasperReport) 
+                JRLoader.loadObjectFromFile
+                (VentanaReportes.class.getResource("/ventanasproyecto/BalanceReport.jasper").getFile());
+
+                HashMap hm4 = new HashMap();
+                hm4.put("Reporte de Ingresos y Egresos", "j");
+        
+                JasperPrint impresion4 
+                 =JasperFillManager.fillReport(
+                    jr4, null,new JREmptyDataSource());
+
+                JasperViewer viewer4 = 
+                         new JasperViewer(impresion4,false);
+                        viewer4.setVisible(true);
                 break;
         }
         
@@ -454,6 +498,7 @@ public class VentanaReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtRepClientesActionPerformed
 
     private void AcceptDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptDialogActionPerformed
+        
         jDialog1.dispose();
         try {
             abrirReporte(selector);
@@ -473,7 +518,7 @@ public class VentanaReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtRepMensVentasMouseClicked
 
     private void ButtRepBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepBalanceMouseClicked
-        selector = 5;
+        selector = 4;
         jDialog1.setVisible(true);
     }//GEN-LAST:event_ButtRepBalanceMouseClicked
 
@@ -538,10 +583,10 @@ public class VentanaReportes extends javax.swing.JFrame {
     private javax.swing.JLabel LabelFechaIni;
     private javax.swing.JLabel LabelSeleccion;
     private javax.swing.JFrame MasVendidoFrameReport;
+    private com.toedter.calendar.JDateChooser ReporteDate1;
+    private com.toedter.calendar.JDateChooser ReporteDate2;
     private javax.swing.JLabel SelecionRep;
     private javax.swing.JFrame VentasFrameReport;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
