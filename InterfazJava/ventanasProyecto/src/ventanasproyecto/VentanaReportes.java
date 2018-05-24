@@ -5,7 +5,17 @@
  */
 package ventanasproyecto;
 
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -38,6 +48,8 @@ public class VentanaReportes extends javax.swing.JFrame {
         LabelFechaIni = new javax.swing.JLabel();
         LabelFechaFin = new javax.swing.JLabel();
         AcceptDialog = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         ClientesFrameReport = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -50,16 +62,6 @@ public class VentanaReportes extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
-        VentasContFrameReport = new javax.swing.JFrame();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
-        jLabel14 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
         BalanceFrameReport = new javax.swing.JFrame();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -81,7 +83,6 @@ public class VentanaReportes extends javax.swing.JFrame {
         ButtRepClientes = new javax.swing.JButton();
         ButtProdMasVend = new javax.swing.JButton();
         ButtRepMensVentas = new javax.swing.JButton();
-        ButtRepVentasCont = new javax.swing.JButton();
         ButtRepBalance = new javax.swing.JButton();
         ButtRepCerrar = new javax.swing.JButton();
         logout = new javax.swing.JButton();
@@ -96,11 +97,11 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         LabelFechaIni.setText("Fecha Inicial");
         jDialog1.getContentPane().add(LabelFechaIni);
-        LabelFechaIni.setBounds(10, 60, 90, 16);
+        LabelFechaIni.setBounds(10, 60, 90, 14);
 
         LabelFechaFin.setText("Fecha Final");
         jDialog1.getContentPane().add(LabelFechaFin);
-        LabelFechaFin.setBounds(10, 100, 80, 16);
+        LabelFechaFin.setBounds(10, 100, 80, 14);
 
         AcceptDialog.setText("Aceptar");
         AcceptDialog.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +110,11 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         });
         jDialog1.getContentPane().add(AcceptDialog);
-        AcceptDialog.setBounds(117, 150, 110, 25);
+        AcceptDialog.setBounds(117, 150, 110, 23);
+        jDialog1.getContentPane().add(jDateChooser1);
+        jDateChooser1.setBounds(110, 60, 130, 20);
+        jDialog1.getContentPane().add(jDateChooser2);
+        jDateChooser2.setBounds(110, 100, 130, 20);
 
         ClientesFrameReport.getContentPane().setLayout(null);
 
@@ -233,155 +238,65 @@ public class VentanaReportes extends javax.swing.JFrame {
         VentasFrameReport.getContentPane().add(jLabel13);
         jLabel13.setBounds(150, 50, 180, 22);
 
-        VentasContFrameReport.getContentPane().setLayout(null);
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Tipo Doc.", "N° Doc.", "Fecha", "Monto sin IGV", "IGV", "Total"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTable4);
-
-        VentasContFrameReport.getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(10, 110, 562, 119);
-
-        jLabel1.setText("Ventas");
-        VentasContFrameReport.getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 90, 70, 16);
-
-        jLabel2.setText("Compras");
-        VentasContFrameReport.getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 240, 80, 16);
-
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "N° Factura", "Fecha", "Monto sin IGV", "IGV", "Total"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(jTable6);
-
-        VentasContFrameReport.getContentPane().add(jScrollPane6);
-        jScrollPane6.setBounds(10, 260, 562, 123);
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("Reporte de documentos contables");
-        VentasContFrameReport.getContentPane().add(jLabel14);
-        jLabel14.setBounds(130, 40, 320, 22);
-
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable5);
-
         BalanceFrameReport.getContentPane().setLayout(null);
 
         jLabel3.setText("Ventas totales");
         BalanceFrameReport.getContentPane().add(jLabel3);
-        jLabel3.setBounds(19, 62, 140, 16);
+        jLabel3.setBounds(19, 62, 140, 14);
 
         jLabel4.setText("Servicios");
         BalanceFrameReport.getContentPane().add(jLabel4);
-        jLabel4.setBounds(19, 93, 150, 16);
+        jLabel4.setBounds(19, 93, 150, 14);
 
         jLabel5.setText("Alquiler");
         BalanceFrameReport.getContentPane().add(jLabel5);
-        jLabel5.setBounds(19, 124, 160, 16);
+        jLabel5.setBounds(19, 124, 160, 14);
 
         jLabel6.setText("Pago empleados");
         BalanceFrameReport.getContentPane().add(jLabel6);
-        jLabel6.setBounds(19, 153, 170, 16);
+        jLabel6.setBounds(19, 153, 170, 14);
 
         jLabel7.setText("Compras");
         BalanceFrameReport.getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 178, 150, 16);
+        jLabel7.setBounds(19, 178, 150, 14);
 
         jLabel8.setText("Otros");
         BalanceFrameReport.getContentPane().add(jLabel8);
-        jLabel8.setBounds(19, 209, 150, 16);
+        jLabel8.setBounds(19, 209, 150, 14);
 
         jTextField1.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField1);
-        jTextField1.setBounds(200, 60, 88, 22);
+        jTextField1.setBounds(200, 60, 88, 20);
 
         jTextField2.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField2);
-        jTextField2.setBounds(200, 90, 88, 22);
+        jTextField2.setBounds(200, 90, 88, 20);
 
         jTextField3.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField3);
-        jTextField3.setBounds(200, 120, 88, 22);
+        jTextField3.setBounds(200, 120, 88, 20);
 
         jTextField4.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField4);
-        jTextField4.setBounds(200, 180, 88, 22);
+        jTextField4.setBounds(200, 180, 88, 20);
 
         jTextField5.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField5);
-        jTextField5.setBounds(200, 150, 88, 22);
+        jTextField5.setBounds(200, 150, 88, 20);
 
         jTextField6.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField6);
-        jTextField6.setBounds(200, 250, 88, 22);
+        jTextField6.setBounds(200, 250, 88, 20);
         BalanceFrameReport.getContentPane().add(jSeparator1);
         jSeparator1.setBounds(19, 237, 280, 10);
 
         jLabel9.setText("Utilidad");
         BalanceFrameReport.getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 250, 150, 16);
+        jLabel9.setBounds(20, 250, 150, 14);
 
         jTextField7.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField7);
-        jTextField7.setBounds(200, 210, 88, 22);
+        jTextField7.setBounds(200, 210, 88, 20);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Reporte de Ingresos y Egresos");
@@ -416,18 +331,6 @@ public class VentanaReportes extends javax.swing.JFrame {
         ButtRepMensVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ButtRepMensVentasMouseClicked(evt);
-            }
-        });
-
-        ButtRepVentasCont.setText("Documentos para Contabilidad");
-        ButtRepVentasCont.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ButtRepVentasContMouseClicked(evt);
-            }
-        });
-        ButtRepVentasCont.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtRepVentasContActionPerformed(evt);
             }
         });
 
@@ -467,7 +370,6 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButtRepBalance)
-                    .addComponent(ButtRepVentasCont)
                     .addComponent(ButtRepMensVentas)
                     .addComponent(ButtProdMasVend)
                     .addComponent(ButtRepClientes)
@@ -491,11 +393,9 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addComponent(ButtProdMasVend)
                 .addGap(26, 26, 26)
                 .addComponent(ButtRepMensVentas)
-                .addGap(30, 30, 30)
-                .addComponent(ButtRepVentasCont)
-                .addGap(26, 26, 26)
+                .addGap(33, 33, 33)
                 .addComponent(ButtRepBalance)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButtRepCerrar)
                     .addComponent(logout))
@@ -505,10 +405,27 @@ public class VentanaReportes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void abrirReporte(int n){
+    public void abrirReporte(int n) throws JRException{        
+        
         switch(n){
             case 1:
-                ClientesFrameReport.setVisible(true);
+                JasperReport jr = 
+                (JasperReport) 
+                JRLoader.loadObjectFromFile
+                (VentanaReportes.class.getResource("D:/2018-1/LP2/TA Git/rLeliah/InterfazJava/ventanasProyecto/src/ventanasproyecto/BalanceReport.jasper").getFile());
+
+                HashMap hm = new HashMap();
+                hm.put("Reporte de clientes más frecuentes", "j");
+        
+                JasperPrint impresion 
+                 =JasperFillManager.fillReport(
+                    jr, null,new JREmptyDataSource());
+
+                JasperViewer viewer = 
+                         new JasperViewer(impresion,false);
+                        viewer.setVisible(true);
+                        viewer.show();
+//                ClientesFrameReport.setVisible(true);
                 break;
             case 2:
                 MasVendidoFrameReport.setVisible(true);
@@ -516,13 +433,11 @@ public class VentanaReportes extends javax.swing.JFrame {
             case 3:
                 VentasFrameReport.setVisible(true);
                 break;
-            case 4:
-                VentasContFrameReport.setVisible(true);
-                break;
             case 5:
                 BalanceFrameReport.setVisible(true);
                 break;
         }
+        
     }
     
     private void ButtRepCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepCerrarMouseClicked
@@ -540,7 +455,11 @@ public class VentanaReportes extends javax.swing.JFrame {
 
     private void AcceptDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptDialogActionPerformed
         jDialog1.dispose();
-        abrirReporte(selector);
+        try {
+            abrirReporte(selector);
+        } catch (JRException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_AcceptDialogActionPerformed
 
     private void ButtProdMasVendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtProdMasVendMouseClicked
@@ -553,19 +472,10 @@ public class VentanaReportes extends javax.swing.JFrame {
         jDialog1.setVisible(true);
     }//GEN-LAST:event_ButtRepMensVentasMouseClicked
 
-    private void ButtRepVentasContMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepVentasContMouseClicked
-        selector = 4;
-        jDialog1.setVisible(true);
-    }//GEN-LAST:event_ButtRepVentasContMouseClicked
-
     private void ButtRepBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepBalanceMouseClicked
         selector = 5;
         jDialog1.setVisible(true);
     }//GEN-LAST:event_ButtRepBalanceMouseClicked
-
-    private void ButtRepVentasContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtRepVentasContActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtRepVentasContActionPerformed
 
     private void ButtRepCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtRepCerrarActionPerformed
         // TODO add your handling code here:
@@ -623,23 +533,20 @@ public class VentanaReportes extends javax.swing.JFrame {
     private javax.swing.JButton ButtRepCerrar;
     private javax.swing.JButton ButtRepClientes;
     private javax.swing.JButton ButtRepMensVentas;
-    private javax.swing.JButton ButtRepVentasCont;
     private javax.swing.JFrame ClientesFrameReport;
     private javax.swing.JLabel LabelFechaFin;
     private javax.swing.JLabel LabelFechaIni;
     private javax.swing.JLabel LabelSeleccion;
     private javax.swing.JFrame MasVendidoFrameReport;
     private javax.swing.JLabel SelecionRep;
-    private javax.swing.JFrame VentasContFrameReport;
     private javax.swing.JFrame VentasFrameReport;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -650,16 +557,10 @@ public class VentanaReportes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
