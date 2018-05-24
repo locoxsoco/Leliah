@@ -8,6 +8,7 @@ package AccesoDatos;
 import clases.Departamento;
 import clases.DiaSemana;
 import clases.Distrito;
+import clases.Proveedor;
 import clases.Provincia;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -107,6 +108,94 @@ public class ProveedorDA {
         }
         con.close();
         return lista;
+    }
+    
+    public ArrayList<Proveedor> listarProveedores() throws ClassNotFoundException, SQLException{
+        ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call LISTAR_PROVEEDORES()}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            Proveedor p = new Proveedor();
+            p.setId(rs.getInt("idProveedor"));
+            p.setNombre(rs.getString("nombre"));
+            p.setRuc(rs.getString("ruc"));
+            p.setCorreo(rs.getString("correo"));
+            p.setTelefono(rs.getString("telefono"));
+            p.setDiaSemana(rs.getInt("Proveedor.FidDiaSemana"), rs.getString("DiaSemana.nombreDiaSemana"));
+            p.setDepartamento(rs.getInt("Proveedor.FidDepartamento"), rs.getString("Departamento.nombreDepartamento"));
+            p.setProvincia(rs.getInt("Proveedor.FidProvincia"), rs.getString("Provincia.nombreProvincia"));
+            p.setDistrito(rs.getInt("Proveedor.FidDistrito"), rs.getString("Distrito.nombreDistrito"));
+            p.setDireccion(rs.getString("direccion"));
+            
+            lista.add(p);
+        }
+        con.close();
+        return lista;
+    }
+    
+    public void registrarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call REGISTRAR_PROVEEDOR(?,?,?,?,?,?,?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_nombre", p.getNombre());
+        stmt.setString("_ruc", p.getRuc());
+        stmt.setString("_direccion", p.getDireccion());
+        stmt.setString("_telefono", p.getTelefono());
+        stmt.setString("_correo", p.getCorreo());
+        stmt.setInt("_FidDiaSemana", p.getDiaSemana().getIdDia());
+        stmt.setInt("_FidDepartamento", p.getDepartamento().getIdDep());
+        stmt.setInt("_FidProvincia", p.getProvincia().getIdProv());
+        stmt.setInt("_FidDistrito", p.getDistrito().getIdDist());
+        stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
+        
+        stmt.executeUpdate();
+        
+        p.setId(stmt.getInt("_id"));
+        
+        con.close();
+    }
+    
+    public void modificarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call MODIFICAR_PROVEEDOR(?,?,?,?,?,?,?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_nombre", p.getNombre());
+        stmt.setString("_ruc", p.getRuc());
+        stmt.setString("_direccion", p.getDireccion());
+        stmt.setString("_telefono", p.getTelefono());
+        stmt.setString("_correo", p.getCorreo());
+        stmt.setInt("_FidDiaSemana", p.getDiaSemana().getIdDia());
+        stmt.setInt("_FidDepartamento", p.getDepartamento().getIdDep());
+        stmt.setInt("_FidProvincia", p.getProvincia().getIdProv());
+        stmt.setInt("_FidDistrito", p.getDistrito().getIdDist());
+        stmt.setInt("_id", p.getId());
+        
+        stmt.executeUpdate();
+        
+        con.close();
+    }
+    
+    public void eliminarServicio(int id) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call ELIMINAR_PROVEEDOR(?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setInt("_id", id);
+        
+        stmt.executeUpdate();
+        
+        con.close();
+        
     }
     
 }

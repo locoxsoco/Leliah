@@ -9,6 +9,7 @@ import LogicaNegocio.ProveedorBL;
 import clases.Departamento;
 import clases.DiaSemana;
 import clases.Distrito;
+import clases.Proveedor;
 import clases.Provincia;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,13 +29,17 @@ public class ventanaManProv extends javax.swing.JFrame {
      */
     ventanaAdmin ventanaAnterior;
     private ProveedorBL LogicaNegocio;
+    private ArrayList<Proveedor> lista;
+    
     public ventanaManProv() throws ClassNotFoundException, SQLException {
         this.setTitle("ventana Mantener Proveedores");
         this.setLocationRelativeTo(null);
         initComponents();
         LogicaNegocio = new ProveedorBL();
+        lista = new ArrayList<Proveedor>();
         llenarComboBoxDia();
         llenarComboBoxDep();
+        listarProveedores();
         provincia.setVisible(false);
         distrito.setVisible(false);
         dir.setVisible(false);
@@ -142,7 +147,7 @@ public class ventanaManProv extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "RUC", "Direccion", "Correo", "Telefono", "Dia Visita"
+                "ID", "Nombre", "RUC", "Correo", "Telefono", "Dia Visita", "Direccion"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,7 +158,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 301, 680, 130);
+        jScrollPane1.setBounds(30, 250, 680, 180);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton1.setText("Cerrar Sesión");
@@ -314,6 +319,21 @@ public class ventanaManProv extends javax.swing.JFrame {
         return true;
     }
     
+    private void listarProveedores() throws ClassNotFoundException, SQLException{
+        lista = LogicaNegocio.listarProveedores();
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = lista.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            Object o[] = {lista.get(i).getId(), lista.get(i).getNombre(), lista.get(i).getRuc(), lista.get(i).getCorreo(), lista.get(i).getTelefono(),lista.get(i).getDiaSemana().toString(), lista.get(i).getDireccion()+", "+lista.get(i).getDistrito().toString()+", "+lista.get(i).getProvincia().toString()+", "+lista.get(i).getDepartamento().toString()};
+            model.addRow(o);
+        }
+    
+    }
+    
     private void llenarComboBoxDia() throws ClassNotFoundException, SQLException{
         ArrayList<DiaSemana> dias = LogicaNegocio.listarDias();
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
@@ -337,25 +357,54 @@ public class ventanaManProv extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.ventanaAnterior.setVisible(true);
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventan anterior?","Volver", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            this.ventanaAnterior.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
     javax.swing.table.DefaultTableModel model;
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea registrar el proveedor?","Registrar Proveedor", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         boolean a = validarInput();
         if(!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        idU++;
-        Object s[] ={idU, nombre.getText(), ruc.getText(),dir.getText(), email.getText(), tlf.getText(), dia.getSelectedItem().toString()};
         
-        model.addRow(s);
+        Proveedor p = new Proveedor();
+        p.setNombre(nombre.getText());
+        p.setRuc(ruc.getText());
+        p.setCorreo(email.getText());
+        p.setTelefono(tlf.getText());
+        p.setDiaSemana((DiaSemana)dia.getSelectedItem());
+        p.setDepartamento((Departamento)departamento.getSelectedItem());
+        p.setProvincia((Provincia) provincia.getSelectedItem());
+        p.setDistrito((Distrito) distrito.getSelectedItem());
+        p.setDireccion(dir.getText());
+        
+        try {
+            LogicaNegocio.registrarProveedor(p);
+            listarProveedores();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         nombre.setText("");
         ruc.setText("");
         dir.setText("");
         email.setText("");
         tlf.setText("");
         dia.setSelectedItem(dia.getItemAt(0));
+        departamento.setSelectedItem(departamento.getItemAt(0));
+        provincia.setVisible(false);
+        distrito.setVisible(false);
+        dir.setVisible(false);
     }//GEN-LAST:event_registrarActionPerformed
 
     private void dirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirActionPerformed
@@ -375,55 +424,108 @@ public class ventanaManProv extends javax.swing.JFrame {
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea modificar la linea seleccionada?","Modificar Proveedor", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        
         boolean a = validarInput();
         if(!a) return;
-        model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
-        model.setValueAt(ruc.getText(), tabla.getSelectedRow(), 2);
-        model.setValueAt(dir.getText(), tabla.getSelectedRow(), 3);
-        model.setValueAt(email.getText(), tabla.getSelectedRow(), 4);
-        model.setValueAt(tlf.getText(), tabla.getSelectedRow(), 5);        
-        model.setValueAt(dia.getSelectedItem().toString(), tabla.getSelectedRow(), 6);
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        
+        Proveedor p = new Proveedor();
+        p.setNombre(nombre.getText());
+        p.setRuc(ruc.getText());
+        p.setCorreo(email.getText());
+        p.setTelefono(tlf.getText());
+        p.setDiaSemana((DiaSemana)dia.getSelectedItem());
+        p.setDepartamento((Departamento)departamento.getSelectedItem());
+        p.setProvincia((Provincia) provincia.getSelectedItem());
+        p.setDistrito((Distrito) distrito.getSelectedItem());
+        p.setDireccion(dir.getText());
+        
+        try {
+            LogicaNegocio.modificarProveedor(p);
+            listarProveedores();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         nombre.setText("");
         ruc.setText("");
         dir.setText("");
         email.setText("");
         tlf.setText("");
         dia.setSelectedItem(dia.getItemAt(0));
+        departamento.setSelectedItem(departamento.getItemAt(0));
+        provincia.setVisible(false);
+        distrito.setVisible(false);
+        dir.setVisible(false);
     }//GEN-LAST:event_modificarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
+        int n = tabla.getSelectedRow();
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        nombre.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 1)));
-        ruc.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
-        dir.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 3)));
-        email.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
-        tlf.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
-        dia.setSelectedItem(model.getValueAt(tabla.getSelectedRow(), 6));
         
+        
+        nombre.setText(lista.get(n).getNombre());
+        ruc.setText(lista.get(n).getRuc());
+        dir.setText(lista.get(n).getDireccion());
+        email.setText(lista.get(n).getCorreo());
+        tlf.setText(lista.get(n).getTelefono());
+        dia.setSelectedItem(lista.get(n).getDiaSemana());
+        departamento.setSelectedItem(lista.get(n).getDepartamento());
+        provincia.setSelectedItem(lista.get(n).getProvincia());
+        distrito.setSelectedItem(lista.get(n).getDistrito());
+        idU = lista.get(n).getId();
+        provincia.setVisible(true);
+        distrito.setVisible(true);
+        dir.setVisible(true);
         modificar.setEnabled(true);
         eliminar.setEnabled(true);
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
-        model.removeRow(tabla.getSelectedRow());
-        eliminar.setEnabled(false);
-        modificar.setEnabled(false);
-        nombre.setText("");
-        ruc.setText("");
-        dir.setText("");
-        email.setText("");
-        tlf.setText("");
-        dia.setSelectedItem(dia.getItemAt(0));
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la linea seleccionada?","Eliminar Proveedor", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
+        }
+        try {
+            // TODO add your handling code here:
+            LogicaNegocio.eliminarServicio(idU);
+            listarProveedores();
+            //model.removeRow(tabla.getSelectedRow());
+            eliminar.setEnabled(false);
+            modificar.setEnabled(false);
+            nombre.setText("");
+            ruc.setText("");
+            dir.setText("");
+            email.setText("");
+            tlf.setText("");
+            dia.setSelectedItem(dia.getItemAt(0));
+            departamento.setSelectedItem(departamento.getItemAt(0));
+            provincia.setVisible(false);
+            distrito.setVisible(false);
+            dir.setVisible(false);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_eliminarActionPerformed
     
     ventanaLogin ventanaHome;
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ventanaHome.regresar();
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            ventanaHome.regresar();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
