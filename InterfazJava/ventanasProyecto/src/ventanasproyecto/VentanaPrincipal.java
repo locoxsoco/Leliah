@@ -58,7 +58,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(30, 150, 80, 25);
+        jButton1.setBounds(30, 150, 80, 23);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 204));
         jButton2.setText("Administrador");
@@ -68,7 +68,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(30, 190, 140, 25);
+        jButton2.setBounds(30, 190, 140, 23);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
         jButton3.setText("Reportes");
@@ -78,7 +78,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(30, 270, 100, 25);
+        jButton3.setBounds(30, 270, 100, 23);
 
         jButton4.setBackground(new java.awt.Color(255, 255, 204));
         jButton4.setText("Compras");
@@ -93,7 +93,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(30, 230, 100, 25);
+        jButton4.setBounds(30, 230, 100, 23);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Bienvenido");
@@ -110,7 +110,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         nomb1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nomb1.setText("usuario");
         getContentPane().add(nomb1);
-        nomb1.setBounds(220, 40, 77, 29);
+        nomb1.setBounds(220, 40, 140, 29);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton6.setText("Cerrar Sesión");

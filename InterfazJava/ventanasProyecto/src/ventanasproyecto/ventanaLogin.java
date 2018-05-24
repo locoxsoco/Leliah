@@ -123,7 +123,7 @@ public class ventanaLogin extends javax.swing.JFrame {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(((user.getText()).equals("Administrador"))&& ((pass.getText()).equals("1234")) || privi==2){ /**/
+        if(privi==2){ /**/
             ventanaAdmin v1 = new ventanaAdmin();
             v1.ventanaHome = this;
             v1.setVisible(true);
@@ -131,7 +131,7 @@ public class ventanaLogin extends javax.swing.JFrame {
             v1.anterior = "Home";
             
             this.setVisible(false);
-        }else if(((user.getText()).equals("Jefe"))&& ((pass.getText()).equals("4321")) || privi==1){
+        }else if( privi==1){
             VentanaPrincipal v1 = new VentanaPrincipal();
             v1.ventanaHome = this;
             v1.setLocationRelativeTo(null);
