@@ -228,5 +228,22 @@ public class TrabajadorDA {
         con.close();
         return lista;
      }
+     
+     public int validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call VALIDAR_USUARIO(?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        stmt.registerOutParameter("_privilegio",java.sql.Types.INTEGER );
+        stmt.setString("_username", _username);
+        stmt.setString("_password", _password);
+        
+        
+        ResultSet rs = stmt.executeQuery();
+        int priv=stmt.getInt("_privilegio");
+        con.close();
+        return priv;
+     }
     
 }

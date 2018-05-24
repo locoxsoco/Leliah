@@ -5,6 +5,10 @@
  */
 package ventanasproyecto;
 
+import LogicaNegocio.TrabajadorBL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +20,10 @@ public class ventanaLogin extends javax.swing.JFrame {
     /**
      * Creates new form ventanaLogin
      */
+    private TrabajadorBL LogicaNegocio;
     public ventanaLogin() {
         initComponents();
+        LogicaNegocio = new TrabajadorBL();
         this.setLocationRelativeTo(null);
         this.setTitle("Ventana Log In");
     }
@@ -108,8 +114,16 @@ public class ventanaLogin extends javax.swing.JFrame {
     
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
+        int privi=-1;
+        try{
+        privi=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        if(((user.getText()).equals("Administrador"))&& ((pass.getText()).equals("1234"))){ /**/
+        if(((user.getText()).equals("Administrador"))&& ((pass.getText()).equals("1234")) || privi==2){ /**/
             ventanaAdmin v1 = new ventanaAdmin();
             v1.ventanaHome = this;
             v1.setVisible(true);
@@ -117,7 +131,7 @@ public class ventanaLogin extends javax.swing.JFrame {
             v1.anterior = "Home";
             
             this.setVisible(false);
-        }else if(((user.getText()).equals("Jefe"))&& ((pass.getText()).equals("4321"))){
+        }else if(((user.getText()).equals("Jefe"))&& ((pass.getText()).equals("4321")) || privi==1){
             VentanaPrincipal v1 = new VentanaPrincipal();
             v1.ventanaHome = this;
             v1.setLocationRelativeTo(null);
