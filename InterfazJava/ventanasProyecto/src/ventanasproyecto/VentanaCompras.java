@@ -235,6 +235,11 @@ public class VentanaCompras extends javax.swing.JFrame {
                 BoxTipoNoConsItemStateChanged(evt);
             }
         });
+        BoxTipoNoCons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoxTipoNoConsActionPerformed(evt);
+            }
+        });
 
         LabelProveedorNoCons.setText("Proveedor");
 
@@ -791,6 +796,10 @@ public class VentanaCompras extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_BoxProductosNoConsActionPerformed
+
+    private void BoxTipoNoConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxTipoNoConsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BoxTipoNoConsActionPerformed
 
     public void mostrar(int id){
         String matriz[][];
