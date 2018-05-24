@@ -5,6 +5,16 @@
  */
 package ventanasproyecto;
 
+import LogicaNegocio.ProveedorBL;
+import clases.Departamento;
+import clases.DiaSemana;
+import clases.Distrito;
+import clases.Provincia;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +27,19 @@ public class ventanaManProv extends javax.swing.JFrame {
      * Creates new form ventanaManProv
      */
     ventanaAdmin ventanaAnterior;
-    public ventanaManProv() {
-        this.setTitle("ventana Manejar Proveedores");
+    private ProveedorBL LogicaNegocio;
+    public ventanaManProv() throws ClassNotFoundException, SQLException {
+        this.setTitle("ventana Mantener Proveedores");
         this.setLocationRelativeTo(null);
         initComponents();
+        LogicaNegocio = new ProveedorBL();
+        llenarComboBoxDia();
+        llenarComboBoxDep();
+        provincia.setVisible(false);
+        distrito.setVisible(false);
+        dir.setVisible(false);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(200);
         registrar.setEnabled(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
@@ -56,9 +75,15 @@ public class ventanaManProv extends javax.swing.JFrame {
         modificar = new javax.swing.JButton();
         dia = new javax.swing.JComboBox<>();
         email = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        departamento = new javax.swing.JComboBox<>();
+        provincia = new javax.swing.JComboBox<>();
+        distrito = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(510, 530));
+        setMinimumSize(new java.awt.Dimension(720, 540));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -67,29 +92,35 @@ public class ventanaManProv extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(12, 13, 206, 22);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("Nombre:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 45, 80, 16);
+        jLabel2.setBounds(30, 43, 80, 16);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("RUC:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 74, 80, 16);
+        jLabel3.setBounds(30, 73, 80, 16);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel4.setText("Dirección:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 103, 80, 16);
+        jLabel4.setBounds(380, 133, 80, 16);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("Correo:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 132, 80, 16);
+        jLabel5.setBounds(30, 103, 80, 16);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel6.setText("Telefono:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(30, 161, 80, 16);
+        jLabel6.setBounds(30, 133, 80, 16);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Día Visita:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(30, 190, 80, 16);
+        jLabel7.setBounds(30, 163, 80, 16);
 
         dir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,13 +128,13 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dir);
-        dir.setBounds(120, 100, 200, 22);
+        dir.setBounds(500, 130, 200, 22);
         getContentPane().add(ruc);
         ruc.setBounds(120, 70, 200, 22);
         getContentPane().add(nombre);
         nombre.setBounds(120, 40, 200, 22);
         getContentPane().add(tlf);
-        tlf.setBounds(120, 160, 200, 22);
+        tlf.setBounds(120, 130, 200, 22);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,7 +153,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 301, 452, 130);
+        jScrollPane1.setBounds(30, 301, 680, 130);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton1.setText("Cerrar Sesión");
@@ -132,7 +163,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(341, 450, 140, 29);
+        jButton1.setBounds(570, 450, 140, 29);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton2.setText("Volver");
@@ -142,7 +173,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(229, 450, 100, 29);
+        jButton2.setBounds(460, 450, 100, 29);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setText("Registrar");
@@ -152,7 +183,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(30, 227, 100, 48);
+        registrar.setBounds(30, 203, 90, 25);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
         eliminar.setText("Eliminar");
@@ -162,7 +193,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(382, 227, 100, 48);
+        eliminar.setBounds(270, 203, 90, 25);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
         modificar.setText("Modificar");
@@ -172,18 +203,56 @@ public class ventanaManProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(214, 229, 100, 45);
+        modificar.setBounds(150, 203, 90, 25);
 
-        dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja...", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
         dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diaActionPerformed(evt);
             }
         });
         getContentPane().add(dia);
-        dia.setBounds(120, 190, 118, 22);
+        dia.setBounds(120, 160, 118, 22);
         getContentPane().add(email);
-        email.setBounds(120, 130, 200, 22);
+        email.setBounds(120, 100, 200, 22);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel8.setText("Departamento:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(380, 40, 100, 16);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel9.setText("Provincia:");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(380, 70, 90, 16);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel10.setText("Distrito:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(380, 100, 70, 16);
+
+        departamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departamentoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(departamento);
+        departamento.setBounds(500, 40, 200, 22);
+
+        provincia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                provinciaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(provincia);
+        provincia.setBounds(500, 70, 200, 22);
+
+        distrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                distritoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(distrito);
+        distrito.setBounds(500, 100, 200, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -244,6 +313,27 @@ public class ventanaManProv extends javax.swing.JFrame {
         
         return true;
     }
+    
+    private void llenarComboBoxDia() throws ClassNotFoundException, SQLException{
+        ArrayList<DiaSemana> dias = LogicaNegocio.listarDias();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        int n = dias.size();
+        for(int i=0; i<n; i++){
+            modelo.addElement(dias.get(i));
+        }
+        dia.setModel(modelo);
+    }
+    
+    private void llenarComboBoxDep() throws ClassNotFoundException, SQLException{
+        ArrayList<Departamento> dep = LogicaNegocio.listarDepartamentos();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        int n = dep.size();
+        for(int i=0; i<n; i++){
+            modelo.addElement(dep.get(i));
+        }
+        departamento.setModel(modelo);
+    }
+    
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -336,28 +426,77 @@ public class ventanaManProv extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
+        try {
+            // TODO add your handling code here:
+            Departamento d = (Departamento) departamento.getSelectedItem();
+            ArrayList<Provincia> prov = LogicaNegocio.listarProvincias(d.getIdDep());
+            DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            int n = prov.size();
+            for(int i=0; i<n; i++){
+                modelo.addElement(prov.get(i));
+            }
+            provincia.setModel(modelo);
+            provincia.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_departamentoActionPerformed
+
+    private void provinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provinciaActionPerformed
+        try {
+            // TODO add your handling code here:
+            Provincia p = (Provincia) provincia.getSelectedItem();
+            ArrayList<Distrito> dist = LogicaNegocio.listarDistritos(p.getIdProv());
+            DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            int n = dist.size();
+            for(int i=0; i<n; i++){
+                modelo.addElement(dist.get(i));
+            }
+            distrito.setModel(modelo);
+            distrito.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_provinciaActionPerformed
+
+    private void distritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distritoActionPerformed
+        // TODO add your handling code here:
+        dir.setVisible(true);
+    }//GEN-LAST:event_distritoActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> departamento;
     private javax.swing.JComboBox<String> dia;
     private javax.swing.JTextField dir;
+    private javax.swing.JComboBox<String> distrito;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
     private javax.swing.JTextField nombre;
+    private javax.swing.JComboBox<String> provincia;
     private javax.swing.JButton registrar;
     private javax.swing.JTextField ruc;
     private javax.swing.JTable tabla;

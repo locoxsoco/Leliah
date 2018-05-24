@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
-enum DiaSemana {Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo}
 public class Proveedor{
 	private String nombre;
 	private String ruc;
@@ -14,6 +13,7 @@ public class Proveedor{
 	private int telefono;
 	private String correo;
 	private DiaSemana diaSemana;
+        private Departamento departamento;
 
 	public String getNombre(){
 		return nombre;
