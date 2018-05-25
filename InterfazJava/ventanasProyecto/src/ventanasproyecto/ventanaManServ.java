@@ -67,7 +67,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         moneda = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(450, 520));
+        setMinimumSize(new java.awt.Dimension(450, 460));
         setResizable(false);
         getContentPane().setLayout(null);
 
