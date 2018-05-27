@@ -12,6 +12,7 @@ import clases.Distrito;
 import clases.Empresa;
 import clases.Persona;
 import clases.Provincia;
+import clases.TipoDocumentoIdentidad;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -37,7 +38,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         this.setTitle("Ventana Mantener Clientes");
         LogicaNegocio = new ClienteBL();
         lista = new ArrayList<Cliente>();
-        //listarClientes();
+        listarClientes();
         llenarComboBoxDep();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(200);
@@ -362,11 +363,44 @@ public class ventanaMantCli extends javax.swing.JFrame {
         boolean a = validarInput();
         if (!a) return;
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        idU++;
-        String num = Integer.toString(idU);
-        Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), numDoc.getText(), apPat.getText(), apMat.getText(), dir.getText(), tlf.getText(), email.getText()};
+        //idU++;
         
-        model.addRow(s);
+        Cliente c = null;
+        String tipo = tipoCli.getSelectedItem().toString();
+        if(tipo.equals("Persona")){
+            //System.out.print("j");
+            c = new Persona();
+            ((Persona)c).setNombre(namae.getText());
+            ((Persona)c).setApPaterno(apPat.getText());
+            ((Persona)c).setApMaterno(apMat.getText());
+            ((Persona)c).setNumDoc(numDoc.getText());
+            ((Persona)c).setTipoDoc(((TipoDocumentoIdentidad)tipoDoc.getSelectedItem()));
+        }else if(tipo.equals("Empresa")){
+            //System.out.print("a");
+            c = new Empresa();
+            ((Empresa)c).setNombre(namae.getText());
+            ((Empresa)c).setRuc(numDoc.getText());
+        }
+        
+        c.setCorreo(email.getText());
+        c.setDireccion(dir.getText());
+        c.setTelefono(tlf.getText());
+        c.setDepartamento(((Departamento)tipoDoc.getSelectedItem()));
+        c.setProvincia(((Provincia)tipoDoc.getSelectedItem()));
+        c.setDistrito(((Distrito)tipoDoc.getSelectedItem()));
+
+        try {
+            LogicaNegocio.registrarCliente(c);
+            listarClientes();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), numDoc.getText(), apPat.getText(), apMat.getText(), dir.getText(), tlf.getText(), email.getText()};
+        
+        //model.addRow(s);
         dir.setText("");
         email.setText("");
         tlf.setText("");
@@ -535,7 +569,15 @@ public class ventanaMantCli extends javax.swing.JFrame {
             departamento.setVisible(true);
             Tdepartamento.setVisible(true);
             registrar.setEnabled(true);
+            try {
+                llenarBoxComboTipo();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if (s == "Empresa"){
+            
             TapPat.setVisible(false);
             TapMat.setVisible(false);
             apPat.setVisible(false);
@@ -558,6 +600,16 @@ public class ventanaMantCli extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tipoCliActionPerformed
 
+    private void llenarBoxComboTipo() throws ClassNotFoundException, SQLException{
+        ArrayList<TipoDocumentoIdentidad> doc = LogicaNegocio.listarTipoDocumento();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        int n = doc.size();
+        for(int i=0; i<n; i++){
+            modelo.addElement(doc.get(i));
+        }
+        tipoDoc.setModel(modelo);
+    }
+    
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();

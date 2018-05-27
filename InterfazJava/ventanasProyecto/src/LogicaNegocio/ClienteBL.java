@@ -10,6 +10,7 @@ import clases.Cliente;
 import clases.Departamento;
 import clases.Distrito;
 import clases.Provincia;
+import clases.TipoDocumentoIdentidad;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,6 +22,10 @@ public class ClienteBL {
     private ClienteDA accesoDatos;
     public ClienteBL(){
         accesoDatos = new ClienteDA();
+    }
+    
+    public ArrayList<TipoDocumentoIdentidad> listarTipoDocumento() throws ClassNotFoundException, SQLException{
+        return accesoDatos.listarTipoDocumento();
     }
     
     public ArrayList<Departamento> listarDepartamentos() throws ClassNotFoundException, SQLException{

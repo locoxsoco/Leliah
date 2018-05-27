@@ -86,6 +86,8 @@ public class Cliente{
     }
         
     public Cliente(){
-            
+           this.departamento = new Departamento();
+           this.provincia = new Provincia();
+           this.distrito = new Distrito();
     }
 }

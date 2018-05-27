@@ -60,5 +60,6 @@ public class Persona extends Cliente{
 
     public Persona(){
         super();
+        this.tipoDoc = new TipoDocumentoIdentidad();
     }
 }

@@ -11,6 +11,7 @@ import clases.Distrito;
 import clases.Empresa;
 import clases.Persona;
 import clases.Provincia;
+import clases.TipoDocumentoIdentidad;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,6 +25,27 @@ import java.util.ArrayList;
 public class ClienteDA {
     public ClienteDA(){
         
+    }
+    
+    public ArrayList<TipoDocumentoIdentidad> listarTipoDocumento() throws ClassNotFoundException, SQLException{
+        ArrayList<TipoDocumentoIdentidad> lista = new ArrayList<TipoDocumentoIdentidad>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call LISTAR_TIPOS_DOCUMENTO_IDENTIDAD()}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            TipoDocumentoIdentidad d = new TipoDocumentoIdentidad();
+            
+            d.setIdTipo(rs.getInt("idTipoDocumentoIdentidad"));
+            d.setNombTipo(rs.getString("nombreDocumentoIdentidad"));
+            
+            lista.add(d);
+        }
+        con.close();
+        return lista;
     }
     
     public ArrayList<Departamento> listarDepartamentos() throws ClassNotFoundException, SQLException{
@@ -115,11 +137,11 @@ public class ClienteDA {
                 ((Empresa) c).setRuc(rs.getString("ruc"));
             }
             c.setCorreo(rs.getString("correo"));
-            c.setDepartamento(rs.getInt("Cliente.FidDepartamento"), rs.getString("Departamento.nombreDepartamento"));
+            c.setDepartamento(rs.getInt("FidDepartamento"), rs.getString("nombreDepartamento"));
             c.setDireccion(rs.getString("direccion"));
-            c.setDistrito(rs.getInt("Cliente.FidDistrito"), rs.getString("Distrito.nombreDistrito"));
+            c.setDistrito(rs.getInt("FidDistrito"), rs.getString("nombreDistrito"));
             c.setIdCliente(rs.getInt("idCliente"));
-            c.setProvincia(rs.getInt("Cliente.FidProvincia"),rs.getString("Provincia.nombreProvincia"));
+            c.setProvincia(rs.getInt("FidProvincia"),rs.getString("nombreProvincia"));
             c.setTelefono(rs.getString("telefono"));
             
             lista.add(c);
@@ -147,8 +169,8 @@ public class ClienteDA {
         }else if(c instanceof Empresa){
             //System.out.print("a");
             stmt.setString("_tipoCliente", "J");
-            stmt.setNull("_ruc", java.sql.Types.VARCHAR);
-            stmt.setNull("_razonSocial", java.sql.Types.VARCHAR);
+            stmt.setString("_ruc", ((Empresa)c).getRuc());
+            stmt.setString("_razonSocial", ((Empresa)c).getNombre());
             stmt.setNull("_nombre", java.sql.Types.VARCHAR);
             stmt.setNull("_apellidoPaterno", java.sql.Types.VARCHAR);
             stmt.setNull("_apellidoMaterno", java.sql.Types.VARCHAR);
