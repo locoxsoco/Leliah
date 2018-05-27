@@ -123,15 +123,15 @@ public class ClienteDA {
         while(rs.next()){
             //agregar elementos a lista
             Cliente c = null;
-            String priv = rs.getString("tipoCliente");
-            if(priv.equals("N")){
+            int priv = rs.getInt("tipoCliente");
+            if(priv == 1){
                 c = new Persona();
                 ((Persona) c).setNombre(rs.getString("nombre"));
                 ((Persona) c).setApPaterno(rs.getString("apellidoPaterno"));
                 ((Persona) c).setApMaterno(rs.getString("apellidoMaterno"));
                 ((Persona) c).setNumDoc(rs.getString("numeroDocumento"));
                 ((Persona) c).setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"), rs.getString("nombreDocumentoIdentidad"));
-            }else if(priv.equals("J")){
+            }else if(priv == 2){
                 c = new Empresa();
                 ((Empresa) c).setNombre(rs.getString("razonSocial"));
                 ((Empresa) c).setRuc(rs.getString("ruc"));
@@ -153,12 +153,12 @@ public class ClienteDA {
     public void registrarCliente(Cliente c) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call REGISTRAR_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(c instanceof Persona){
             //System.out.print("j");
-            stmt.setString("tipoCliente", "N");
+            stmt.setInt("_tipoCliente", 1);
             stmt.setNull("_ruc", java.sql.Types.VARCHAR);
             stmt.setNull("_razonSocial", java.sql.Types.VARCHAR);
             stmt.setString("_nombre", ((Persona) c).getNombre());
@@ -168,7 +168,7 @@ public class ClienteDA {
             stmt.setInt("_FidTipoDocumentoIdentidad", ((Persona) c).getTipoDoc().getIdTipo());
         }else if(c instanceof Empresa){
             //System.out.print("a");
-            stmt.setString("_tipoCliente", "J");
+            stmt.setInt("_tipoCliente", 2);
             stmt.setString("_ruc", ((Empresa)c).getRuc());
             stmt.setString("_razonSocial", ((Empresa)c).getNombre());
             stmt.setNull("_nombre", java.sql.Types.VARCHAR);

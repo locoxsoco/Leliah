@@ -385,9 +385,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
         c.setCorreo(email.getText());
         c.setDireccion(dir.getText());
         c.setTelefono(tlf.getText());
-        c.setDepartamento(((Departamento)tipoDoc.getSelectedItem()));
-        c.setProvincia(((Provincia)tipoDoc.getSelectedItem()));
-        c.setDistrito(((Distrito)tipoDoc.getSelectedItem()));
+        c.setDepartamento(((Departamento)departamento.getSelectedItem()));
+        c.setProvincia(((Provincia)provincia.getSelectedItem()));
+        c.setDistrito(((Distrito)distrito.getSelectedItem()));
 
         try {
             LogicaNegocio.registrarCliente(c);
@@ -612,33 +612,84 @@ public class ventanaMantCli extends javax.swing.JFrame {
     
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
+        int n = tabla.getSelectedRow();
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
-        dir.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 8)));
-        email.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 10)));
-        tlf.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 9)));
-        tipoCli.setSelectedItem(model.getValueAt(tabla.getSelectedRow(), 1));
+        
+//        dir.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 8)));
+//        email.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 10)));
+//        tlf.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 9)));
+//        tipoCli.setSelectedItem(model.getValueAt(tabla.getSelectedRow(), 1));
+
         
         modificar.setEnabled(true);
         eliminar.setEnabled(true);
-        //dni.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 6)));
+        
+        try {
+            System.out.println(lista.get(n).getDepartamento().getNombDep());
+            llenarComboBoxProv(lista.get(n).getDepartamento().getIdDep());
+            System.out.println(lista.get(n).getProvincia().getNombProv());
+            llenarComboBoxDist(lista.get(n).getProvincia().getIdProv());
+            //dni.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 6)));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         //tipoUser.setSelectedItem(model.getValueAt(tabla.getSelectedRow(), 7));
-        if(tipoCli.getSelectedItem().toString() == "Persona"){
-            namae.setEnabled(true);
-            TapPat.setEnabled(true);
-            TapMat.setEnabled(true);
-            namae.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
-            apPat.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 4)));
-            apMat.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 5)));
-        }else if(tipoCli.getSelectedItem().toString() == "Empresa"){
+        if(lista.get(n) instanceof Persona){
+            tipoCli.setSelectedItem(tipoCli.getItemAt(1));
+            numDoc.setVisible(true);
+            TapPat.setVisible(true);
+            TapMat.setVisible(true);
+            apPat.setVisible(true);
+            apMat.setVisible(true);
+            email.setVisible(true);
+            tlf.setVisible(true);
+            emailtxt.setVisible(true);
+            tlftxt.setVisible(true);
+            namae.setVisible(true);
+            namaetxt.setVisible(true);
+            namaetxt.setText("Nombre:");
+            tipoDoc.setVisible(true);
+            numDoc.setVisible(true);
+            TnumDoc.setVisible(true);
+            TnumDoc.setText("Num Documento:");
+            TtipoDoc.setVisible(true);
+            departamento.setVisible(true);
+            Tdepartamento.setVisible(true);
+            provincia.setVisible(true);
+            Tprovincia.setVisible(true);
+            distrito.setVisible(true);
+            Tdistrito.setVisible(true);
+            registrar.setEnabled(true);
+            dir.setVisible(true);
+            dirtxt.setVisible(true);
+            
+            numDoc.setText(((Persona)lista.get(n)).getNumDoc());
+            namae.setText(((Persona)lista.get(n)).getNombre());
+            tipoDoc.setSelectedItem(((Persona)lista.get(n)).getTipoDoc());
+            apPat.setText(((Persona)lista.get(n)).getApPaterno());
+            apMat.setText(((Persona)lista.get(n)).getApMaterno());
+            
+            
+        }else if(lista.get(n) instanceof Empresa){
 
-            TapPat.setEnabled(false);
-            TapMat.setEnabled(false);
-            namaetxt.setEnabled(true);
-            namae.setEnabled(false);
-            apPat.setEnabled(false);
-            apMat.setEnabled(false);
+            TapPat.setVisible(false);
+            TapMat.setVisible(false);
+            namaetxt.setVisible(true);
+            namae.setVisible(true);
+            apPat.setVisible(false);
+            apMat.setVisible(false);
         }
+        
+        dir.setText(lista.get(n).getDireccion());
+        email.setText(lista.get(n).getCorreo());
+        tlf.setText(lista.get(n).getTelefono());
+        departamento.setSelectedItem(lista.get(n).getDepartamento().getNombDep());
+        provincia.setSelectedItem(lista.get(n).getProvincia().getNombProv());
+        distrito.setSelectedItem(lista.get(n).getDistrito().getNombDist());
+        idU = lista.get(n).getIdCliente();
     }//GEN-LAST:event_tablaMouseClicked
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
@@ -717,19 +768,23 @@ public class ventanaMantCli extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void llenarComboBoxProv(int id) throws ClassNotFoundException, SQLException{
+        ArrayList<Provincia> prov = LogicaNegocio.listarProvincias(id);
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        int n = prov.size();
+        for(int i=0; i<n; i++){
+            modelo.addElement(prov.get(i));
+        }
+        provincia.setModel(modelo);
+        provincia.setVisible(true);
+        Tprovincia.setVisible(true);
+    }
+    
     private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
         try {
             // TODO add your handling code here:
             Departamento d = (Departamento) departamento.getSelectedItem();
-            ArrayList<Provincia> prov = LogicaNegocio.listarProvincias(d.getIdDep());
-            DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-            int n = prov.size();
-            for(int i=0; i<n; i++){
-                modelo.addElement(prov.get(i));
-            }
-            provincia.setModel(modelo);
-            provincia.setVisible(true);
-            Tprovincia.setVisible(true);
+            llenarComboBoxProv(d.getIdDep());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -737,19 +792,24 @@ public class ventanaMantCli extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_departamentoActionPerformed
 
+    private void llenarComboBoxDist(int id) throws ClassNotFoundException, SQLException{
+        ArrayList<Distrito> dist = LogicaNegocio.listarDistritos(id);
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        int n = dist.size();
+        for(int i=0; i<n; i++){
+            modelo.addElement(dist.get(i));
+        }
+        distrito.setModel(modelo);
+        distrito.setVisible(true);
+        Tdistrito.setVisible(true);
+    }
+    
     private void provinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provinciaActionPerformed
         try {
             // TODO add your handling code here:
             Provincia p = (Provincia) provincia.getSelectedItem();
-            ArrayList<Distrito> dist = LogicaNegocio.listarDistritos(p.getIdProv());
-            DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-            int n = dist.size();
-            for(int i=0; i<n; i++){
-                modelo.addElement(dist.get(i));
-            }
-            distrito.setModel(modelo);
-            distrito.setVisible(true);
-            Tdistrito.setVisible(true);
+            llenarComboBoxDist(p.getIdProv());
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
