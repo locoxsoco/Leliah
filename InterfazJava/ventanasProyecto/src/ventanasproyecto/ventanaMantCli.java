@@ -40,8 +40,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
         lista = new ArrayList<Cliente>();
         listarClientes();
         llenarComboBoxDep();
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(200);
+        //tabla.getColumnModel().getColumn(0).setPreferredWidth(10);
+        //tabla.getColumnModel().getColumn(1).setPreferredWidth(20);
+        //tabla.getColumnModel().getColumn(6).setPreferredWidth(200);
         TapPat.setVisible(false);
         TapMat.setVisible(false);
         apPat.setVisible(false);
@@ -176,15 +177,40 @@ public class ventanaMantCli extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Tipo Cliente", "DNI/RUC", "Nombre", "Telefono", "Correo", "Direccion"
+                "ID", "Tipo Cliente", "DNI/RUC", "Nombre", "Telefono", "Correo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(30);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tabla.getColumnModel().getColumn(0).setMaxWidth(30);
+            tabla.getColumnModel().getColumn(1).setMinWidth(80);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabla.getColumnModel().getColumn(1).setMaxWidth(80);
+            tabla.getColumnModel().getColumn(2).setMinWidth(100);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(2).setMaxWidth(100);
+            tabla.getColumnModel().getColumn(3).setMinWidth(200);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tabla.getColumnModel().getColumn(3).setMaxWidth(200);
+            tabla.getColumnModel().getColumn(4).setMinWidth(100);
+            tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(4).setMaxWidth(100);
+        }
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 290, 700, 230);
@@ -343,7 +369,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 doc = ((Empresa)lista.get(i)).getRuc();
                 nombre = ((Empresa)lista.get(i)).getNombre();
             }
-            Object o[] = {lista.get(i).getIdCliente(), tipo, doc, nombre, lista.get(i).getTelefono(), lista.get(i).getCorreo(), lista.get(i).getDireccion()+", "+lista.get(i).getDistrito().toString()+", "+lista.get(i).getProvincia().toString()+", "+lista.get(i).getDepartamento().toString()};
+            Object o[] = {lista.get(i).getIdCliente(), tipo, doc, nombre, lista.get(i).getTelefono(), lista.get(i).getCorreo()};
             model.addRow(o);
         }
     }
@@ -409,6 +435,31 @@ public class ventanaMantCli extends javax.swing.JFrame {
         apPat.setText("");
         tipoCli.setSelectedItem(tipoCli.getItemAt(0));
         apMat.setText("");
+        TapPat.setVisible(false);
+        TapMat.setVisible(false);
+        apPat.setVisible(false);
+        apMat.setVisible(false);
+        dir.setVisible(false);
+        email.setVisible(false);
+        tlf.setVisible(false);
+        dirtxt.setVisible(false);
+        emailtxt.setVisible(false);
+        tlftxt.setVisible(false);
+        namae.setVisible(false);
+        namaetxt.setVisible(false);
+        tipoDoc.setVisible(false);
+        numDoc.setVisible(false);
+        TnumDoc.setVisible(false);
+        TtipoDoc.setVisible(false);
+        departamento.setVisible(false);
+        provincia.setVisible(false);
+        distrito.setVisible(false);
+        Tdepartamento.setVisible(false);
+        Tprovincia.setVisible(false);
+        Tdistrito.setVisible(false);
+        registrar.setEnabled(false);
+        modificar.setEnabled(false);
+        eliminar.setEnabled(false);
         
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -625,9 +676,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
         eliminar.setEnabled(true);
         
         try {
-            System.out.println(lista.get(n).getDepartamento().getNombDep());
+            //System.out.println(lista.get(n).getDepartamento().getNombDep());
             llenarComboBoxProv(lista.get(n).getDepartamento().getIdDep());
-            System.out.println(lista.get(n).getProvincia().getNombProv());
+            //System.out.println(lista.get(n).getProvincia().getNombProv());
             llenarComboBoxDist(lista.get(n).getProvincia().getIdProv());
             //dni.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 6)));
         } catch (ClassNotFoundException ex) {
@@ -675,12 +726,35 @@ public class ventanaMantCli extends javax.swing.JFrame {
             
         }else if(lista.get(n) instanceof Empresa){
 
+            tipoCli.setSelectedItem(tipoCli.getItemAt(1));
+            numDoc.setVisible(true);
             TapPat.setVisible(false);
             TapMat.setVisible(false);
-            namaetxt.setVisible(true);
-            namae.setVisible(true);
             apPat.setVisible(false);
             apMat.setVisible(false);
+            email.setVisible(true);
+            tlf.setVisible(true);
+            emailtxt.setVisible(true);
+            tlftxt.setVisible(true);
+            namae.setVisible(true);
+            namaetxt.setVisible(true);
+            namaetxt.setText("Razon Social:");
+            tipoDoc.setVisible(false);
+            TnumDoc.setVisible(true);
+            TnumDoc.setText("RUC:");
+            TtipoDoc.setVisible(false);
+            departamento.setVisible(true);
+            Tdepartamento.setVisible(true);
+            provincia.setVisible(true);
+            Tprovincia.setVisible(true);
+            distrito.setVisible(true);
+            Tdistrito.setVisible(true);
+            registrar.setEnabled(true);
+            dir.setVisible(true);
+            dirtxt.setVisible(true);
+            
+            numDoc.setText(((Empresa)lista.get(n)).getRuc());
+            namae.setText(((Empresa)lista.get(n)).getNombre());
         }
         
         dir.setText(lista.get(n).getDireccion());
@@ -699,28 +773,79 @@ public class ventanaMantCli extends javax.swing.JFrame {
         if(YesOrNo == 0){
             boolean a = validarInput();
             if(!a) return;
-            model.setValueAt(dir.getText(), tabla.getSelectedRow(), 8);
-            model.setValueAt(email.getText(), tabla.getSelectedRow(), 10);
-            model.setValueAt(tlf.getText(), tabla.getSelectedRow(), 9);
-            model.setValueAt(tipoCli.getSelectedItem().toString(), tabla.getSelectedRow(), 1);
+            model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+            //idU++;
 
-            if(tipoCli.getSelectedItem().toString() == "Persona"){
-
-            }else if(tipoCli.getSelectedItem().toString() == "Empresa"){
-                apPat.setText("");
-                apMat.setText("");
+            Cliente c = null;
+            String tipo = tipoCli.getSelectedItem().toString();
+            if(tipo.equals("Persona")){
+                //System.out.print("j");
+                c = new Persona();
+                ((Persona)c).setNombre(namae.getText());
+                ((Persona)c).setApPaterno(apPat.getText());
+                ((Persona)c).setApMaterno(apMat.getText());
+                ((Persona)c).setNumDoc(numDoc.getText());
+                ((Persona)c).setTipoDoc(((TipoDocumentoIdentidad)tipoDoc.getSelectedItem()));
+            }else if(tipo.equals("Empresa")){
+                //System.out.print("a");
+                c = new Empresa();
+                ((Empresa)c).setNombre(namae.getText());
+                ((Empresa)c).setRuc(numDoc.getText());
             }
-            model.setValueAt(namae.getText(), tabla.getSelectedRow(), 2);
-            model.setValueAt(apPat.getText(), tabla.getSelectedRow(), 4);
-            model.setValueAt(apMat.getText(), tabla.getSelectedRow(), 5);
-            model.setValueAt(namae.getText(), tabla.getSelectedRow(), 7);
+
+            c.setCorreo(email.getText());
+            c.setDireccion(dir.getText());
+            c.setTelefono(tlf.getText());
+            c.setDepartamento(((Departamento)departamento.getSelectedItem()));
+            c.setProvincia(((Provincia)provincia.getSelectedItem()));
+            c.setDistrito(((Distrito)distrito.getSelectedItem()));
+            c.setIdCliente(idU);
+
+            try {
+                LogicaNegocio.modificarCliente(c);
+                listarClientes();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), numDoc.getText(), apPat.getText(), apMat.getText(), dir.getText(), tlf.getText(), email.getText()};
+
+            //model.addRow(s);
             dir.setText("");
             email.setText("");
             tlf.setText("");
             namae.setText("");
+            numDoc.setText("");
             apPat.setText("");
             tipoCli.setSelectedItem(tipoCli.getItemAt(0));
             apMat.setText("");
+            TapPat.setVisible(false);
+            TapMat.setVisible(false);
+            apPat.setVisible(false);
+            apMat.setVisible(false);
+            dir.setVisible(false);
+            email.setVisible(false);
+            tlf.setVisible(false);
+            dirtxt.setVisible(false);
+            emailtxt.setVisible(false);
+            tlftxt.setVisible(false);
+            namae.setVisible(false);
+            namaetxt.setVisible(false);
+            tipoDoc.setVisible(false);
+            numDoc.setVisible(false);
+            TnumDoc.setVisible(false);
+            TtipoDoc.setVisible(false);
+            departamento.setVisible(false);
+            provincia.setVisible(false);
+            distrito.setVisible(false);
+            Tdepartamento.setVisible(false);
+            Tprovincia.setVisible(false);
+            Tdistrito.setVisible(false);
+            registrar.setEnabled(false);
+            modificar.setEnabled(false);
+            eliminar.setEnabled(false);
         }
         
        
@@ -729,19 +854,53 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
         
-        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la linea seleccionada?","Eliminar Linea", JOptionPane.YES_NO_OPTION);
-        if(YesOrNo == 0){
-            model.removeRow(tabla.getSelectedRow());
-            eliminar.setEnabled(false);
-            modificar.setEnabled(false);
-            dir.setText("");
-            email.setText("");
-            tlf.setText("");
-            namae.setText("");
-            apPat.setText("");
-            tipoCli.setSelectedItem(tipoCli.getItemAt(0));
-            apMat.setText("");
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la linea seleccionada?","Eliminar Trabajador", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo != 0){
+            return;
         }
+        
+        try {
+            // TODO add your handling code here:
+            LogicaNegocio.eliminarCliente(idU);
+            listarClientes();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dir.setText("");
+        email.setText("");
+        tlf.setText("");
+        namae.setText("");
+        numDoc.setText("");
+        apPat.setText("");
+        tipoCli.setSelectedItem(tipoCli.getItemAt(0));
+        apMat.setText("");
+        TapPat.setVisible(false);
+        TapMat.setVisible(false);
+        apPat.setVisible(false);
+        apMat.setVisible(false);
+        dir.setVisible(false);
+        email.setVisible(false);
+        tlf.setVisible(false);
+        dirtxt.setVisible(false);
+        emailtxt.setVisible(false);
+        tlftxt.setVisible(false);
+        namae.setVisible(false);
+        namaetxt.setVisible(false);
+        tipoDoc.setVisible(false);
+        numDoc.setVisible(false);
+        TnumDoc.setVisible(false);
+        TtipoDoc.setVisible(false);
+        departamento.setVisible(false);
+        provincia.setVisible(false);
+        distrito.setVisible(false);
+        Tdepartamento.setVisible(false);
+        Tprovincia.setVisible(false);
+        Tdistrito.setVisible(false);
+        registrar.setEnabled(false);
+        modificar.setEnabled(false);
+        eliminar.setEnabled(false);
         
     }//GEN-LAST:event_eliminarActionPerformed
     ventanaLogin ventanaHome;

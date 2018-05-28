@@ -202,7 +202,7 @@ public class ClienteDA {
         
         if(c instanceof Persona){
             //System.out.print("j");
-            stmt.setString("tipoCliente", "N");
+            stmt.setInt("_tipoCliente", 1);
             stmt.setNull("_ruc", java.sql.Types.VARCHAR);
             stmt.setNull("_razonSocial", java.sql.Types.VARCHAR);
             stmt.setString("_nombre", ((Persona) c).getNombre());
@@ -212,9 +212,9 @@ public class ClienteDA {
             stmt.setInt("_FidTipoDocumentoIdentidad", ((Persona) c).getTipoDoc().getIdTipo());
         }else if(c instanceof Empresa){
             //System.out.print("a");
-            stmt.setString("_tipoCliente", "J");
-            stmt.setNull("_ruc", java.sql.Types.VARCHAR);
-            stmt.setNull("_razonSocial", java.sql.Types.VARCHAR);
+            stmt.setInt("_tipoCliente", 2);
+            stmt.setString("_ruc", ((Empresa)c).getRuc());
+            stmt.setString("_razonSocial", ((Empresa)c).getNombre());
             stmt.setNull("_nombre", java.sql.Types.VARCHAR);
             stmt.setNull("_apellidoPaterno", java.sql.Types.VARCHAR);
             stmt.setNull("_apellidoMaterno", java.sql.Types.VARCHAR);
@@ -231,6 +231,7 @@ public class ClienteDA {
         stmt.setInt("_id", c.getIdCliente());
         
         stmt.executeUpdate();
+        
         con.close();
     }
     
