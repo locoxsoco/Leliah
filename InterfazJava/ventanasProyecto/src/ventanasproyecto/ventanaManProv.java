@@ -86,6 +86,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         departamento = new javax.swing.JComboBox<>();
         provincia = new javax.swing.JComboBox<>();
         distrito = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 540));
@@ -181,34 +182,40 @@ public class ventanaManProv extends javax.swing.JFrame {
         jButton2.setBounds(460, 450, 100, 29);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
+        registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         registrar.setText("Registrar");
+        registrar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarActionPerformed(evt);
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(30, 203, 90, 25);
+        registrar.setBounds(30, 205, 100, 29);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         eliminar.setText("Eliminar");
+        eliminar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(270, 203, 90, 25);
+        eliminar.setBounds(405, 205, 100, 29);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
+        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificar.png"))); // NOI18N
         modificar.setText("Modificar");
+        modificar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarActionPerformed(evt);
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(150, 203, 90, 25);
+        modificar.setBounds(280, 205, 100, 29);
 
         dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +265,13 @@ public class ventanaManProv extends javax.swing.JFrame {
         });
         getContentPane().add(distrito);
         distrito.setBounds(500, 100, 200, 22);
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        jButton3.setText("Buscar");
+        jButton3.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        getContentPane().add(jButton3);
+        jButton3.setBounds(155, 205, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -585,6 +599,7 @@ public class ventanaManProv extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

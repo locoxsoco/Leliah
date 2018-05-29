@@ -65,9 +65,10 @@ public class ventanaManServ extends javax.swing.JFrame {
         eliminar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         moneda = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(450, 460));
+        setMinimumSize(new java.awt.Dimension(510, 460));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -107,59 +108,65 @@ public class ventanaManServ extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 190, 410, 179);
+        jScrollPane1.setBounds(20, 190, 470, 179);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton1.setText("Cerrar Sesión");
+        jButton1.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(300, 380, 130, 29);
+        jButton1.setBounds(360, 380, 130, 29);
 
-        volver.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         volver.setText("Volver");
+        volver.setMargin(new java.awt.Insets(2, 4, 2, 4));
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
             }
         });
         getContentPane().add(volver);
-        volver.setBounds(180, 380, 90, 29);
+        volver.setBounds(245, 380, 90, 29);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
+        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificar.png"))); // NOI18N
         modificar.setText("Modificar");
+        modificar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarActionPerformed(evt);
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(135, 150, 90, 25);
+        modificar.setBounds(265, 150, 100, 29);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
+        registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         registrar.setText("Registrar");
+        registrar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarActionPerformed(evt);
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(15, 150, 90, 25);
+        registrar.setBounds(15, 150, 100, 29);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         eliminar.setText("Eliminar");
+        eliminar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(255, 150, 90, 25);
+        eliminar.setBounds(390, 150, 100, 29);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel4.setText("Tipo de Moneda:");
@@ -174,6 +181,13 @@ public class ventanaManServ extends javax.swing.JFrame {
         });
         getContentPane().add(moneda);
         moneda.setBounds(135, 110, 70, 22);
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        jButton2.setText("Buscar");
+        jButton2.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        getContentPane().add(jButton2);
+        jButton2.setBounds(140, 150, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -387,6 +401,7 @@ public class ventanaManServ extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

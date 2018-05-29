@@ -100,6 +100,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         tipoDoc = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         numDoc = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 620));
@@ -196,34 +197,40 @@ public class ventanaManTrab extends javax.swing.JFrame {
         tipoUser.setBounds(600, 118, 200, 22);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
+        registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         registrar.setText("Registrar");
+        registrar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarActionPerformed(evt);
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(12, 270, 90, 25);
+        registrar.setBounds(12, 270, 100, 29);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
+        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificar.png"))); // NOI18N
         modificar.setText("Modificar");
+        modificar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarActionPerformed(evt);
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(132, 270, 90, 25);
+        modificar.setBounds(262, 270, 100, 29);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         eliminar.setText("Eliminar");
+        eliminar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(252, 270, 90, 25);
+        eliminar.setBounds(387, 270, 100, 29);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -283,6 +290,13 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel10.setBounds(460, 86, 140, 16);
         getContentPane().add(numDoc);
         numDoc.setBounds(600, 83, 200, 22);
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        jButton1.setText("Buscar");
+        jButton1.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        getContentPane().add(jButton1);
+        jButton1.setBounds(137, 270, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -834,6 +848,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JComboBox<String> frec;
     public static javax.swing.JTextField horas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

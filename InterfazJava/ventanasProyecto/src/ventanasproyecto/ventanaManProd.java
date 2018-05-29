@@ -83,6 +83,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         categoria = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         moneda = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(550, 550));
@@ -125,13 +126,13 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(154, 48, 200, 20);
+        nombre.setBounds(154, 48, 200, 22);
         getContentPane().add(precio);
-        precio.setBounds(154, 77, 200, 20);
+        precio.setBounds(154, 77, 200, 22);
         getContentPane().add(cantMin);
-        cantMin.setBounds(154, 106, 200, 20);
+        cantMin.setBounds(154, 106, 200, 22);
         getContentPane().add(marca);
-        marca.setBounds(154, 135, 200, 20);
+        marca.setBounds(154, 135, 200, 22);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -151,37 +152,43 @@ public class ventanaManProd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 330, 500, 130);
+        jScrollPane1.setBounds(10, 330, 520, 130);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
+        registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         registrar.setText("Registrar");
+        registrar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarActionPerformed(evt);
             }
         });
         getContentPane().add(registrar);
-        registrar.setBounds(40, 290, 90, 30);
+        registrar.setBounds(12, 290, 100, 30);
 
         modificar.setBackground(new java.awt.Color(255, 255, 204));
+        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificar.png"))); // NOI18N
         modificar.setText("Modificar");
+        modificar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarActionPerformed(evt);
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(240, 290, 90, 30);
+        modificar.setBounds(262, 290, 100, 30);
 
         eliminar.setBackground(new java.awt.Color(255, 255, 204));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         eliminar.setText("Eliminar");
+        eliminar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(430, 290, 90, 30);
+        eliminar.setBounds(387, 290, 100, 30);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
@@ -210,7 +217,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(150, 193, 79, 23);
+        consum.setBounds(150, 193, 95, 25);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -219,14 +226,14 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(250, 193, 120, 23);
+        no_consum.setBounds(250, 193, 120, 25);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Descripción:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(12, 167, 130, 16);
         getContentPane().add(desc);
-        desc.setBounds(154, 164, 200, 20);
+        desc.setBounds(154, 164, 200, 22);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel8.setText("Categoria:");
@@ -234,7 +241,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel8.setBounds(12, 225, 110, 16);
 
         getContentPane().add(categoria);
-        categoria.setBounds(154, 222, 200, 20);
+        categoria.setBounds(154, 222, 200, 22);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel9.setText("Tipo Moneda:");
@@ -248,7 +255,14 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(moneda);
-        moneda.setBounds(154, 251, 100, 20);
+        moneda.setBounds(154, 251, 100, 22);
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        jButton1.setText("Buscar");
+        jButton1.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        getContentPane().add(jButton1);
+        jButton1.setBounds(137, 290, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -585,6 +599,7 @@ public class ventanaManProd extends javax.swing.JFrame {
     private javax.swing.JRadioButton consum;
     private javax.swing.JTextField desc;
     private javax.swing.JButton eliminar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
