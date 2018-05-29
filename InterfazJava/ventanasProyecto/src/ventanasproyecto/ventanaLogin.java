@@ -6,23 +6,20 @@
 package ventanasproyecto;
 
 import LogicaNegocio.TrabajadorBL;
+import clases.usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author alulab14
- */
 public class ventanaLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ventanaLogin
-     */
+    
     private TrabajadorBL LogicaNegocio;
     public ventanaLogin() {
+        
         initComponents();
+        //System.out.println("hola");
         LogicaNegocio = new TrabajadorBL();
         this.setLocationRelativeTo(null);
         this.setTitle("Ventana Log In");
@@ -114,24 +111,27 @@ public class ventanaLogin extends javax.swing.JFrame {
     
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-        int privi=-1;
-        try{
-        privi=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
+        usuario u = null;
+        System.out.println("hola");
+  
+        try {
+            u=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //System.out.println(privi);
         
-        if(privi==2){ /**/
+        if(u.getPriv()==2){
             ventanaAdmin v1 = new ventanaAdmin();
             v1.ventanaHome = this;
             v1.setVisible(true);
-            v1.nomb.setText(user.getText());
+            v1.nomb.setText(u.getNomb());
             v1.anterior = "Home";
             
             this.setVisible(false);
-        }else if( privi==1){
+        }else if( u.getPriv()==1){
             VentanaPrincipal v1 = new VentanaPrincipal();
             v1.ventanaHome = this;
             v1.setLocationRelativeTo(null);

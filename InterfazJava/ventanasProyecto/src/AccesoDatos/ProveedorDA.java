@@ -122,7 +122,7 @@ public class ProveedorDA {
         while(rs.next()){
             Proveedor p = new Proveedor();
             p.setId(rs.getInt("idProveedor"));
-            p.setNombre(rs.getString("nombre"));
+            p.setNombre(rs.getString("razonSocial"));
             p.setRuc(rs.getString("ruc"));
             p.setCorreo(rs.getString("correo"));
             p.setTelefono(rs.getString("telefono"));
@@ -196,6 +196,36 @@ public class ProveedorDA {
         
         con.close();
         
+    }
+    
+    public ArrayList<Proveedor> buscarProveedores(String razon, String ruc) throws ClassNotFoundException, SQLException{
+        ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call BUSCAR_PROVEEDOR(?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_razonSocial", razon);
+        stmt.setString("_ruc", ruc);
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            Proveedor p = new Proveedor();
+            p.setId(rs.getInt("idProveedor"));
+            p.setNombre(rs.getString("razonSocial"));
+            p.setRuc(rs.getString("ruc"));
+            p.setCorreo(rs.getString("correo"));
+            p.setTelefono(rs.getString("telefono"));
+            p.setDiaSemana(rs.getInt("Proveedor.FidDiaSemana"), rs.getString("DiaSemana.nombreDiaSemana"));
+            p.setDepartamento(rs.getInt("Proveedor.FidDepartamento"), rs.getString("Departamento.nombreDepartamento"));
+            p.setProvincia(rs.getInt("Proveedor.FidProvincia"), rs.getString("Provincia.nombreProvincia"));
+            p.setDistrito(rs.getInt("Proveedor.FidDistrito"), rs.getString("Distrito.nombreDistrito"));
+            p.setDireccion(rs.getString("direccion"));
+            
+            lista.add(p);
+        }
+        con.close();
+        return lista;
     }
     
 }

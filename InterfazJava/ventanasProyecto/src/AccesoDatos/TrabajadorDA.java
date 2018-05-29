@@ -11,6 +11,7 @@ import clases.TiempoPago;
 import clases.TipoDocumentoIdentidad;
 import clases.Trabajador;
 import clases.Vendedor;
+import clases.usuario;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -229,21 +230,24 @@ public class TrabajadorDA {
         return lista;
      }
      
-     public int validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
+     public usuario validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
         
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call VALIDAR_USUARIO(?,?,?)}";
+        String sql = "{call VALIDAR_USUARIO(?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         stmt.registerOutParameter("_privilegio",java.sql.Types.INTEGER );
         stmt.setString("_username", _username);
         stmt.setString("_password", _password);
-        
+        stmt.registerOutParameter("_NOMBRE", java.sql.Types.VARCHAR);
         
         ResultSet rs = stmt.executeQuery();
-        int priv=stmt.getInt("_privilegio");
+        //priv=stmt.getInt("_privilegio");
+        usuario u = new usuario();
+        u.setPriv(stmt.getInt("_privilegio"));
+        u.setNomb(stmt.getString("_NOMBRE"));
         con.close();
-        return priv;
+        return u;
      }
     
 }

@@ -9,6 +9,7 @@ import AccesoDatos.TrabajadorDA;
 import clases.TiempoPago;
 import clases.TipoDocumentoIdentidad;
 import clases.Trabajador;
+import clases.usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class TrabajadorBL {
         return accesoDatos.listarTiempoPago();
     }
     
-    public int validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
+    public usuario validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
         return accesoDatos.validarUsuario(_username, _password);
     }
 }

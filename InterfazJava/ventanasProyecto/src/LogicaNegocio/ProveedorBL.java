@@ -55,4 +55,8 @@ public class ProveedorBL {
     public void eliminarServicio(int id) throws ClassNotFoundException, SQLException{
         accesoDatos.eliminarServicio(id);
     }
+    
+    public ArrayList<Proveedor> buscarProveedores(String razon, String ruc) throws ClassNotFoundException, SQLException{
+        return accesoDatos.buscarProveedores(razon, ruc);
+    }
 }
