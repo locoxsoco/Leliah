@@ -104,6 +104,11 @@ public class VentanaReportes extends javax.swing.JFrame {
         LabelFechaFin.setBounds(10, 100, 80, 14);
 
         AcceptDialog.setText("Aceptar");
+        AcceptDialog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AcceptDialogMouseClicked(evt);
+            }
+        });
         AcceptDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AcceptDialogActionPerformed(evt);
@@ -414,12 +419,12 @@ public class VentanaReportes extends javax.swing.JFrame {
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/ClientesFrecReport.jasper").getFile());
 
-                HashMap hm1 = new HashMap();
-                hm1.put("Reporte de clientes más frecuentes", "j");
+//                HashMap hm1 = new HashMap();
+//                hm1.put("Reporte de clientes más frecuentes", "j");
         
                 JasperPrint impresion1 
                  =JasperFillManager.fillReport(
-                    jr1, hm1,new JREmptyDataSource());
+                    jr1, null,new JREmptyDataSource());
 
                 JasperViewer viewer1 = 
                          new JasperViewer(impresion1,false);
@@ -498,13 +503,7 @@ public class VentanaReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtRepClientesActionPerformed
 
     private void AcceptDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptDialogActionPerformed
-        
-        jDialog1.dispose();
-        try {
-            abrirReporte(selector);
-        } catch (JRException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                
     }//GEN-LAST:event_AcceptDialogActionPerformed
 
     private void ButtProdMasVendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtProdMasVendMouseClicked
@@ -533,6 +532,15 @@ public class VentanaReportes extends javax.swing.JFrame {
         ventanaHome.regresar();
         this.dispose();
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void AcceptDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AcceptDialogMouseClicked
+        jDialog1.dispose();
+        try {
+            abrirReporte(selector);
+        } catch (JRException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_AcceptDialogMouseClicked
 
     /**
      * @param args the command line arguments
