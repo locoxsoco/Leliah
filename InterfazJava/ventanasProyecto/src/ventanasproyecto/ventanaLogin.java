@@ -112,7 +112,7 @@ public class ventanaLogin extends javax.swing.JFrame {
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
         usuario u = null;
-        System.out.println("hola");
+        //System.out.println("hola");
   
         try {
             u=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
