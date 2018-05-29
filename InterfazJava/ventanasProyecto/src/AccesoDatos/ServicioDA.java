@@ -93,4 +93,28 @@ public class ServicioDA {
         
     }
     
+    public ArrayList<Servicio> buscarServicio(String nomb) throws ClassNotFoundException, SQLException{
+        ArrayList<Servicio> lista = new ArrayList<Servicio>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call BUSCAR_SERVICIO(?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_nombre", nomb);
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            //agregar elementos a lista
+            Servicio s = new Servicio();
+            s.SetId(rs.getInt("idServicio"));
+            //System.out.println(s.getId());
+            s.setNombre(rs.getString("nombre"));
+            s.setprecioxUnit(rs.getDouble("precioUnitario"));
+            s.SetMoneda(rs.getString("moneda"));
+            lista.add(s);
+        }
+        con.close();
+        return lista;
+    }
+    
 }

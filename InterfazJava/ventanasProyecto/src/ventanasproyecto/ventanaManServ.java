@@ -65,7 +65,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         eliminar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         moneda = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(510, 460));
@@ -182,12 +182,17 @@ public class ventanaManServ extends javax.swing.JFrame {
         getContentPane().add(moneda);
         moneda.setBounds(135, 110, 70, 22);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 204));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
-        jButton2.setText("Buscar");
-        jButton2.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        getContentPane().add(jButton2);
-        jButton2.setBounds(140, 150, 100, 29);
+        buscar.setBackground(new java.awt.Color(255, 255, 204));
+        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        buscar.setText("Buscar");
+        buscar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscar);
+        buscar.setBounds(140, 150, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -394,14 +399,56 @@ public class ventanaManServ extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_monedaActionPerformed
 
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+        String nomb = nombre.getText();
+        //System.out.println("busco");
+        int vacio = 1;
+        for(int i=0; i<nomb.length(); i++){
+            if(nomb.charAt(i) != ' ' && nomb.charAt(i) != '\t'){
+                //System.out.println("vacio");
+                vacio = 0;
+                break;
+            }
+        }
+        if(vacio == 1){
+            try {
+                listarServicios();
+                return;
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            ArrayList<Servicio> arr = LogicaNegocio.buscarServicio(nomb);
+            model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+            int n = arr.size();
+            int r = model.getRowCount();
+            for (int j=0; j<r; j++){
+                model.removeRow(0);
+            }
+            for (int i=0; i<n; i++){
+                Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit(), arr.get(i).getMoneda()};
+                model.addRow(o);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_buscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscar;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

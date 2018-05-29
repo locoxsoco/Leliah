@@ -38,4 +38,8 @@ public class ServicioBL {
         accesoDatos.eliminarServicio(id);
     }
     
+    public ArrayList<Servicio> buscarServicio(String nomb) throws ClassNotFoundException, SQLException{
+        return accesoDatos.buscarServicio(nomb);
+    }
+    
 }
