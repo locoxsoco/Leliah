@@ -247,4 +247,60 @@ public class ClienteDA {
         
         con.close();
     }
+    
+    public ArrayList<Cliente> buscarClientes(int tipo, String nombre, String apPat, String apMat, String numDoc, String ruc, String razon) throws ClassNotFoundException, SQLException{
+        ArrayList<Cliente> lista = new ArrayList<Cliente>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call BUSCAR_CLIENTE(?,?,?,?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setInt("_tipoCliente", tipo);
+        if(tipo == 1){
+            stmt.setString("_nombre", nombre);
+            stmt.setString("_apellidoPaterno", apPat);
+            stmt.setString("_apellidoMaterno", apMat);
+            stmt.setString("_numeroDocumento", numDoc);
+            stmt.setNull("_ruc", java.sql.Types.VARCHAR);
+            stmt.setNull("_razonSocial", java.sql.Types.VARCHAR);
+        }else if(tipo ==2){
+            stmt.setNull("_nombre", java.sql.Types.VARCHAR);
+            stmt.setNull("_apellidoPaterno", java.sql.Types.VARCHAR);
+            stmt.setNull("_apellidoMaterno", java.sql.Types.VARCHAR);
+            stmt.setNull("_numeroDocumento", java.sql.Types.VARCHAR);
+            stmt.setString("_ruc", ruc);
+            stmt.setString("_razonSocial", razon);
+        }
+        
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            //agregar elementos a lista
+            Cliente c = null;
+            int priv = rs.getInt("tipoCliente");
+            if(priv == 1){
+                c = new Persona();
+                ((Persona) c).setNombre(rs.getString("nombre"));
+                ((Persona) c).setApPaterno(rs.getString("apellidoPaterno"));
+                ((Persona) c).setApMaterno(rs.getString("apellidoMaterno"));
+                ((Persona) c).setNumDoc(rs.getString("numeroDocumento"));
+                ((Persona) c).setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"), rs.getString("nombreDocumentoIdentidad"));
+            }else if(priv == 2){
+                c = new Empresa();
+                ((Empresa) c).setNombre(rs.getString("razonSocial"));
+                ((Empresa) c).setRuc(rs.getString("ruc"));
+            }
+            c.setCorreo(rs.getString("correo"));
+            c.setDepartamento(rs.getInt("FidDepartamento"), rs.getString("nombreDepartamento"));
+            c.setDireccion(rs.getString("direccion"));
+            c.setDistrito(rs.getInt("FidDistrito"), rs.getString("nombreDistrito"));
+            c.setIdCliente(rs.getInt("idCliente"));
+            c.setProvincia(rs.getInt("FidProvincia"),rs.getString("nombreProvincia"));
+            c.setTelefono(rs.getString("telefono"));
+            
+            lista.add(c);
+        }
+        con.close();
+        return lista;
+    }
 }

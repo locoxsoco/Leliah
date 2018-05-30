@@ -55,4 +55,8 @@ public class ClienteBL {
     public void eliminarCliente(int id) throws ClassNotFoundException, SQLException{
         accesoDatos.eliminarCliente(id);
     }
+    
+    public ArrayList<Cliente> buscarClientes(int tipo, String nombre, String apPat, String apMat, String numDoc, String ruc, String razon) throws ClassNotFoundException, SQLException{
+        return accesoDatos.buscarClientes(tipo, nombre, apPat, apMat, numDoc, ruc, razon);
+    }
 }

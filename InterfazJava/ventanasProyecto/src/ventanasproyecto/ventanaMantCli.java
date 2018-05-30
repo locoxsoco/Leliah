@@ -115,7 +115,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         departamento = new javax.swing.JComboBox<>();
         provincia = new javax.swing.JComboBox<>();
         distrito = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        buscar = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
@@ -350,12 +350,17 @@ public class ventanaMantCli extends javax.swing.JFrame {
         getContentPane().add(distrito);
         distrito.setBounds(490, 180, 200, 22);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        getContentPane().add(jButton1);
-        jButton1.setBounds(137, 250, 100, 29);
+        buscar.setBackground(new java.awt.Color(255, 255, 204));
+        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        buscar.setText("Buscar");
+        buscar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscar);
+        buscar.setBounds(137, 250, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -390,12 +395,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
     
     private void llenarComboBoxDep() throws ClassNotFoundException, SQLException{
         ArrayList<Departamento> dep = LogicaNegocio.listarDepartamentos();
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        //DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         int n = dep.size();
+        departamento.removeAllItems();
         for(int i=0; i<n; i++){
-            modelo.addElement(dep.get(i));
+            //modelo.addElement(dep.get(i));
+            departamento.addItem(dep.get(i));
         }
-        departamento.setModel(modelo);
+        //departamento.setModel(modelo);
     }
     
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
@@ -667,12 +674,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
 
     private void llenarBoxComboTipo() throws ClassNotFoundException, SQLException{
         ArrayList<TipoDocumentoIdentidad> doc = LogicaNegocio.listarTipoDocumento();
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        //DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         int n = doc.size();
+        tipoDoc.removeAllItems();
         for(int i=0; i<n; i++){
-            modelo.addElement(doc.get(i));
+            //modelo.addElement(doc.get(i));
+            tipoDoc.addItem(doc.get(i));
         }
-        tipoDoc.setModel(modelo);
+        //tipoDoc.setModel(modelo);
     }
     
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -703,6 +712,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         
         //tipoUser.setSelectedItem(model.getValueAt(tabla.getSelectedRow(), 7));
         if(lista.get(n) instanceof Persona){
+            
             tipoCli.setSelectedItem(tipoCli.getItemAt(1));
             numDoc.setVisible(true);
             TapPat.setVisible(true);
@@ -733,7 +743,15 @@ public class ventanaMantCli extends javax.swing.JFrame {
             
             numDoc.setText(((Persona)lista.get(n)).getNumDoc());
             namae.setText(((Persona)lista.get(n)).getNombre());
-            tipoDoc.setSelectedItem(((Persona)lista.get(n)).getTipoDoc());
+            int pos =0;
+            for(int index=0; index<tipoDoc.getItemCount(); index++){
+                TipoDocumentoIdentidad d = (TipoDocumentoIdentidad) (tipoDoc.getItemAt(index));
+                if(((Persona)lista.get(n)).getTipoDoc().getIdTipo()== d.getIdTipo()){
+                    pos = index;
+                    break;
+                }
+            }
+            tipoDoc.setSelectedItem(tipoDoc.getItemAt(pos));
             apPat.setText(((Persona)lista.get(n)).getApPaterno());
             apMat.setText(((Persona)lista.get(n)).getApMaterno());
             
@@ -774,9 +792,34 @@ public class ventanaMantCli extends javax.swing.JFrame {
         dir.setText(lista.get(n).getDireccion());
         email.setText(lista.get(n).getCorreo());
         tlf.setText(lista.get(n).getTelefono());
-        departamento.setSelectedItem(lista.get(n).getDepartamento().getNombDep());
-        provincia.setSelectedItem(lista.get(n).getProvincia().getNombProv());
-        distrito.setSelectedItem(lista.get(n).getDistrito().getNombDist());
+        
+        int pos =0;
+        for(int index=0; index<departamento.getItemCount(); index++){
+            Departamento d = (Departamento) (departamento.getItemAt(index));
+            if(lista.get(n).getDepartamento().getIdDep()== d.getIdDep()){
+                pos = index;
+                break;
+            }
+        }
+        departamento.setSelectedItem(departamento.getItemAt(pos));
+        
+        for(int index=0; index<provincia.getItemCount(); index++){
+            Provincia p = (Provincia) (provincia.getItemAt(index));
+            if(lista.get(n).getProvincia().getIdProv()== p.getIdProv()){
+                pos = index;
+                break;
+            }
+        }
+        provincia.setSelectedItem(provincia.getItemAt(pos));
+                
+        for(int index=0; index<distrito.getItemCount(); index++){
+            Distrito d = (Distrito) (distrito.getItemAt(index));
+            if(lista.get(n).getDistrito().getIdDist()== d.getIdDist()){
+                pos = index;
+                break;
+            }
+        }
+        distrito.setSelectedItem(distrito.getItemAt(pos));
         idU = lista.get(n).getIdCliente();
     }//GEN-LAST:event_tablaMouseClicked
 
@@ -943,12 +986,13 @@ public class ventanaMantCli extends javax.swing.JFrame {
 
     private void llenarComboBoxProv(int id) throws ClassNotFoundException, SQLException{
         ArrayList<Provincia> prov = LogicaNegocio.listarProvincias(id);
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        //DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         int n = prov.size();
         for(int i=0; i<n; i++){
-            modelo.addElement(prov.get(i));
+            //modelo.addElement(prov.get(i));
+            provincia.addItem(prov.get(i));
         }
-        provincia.setModel(modelo);
+        //provincia.setModel(modelo);
         provincia.setVisible(true);
         Tprovincia.setVisible(true);
     }
@@ -967,12 +1011,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
 
     private void llenarComboBoxDist(int id) throws ClassNotFoundException, SQLException{
         ArrayList<Distrito> dist = LogicaNegocio.listarDistritos(id);
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        //DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         int n = dist.size();
+        distrito.removeAllItems();
         for(int i=0; i<n; i++){
-            modelo.addElement(dist.get(i));
+            //modelo.addElement(dist.get(i));
+            distrito.addItem(dist.get(i));
         }
-        distrito.setModel(modelo);
+        //distrito.setModel(modelo);
         distrito.setVisible(true);
         Tdistrito.setVisible(true);
     }
@@ -996,6 +1042,55 @@ public class ventanaMantCli extends javax.swing.JFrame {
         dirtxt.setVisible(true);
     }//GEN-LAST:event_distritoActionPerformed
 
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+        int tipo = -1;
+        if(tipoCli.getSelectedItem().toString().equals("Persona"))
+            tipo = 1;
+        else if(tipoCli.getSelectedItem().toString().equals("Empresa"))
+            tipo = 2;
+        if(tipo == -1){
+            try {
+                lista = LogicaNegocio.listarClientes();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                lista = LogicaNegocio.buscarClientes(tipo, namae.getText(), apPat.getText(), apMat.getText(), numDoc.getText(), numDoc.getText(), namae.getText());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = lista.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            String tipo1 = "";
+            String doc = "";
+            String nombre ="";
+            if(lista.get(i) instanceof Persona){
+                tipo1 = "Persona";
+                doc = ((Persona)lista.get(i)).getNumDoc();
+                nombre = ((Persona)lista.get(i)).getNombre()+" "+((Persona)lista.get(i)).getApPaterno()+" "+((Persona)lista.get(i)).getApMaterno();
+            }else if(lista.get(i) instanceof Empresa){
+                tipo1 = "Empresa";
+                doc = ((Empresa)lista.get(i)).getRuc();
+                nombre = ((Empresa)lista.get(i)).getNombre();
+            }
+            Object o[] = {lista.get(i).getIdCliente(), tipo1, doc, nombre, lista.get(i).getTelefono(), lista.get(i).getCorreo()};
+            model.addRow(o);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1010,14 +1105,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private javax.swing.JLabel TtipoDoc;
     private javax.swing.JTextField apMat;
     private javax.swing.JTextField apPat;
-    private javax.swing.JComboBox<String> departamento;
+    private javax.swing.JButton buscar;
+    private javax.swing.JComboBox<Object> departamento;
     private javax.swing.JTextField dir;
     private javax.swing.JLabel dirtxt;
-    private javax.swing.JComboBox<String> distrito;
+    private javax.swing.JComboBox<Object> distrito;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField email;
     private javax.swing.JLabel emailtxt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -1029,11 +1124,11 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private javax.swing.JTextField namae;
     private javax.swing.JLabel namaetxt;
     private javax.swing.JTextField numDoc;
-    private javax.swing.JComboBox<String> provincia;
+    private javax.swing.JComboBox<Object> provincia;
     private javax.swing.JButton registrar;
     private javax.swing.JTable tabla;
     private javax.swing.JComboBox<String> tipoCli;
-    private javax.swing.JComboBox<String> tipoDoc;
+    private javax.swing.JComboBox<Object> tipoDoc;
     private javax.swing.JTextField tlf;
     private javax.swing.JLabel tlftxt;
     // End of variables declaration//GEN-END:variables
