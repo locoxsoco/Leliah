@@ -50,4 +50,8 @@ public class TrabajadorBL {
     public usuario validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
         return accesoDatos.validarUsuario(_username, _password);
     }
+    
+    public ArrayList<Trabajador> buscarTrabajadores(String nombre, String apPat, String apMat, String user, int privI, String numDoc) throws ClassNotFoundException, SQLException{
+        return accesoDatos.buscarTrabajadores(nombre, apPat, apMat, user, privI, numDoc);
+    }
 }

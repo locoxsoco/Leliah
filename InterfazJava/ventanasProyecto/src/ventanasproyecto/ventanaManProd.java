@@ -39,6 +39,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         LogicaNegocio = new ProductoBL();
         listarProductos();
+        inicializarCon();
         registrar.setEnabled(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
@@ -545,6 +546,17 @@ public class ventanaManProd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void inicializarCon(){
+        ArrayList<String> s = new ArrayList<String>();
+        s.add("Escoja");
+        int n = s.size();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for(int i=0; i<n; i++){
+            modelo.addElement(s.get(i));
+        }
+        categoria.setModel(modelo);
+    }
+    
     private void inicializarComboCon(int tipo){
         ArrayList<String> s = new ArrayList<String>();
         if(tipo == 1){
@@ -595,6 +607,15 @@ public class ventanaManProd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_monedaActionPerformed
 
+    /*private boolean estaVacio(String s){
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) != ' ' && s.charAt(i) != '\t'){
+                return false;
+            }
+        }
+        return true;
+    }*/
+    
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         int cons;
         if (consum.isSelected()) cons = 1;

@@ -100,7 +100,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         tipoDoc = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         numDoc = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 620));
@@ -291,12 +291,17 @@ public class ventanaManTrab extends javax.swing.JFrame {
         getContentPane().add(numDoc);
         numDoc.setBounds(600, 83, 200, 22);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        getContentPane().add(jButton1);
-        jButton1.setBounds(137, 270, 100, 29);
+        buscar.setBackground(new java.awt.Color(255, 255, 204));
+        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        buscar.setText("Buscar");
+        buscar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscar);
+        buscar.setBounds(137, 270, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -835,6 +840,43 @@ public class ventanaManTrab extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        try {
+            int privI = -1;
+            String tipo1 = tipoUser.getSelectedItem().toString();
+            
+            if(tipo1.equals("Jefe")){
+                privI = 1;
+            }else if(tipo1.equals("Administrador del Sistema")){
+                privI = 2;
+            }else if(tipo1.equals("Vendedor")){
+                privI = 3;
+            }
+            lista = LogicaNegocio.buscarTrabajadores(nombre.getText(), apPat.getText(), apMat.getText(), user.getText(), privI, numDoc.getText());
+            model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+            int n = lista.size();
+            int r = model.getRowCount();
+            for (int j=0; j<r; j++){
+                model.removeRow(0);
+            }
+            for (int i=0; i<n; i++){
+                String tipo = "";
+                if(lista.get(i) instanceof Jefe)
+                    tipo = "Jefe";
+                else if(lista.get(i) instanceof AdministradorSistema)
+                    tipo = "Administrador del Sistema";
+                else if(lista.get(i) instanceof Vendedor)
+                    tipo = "Vendedor";
+                Object o[] = {lista.get(i).getId(), lista.get(i).getNombre()+" "+lista.get(i).getApPaterno()+" "+lista.get(i).getApMaterno() , lista.get(i).getUsername(), lista.get(i).getContrasena(), lista.get(i).getFecha().toString(),tipo};
+                model.addRow(o);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
     
 
 
@@ -844,11 +886,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
     public static javax.swing.JLabel Ttipo;
     public static javax.swing.JTextField apMat;
     public static javax.swing.JTextField apPat;
+    private javax.swing.JButton buscar;
     private javax.swing.JButton eliminar;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JComboBox<String> frec;
     public static javax.swing.JTextField horas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

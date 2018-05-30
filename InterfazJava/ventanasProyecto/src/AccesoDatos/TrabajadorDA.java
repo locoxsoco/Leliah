@@ -248,6 +248,57 @@ public class TrabajadorDA {
         u.setNomb(stmt.getString("_NOMBRE"));
         con.close();
         return u;
-     }
+    }
+     
+    public ArrayList<Trabajador> buscarTrabajadores(String nombre, String apPat, String apMat, String user, int privI, String numDoc) throws ClassNotFoundException, SQLException{
+        ArrayList<Trabajador> lista = new ArrayList<Trabajador>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call BUSCAR_TRABAJADOR(?,?,?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_nombre", nombre);
+        stmt.setString("_apellidoPaterno", apPat);
+        stmt.setString("_apellidoMaterno", apMat);
+        stmt.setString("_username", user);
+        stmt.setString("_numeroDocumento", numDoc);
+        stmt.setInt("_privilegio", privI);
+        
+        
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            //agregar elementos a lista
+            Trabajador t = null;
+            int priv = rs.getInt("privilegio");
+            if(priv == 1){
+                t = new Jefe();
+            }else if(priv == 2){
+                t = new AdministradorSistema();
+                ((AdministradorSistema) t).setSueldo(rs.getDouble("sueldo"));
+                ((AdministradorSistema) t).setMoneda(rs.getString("moneda"));
+            }else if(priv == 3){
+                t = new Vendedor();
+                ((Vendedor) t).setPagoxHora(rs.getDouble("pagoxhora"));
+                ((Vendedor) t).setHoraxSemana(rs.getInt("horasxsemana"));
+                ((Vendedor) t).setMoneda(rs.getString("moneda"));
+                ((Vendedor) t).setTiempoPago(rs.getInt("FidTiempoPago"),rs.getString("TiempoPago.nombreTiempoPago"));
+            }
+            t.setId(rs.getInt("idTrabajador"));
+            //System.out.println(s.getId());
+            t.setNumDoc(rs.getString("numeroDocumento"));
+            t.setNombre(rs.getString("nombre"));
+            t.setApPaterno(rs.getString("apellidoPaterno"));
+            t.setApMaterno(rs.getString("apellidoMaterno"));
+            t.setFecha(rs.getDate("fechaNacimiento"));
+            t.setUsername(rs.getString("username"));
+            t.setContrasena(rs.getString("contrasena"));
+            t.setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("TipoDocumentoIdentidad.nombreDocumentoIdentidad"));
+
+            lista.add(t);
+        }
+        con.close();
+        return lista;
+    }
     
 }
