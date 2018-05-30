@@ -3,6 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[CALL LISTAR_PRODUCTOS_MAS_VENDIDOS]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="cantidades" class="java.lang.Integer"/>
+	<field name="total" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -54,7 +60,20 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="33" y="0" width="100" height="18" uuid="d444821b-4ab3-411f-b887-87e1bf505ccb"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="1" width="78" height="14" uuid="4016a24a-385f-4a1f-9b87-b193f918fdfd"/>
+				<textFieldExpression><![CDATA[$F{cantidades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="80" height="14" uuid="d0471a67-878d-416c-a3da-073c53a6a64f"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

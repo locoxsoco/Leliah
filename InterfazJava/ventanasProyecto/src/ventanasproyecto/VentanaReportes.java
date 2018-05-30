@@ -5,6 +5,9 @@
  */
 package ventanasproyecto;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -410,8 +413,12 @@ public class VentanaReportes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void abrirReporte(int n) throws JRException{        
-        
+    public void abrirReporte(int n) throws JRException, ClassNotFoundException, SQLException{        
+        Class.forName("com.mysql.jdbc.Driver");
+Connection con = 
+DriverManager.getConnection
+("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9", 
+        "inf282g9", "Yf9bS1");
         switch(n){
             case 1:
                 JasperReport jr1 = 
@@ -424,7 +431,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         
                 JasperPrint impresion1 
                  =JasperFillManager.fillReport(
-                    jr1, null,new JREmptyDataSource());
+                    jr1, null,con);
 
                 JasperViewer viewer1 = 
                          new JasperViewer(impresion1,false);
@@ -443,7 +450,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         
                 JasperPrint impresion2 
                  =JasperFillManager.fillReport(
-                    jr2, null,new JREmptyDataSource());
+                    jr2, null,con);
 
                 JasperViewer viewer2 = 
                          new JasperViewer(impresion2,false);
@@ -462,7 +469,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         
                 JasperPrint impresion3 
                  =JasperFillManager.fillReport(
-                    jr3, null,new JREmptyDataSource());
+                    jr3, null,con);
 
                 JasperViewer viewer3 = 
                          new JasperViewer(impresion3,false);
@@ -479,7 +486,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         
                 JasperPrint impresion4 
                  =JasperFillManager.fillReport(
-                    jr4, null,new JREmptyDataSource());
+                    jr4, null,con);
 
                 JasperViewer viewer4 = 
                          new JasperViewer(impresion4,false);
@@ -538,6 +545,10 @@ public class VentanaReportes extends javax.swing.JFrame {
         try {
             abrirReporte(selector);
         } catch (JRException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_AcceptDialogMouseClicked

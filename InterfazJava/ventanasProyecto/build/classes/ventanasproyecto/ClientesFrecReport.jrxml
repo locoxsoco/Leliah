@@ -3,6 +3,11 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[CALL LISTAR_CLIENTES_FRECUENTES]]>
+	</queryString>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="visitas" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -47,7 +52,16 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="0" width="191" height="20" uuid="9a31d117-f6d9-4311-9615-9bd8732266f9"/>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="0" width="49" height="20" uuid="85a03042-a848-4436-a72b-66dea5d76643"/>
+				<textFieldExpression><![CDATA[$F{visitas}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
