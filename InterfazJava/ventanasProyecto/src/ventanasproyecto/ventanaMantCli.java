@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import static ventanasproyecto.ventanaManTrab.tabla;
 
@@ -988,6 +989,16 @@ public class ventanaMantCli extends javax.swing.JFrame {
         ArrayList<Provincia> prov = LogicaNegocio.listarProvincias(id);
         //DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         int n = prov.size();
+        try{
+            int n1 = provincia.getItemCount();
+            for(int j=0; j<n1; j++){
+                provincia.removeItemAt(0);
+            }
+        } catch (Exception ex){
+            
+            //System.out.println(ex.getMessage());
+        }
+        
         for(int i=0; i<n; i++){
             //modelo.addElement(prov.get(i));
             provincia.addItem(prov.get(i));

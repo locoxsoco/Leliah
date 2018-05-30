@@ -615,7 +615,15 @@ public class ventanaManProv extends javax.swing.JFrame {
         int n = prov.size();
         //if(provincia.getItemCount()>0)
         //provincia.removeAllItems();
-        //provincia.removeAllItems();
+        try{
+            int n1 = provincia.getItemCount();
+            for(int j=0; j<n1; j++){
+                provincia.removeItemAt(0);
+            }
+        } catch (Exception ex){
+            
+            //System.out.println(ex.getMessage());
+        }
         for(int i=0; i<n; i++){
             //modelo.addElement();
             provincia.addItem(prov.get(i));
