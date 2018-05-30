@@ -234,7 +234,7 @@ public class TrabajadorDA {
         
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call VALIDAR_USUARIO(?,?,?,?)}";
+        String sql = "{call VALIDAR_USUARIO2(?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         stmt.registerOutParameter("_privilegio",java.sql.Types.INTEGER );
         stmt.setString("_username", _username);
