@@ -19,6 +19,10 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +34,9 @@ public class VentanaReportes extends javax.swing.JFrame {
      * Creates new form VentanaReportes
      */
     int selector = 0;
+    Date fechaini;
+    Date fechafin;
+    int mes;
     VentanaPrincipal vAnterior;
     ventanaLogin ventanaHome;
     public VentanaReportes() {
@@ -45,6 +52,10 @@ public class VentanaReportes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog2 = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        MesChooser = new com.toedter.calendar.JMonthChooser();
+        AceptarJD2Butt = new javax.swing.JButton();
         jDialog1 = new javax.swing.JDialog();
         LabelSeleccion = new javax.swing.JLabel();
         LabelFechaIni = new javax.swing.JLabel();
@@ -89,22 +100,58 @@ public class VentanaReportes extends javax.swing.JFrame {
         ButtRepCerrar = new javax.swing.JButton();
         logout = new javax.swing.JButton();
 
+        jDialog2.setMinimumSize(new java.awt.Dimension(300, 300));
+        jDialog2.setPreferredSize(new java.awt.Dimension(300, 300));
+        jDialog2.setResizable(false);
+        jDialog2.setSize(new java.awt.Dimension(300, 300));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Seleccione un mes:");
+
+        AceptarJD2Butt.setText("Aceptar");
+        AceptarJD2Butt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AceptarJD2ButtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MesChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(AceptarJD2Butt)))
+                .addContainerGap(137, Short.MAX_VALUE))
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(MesChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(AceptarJD2Butt)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
         jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jDialog1.setMinimumSize(new java.awt.Dimension(300, 300));
-        jDialog1.getContentPane().setLayout(null);
 
         LabelSeleccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LabelSeleccion.setText("Seleccione un rango de fecha");
-        jDialog1.getContentPane().add(LabelSeleccion);
-        LabelSeleccion.setBounds(10, 20, 230, 17);
 
         LabelFechaIni.setText("Fecha Inicial");
-        jDialog1.getContentPane().add(LabelFechaIni);
-        LabelFechaIni.setBounds(10, 60, 90, 14);
 
         LabelFechaFin.setText("Fecha Final");
-        jDialog1.getContentPane().add(LabelFechaFin);
-        LabelFechaFin.setBounds(10, 100, 80, 14);
 
         AcceptDialog.setText("Aceptar");
         AcceptDialog.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,12 +164,44 @@ public class VentanaReportes extends javax.swing.JFrame {
                 AcceptDialogActionPerformed(evt);
             }
         });
-        jDialog1.getContentPane().add(AcceptDialog);
-        AcceptDialog.setBounds(117, 150, 110, 23);
-        jDialog1.getContentPane().add(ReporteDate1);
-        ReporteDate1.setBounds(110, 60, 130, 20);
-        jDialog1.getContentPane().add(ReporteDate2);
-        ReporteDate2.setBounds(110, 100, 130, 20);
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(LabelSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(LabelFechaIni, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(ReporteDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(LabelFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ReporteDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(AcceptDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(LabelSeleccion)
+                .addGap(23, 23, 23)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelFechaIni)
+                    .addComponent(ReporteDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelFechaFin)
+                    .addComponent(ReporteDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(AcceptDialog))
+        );
 
         ClientesFrameReport.getContentPane().setLayout(null);
 
@@ -418,20 +497,24 @@ public class VentanaReportes extends javax.swing.JFrame {
 Connection con = 
 DriverManager.getConnection
 ("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9", 
-        "inf282g9", "Yf9bS1");
+        "inf282g9", "Yf9bS1");        
+        String formato;
+        SimpleDateFormat sdf;
         switch(n){
             case 1:
                 JasperReport jr1 = 
                 (JasperReport) 
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/ClientesFrecReport.jasper").getFile());
-
-//                HashMap hm1 = new HashMap();
-//                hm1.put("Reporte de clientes más frecuentes", "j");
+                formato = ReporteDate1.getDateFormatString();
+                sdf = new SimpleDateFormat(formato);
+                HashMap hm1 = new HashMap();
+                hm1.put("fechaini", String.valueOf(sdf.format(fechaini)));
+                hm1.put("fechafin", String.valueOf(sdf.format(fechafin)));
         
                 JasperPrint impresion1 
                  =JasperFillManager.fillReport(
-                    jr1, null,con);
+                    jr1, hm1,con);
 
                 JasperViewer viewer1 = 
                          new JasperViewer(impresion1,false);
@@ -444,13 +527,15 @@ DriverManager.getConnection
                 (JasperReport) 
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/MasVendidosReport.jasper").getFile());
-
+                formato = ReporteDate1.getDateFormatString();
+                sdf = new SimpleDateFormat(formato);
                 HashMap hm2 = new HashMap();
-                hm2.put("Reporte de Productos más vendidos", "j");
+                hm2.put("fechaini", String.valueOf(sdf.format(fechaini)));
+                hm2.put("fechafin", String.valueOf(sdf.format(fechafin)));
         
                 JasperPrint impresion2 
                  =JasperFillManager.fillReport(
-                    jr2, null,con);
+                    jr2, hm2,con);
 
                 JasperViewer viewer2 = 
                          new JasperViewer(impresion2,false);
@@ -463,13 +548,15 @@ DriverManager.getConnection
                 (JasperReport) 
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/VentasReport.jasper").getFile());
-
+                formato = ReporteDate1.getDateFormatString();
+                sdf = new SimpleDateFormat(formato);
                 HashMap hm3 = new HashMap();
-                hm3.put("Reporte de Documentos de ventas", "j");
+                hm3.put("fechaini", String.valueOf(sdf.format(fechaini)));
+                hm3.put("fechafin", String.valueOf(sdf.format(fechafin)));
         
                 JasperPrint impresion3 
                  =JasperFillManager.fillReport(
-                    jr3, null,con);
+                    jr3, hm3,con);
 
                 JasperViewer viewer3 = 
                          new JasperViewer(impresion3,false);
@@ -482,11 +569,48 @@ DriverManager.getConnection
                 (VentanaReportes.class.getResource("/ventanasproyecto/BalanceReport.jasper").getFile());
 
                 HashMap hm4 = new HashMap();
-                hm4.put("Reporte de Ingresos y Egresos", "j");
+                switch(mes){
+                    case 0:
+                        hm4.put("mes","Enero");
+                        break;
+                    case 1:
+                        hm4.put("mes","Febrero");
+                        break;
+                    case 2:
+                        hm4.put("mes","Marzo");
+                        break;
+                    case 3:
+                        hm4.put("mes","Abril");
+                        break;
+                    case 4:
+                        hm4.put("mes","Mayo");
+                        break;
+                    case 5:
+                        hm4.put("mes","Junio");
+                        break;
+                    case 6:
+                        hm4.put("mes","Julio");
+                        break;
+                    case 7:
+                        hm4.put("mes","Agosto");
+                        break;
+                    case 8:
+                        hm4.put("mes","Septiembre");
+                        break;
+                    case 9:
+                        hm4.put("mes","Octubre");
+                        break;
+                    case 10:
+                        hm4.put("mes","Noviembre");
+                        break;
+                    case 11:
+                        hm4.put("mes","Diciembre");
+                        break;
+                }               
         
                 JasperPrint impresion4 
                  =JasperFillManager.fillReport(
-                    jr4, null,con);
+                    jr4, hm4,new JREmptyDataSource());
 
                 JasperViewer viewer4 = 
                          new JasperViewer(impresion4,false);
@@ -525,7 +649,7 @@ DriverManager.getConnection
 
     private void ButtRepBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepBalanceMouseClicked
         selector = 4;
-        jDialog1.setVisible(true);
+        jDialog2.setVisible(true);
     }//GEN-LAST:event_ButtRepBalanceMouseClicked
 
     private void ButtRepCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtRepCerrarActionPerformed
@@ -541,6 +665,8 @@ DriverManager.getConnection
     }//GEN-LAST:event_logoutActionPerformed
 
     private void AcceptDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AcceptDialogMouseClicked
+        fechaini = ReporteDate1.getDate();
+        fechafin = ReporteDate2.getDate();        
         jDialog1.dispose();
         try {
             abrirReporte(selector);
@@ -552,6 +678,20 @@ DriverManager.getConnection
             Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_AcceptDialogMouseClicked
+
+    private void AceptarJD2ButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarJD2ButtActionPerformed
+        mes = MesChooser.getMonth();
+        jDialog2.dispose();
+        try {
+            abrirReporte(selector);
+        } catch (JRException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_AceptarJD2ButtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -591,6 +731,7 @@ DriverManager.getConnection
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AcceptDialog;
+    private javax.swing.JButton AceptarJD2Butt;
     private javax.swing.JFrame BalanceFrameReport;
     private javax.swing.JButton ButtProdMasVend;
     private javax.swing.JButton ButtRepBalance;
@@ -602,11 +743,14 @@ DriverManager.getConnection
     private javax.swing.JLabel LabelFechaIni;
     private javax.swing.JLabel LabelSeleccion;
     private javax.swing.JFrame MasVendidoFrameReport;
+    private com.toedter.calendar.JMonthChooser MesChooser;
     private com.toedter.calendar.JDateChooser ReporteDate1;
     private com.toedter.calendar.JDateChooser ReporteDate2;
     private javax.swing.JLabel SelecionRep;
     private javax.swing.JFrame VentasFrameReport;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
