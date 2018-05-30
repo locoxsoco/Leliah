@@ -212,4 +212,54 @@ public class ProductoDA {
         return lista;
     }
     
+    public ArrayList<Producto> buscarProductos(String nombre, String marca, String cat, int cons) throws ClassNotFoundException, SQLException{
+        ArrayList<Producto> lista = new ArrayList<Producto>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call BUSCAR_PRODUCTO_ADMIN(?,?,?,?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_nombre", nombre);
+        stmt.setString("_marca", marca);
+        if(cat.equals("Escoja")){
+            stmt.setString("_categoria", "");
+        }else{
+            stmt.setString("_categoria", cat);
+        }
+        
+        stmt.setInt("_consumible", cons);
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            //agregar elementos a lista
+            Producto p;
+            int tipo = rs.getInt("consumible");
+            if(tipo == 1){
+                p = new Consumible();
+                String s = rs.getString("categoria");
+                Categoria_Consumible c = Categoria_Consumible.valueOf(s);
+                ((Consumible) p).setCategoria(c);
+            }else{
+                p = new NoConsumible();
+                String s = rs.getString("categoria");
+                Categoria_NoConsumible c = Categoria_NoConsumible.valueOf(s);
+                ((NoConsumible) p).setCategoria(c);
+            }
+                
+            p.setIdProducto(rs.getInt("idProducto"));
+            //System.out.println(s.getId());
+            p.setNombre(rs.getString("nombre"));
+            p.setPrecio(rs.getDouble("precioUnitario"));
+            p.setCantMinima(rs.getInt("cantidadMinima"));
+            p.setMarca(rs.getString("marca"));
+            p.setMoneda(rs.getString("moneda"));
+            p.setDescripcion(rs.getString("descripcion"));
+            
+            lista.add(p);
+        }
+        con.close();
+        
+        return lista;
+    }
+    
 }

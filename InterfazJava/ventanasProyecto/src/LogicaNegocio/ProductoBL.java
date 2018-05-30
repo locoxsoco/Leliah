@@ -43,5 +43,9 @@ public class ProductoBL {
     public ArrayList<String> listarProdxCat(int tipo){   
         return accesoDatos.listarProdxCat(tipo);
     }
+    
+    public ArrayList<Producto> buscarProductos(String nombre, String marca, String cat, int cons) throws ClassNotFoundException, SQLException{
+        return accesoDatos.buscarProductos(nombre, marca, cat, cons);
+    }
 
 }

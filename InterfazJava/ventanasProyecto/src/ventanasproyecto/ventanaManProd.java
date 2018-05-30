@@ -83,7 +83,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         categoria = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         moneda = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(550, 550));
@@ -257,12 +257,17 @@ public class ventanaManProd extends javax.swing.JFrame {
         getContentPane().add(moneda);
         moneda.setBounds(154, 251, 100, 22);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        getContentPane().add(jButton1);
-        jButton1.setBounds(137, 290, 100, 29);
+        buscar.setBackground(new java.awt.Color(255, 255, 204));
+        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        buscar.setText("Buscar");
+        buscar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscar);
+        buscar.setBounds(137, 290, 100, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -543,12 +548,14 @@ public class ventanaManProd extends javax.swing.JFrame {
     private void inicializarComboCon(int tipo){
         ArrayList<String> s = new ArrayList<String>();
         if(tipo == 1){
+            s.add("Escoja");
             s.add(Categoria_Consumible.Bebida.toString());
             s.add(Categoria_Consumible.Caramelo.toString());
             s.add(Categoria_Consumible.Helado.toString());
             s.add(Categoria_Consumible.Postre.toString());
             s.add(Categoria_Consumible.Snack.toString());
         }else if(tipo == 2){
+            s.add("Escoja");
             s.add(Categoria_NoConsumible.Adorno.toString());
             s.add(Categoria_NoConsumible.Juguete.toString());
             s.add(Categoria_NoConsumible.UtilOficina.toString());
@@ -588,18 +595,52 @@ public class ventanaManProd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_monedaActionPerformed
 
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        int cons;
+        if (consum.isSelected()) cons = 1;
+        else if (no_consum.isSelected()) cons =0;
+        else cons = -1;
+        
+        try {
+            list = LogicaNegocio.buscarProductos(nombre.getText(), marca.getText(), categoria.getSelectedItem().toString(), cons);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = list.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            String con = "";
+            String cat = "";
+            if(list.get(i) instanceof Consumible){
+                con = "Consumible";
+                cat = ((Consumible) list.get(i)).getCategoria().toString();
+            }else if(list.get(i) instanceof NoConsumible){
+                con = "No Consumible";
+                cat = ((NoConsumible) list.get(i)).getCategoria().toString();
+            }
+            Object o[] = {list.get(i).getIdProducto(), list.get(i).getNombre(), list.get(i).getPrecio(), list.get(i).getMarca(), con, cat};
+            model.addRow(o);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscar;
     private javax.swing.JTextField cantMin;
     private javax.swing.JComboBox<String> categoria;
     private javax.swing.JRadioButton consum;
     private javax.swing.JTextField desc;
     private javax.swing.JButton eliminar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
