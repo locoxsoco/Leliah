@@ -1,0 +1,1 @@
+public enum TipoRecibo{FACTURA,BOLETA};
