@@ -3,10 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-        <parameter name="fechaini" class="java.lang.String"/>
+	<parameter name="fechaini" class="java.lang.String"/>
 	<parameter name="fechafin" class="java.lang.String"/>
+	<parameter name="fechainiP" class="java.util.Date"/>
+	<parameter name="fechafinP" class="java.util.Date"/>
 	<queryString language="SQL">
-		<![CDATA[CALL LISTAR_PRODUCTOS_MAS_VENDIDOS]]>
+		<![CDATA[CALL LISTAR_PRODUCTOS_MAS_VENDIDOS($P{fechainiP},$P{fechafinP})]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="cantidades" class="java.lang.Integer"/>

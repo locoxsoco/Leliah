@@ -21,6 +21,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
@@ -492,26 +493,32 @@ public class VentanaReportes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void abrirReporte(int n) throws JRException, ClassNotFoundException, SQLException{        
+    public void abrirReporte(int n) throws JRException, ClassNotFoundException, SQLException, ParseException{        
         Class.forName("com.mysql.jdbc.Driver");
 Connection con = 
 DriverManager.getConnection
 ("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9", 
         "inf282g9", "Yf9bS1");        
         String formato;
-        SimpleDateFormat sdf;
+        SimpleDateFormat sdf1,sdf2;
         switch(n){
             case 1:
                 JasperReport jr1 = 
                 (JasperReport) 
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/ClientesFrecReport.jasper").getFile());
-                formato = ReporteDate1.getDateFormatString();
-                sdf = new SimpleDateFormat(formato);
+                sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+                
+//                SimpleDateFormat parseador = new SimpleDateFormat("yyyy-MM-dd");
+                Date dateini = sdf1.parse(String.valueOf(sdf1.format(fechaini)));
+                Date datefin = sdf1.parse(String.valueOf(sdf1.format(fechafin)));
+                
                 HashMap hm1 = new HashMap();
-                hm1.put("fechaini", String.valueOf(sdf.format(fechaini)));
-                hm1.put("fechafin", String.valueOf(sdf.format(fechafin)));
-        
+                hm1.put("fechaini", String.valueOf(sdf2.format(fechaini)));
+                hm1.put("fechafin", String.valueOf(sdf2.format(fechafin)));
+                hm1.put("fechainiP", dateini);
+                hm1.put("fechafinP", datefin);
                 JasperPrint impresion1 
                  =JasperFillManager.fillReport(
                     jr1, hm1,con);
@@ -528,10 +535,10 @@ DriverManager.getConnection
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/MasVendidosReport.jasper").getFile());
                 formato = ReporteDate1.getDateFormatString();
-                sdf = new SimpleDateFormat(formato);
+                sdf1 = new SimpleDateFormat(formato);
                 HashMap hm2 = new HashMap();
-                hm2.put("fechaini", String.valueOf(sdf.format(fechaini)));
-                hm2.put("fechafin", String.valueOf(sdf.format(fechafin)));
+                hm2.put("fechaini", String.valueOf(sdf1.format(fechaini)));
+                hm2.put("fechafin", String.valueOf(sdf1.format(fechafin)));
         
                 JasperPrint impresion2 
                  =JasperFillManager.fillReport(
@@ -549,10 +556,10 @@ DriverManager.getConnection
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/VentasReport.jasper").getFile());
                 formato = ReporteDate1.getDateFormatString();
-                sdf = new SimpleDateFormat(formato);
+                sdf1= new SimpleDateFormat(formato);
                 HashMap hm3 = new HashMap();
-                hm3.put("fechaini", String.valueOf(sdf.format(fechaini)));
-                hm3.put("fechafin", String.valueOf(sdf.format(fechafin)));
+                hm3.put("fechaini", String.valueOf(sdf1.format(fechaini)));
+                hm3.put("fechafin", String.valueOf(sdf1.format(fechafin)));
         
                 JasperPrint impresion3 
                  =JasperFillManager.fillReport(
@@ -676,6 +683,8 @@ DriverManager.getConnection
             Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_AcceptDialogMouseClicked
 
@@ -689,6 +698,8 @@ DriverManager.getConnection
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_AceptarJD2ButtActionPerformed
