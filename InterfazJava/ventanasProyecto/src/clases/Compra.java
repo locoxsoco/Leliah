@@ -51,7 +51,7 @@ public class Compra{
 		this.listLineaxCompra=new ArrayList<LineaxCompra>();
 	}
         public Compra(){
-            
+            this.listLineaxCompra=new ArrayList<LineaxCompra>();
         }
 	public void agregarLineaxProducto (LineaxVenta lineaxProd){
 		

@@ -5,7 +5,14 @@
  */
 package ventanasproyecto;
 
-import clases.Proveedor;
+import LogicaNegocio.CompraBL;
+import clases.Compra;
+import clases.LineaxCompra;
+import clases.Producto;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,16 +24,29 @@ public class ventanaCompra extends javax.swing.JFrame {
      * Creates new form ventanaCompra
      */
     //public Proveedor prov;
+    public float total=0;
+    public int counterId=0;
+    private CompraBL logicaNegocio;
     public VentanaPrincipal vAnterior;
     public ventanaLogin ventanaHome;
+    public Compra comp;
+    public Producto prod;
     public int idProv;
     public int idProd;
     public ventanaCompra() {
         initComponents();
-        //prov = new Proveedor();
+        comp = new Compra();
+        prod = new Producto();
+        logicaNegocio = new CompraBL();
+        buscarProd.setEnabled(false);
+        buscarProv.setEnabled(false);
+        pu.setEnabled(false);
+        cant.setEnabled(false);
         razon.setEnabled(false);
         ruc.setEnabled(false);
         nombreProd.setEnabled(false);
+        model = (javax.swing.table.DefaultTableModel)dvgDetalle_compra.getModel();
+        
     }
 
     /**
@@ -58,7 +78,7 @@ public class ventanaCompra extends javax.swing.JFrame {
         agregar = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        dvgDetalle_compra = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         volver = new javax.swing.JButton();
@@ -83,6 +103,11 @@ public class ventanaCompra extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
         jButton1.setText("Nuevo");
         jButton1.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(25, 15, 100, 29);
 
@@ -90,6 +115,11 @@ public class ventanaCompra extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         jButton2.setText("Guardar");
         jButton2.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(148, 15, 100, 29);
 
@@ -97,6 +127,11 @@ public class ventanaCompra extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jButton3.setText("Cancelar");
         jButton3.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(270, 15, 100, 29);
 
@@ -151,6 +186,12 @@ public class ventanaCompra extends javax.swing.JFrame {
         });
         getContentPane().add(buscarProd);
         buscarProd.setBounds(90, 200, 33, 29);
+
+        pu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                puActionPerformed(evt);
+            }
+        });
         getContentPane().add(pu);
         pu.setBounds(130, 260, 70, 22);
         getContentPane().add(cant);
@@ -172,10 +213,15 @@ public class ventanaCompra extends javax.swing.JFrame {
         jButton7.setBackground(new java.awt.Color(255, 255, 204));
         jButton7.setText("Eliminar");
         jButton7.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton7);
         jButton7.setBounds(250, 290, 100, 25);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        dvgDetalle_compra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -183,7 +229,7 @@ public class ventanaCompra extends javax.swing.JFrame {
                 "Producto", "Precio", "Cantidad", "Subtotal"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(dvgDetalle_compra);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(20, 340, 350, 210);
@@ -253,6 +299,7 @@ public class ventanaCompra extends javax.swing.JFrame {
         v.setVisible(true);
         this.setEnabled(false);
         v.ventanaAnterior = this;
+        
     }//GEN-LAST:event_buscarProdActionPerformed
 
     private void buscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProvActionPerformed
@@ -274,11 +321,104 @@ public class ventanaCompra extends javax.swing.JFrame {
         ventanaHome.regresar();
         this.dispose();
     }//GEN-LAST:event_cerrarSesionActionPerformed
-
+    javax.swing.table.DefaultTableModel model;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
+        String s = this.pu.getText();
+        if(s.equals("")){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos vacio", "Error Precio Unitario", JOptionPane.PLAIN_MESSAGE);
+        }
         
+        s = this.cant.getText();
+        if(s.equals("")){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos vacio", "Error Cantidad", JOptionPane.PLAIN_MESSAGE);
+        }
+        for (int i=0; i<s.length(); i++){
+            if(!(s.charAt(i)>='0' && s.charAt(i)<='9')){
+                JOptionPane.showMessageDialog(null, "Este campo solo puede contener numeros", "Error Cantidad", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+        counterId++;
+        LineaxCompra dCompra = new LineaxCompra();
+        dCompra.setProducto(prod);
+        dCompra.setIdLineaxCompra(counterId);
+        dCompra.setCantidad(Integer.parseInt(this.cant.getText()));
+        dCompra.setPrecioUnit(Float.parseFloat(this.pu.getText()));
+        comp.getListLineaxProd().add(dCompra);
+        Object o[]={prod.getNombre(), pu.getText(), cant.getText(), Float.parseFloat(pu.getText())*Integer.parseInt(cant.getText())};
+        model.addRow(o);
+        total+=Float.parseFloat(pu.getText())*Integer.parseInt(cant.getText());
+        jTextField7.setText(Float.toString(total));
     }//GEN-LAST:event_agregarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        buscarProd.setEnabled(true);
+        buscarProv.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            logicaNegocio.registrarCompras(comp);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        razon.setText("");
+        ruc.setText("");
+        nombreProd.setText("");
+        pu.setText("");
+        cant.setText("");
+        razon.setEnabled(false);
+        ruc.setEnabled(false);
+        nombreProd.setEnabled(false);
+        pu.setEnabled(false);
+        cant.setEnabled(false);
+        buscarProd.setEnabled(false);
+        buscarProv.setEnabled(false);
+        for (int i = 0; i < dvgDetalle_compra.getRowCount(); i++) {
+            model.removeRow(i);
+            i-=1;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        razon.setText("");
+        ruc.setText("");
+        nombreProd.setText("");
+        pu.setText("");
+        cant.setText("");
+        razon.setEnabled(false);
+        ruc.setEnabled(false);
+        nombreProd.setEnabled(false);
+        pu.setEnabled(false);
+        cant.setEnabled(false);
+        buscarProd.setEnabled(false);
+        buscarProv.setEnabled(false);
+        for (int i = 0; i < dvgDetalle_compra.getRowCount(); i++) {
+            model.removeRow(i);
+            i-=1;
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void puActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_puActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        int currentIndex = dvgDetalle_compra.getSelectedRow();
+        total-=Float.parseFloat(model.getValueAt(currentIndex, 3).toString());
+        jTextField7.setText(Float.toString(total));
+        model.removeRow(currentIndex);
+        comp.getListLineaxProd().remove(currentIndex);
+        counterId--;
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,8 +459,9 @@ public class ventanaCompra extends javax.swing.JFrame {
     private javax.swing.JButton agregar;
     private javax.swing.JButton buscarProd;
     private javax.swing.JButton buscarProv;
-    private javax.swing.JTextField cant;
+    public javax.swing.JTextField cant;
     private javax.swing.JButton cerrarSesion;
+    private javax.swing.JTable dvgDetalle_compra;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -344,10 +485,9 @@ public class ventanaCompra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField7;
     public javax.swing.JTextField nombreProd;
-    private javax.swing.JTextField pu;
+    public javax.swing.JTextField pu;
     public javax.swing.JTextField razon;
     public javax.swing.JTextField ruc;
     private javax.swing.JButton volver;

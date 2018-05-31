@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andres
  */
-public class ventanaBusarProd extends javax.swing.JFrame {
+    public class ventanaBusarProd extends javax.swing.JFrame {
 
     /**
      * Creates new form ventanaBusarProd
@@ -200,6 +200,9 @@ public class ventanaBusarProd extends javax.swing.JFrame {
         ventanaAnterior.nombreProd.setText(list.get(n).getNombre());
         ventanaAnterior.idProd = list.get(n).getIdProducto();
         ventanaAnterior.setEnabled(true);
+        ventanaAnterior.prod= list.get(n);
+        ventanaAnterior.pu.setEnabled(true);
+        ventanaAnterior.cant.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
 

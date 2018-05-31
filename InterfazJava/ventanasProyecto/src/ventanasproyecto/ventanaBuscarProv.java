@@ -147,6 +147,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
         ventanaAnterior.razon.setText(lista.get(n).getNombre());
         ventanaAnterior.ruc.setText(lista.get(n).getRuc());
         ventanaAnterior.idProv = lista.get(n).getId();
+        ventanaAnterior.comp.setProveedor( lista.get(n));
         ventanaAnterior.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
