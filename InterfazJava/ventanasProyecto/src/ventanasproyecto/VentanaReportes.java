@@ -733,37 +733,62 @@ DriverManager.getConnection
 
     private void AcceptDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AcceptDialogMouseClicked
         fechaini = ReporteDate1.getDate();
-        fechafin = ReporteDate2.getDate();        
-        jDialog1.dispose();
-        try {
-            abrirReporte(selector);
-        } catch (JRException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        fechafin = ReporteDate2.getDate();
+        if((fechaini!=null) && (fechafin!=null)){
+            jDialog1.dispose();
+            try {
+                abrirReporte(selector);
+            } catch (JRException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this,"Debe seleccionar un rango de fechas");
         }
     }//GEN-LAST:event_AcceptDialogMouseClicked
-
+    public static boolean isNumeric(String str)
+    {
+        try
+        {
+            double d = Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe)
+        {  
+            return false;
+        }
+        return true;
+    }
     private void AceptarJD2ButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarJD2ButtActionPerformed
         mes = MesChooser.getMonth();
-        alquiler = Double.parseDouble(txtPagoAlquiler.getText());
-        servicios = Double.parseDouble(txtPagoServicios.getText());
-        otros = Double.parseDouble(txtOtrosPagos.getText());
-        jDialog2.dispose();
-        try {
-            abrirReporte(selector);
-        } catch (JRException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        if(txtPagoServicios.getText().length()!=0 && 
+                txtPagoAlquiler.getText().length()!=0&& 
+                txtOtrosPagos.getText().length()!=0 ){
+            if(isNumeric(txtPagoServicios.getText())&& isNumeric(txtPagoAlquiler.getText()) && isNumeric(txtOtrosPagos.getText())){
+                alquiler = Double.parseDouble(txtPagoAlquiler.getText());
+                servicios = Double.parseDouble(txtPagoServicios.getText());
+                otros = Double.parseDouble(txtOtrosPagos.getText());
+                jDialog2.dispose();
+                try {
+                    abrirReporte(selector);
+                } catch (JRException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"Ingrese datos numericos");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this,"No deje campos vacíos");
         }
     }//GEN-LAST:event_AceptarJD2ButtActionPerformed
 
