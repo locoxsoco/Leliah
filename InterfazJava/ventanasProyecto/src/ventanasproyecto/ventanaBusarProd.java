@@ -14,8 +14,11 @@ public class ventanaBusarProd extends javax.swing.JFrame {
     /**
      * Creates new form ventanaBusarProd
      */
+    public ventanaCompra vAnterior;
+    
     public ventanaBusarProd() {
         initComponents();
+        seleccionar.setEnabled(false);
     }
 
     /**
@@ -28,78 +31,85 @@ public class ventanaBusarProd extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        consum = new javax.swing.JRadioButton();
+        no_consum = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        categoria = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        marca = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        buscar = new javax.swing.JButton();
+        seleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Buscar Producto");
+        setPreferredSize(new java.awt.Dimension(400, 510));
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Consumible:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(12, 26, 71, 16);
 
-        jRadioButton1.setText("Consumible");
+        consum.setText("Consumible");
+        getContentPane().add(consum);
+        consum.setBounds(101, 22, 95, 25);
 
-        jRadioButton2.setText("No Consumible");
+        no_consum.setText("No Consumible");
+        getContentPane().add(no_consum);
+        no_consum.setBounds(214, 22, 113, 25);
 
         jLabel2.setText("Categoria:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(12, 59, 60, 16);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(categoria);
+        categoria.setBounds(101, 56, 170, 22);
 
         jLabel3.setText("Nombre:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(12, 99, 50, 16);
+        getContentPane().add(nombre);
+        nombre.setBounds(101, 96, 230, 22);
 
         jLabel4.setText("Marca:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(12, 139, 40, 16);
+        getContentPane().add(marca);
+        marca.setBounds(101, 136, 194, 22);
 
-        jTextField2.setText("jTextField2");
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(142, Short.MAX_VALUE))
-        );
+            },
+            new String [] {
+                "Nombre", "Marca", "Tipo Producto", "Categoria"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 210, 375, 280);
+
+        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        buscar.setText("Buscar");
+        getContentPane().add(buscar);
+        buscar.setBounds(120, 170, 100, 29);
+
+        seleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/seleccionar.png"))); // NOI18N
+        seleccionar.setText("Seleccionar");
+        getContentPane().add(seleccionar);
+        seleccionar.setBounds(250, 170, 130, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,14 +150,18 @@ public class ventanaBusarProd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton buscar;
+    private javax.swing.JComboBox<String> categoria;
+    private javax.swing.JRadioButton consum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField marca;
+    private javax.swing.JRadioButton no_consum;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JButton seleccionar;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

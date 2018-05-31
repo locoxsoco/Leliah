@@ -5,6 +5,14 @@
  */
 package ventanasproyecto;
 
+import LogicaNegocio.ProveedorBL;
+import clases.Proveedor;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andres
@@ -14,8 +22,15 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
     /**
      * Creates new form ventanaBuscarProv
      */
+    public ventanaCompra ventanaAnterior;
+    private ProveedorBL LogicaNegocio;
+    private ArrayList<Proveedor> lista;
+    
     public ventanaBuscarProv() {
         initComponents();
+        LogicaNegocio = new ProveedorBL();
+        lista = new ArrayList<Proveedor>();
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
     }
 
     /**
@@ -29,53 +44,109 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        razon = new javax.swing.JTextField();
+        ruc = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tabla = new javax.swing.JTable();
+        buscar = new javax.swing.JButton();
+        seleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Buscar Proveedor");
+        setMinimumSize(new java.awt.Dimension(400, 420));
         getContentPane().setLayout(null);
 
         jLabel1.setText("Razon Social:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(23, 35, 78, 16);
+        jLabel1.setBounds(23, 35, 90, 16);
 
         jLabel2.setText("RUC:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(23, 75, 29, 16);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(119, 32, 210, 22);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(119, 72, 111, 22);
+        jLabel2.setBounds(23, 75, 60, 16);
+        getContentPane().add(razon);
+        razon.setBounds(119, 32, 210, 22);
+        getContentPane().add(ruc);
+        ruc.setBounds(119, 72, 111, 22);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Razon Social", "RUC"
+                "RUC", "Razon Social"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 160, 320, 190);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(70, 120, 100, 29);
+        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        buscar.setText("Buscar");
+        buscar.setMaximumSize(new java.awt.Dimension(952444, 29243));
+        buscar.setMinimumSize(new java.awt.Dimension(200, 300));
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscar);
+        buscar.setBounds(70, 120, 100, 29);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/seleccionar.png"))); // NOI18N
-        jButton2.setText("Seleccionar");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(210, 120, 123, 29);
+        seleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/seleccionar.png"))); // NOI18N
+        seleccionar.setText("Seleccionar");
+        seleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seleccionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(seleccionar);
+        seleccionar.setBounds(210, 120, 123, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+
+            lista = LogicaNegocio.buscarProveedores(razon.getText(), ruc.getText());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultTableModel model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = lista.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            Object o[] = {lista.get(i).getId(), lista.get(i).getNombre(), lista.get(i).getRuc(), lista.get(i).getCorreo(), lista.get(i).getTelefono(),lista.get(i).getDiaSemana().toString(), lista.get(i).getDireccion()+", "+lista.get(i).getDistrito().toString()+", "+lista.get(i).getProvincia().toString()+", "+lista.get(i).getDepartamento().toString()};
+            model.addRow(o);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
+        // TODO add your handling code here:
+        int n = tabla.getSelectedRow();
+        //this.ventanaAnterior.prov = lista.get(n);
+        ventanaAnterior.razon.setText(lista.get(n).getNombre());
+        ventanaAnterior.ruc.setText(lista.get(n).getRuc());
+        ventanaAnterior.setEnabled(true);
+        this.dispose();
+    }//GEN-LAST:event_seleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,13 +184,13 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton buscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField razon;
+    private javax.swing.JTextField ruc;
+    private javax.swing.JButton seleccionar;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }
