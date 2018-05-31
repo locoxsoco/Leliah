@@ -241,6 +241,11 @@ public class ventanaManProd extends javax.swing.JFrame {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(12, 225, 110, 16);
 
+        categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaActionPerformed(evt);
+            }
+        });
         getContentPane().add(categoria);
         categoria.setBounds(154, 222, 200, 22);
 
@@ -649,6 +654,10 @@ public class ventanaManProd extends javax.swing.JFrame {
             model.addRow(o);
         }
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoriaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -32,7 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        compras = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         optionLbel = new javax.swing.JLabel();
         nomb1 = new javax.swing.JLabel();
@@ -58,7 +58,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(30, 150, 80, 23);
+        jButton1.setBounds(30, 150, 80, 25);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 204));
         jButton2.setText("Administrador");
@@ -68,7 +68,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(30, 190, 140, 23);
+        jButton2.setBounds(30, 190, 140, 25);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
         jButton3.setText("Reportes");
@@ -78,22 +78,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(30, 270, 100, 23);
+        jButton3.setBounds(30, 270, 100, 25);
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 204));
-        jButton4.setText("Compras");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        compras.setBackground(new java.awt.Color(255, 255, 204));
+        compras.setText("Compras");
+        compras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                comprasMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        compras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                comprasActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(30, 230, 100, 23);
+        getContentPane().add(compras);
+        compras.setBounds(30, 230, 100, 25);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Bienvenido");
@@ -133,19 +133,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-    VentanaCompras ventCmp = new VentanaCompras();
+    private void comprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comprasMouseClicked
+    ventanaCompra ventCmp = new ventanaCompra();
     ventCmp.setLocationRelativeTo(null);
     ventCmp.setVisible(true);
     ventCmp.vAnterior = this;
     ventCmp.ventanaHome = this.ventanaHome;
     this.setVisible(false);
 // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_comprasMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void comprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_comprasActionPerformed
     ventanaLogin ventanaHome;
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -214,10 +214,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton compras;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

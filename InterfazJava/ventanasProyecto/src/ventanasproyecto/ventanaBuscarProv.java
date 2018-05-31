@@ -31,6 +31,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
         LogicaNegocio = new ProveedorBL();
         lista = new ArrayList<Proveedor>();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
+        seleccionar.setEnabled(false);
     }
 
     /**
@@ -113,6 +114,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
+        seleccionar.setEnabled(true);
     }//GEN-LAST:event_tablaMouseClicked
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
@@ -144,6 +146,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
         //this.ventanaAnterior.prov = lista.get(n);
         ventanaAnterior.razon.setText(lista.get(n).getNombre());
         ventanaAnterior.ruc.setText(lista.get(n).getRuc());
+        ventanaAnterior.idProv = lista.get(n).getId();
         ventanaAnterior.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
@@ -151,37 +154,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ventanaBuscarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ventanaBuscarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ventanaBuscarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ventanaBuscarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ventanaBuscarProv().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;

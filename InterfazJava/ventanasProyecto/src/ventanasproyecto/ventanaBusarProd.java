@@ -5,6 +5,19 @@
  */
 package ventanasproyecto;
 
+import LogicaNegocio.ProductoBL;
+import clases.Categoria_Consumible;
+import clases.Categoria_NoConsumible;
+import clases.Consumible;
+import clases.NoConsumible;
+import clases.Producto;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andres
@@ -14,11 +27,15 @@ public class ventanaBusarProd extends javax.swing.JFrame {
     /**
      * Creates new form ventanaBusarProd
      */
-    public ventanaCompra vAnterior;
-    
+    public ventanaCompra ventanaAnterior;
+    private ProductoBL LogicaNegocio;
+    private ArrayList<Producto> list;
     public ventanaBusarProd() {
         initComponents();
         seleccionar.setEnabled(false);
+        LogicaNegocio = new ProductoBL();
+        list = new ArrayList<Producto>();
+        inicializarCon();
     }
 
     /**
@@ -54,10 +71,20 @@ public class ventanaBusarProd extends javax.swing.JFrame {
         jLabel1.setBounds(12, 26, 71, 16);
 
         consum.setText("Consumible");
+        consum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consumActionPerformed(evt);
+            }
+        });
         getContentPane().add(consum);
         consum.setBounds(101, 22, 95, 25);
 
         no_consum.setText("No Consumible");
+        no_consum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                no_consumActionPerformed(evt);
+            }
+        });
         getContentPane().add(no_consum);
         no_consum.setBounds(214, 22, 113, 25);
 
@@ -85,7 +112,7 @@ public class ventanaBusarProd extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Marca", "Tipo Producto", "Categoria"
+                "Nombre", "Marca", "Consumible", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -96,6 +123,11 @@ public class ventanaBusarProd extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         getContentPane().add(jScrollPane1);
@@ -103,51 +135,129 @@ public class ventanaBusarProd extends javax.swing.JFrame {
 
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         buscar.setText("Buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
         getContentPane().add(buscar);
         buscar.setBounds(120, 170, 100, 29);
 
         seleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/seleccionar.png"))); // NOI18N
         seleccionar.setText("Seleccionar");
+        seleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seleccionarActionPerformed(evt);
+            }
+        });
         getContentPane().add(seleccionar);
         seleccionar.setBounds(250, 170, 130, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+        int cons;
+        if (consum.isSelected()) cons = 1;
+        else if (no_consum.isSelected()) cons =0;
+        else cons = -1;
+        
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            list = LogicaNegocio.buscarProductos(nombre.getText(), marca.getText(), categoria.getSelectedItem().toString(), cons);
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ventanaBusarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ventanaBusarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ventanaBusarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ventanaBusarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ventanaBusarProd().setVisible(true);
+        DefaultTableModel model = (javax.swing.table.DefaultTableModel)tabla.getModel();
+        int n = list.size();
+        int r = model.getRowCount();
+        for (int j=0; j<r; j++){
+            model.removeRow(0);
+        }
+        for (int i=0; i<n; i++){
+            String con = "";
+            String cat = "";
+            if(list.get(i) instanceof Consumible){
+                con = "Si";
+                cat = ((Consumible) list.get(i)).getCategoria().toString();
+            }else if(list.get(i) instanceof NoConsumible){
+                con = "No";
+                cat = ((NoConsumible) list.get(i)).getCategoria().toString();
             }
-        });
+            Object o[] = {list.get(i).getIdProducto(), list.get(i).getNombre(), list.get(i).getPrecio(), list.get(i).getMarca(), con, cat};
+            model.addRow(o);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    
+    
+    private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
+        // TODO add your handling code here:
+        int n = tabla.getSelectedRow();
+        //this.ventanaAnterior.prov = lista.get(n);
+        ventanaAnterior.nombreProd.setText(list.get(n).getNombre());
+        ventanaAnterior.idProd = list.get(n).getIdProducto();
+        ventanaAnterior.setEnabled(true);
+        this.dispose();
+    }//GEN-LAST:event_seleccionarActionPerformed
+
+    private void consumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consumActionPerformed
+        // TODO add your handling code here:
+        if (consum.isSelected()==true){
+            no_consum.setSelected(false);
+            inicializarComboCon(1);
+        }
+    }//GEN-LAST:event_consumActionPerformed
+
+    private void no_consumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_no_consumActionPerformed
+        // TODO add your handling code here:
+        if (no_consum.isSelected()==true){
+            consum.setSelected(false);
+            inicializarComboCon(2);
+        }
+    }//GEN-LAST:event_no_consumActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TODO add your handling code here:
+        seleccionar.setEnabled(true);
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void inicializarCon(){
+        ArrayList<String> s = new ArrayList<String>();
+        s.add("Escoja");
+        int n = s.size();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for(int i=0; i<n; i++){
+            modelo.addElement(s.get(i));
+        }
+        categoria.setModel(modelo);
     }
+    
+    private void inicializarComboCon(int tipo){
+        ArrayList<String> s = new ArrayList<String>();
+        if(tipo == 1){
+            s.add("Escoja");
+            s.add(Categoria_Consumible.Bebida.toString());
+            s.add(Categoria_Consumible.Caramelo.toString());
+            s.add(Categoria_Consumible.Helado.toString());
+            s.add(Categoria_Consumible.Postre.toString());
+            s.add(Categoria_Consumible.Snack.toString());
+        }else if(tipo == 2){
+            s.add("Escoja");
+            s.add(Categoria_NoConsumible.Adorno.toString());
+            s.add(Categoria_NoConsumible.Juguete.toString());
+            s.add(Categoria_NoConsumible.UtilOficina.toString());
+        }
+        int n = s.size();
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for(int i=0; i<n; i++){
+            modelo.addElement(s.get(i));
+        }
+        categoria.setModel(modelo);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;

@@ -17,11 +17,16 @@ public class ventanaCompra extends javax.swing.JFrame {
      * Creates new form ventanaCompra
      */
     //public Proveedor prov;
+    public VentanaPrincipal vAnterior;
+    public ventanaLogin ventanaHome;
+    public int idProv;
+    public int idProd;
     public ventanaCompra() {
         initComponents();
         //prov = new Proveedor();
         razon.setEnabled(false);
         ruc.setEnabled(false);
+        nombreProd.setEnabled(false);
     }
 
     /**
@@ -46,18 +51,18 @@ public class ventanaCompra extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         buscarProv = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        buscarProd = new javax.swing.JButton();
+        pu = new javax.swing.JTextField();
+        cant = new javax.swing.JTextField();
+        nombreProd = new javax.swing.JTextField();
+        agregar = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
+        cerrarSesion = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
@@ -71,7 +76,7 @@ public class ventanaCompra extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Compra");
-        setMinimumSize(new java.awt.Dimension(400, 630));
+        setMinimumSize(new java.awt.Dimension(410, 700));
         getContentPane().setLayout(null);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
@@ -86,14 +91,14 @@ public class ventanaCompra extends javax.swing.JFrame {
         jButton2.setText("Guardar");
         jButton2.setMargin(new java.awt.Insets(2, 4, 2, 4));
         getContentPane().add(jButton2);
-        jButton2.setBounds(150, 15, 100, 29);
+        jButton2.setBounds(148, 15, 100, 29);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jButton3.setText("Cancelar");
         jButton3.setMargin(new java.awt.Insets(2, 4, 2, 4));
         getContentPane().add(jButton3);
-        jButton3.setBounds(275, 15, 100, 29);
+        jButton3.setBounds(270, 15, 100, 29);
 
         jLabel1.setText("Proveedor:");
         getContentPane().add(jLabel1);
@@ -137,31 +142,38 @@ public class ventanaCompra extends javax.swing.JFrame {
         getContentPane().add(buscarProv);
         buscarProv.setBounds(110, 75, 33, 29);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
-        jButton5.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        buscarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        buscarProd.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        buscarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                buscarProdActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(90, 200, 33, 29);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(130, 260, 70, 22);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(130, 290, 70, 22);
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(90, 230, 150, 22);
+        getContentPane().add(buscarProd);
+        buscarProd.setBounds(90, 200, 33, 29);
+        getContentPane().add(pu);
+        pu.setBounds(130, 260, 70, 22);
+        getContentPane().add(cant);
+        cant.setBounds(130, 290, 70, 22);
+        getContentPane().add(nombreProd);
+        nombreProd.setBounds(90, 230, 150, 22);
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 204));
-        jButton6.setText("Agregar");
-        getContentPane().add(jButton6);
-        jButton6.setBounds(250, 260, 79, 25);
+        agregar.setBackground(new java.awt.Color(255, 255, 204));
+        agregar.setText("Agregar");
+        agregar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregar);
+        agregar.setBounds(250, 260, 100, 25);
 
         jButton7.setBackground(new java.awt.Color(255, 255, 204));
         jButton7.setText("Eliminar");
+        jButton7.setMargin(new java.awt.Insets(2, 4, 2, 4));
         getContentPane().add(jButton7);
-        jButton7.setBounds(250, 290, 79, 25);
+        jButton7.setBounds(250, 290, 100, 25);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,52 +194,66 @@ public class ventanaCompra extends javax.swing.JFrame {
         getContentPane().add(jTextField7);
         jTextField7.setBounds(250, 560, 110, 22);
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
-        jButton8.setText("Volver");
-        getContentPane().add(jButton8);
-        jButton8.setBounds(100, 600, 110, 29);
+        volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
+        volver.setText("Volver");
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(volver);
+        volver.setBounds(100, 600, 110, 29);
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
-        jButton9.setText("Cerrar Sesión");
-        getContentPane().add(jButton9);
-        jButton9.setBounds(230, 600, 140, 29);
+        cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarSesionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cerrarSesion);
+        cerrarSesion.setBounds(230, 600, 140, 29);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(15, 70, 355, 10);
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(15, 320, 355, 10);
+        jSeparator2.setBounds(15, 320, 355, 2);
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator3);
-        jSeparator3.setBounds(370, 70, 50, 100);
+        jSeparator3.setBounds(370, 70, 2, 100);
         getContentPane().add(jSeparator4);
-        jSeparator4.setBounds(15, 170, 355, 10);
+        jSeparator4.setBounds(15, 170, 355, 2);
         getContentPane().add(jSeparator5);
         jSeparator5.setBounds(15, 70, 20, 20);
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator6);
-        jSeparator6.setBounds(15, 70, 50, 100);
+        jSeparator6.setBounds(15, 70, 2, 100);
         getContentPane().add(jSeparator7);
-        jSeparator7.setBounds(15, 195, 355, 10);
+        jSeparator7.setBounds(15, 195, 355, 2);
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator8);
-        jSeparator8.setBounds(370, 195, 50, 125);
+        jSeparator8.setBounds(370, 195, 2, 125);
 
         jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator9);
-        jSeparator9.setBounds(15, 195, 50, 125);
+        jSeparator9.setBounds(15, 195, 2, 125);
 
         jSeparator10.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator10);
-        jSeparator10.setBounds(15, 195, 50, 125);
+        jSeparator10.setBounds(15, 195, 2, 125);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void buscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        ventanaBusarProd v = new ventanaBusarProd();
+        v.setVisible(true);
+        this.setEnabled(false);
+        v.ventanaAnterior = this;
+    }//GEN-LAST:event_buscarProdActionPerformed
 
     private void buscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProvActionPerformed
         // TODO add your handling code here:
@@ -236,6 +262,23 @@ public class ventanaCompra extends javax.swing.JFrame {
         this.setEnabled(false);
         v.ventanaAnterior = this;
     }//GEN-LAST:event_buscarProvActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        // TODO add your handling code here:
+        vAnterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
+        // TODO add your handling code here:
+        ventanaHome.regresar();
+        this.dispose();
+    }//GEN-LAST:event_cerrarSesionActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_agregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,15 +316,15 @@ public class ventanaCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregar;
+    private javax.swing.JButton buscarProd;
     private javax.swing.JButton buscarProv;
+    private javax.swing.JTextField cant;
+    private javax.swing.JButton cerrarSesion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -302,11 +345,11 @@ public class ventanaCompra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    public javax.swing.JTextField nombreProd;
+    private javax.swing.JTextField pu;
     public javax.swing.JTextField razon;
     public javax.swing.JTextField ruc;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }
