@@ -3,6 +3,14 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="fechaini" class="java.lang.String"/>
+	<parameter name="fechafin" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[CALL LISTAR_DOCUMENTOS_VENTA]]>
+	</queryString>
+	<field name="documento" class="java.lang.String"/>
+	<field name="numDocumento" class="java.lang.Integer"/>
+	<field name="monto" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -20,32 +28,48 @@
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="37" y="15" width="100" height="20" uuid="a61a107d-32b9-4fec-85a2-1e7370fddf7b"/>
+				<reportElement x="37" y="11" width="54" height="20" uuid="a61a107d-32b9-4fec-85a2-1e7370fddf7b"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="91" y="15" width="32" height="20" uuid="31245ece-adb5-43bd-ae24-7b8e4cbfea00"/>
+				<text><![CDATA[Del]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="123" y="15" width="61" height="20" uuid="35137db0-c43d-4fb7-9172-6bdb7c34438f"/>
+				<textFieldExpression><![CDATA[$P{fechaini}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="15" width="17" height="20" uuid="c9cffaad-2ead-4eb7-995b-bff55c4388e9"/>
+				<text><![CDATA[al]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="201" y="15" width="69" height="20" uuid="0aff4d68-0486-48c2-bb69-3033466f7ab5"/>
+				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="37" y="41" width="100" height="20" uuid="5a52598c-bd2b-4ab7-a386-252f349757ab"/>
+				<reportElement x="37" y="22" width="100" height="20" uuid="5a52598c-bd2b-4ab7-a386-252f349757ab"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="41" width="132" height="20" uuid="1d690319-91f7-4a89-94ef-aeebb54e4747"/>
+				<reportElement x="213" y="22" width="132" height="20" uuid="1d690319-91f7-4a89-94ef-aeebb54e4747"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[N° de documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="443" y="41" width="63" height="20" uuid="900d4f42-ef76-40d3-a98c-edb2bca93cb0"/>
+				<reportElement x="443" y="22" width="63" height="20" uuid="900d4f42-ef76-40d3-a98c-edb2bca93cb0"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -54,7 +78,20 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement x="49" y="12" width="100" height="20" uuid="2e6ff690-eecc-4a31-aece-2c585ce24241"/>
+				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="12" width="100" height="20" uuid="9552ca17-8e2e-458b-83ff-305d62f3fbec"/>
+				<textFieldExpression><![CDATA[$F{numDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="12" width="100" height="20" uuid="3d8f1432-5e29-45e7-91d9-10878462c558"/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
