@@ -3,10 +3,14 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="inf282g9"/>
 	<parameter name="fechaini" class="java.lang.String"/>
 	<parameter name="fechafin" class="java.lang.String"/>
+	<parameter name="fechainiP" class="java.util.Date"/>
+	<parameter name="fechafinP" class="java.util.Date"/>
 	<queryString language="SQL">
-		<![CDATA[CALL LISTAR_DOCUMENTOS_VENTA]]>
+		<![CDATA[CALL LISTAR_DOCUMENTOS_VENTA($P{fechainiP},$P{fechafinP})]]>
 	</queryString>
 	<field name="documento" class="java.lang.String"/>
 	<field name="numDocumento" class="java.lang.Integer"/>
@@ -36,18 +40,30 @@
 			</staticText>
 			<staticText>
 				<reportElement x="91" y="15" width="32" height="20" uuid="31245ece-adb5-43bd-ae24-7b8e4cbfea00"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<text><![CDATA[Del]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="123" y="15" width="61" height="20" uuid="35137db0-c43d-4fb7-9172-6bdb7c34438f"/>
+				<reportElement x="123" y="15" width="84" height="20" uuid="35137db0-c43d-4fb7-9172-6bdb7c34438f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{fechaini}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="184" y="15" width="17" height="20" uuid="c9cffaad-2ead-4eb7-995b-bff55c4388e9"/>
+				<reportElement x="207" y="15" width="17" height="20" uuid="c9cffaad-2ead-4eb7-995b-bff55c4388e9"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<text><![CDATA[al]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="201" y="15" width="69" height="20" uuid="0aff4d68-0486-48c2-bb69-3033466f7ab5"/>
+				<reportElement x="224" y="15" width="80" height="20" uuid="0aff4d68-0486-48c2-bb69-3033466f7ab5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -78,17 +94,17 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="38" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="49" y="12" width="100" height="20" uuid="2e6ff690-eecc-4a31-aece-2c585ce24241"/>
+				<reportElement x="47" y="0" width="100" height="20" uuid="2e6ff690-eecc-4a31-aece-2c585ce24241"/>
 				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="245" y="12" width="100" height="20" uuid="9552ca17-8e2e-458b-83ff-305d62f3fbec"/>
+				<reportElement x="245" y="0" width="100" height="20" uuid="9552ca17-8e2e-458b-83ff-305d62f3fbec"/>
 				<textFieldExpression><![CDATA[$F{numDocumento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="12" width="100" height="20" uuid="3d8f1432-5e29-45e7-91d9-10878462c558"/>
+				<reportElement x="443" y="0" width="63" height="20" uuid="3d8f1432-5e29-45e7-91d9-10878462c558"/>
 				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
 			</textField>
 		</band>

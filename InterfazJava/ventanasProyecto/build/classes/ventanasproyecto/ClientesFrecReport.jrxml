@@ -3,10 +3,14 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+        <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="inf282g9"/>
 	<parameter name="fechaini" class="java.lang.String"/>
 	<parameter name="fechafin" class="java.lang.String"/>
+        <parameter name="fechainiP" class="java.util.Date"/>
+	<parameter name="fechafinP" class="java.util.Date"/>
 	<queryString language="SQL">
-		<![CDATA[CALL LISTAR_CLIENTES_FRECUENTES]]>
+		<![CDATA[CALL LISTAR_CLIENTES_FRECUENTES($P{fechainiP},$P{fechafinP})]]>
 	</queryString>
 	<field name="nombres" class="java.lang.String"/>
 	<field name="visitas" class="java.lang.Integer"/>

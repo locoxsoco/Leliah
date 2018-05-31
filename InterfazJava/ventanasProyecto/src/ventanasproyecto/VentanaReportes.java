@@ -501,6 +501,8 @@ DriverManager.getConnection
         "inf282g9", "Yf9bS1");        
         String formato;
         SimpleDateFormat sdf1,sdf2;
+        Date dateini;
+        Date datefin;
         switch(n){
             case 1:
                 JasperReport jr1 = 
@@ -511,9 +513,8 @@ DriverManager.getConnection
                 sdf2 = new SimpleDateFormat("dd-MM-yyyy");
                 
 //                SimpleDateFormat parseador = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateini = sdf1.parse(String.valueOf(sdf1.format(fechaini)));
-                Date datefin = sdf1.parse(String.valueOf(sdf1.format(fechafin)));
-                
+                dateini = sdf1.parse(String.valueOf(sdf1.format(fechaini)));
+                datefin = sdf1.parse(String.valueOf(sdf1.format(fechafin)));
                 HashMap hm1 = new HashMap();
                 hm1.put("fechaini", String.valueOf(sdf2.format(fechaini)));
                 hm1.put("fechafin", String.valueOf(sdf2.format(fechafin)));
@@ -534,11 +535,17 @@ DriverManager.getConnection
                 (JasperReport) 
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/MasVendidosReport.jasper").getFile());
-                formato = ReporteDate1.getDateFormatString();
-                sdf1 = new SimpleDateFormat(formato);
+                sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+                
+//                SimpleDateFormat parseador = new SimpleDateFormat("yyyy-MM-dd");
+                dateini = sdf1.parse(String.valueOf(sdf1.format(fechaini)));
+                datefin = sdf1.parse(String.valueOf(sdf1.format(fechafin)));
                 HashMap hm2 = new HashMap();
-                hm2.put("fechaini", String.valueOf(sdf1.format(fechaini)));
-                hm2.put("fechafin", String.valueOf(sdf1.format(fechafin)));
+                hm2.put("fechaini", String.valueOf(sdf2.format(fechaini)));
+                hm2.put("fechafin", String.valueOf(sdf2.format(fechafin)));
+                hm2.put("fechainiP", dateini);
+                hm2.put("fechafinP", datefin);                
         
                 JasperPrint impresion2 
                  =JasperFillManager.fillReport(
@@ -555,11 +562,17 @@ DriverManager.getConnection
                 (JasperReport) 
                 JRLoader.loadObjectFromFile
                 (VentanaReportes.class.getResource("/ventanasproyecto/VentasReport.jasper").getFile());
-                formato = ReporteDate1.getDateFormatString();
-                sdf1= new SimpleDateFormat(formato);
+                sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+                
+                dateini = sdf1.parse(String.valueOf(sdf1.format(fechaini)));
+                datefin = sdf1.parse(String.valueOf(sdf1.format(fechafin)));
+                
                 HashMap hm3 = new HashMap();
-                hm3.put("fechaini", String.valueOf(sdf1.format(fechaini)));
-                hm3.put("fechafin", String.valueOf(sdf1.format(fechafin)));
+                hm3.put("fechaini", String.valueOf(sdf2.format(fechaini)));
+                hm3.put("fechafin", String.valueOf(sdf2.format(fechafin)));
+                hm3.put("fechainiP", dateini);
+                hm3.put("fechafinP", datefin);                
         
                 JasperPrint impresion3 
                  =JasperFillManager.fillReport(
