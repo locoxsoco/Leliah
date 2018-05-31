@@ -38,6 +38,7 @@ public class VentanaReportes extends javax.swing.JFrame {
     Date fechaini;
     Date fechafin;
     int mes;
+    double alquiler, servicios, otros;
     VentanaPrincipal vAnterior;
     ventanaLogin ventanaHome;
     public VentanaReportes() {
@@ -57,6 +58,12 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         MesChooser = new com.toedter.calendar.JMonthChooser();
         AceptarJD2Butt = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtPagoServicios = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtPagoAlquiler = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtOtrosPagos = new javax.swing.JTextField();
         jDialog1 = new javax.swing.JDialog();
         LabelSeleccion = new javax.swing.JLabel();
         LabelFechaIni = new javax.swing.JLabel();
@@ -102,7 +109,6 @@ public class VentanaReportes extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
 
         jDialog2.setMinimumSize(new java.awt.Dimension(300, 300));
-        jDialog2.setPreferredSize(new java.awt.Dimension(300, 300));
         jDialog2.setResizable(false);
         jDialog2.setSize(new java.awt.Dimension(300, 300));
 
@@ -116,6 +122,18 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Ingrese el pago de servicios:");
+
+        txtPagoServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPagoServiciosActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Ingrese el pago de alquiler:");
+
+        jLabel15.setText("Ingrese otros pagos efectuados:");
+
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
         jDialog2Layout.setHorizontalGroup(
@@ -126,11 +144,25 @@ public class VentanaReportes extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MesChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
+                            .addComponent(jLabel1)
+                            .addGroup(jDialog2Layout.createSequentialGroup()
+                                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jDialog2Layout.createSequentialGroup()
+                                        .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel14))
+                                        .addGap(38, 38, 38))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPagoServicios)
+                                    .addComponent(txtPagoAlquiler)
+                                    .addComponent(txtOtrosPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(107, 107, 107)
                         .addComponent(AceptarJD2Butt)))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,9 +171,21 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(MesChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPagoServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtPagoAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtOtrosPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(AceptarJD2Butt)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -627,10 +671,13 @@ DriverManager.getConnection
                         hm4.put("mes","Diciembre");
                         break;
                 }               
-        
+                hm4.put("numMes",mes);
+                hm4.put("alquiler",alquiler);
+                hm4.put("servicios",servicios);
+                hm4.put("otros",otros);
                 JasperPrint impresion4 
                  =JasperFillManager.fillReport(
-                    jr4, hm4,new JREmptyDataSource());
+                    jr4, hm4,con);
 
                 JasperViewer viewer4 = 
                          new JasperViewer(impresion4,false);
@@ -703,6 +750,9 @@ DriverManager.getConnection
 
     private void AceptarJD2ButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarJD2ButtActionPerformed
         mes = MesChooser.getMonth();
+        alquiler = Double.parseDouble(txtPagoAlquiler.getText());
+        servicios = Double.parseDouble(txtPagoServicios.getText());
+        otros = Double.parseDouble(txtOtrosPagos.getText());
         jDialog2.dispose();
         try {
             abrirReporte(selector);
@@ -716,6 +766,10 @@ DriverManager.getConnection
             Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_AceptarJD2ButtActionPerformed
+
+    private void txtPagoServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagoServiciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagoServiciosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -779,6 +833,9 @@ DriverManager.getConnection
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -801,5 +858,8 @@ DriverManager.getConnection
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JButton logout;
+    private javax.swing.JTextField txtOtrosPagos;
+    private javax.swing.JTextField txtPagoAlquiler;
+    private javax.swing.JTextField txtPagoServicios;
     // End of variables declaration//GEN-END:variables
 }
