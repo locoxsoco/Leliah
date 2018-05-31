@@ -396,12 +396,12 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         }
         
-        for (int i=0; i<s.length(); i++){
+        /*for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
                 JOptionPane.showMessageDialog(null, "campo apellido materno solo puede contener letras", "Error Apellido Materno", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
-        }
+        }*/
         s = this.user.getText();
          if((s).equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
@@ -449,6 +449,13 @@ public class ventanaManTrab extends javax.swing.JFrame {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fecha1);
         calendar.add(Calendar.YEAR, -18);
+        //String s1 = ;
+        //System.out.println(s1);
+        /*if(this.fecha.isValid()){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }*/
+        
         java.sql.Date sqlDate = new java.sql.Date(fecha.getDate().getTime());
         java.sql.Date fechaMin = new java.sql.Date(calendar.getTime().getTime());
         //System.out.println(fechaMin);
@@ -457,9 +464,19 @@ public class ventanaManTrab extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Un menor de edad no puede trabajar", "Error Fecha Nacimiento", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        
-        s = this.tipoUser.getSelectedItem().toString();
         String s1;
+        s = this.numDoc.getText();
+        if((s).equals("")){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        for (int i=0; i<s.length(); i++){
+            if(!(s.charAt(i)>='0' && s.charAt(i)<='9')){
+                JOptionPane.showMessageDialog(null, "campo telefono solo puede contener numeros", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+        }
+        s = this.tipoUser.getSelectedItem().toString();
         if(s =="Administrador del Sistema"){
             s1 = this.sueldo.getText();
             if((s1).equals("")){
@@ -482,7 +499,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }*/
             
             if(!isDouble(s1)){
-                JOptionPane.showMessageDialog(null, "Sueldo debe ser un valor real", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Pago por Hora debe ser un valor real", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
             s1 = this.horas.getText();
@@ -492,22 +509,23 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
             for (int i=0; i<s1.length(); i++){
                 if(!(s1.charAt(i)>='0' && s1.charAt(i)<='9')){
-                    JOptionPane.showMessageDialog(null, "Edad debe ser un valor entero positivo", "Error Edad", JOptionPane.PLAIN_MESSAGE);
-                return false;
+                    JOptionPane.showMessageDialog(null, "Horas semanales debe ser un valor entero positivo", "Error Edad", JOptionPane.PLAIN_MESSAGE);
+                    return false;
+                }
             }
             s1 = this.frec.getSelectedItem().toString();
             if((s1).equals("Escoja...")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
-            for (i=0; i<s1.length(); i++){
+            /*for (int i=0; i<s1.length(); i++){
                 if(!((s1.charAt(i)>='a' && s1.charAt(i)<='z')||(s1.charAt(i)>='A' && s1.charAt(i)<='Z') || s1.charAt(i) == 'n' || s1.charAt(i) == 'N')){
                     JOptionPane.showMessageDialog(null, "campo tipo pago solo puede contener letras", "Error Tipo Pago", JOptionPane.PLAIN_MESSAGE);
                     return false;
                 }
-        }
+            }*/
             
-        }
+            
         }
         return true;
     }

@@ -299,8 +299,8 @@ public class ventanaManProd extends javax.swing.JFrame {
             return false;
         }
         for (int i=0; i<s.length(); i++){
-            if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
-                JOptionPane.showMessageDialog(null, "campo nombre solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+            if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='0' && s.charAt(i)<='9')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
+                JOptionPane.showMessageDialog(null, "campo nombre solo puede contener alfanumericos", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
         }
@@ -335,10 +335,14 @@ public class ventanaManProd extends javax.swing.JFrame {
             return false;
         }
         
-        
-        
-    
-        
+        if(categoria.getSelectedItem().toString().equals("Escoja")){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos sin seleccionar", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(moneda.getSelectedItem().toString().equals("Escoja...")){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos sin seleccionar", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
                           
         return true;
     }
