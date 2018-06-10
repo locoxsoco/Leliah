@@ -38,7 +38,6 @@ public class ServicioDA {
             //System.out.println(s.getId());
             s.setNombre(rs.getString("nombre"));
             s.setprecioxUnit(rs.getDouble("precioUnitario"));
-            s.SetMoneda(rs.getString("moneda"));
             lista.add(s);
         }
         con.close();
@@ -48,12 +47,11 @@ public class ServicioDA {
     public void registrarServicio(Servicio s) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_SERVICIO(?,?,?,?)}";
+        String sql = "{call REGISTRAR_SERVICIO(?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         stmt.setString("_nombre", s.getNombre());
         stmt.setDouble("_precioUnitario", s.getprecioxUnit());
-        stmt.setString("_moneda", s.getMoneda());
         stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
@@ -66,12 +64,11 @@ public class ServicioDA {
     public void modificarServicio(Servicio s) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call MODIFICAR_SERVICIO(?,?,?,?)}";
+        String sql = "{call MODIFICAR_SERVICIO(?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         stmt.setString("_nombre", s.getNombre());
         stmt.setDouble("_precioUnitario", s.getprecioxUnit());
-        stmt.setString("_moneda", s.getMoneda());
         stmt.setInt("_id", s.getId());
         
         stmt.executeUpdate();
@@ -110,7 +107,6 @@ public class ServicioDA {
             //System.out.println(s.getId());
             s.setNombre(rs.getString("nombre"));
             s.setprecioxUnit(rs.getDouble("precioUnitario"));
-            s.SetMoneda(rs.getString("moneda"));
             lista.add(s);
         }
         con.close();

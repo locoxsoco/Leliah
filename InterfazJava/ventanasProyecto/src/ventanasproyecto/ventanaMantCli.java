@@ -502,16 +502,6 @@ public class ventanaMantCli extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        int cantArroba = 0;
-        for (int i=0; i<s.length(); i++){
-            if(s.charAt(i) == '@'){
-                cantArroba++;
-            }
-        }
-        if (cantArroba > 0){
-            JOptionPane.showMessageDialog(null, "El correo debe tener arroba", "Error Correo", JOptionPane.PLAIN_MESSAGE);
-            return false;
-        }
         
         s = this.tlf.getText();
         if((s).equals("")){
@@ -999,7 +989,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         ArrayList<Provincia> prov = LogicaNegocio.listarProvincias(id);
         //DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         int n = prov.size();
-        try{
+        /*try{
             //provincia.removeAllItems();
             int n1 = provincia.getItemCount();
             for(int j=0; j<n1; j++){
@@ -1008,7 +998,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         } catch (Exception ex){
             
             //System.out.println(ex.getMessage());
-        }
+        }*/
         
         for(int i=0; i<n; i++){
             //modelo.addElement(prov.get(i));

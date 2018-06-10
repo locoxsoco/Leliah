@@ -63,9 +63,8 @@ public class ventanaManServ extends javax.swing.JFrame {
         modificar = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        moneda = new javax.swing.JComboBox<>();
         buscar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(510, 460));
@@ -97,7 +96,7 @@ public class ventanaManServ extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "P.U.", "Moneda"
+                "Id", "Nombre", "P.U."
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,20 +167,6 @@ public class ventanaManServ extends javax.swing.JFrame {
         getContentPane().add(eliminar);
         eliminar.setBounds(390, 150, 100, 29);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel4.setText("Tipo de Moneda:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(15, 110, 110, 16);
-
-        moneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja..", "Soles", "Dólares" }));
-        moneda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monedaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(moneda);
-        moneda.setBounds(135, 110, 70, 22);
-
         buscar.setBackground(new java.awt.Color(255, 255, 204));
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         buscar.setText("Buscar");
@@ -193,6 +178,11 @@ public class ventanaManServ extends javax.swing.JFrame {
         });
         getContentPane().add(buscar);
         buscar.setBounds(140, 150, 100, 29);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel5.setText("S./");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(215, 85, 30, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -256,7 +246,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             model.removeRow(0);
         }
         for (int i=0; i<n; i++){
-            Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit(), arr.get(i).getMoneda()};
+            Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit()};
             model.addRow(o);
         }
     }
@@ -275,7 +265,6 @@ public class ventanaManServ extends javax.swing.JFrame {
         Servicio s = new Servicio();
         s.setNombre(nombre.getText());
         s.setprecioxUnit(Double.parseDouble(pu.getText()));
-        s.SetMoneda(moneda.getSelectedItem().toString());
         try {
             LogicaNegocio.registrarServicio(s);
         } catch (ClassNotFoundException ex) {
@@ -284,7 +273,6 @@ public class ventanaManServ extends javax.swing.JFrame {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            //Object o[] = {s.getId(), s.getNombre(), s.getprecioxUnit(), s.getMoneda()};
             //model.addRow(o);
             listarServicios();
         } catch (ClassNotFoundException ex) {
@@ -294,7 +282,6 @@ public class ventanaManServ extends javax.swing.JFrame {
         }
         nombre.setText("");
         pu.setText("");
-        moneda.setSelectedItem(moneda.getItemAt(0));
     }//GEN-LAST:event_registrarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -302,7 +289,6 @@ public class ventanaManServ extends javax.swing.JFrame {
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         nombre.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 1)));
         pu.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 2)));
-        moneda.setSelectedItem(String.valueOf(model.getValueAt(tabla.getSelectedRow() ,3)));
         
         registrar.setEnabled(true);
         modificar.setEnabled(true);
@@ -329,7 +315,6 @@ public class ventanaManServ extends javax.swing.JFrame {
         s.SetId(Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0))));
         s.setNombre(nombre.getText());
         s.setprecioxUnit(Double.parseDouble(pu.getText()));
-        s.SetMoneda(moneda.getSelectedItem().toString());
         
         try {
             LogicaNegocio.modificarServicio(s);
@@ -352,7 +337,6 @@ public class ventanaManServ extends javax.swing.JFrame {
         
         nombre.setText("");
         pu.setText("");
-        moneda.setSelectedItem(moneda.getItemAt(0));
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -377,7 +361,6 @@ public class ventanaManServ extends javax.swing.JFrame {
         
         nombre.setText("");
         pu.setText("");
-        moneda.setSelectedItem(moneda.getItemAt(0));
     }//GEN-LAST:event_eliminarActionPerformed
     
     
@@ -389,15 +372,6 @@ public class ventanaManServ extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void monedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monedaActionPerformed
-        // TODO add your handling code here:
-        if (moneda.getSelectedItem().equals(moneda.getItemAt(0))){
-            registrar.setEnabled(false);
-            modificar.setEnabled(false);
-            eliminar.setEnabled(false);
-        }
-    }//GEN-LAST:event_monedaActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         // TODO add your handling code here:
@@ -430,7 +404,7 @@ public class ventanaManServ extends javax.swing.JFrame {
                 model.removeRow(0);
             }
             for (int i=0; i<n; i++){
-                Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit(), arr.get(i).getMoneda()};
+                Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit()};
                 model.addRow(o);
             }
         } catch (ClassNotFoundException ex) {
@@ -452,10 +426,9 @@ public class ventanaManServ extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
-    private javax.swing.JComboBox<String> moneda;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField pu;
     private javax.swing.JButton registrar;

@@ -60,7 +60,6 @@ public class ProductoDA {
             p.setPrecio(rs.getDouble("precioUnitario"));
             p.setCantMinima(rs.getInt("cantidadMinima"));
             p.setMarca(rs.getString("marca"));
-            p.setMoneda(rs.getString("moneda"));
             p.setDescripcion(rs.getString("descripcion"));
             
             lista.add(p);
@@ -73,7 +72,7 @@ public class ProductoDA {
     public void registrarProducto(Producto p) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_PRODUCTO(?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call REGISTRAR_PRODUCTO(?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(p instanceof Consumible){
@@ -89,7 +88,6 @@ public class ProductoDA {
         stmt.setInt("_cantidadMinima", p.getCantMinima());
         stmt.setString("_marca", p.getMarca());
         stmt.setString("_descripcion", p.getDescripcion());
-        stmt.setString("_moneda", p.getMoneda());
         
         stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
         
@@ -103,7 +101,7 @@ public class ProductoDA {
     public void modificarProducto(Producto p) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call MODIFICAR_PRODUCTO(?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call MODIFICAR_PRODUCTO(?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(p instanceof Consumible){
@@ -119,7 +117,6 @@ public class ProductoDA {
         stmt.setInt("_cantidadMinima", p.getCantMinima());
         stmt.setString("_marca", p.getMarca());
         stmt.setString("_descripcion", p.getDescripcion());
-        stmt.setString("_moneda", p.getMoneda());
         stmt.setInt("_id", p.getIdProducto());
         
         stmt.executeUpdate();
@@ -252,7 +249,6 @@ public class ProductoDA {
             p.setPrecio(rs.getDouble("precioUnitario"));
             p.setCantMinima(rs.getInt("cantidadMinima"));
             p.setMarca(rs.getString("marca"));
-            p.setMoneda(rs.getString("moneda"));
             p.setDescripcion(rs.getString("descripcion"));
             
             lista.add(p);

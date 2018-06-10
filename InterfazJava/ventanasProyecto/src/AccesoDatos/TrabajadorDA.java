@@ -48,12 +48,10 @@ public class TrabajadorDA {
             }else if(priv == 2){
                 t = new AdministradorSistema();
                 ((AdministradorSistema) t).setSueldo(rs.getDouble("sueldo"));
-                ((AdministradorSistema) t).setMoneda(rs.getString("moneda"));
             }else if(priv == 3){
                 t = new Vendedor();
                 ((Vendedor) t).setPagoxHora(rs.getDouble("pagoxhora"));
                 ((Vendedor) t).setHoraxSemana(rs.getInt("horasxsemana"));
-                ((Vendedor) t).setMoneda(rs.getString("moneda"));
                 ((Vendedor) t).setTiempoPago(rs.getInt("FidTiempoPago"),rs.getString("TiempoPago.nombreTiempoPago"));
             }
             t.setId(rs.getInt("idTrabajador"));
@@ -76,13 +74,12 @@ public class TrabajadorDA {
     public void registrarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call REGISTRAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(t instanceof Jefe){
             //System.out.print("j");
             stmt.setInt("_privilegio", 1);
-            stmt.setNull("_moneda", java.sql.Types.VARCHAR);
             stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
             stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
             stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
@@ -90,7 +87,6 @@ public class TrabajadorDA {
         }else if(t instanceof AdministradorSistema){
             //System.out.print("a");
             stmt.setInt("_privilegio", 2);
-            stmt.setString("_moneda", ((AdministradorSistema) t).getMoneda());
             stmt.setDouble("_sueldo", ((AdministradorSistema) t).getSueldo());
             stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
             stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
@@ -99,7 +95,6 @@ public class TrabajadorDA {
             //System.out.print("v");
             stmt.setInt("_privilegio", 3);
             stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
-            stmt.setString("_moneda", ((Vendedor) t).getMoneda());
             stmt.setDouble("_pagoxhora", ((Vendedor) t).getPagoxHora());
             stmt.setDouble("_horasxsemana", ((Vendedor) t).getHoraxSemana());
             stmt.setInt("_FidTiempoPago", ((Vendedor) t).getTiempoPago().getIdTiempo());
@@ -128,13 +123,12 @@ public class TrabajadorDA {
     public void modificarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call MODIFICAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call MODIFICAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(t instanceof Jefe){
             //System.out.print("j");
             stmt.setInt("_privilegio", 1);
-            stmt.setNull("_moneda", java.sql.Types.VARCHAR);
             stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
             stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
             stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
@@ -142,7 +136,6 @@ public class TrabajadorDA {
         }else if(t instanceof AdministradorSistema){
             //System.out.print("a");
             stmt.setInt("_privilegio", 2);
-            stmt.setString("_moneda", ((AdministradorSistema) t).getMoneda());
             stmt.setDouble("_sueldo", ((AdministradorSistema) t).getSueldo());
             stmt.setNull("_pagoxhora", java.sql.Types.DOUBLE);
             stmt.setNull("_horasxsemana", java.sql.Types.INTEGER);
@@ -151,7 +144,6 @@ public class TrabajadorDA {
             //System.out.print("v");
             stmt.setInt("_privilegio", 3);
             stmt.setNull("_sueldo", java.sql.Types.DOUBLE);
-            stmt.setString("_moneda", ((Vendedor) t).getMoneda());
             stmt.setDouble("_pagoxhora", ((Vendedor) t).getPagoxHora());
             stmt.setDouble("_horasxsemana", ((Vendedor) t).getHoraxSemana());
             stmt.setInt("_FidTiempoPago", ((Vendedor) t).getTiempoPago().getIdTiempo());
@@ -276,12 +268,10 @@ public class TrabajadorDA {
             }else if(priv == 2){
                 t = new AdministradorSistema();
                 ((AdministradorSistema) t).setSueldo(rs.getDouble("sueldo"));
-                ((AdministradorSistema) t).setMoneda(rs.getString("moneda"));
             }else if(priv == 3){
                 t = new Vendedor();
                 ((Vendedor) t).setPagoxHora(rs.getDouble("pagoxhora"));
                 ((Vendedor) t).setHoraxSemana(rs.getInt("horasxsemana"));
-                ((Vendedor) t).setMoneda(rs.getString("moneda"));
                 ((Vendedor) t).setTiempoPago(rs.getInt("FidTiempoPago"),rs.getString("TiempoPago.nombreTiempoPago"));
             }
             t.setId(rs.getInt("idTrabajador"));

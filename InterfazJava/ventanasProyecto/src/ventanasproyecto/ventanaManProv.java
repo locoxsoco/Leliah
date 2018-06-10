@@ -37,12 +37,16 @@ public class ventanaManProv extends javax.swing.JFrame {
         initComponents();
         LogicaNegocio = new ProveedorBL();
         lista = new ArrayList<Proveedor>();
+        provincia.setVisible(false);
+        TProvincia.setVisible(false);
+        distrito.setVisible(false);
+        TDistrito.setVisible(false);
+        dir.setVisible(false);
+        TDir.setVisible(false);
         llenarComboBoxDia();
         llenarComboBoxDep();
         listarProveedores();
-        provincia.setVisible(false);
-        distrito.setVisible(false);
-        dir.setVisible(false);
+        
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(200);
         registrar.setEnabled(false);
@@ -63,7 +67,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        TDir = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -81,8 +85,8 @@ public class ventanaManProv extends javax.swing.JFrame {
         dia = new javax.swing.JComboBox<>();
         email = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        TProvincia = new javax.swing.JLabel();
+        TDistrito = new javax.swing.JLabel();
         departamento = new javax.swing.JComboBox<>();
         provincia = new javax.swing.JComboBox<>();
         distrito = new javax.swing.JComboBox<>();
@@ -108,10 +112,10 @@ public class ventanaManProv extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 73, 80, 16);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel4.setText("Dirección:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(380, 133, 80, 16);
+        TDir.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        TDir.setText("Dirección:");
+        getContentPane().add(TDir);
+        TDir.setBounds(380, 133, 80, 16);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("Correo:");
@@ -232,15 +236,15 @@ public class ventanaManProv extends javax.swing.JFrame {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(380, 40, 100, 16);
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel9.setText("Provincia:");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(380, 70, 90, 16);
+        TProvincia.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        TProvincia.setText("Provincia:");
+        getContentPane().add(TProvincia);
+        TProvincia.setBounds(380, 70, 90, 16);
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel10.setText("Distrito:");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(380, 100, 70, 16);
+        TDistrito.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        TDistrito.setText("Distrito:");
+        getContentPane().add(TDistrito);
+        TDistrito.setBounds(380, 100, 70, 16);
 
         departamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,6 +379,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             departamento.addItem(dep.get(i));
         }
         //departamento.setModel(modelo);
+        departamento.setSelectedItem(departamento.getItemAt(0));
     }
     
     
@@ -615,21 +620,23 @@ public class ventanaManProv extends javax.swing.JFrame {
         int n = prov.size();
         //if(provincia.getItemCount()>0)
         //provincia.removeAllItems();
-        try{
+        /*try{
             int n1 = provincia.getItemCount();
             for(int j=0; j<n1; j++){
                 provincia.removeItemAt(0);
             }
         } catch (Exception ex){
             
-            //System.out.println(ex.getMessage());
-        }
+           System.out.println(ex.getMessage());
+        }*/
         for(int i=0; i<n; i++){
             //modelo.addElement();
             provincia.addItem(prov.get(i));
         }
         //provincia.setModel(modelo);
         provincia.setVisible(true);
+        TProvincia.setVisible(true);
+        provincia.setSelectedItem(provincia.getItemAt(0));
     }
     
     private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
@@ -655,7 +662,9 @@ public class ventanaManProv extends javax.swing.JFrame {
             distrito.addItem(dist.get(i));
         }
         //distrito.setModel(modelo);
+        distrito.setSelectedItem(distrito.getItemAt(0));
         distrito.setVisible(true);
+        TDistrito.setVisible(true);
     }
     
     private void provinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provinciaActionPerformed
@@ -674,6 +683,7 @@ public class ventanaManProv extends javax.swing.JFrame {
     private void distritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distritoActionPerformed
         // TODO add your handling code here:
         dir.setVisible(true);
+        TDir.setVisible(true);
     }//GEN-LAST:event_distritoActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
@@ -704,6 +714,9 @@ public class ventanaManProv extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TDir;
+    private javax.swing.JLabel TDistrito;
+    private javax.swing.JLabel TProvincia;
     private javax.swing.JButton buscar;
     private javax.swing.JComboBox<Object> departamento;
     private javax.swing.JComboBox<Object> dia;
@@ -714,15 +727,12 @@ public class ventanaManProv extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
     private javax.swing.JTextField nombre;

@@ -84,7 +84,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         user = new javax.swing.JTextField();
         fecha = new com.toedter.calendar.JDateChooser();
         pass = new javax.swing.JTextField();
-        moneda = new javax.swing.JComboBox<>();
         sueldo = new javax.swing.JTextField();
         frec = new javax.swing.JComboBox<>();
         horas = new javax.swing.JTextField();
@@ -101,6 +100,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         numDoc = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
+        moneda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 620));
@@ -173,10 +173,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         fecha.setBounds(140, 223, 200, 22);
         getContentPane().add(pass);
         pass.setBounds(142, 188, 200, 22);
-
-        moneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S./", "$" }));
-        getContentPane().add(moneda);
-        moneda.setBounds(750, 153, 50, 22);
 
         sueldo.setMinimumSize(new java.awt.Dimension(850, 650));
         getContentPane().add(sueldo);
@@ -302,6 +298,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
         });
         getContentPane().add(buscar);
         buscar.setBounds(137, 270, 100, 29);
+
+        moneda.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        moneda.setText("S./");
+        getContentPane().add(moneda);
+        moneda.setBounds(750, 156, 48, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -560,7 +561,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
             sueldo.setText("");
             sueldo.setVisible(true);
             horas.setVisible(false);
-            moneda.setSelectedItem(moneda.getItemAt(0));
             moneda.setVisible(true);
             registrar.setEnabled(true);
             
@@ -575,7 +575,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
             sueldo.setVisible(true);
             horas.setText("");
             horas.setVisible(true);
-            moneda.setSelectedItem(moneda.getItemAt(0));
             moneda.setVisible(true);
             registrar.setEnabled(true);
         }
@@ -610,13 +609,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
         }else if(tipo.equals("Administrador del Sistema")){
             t = new AdministradorSistema();
             ((AdministradorSistema)t).setSueldo(Double.parseDouble(sueldo.getText()));
-            ((AdministradorSistema)t).setMoneda(moneda.getSelectedItem().toString());
         }else if(tipo.equals("Vendedor")){
             t = new Vendedor();
             ((Vendedor)t).setTiempoPago((TiempoPago) frec.getSelectedItem());
             ((Vendedor)t).setHoraxSemana(Integer.parseInt(horas.getText()));
             ((Vendedor)t).setPagoxHora(Double.parseDouble(sueldo.getText()));
-            ((Vendedor)t).setMoneda(moneda.getSelectedItem().toString());
         }
         t.setNombre(nombre.getText());
         t.setApPaterno(apPat.getText());
@@ -649,7 +646,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         numDoc.setText("");
         tipoUser.setSelectedItem(tipoUser.getItemAt(0));
         sueldo.setText("");
-        moneda.setSelectedItem(moneda.getItemAt(0));
         horas.setText("");
         frec.setSelectedItem(frec.getItemAt(0));
         registrar.setEnabled(false);
@@ -682,13 +678,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
         }else if(tipo.equals("Administrador del Sistema")){
             t = new AdministradorSistema();
             ((AdministradorSistema)t).setSueldo(Double.parseDouble(sueldo.getText()));
-            ((AdministradorSistema)t).setMoneda(moneda.getSelectedItem().toString());
         }else if(tipo.equals("Vendedor")){
             t = new Vendedor();
             ((Vendedor)t).setTiempoPago((TiempoPago) frec.getSelectedItem());
             ((Vendedor)t).setHoraxSemana(Integer.parseInt(horas.getText()));
             ((Vendedor)t).setPagoxHora(Double.parseDouble(sueldo.getText()));
-            ((Vendedor)t).setMoneda(moneda.getSelectedItem().toString());
         }
         t.setNombre(nombre.getText());
         t.setApPaterno(apPat.getText());
@@ -721,7 +715,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         numDoc.setText("");
         tipoUser.setSelectedItem(tipoUser.getItemAt(0));
         sueldo.setText("");
-        moneda.setSelectedItem(moneda.getItemAt(0));
         horas.setText("");
         frec.setSelectedItem(frec.getItemAt(0));
         registrar.setEnabled(false);
@@ -775,7 +768,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
             moneda.setVisible(true);
             tipoUser.setSelectedItem("Administrador del Sistema");
             sueldo.setText(String.valueOf(((AdministradorSistema)lista.get(n)).getSueldo()));
-            moneda.setSelectedItem(((AdministradorSistema)lista.get(n)).getMoneda());
         }else if(lista.get(n) instanceof Vendedor){
             sueldo.setVisible(true);
             Tsueldo.setText("Pago x Hora:");
@@ -787,7 +779,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
             moneda.setVisible(true);
             tipoUser.setSelectedItem("Vendedor");
             sueldo.setText(String.valueOf(((Vendedor)lista.get(n)).getPagoxHora()));
-            moneda.setSelectedItem(((Vendedor)lista.get(n)).getMoneda());
             horas.setText(String.valueOf(((Vendedor)lista.get(n)).getHoraxSemana()));
             frec.setSelectedItem(((Vendedor)lista.get(n)).getTiempoPago().getNombTiempo());
         }
@@ -834,7 +825,6 @@ public class ventanaManTrab extends javax.swing.JFrame {
         numDoc.setText("");
         tipoUser.setSelectedItem(tipoUser.getItemAt(0));
         sueldo.setText("");
-        moneda.setSelectedItem(moneda.getItemAt(0));
         horas.setText("");
         frec.setSelectedItem(frec.getItemAt(0));
         registrar.setEnabled(false);
@@ -923,7 +913,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
-    private javax.swing.JComboBox<String> moneda;
+    private javax.swing.JLabel moneda;
     public static javax.swing.JTextField nombre;
     private javax.swing.JTextField numDoc;
     public static javax.swing.JTextField pass;
