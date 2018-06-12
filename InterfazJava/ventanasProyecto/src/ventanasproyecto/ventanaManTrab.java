@@ -585,6 +585,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
         int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventana anterior?","Volver", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             anterior.setVisible(true);
+            anterior.jButton1.setEnabled(true);
+            anterior.jButton2.setEnabled(true);
+            anterior.jButton3.setEnabled(true);
+            anterior.jButton4.setEnabled(true);
+            anterior.jButton5.setEnabled(true);
             this.dispose();
         }
         
@@ -844,6 +849,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             ventanaHome.regresar();
+            anterior.dispose();
             this.dispose();
         }
         

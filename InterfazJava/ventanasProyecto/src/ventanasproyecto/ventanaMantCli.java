@@ -156,6 +156,12 @@ public class ventanaMantCli extends javax.swing.JFrame {
         dir.setBounds(490, 210, 200, 22);
         getContentPane().add(email);
         email.setBounds(490, 90, 200, 22);
+
+        tlf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tlfKeyTyped(evt);
+            }
+        });
         getContentPane().add(tlf);
         tlf.setBounds(490, 60, 200, 22);
 
@@ -168,8 +174,20 @@ public class ventanaMantCli extends javax.swing.JFrame {
         TapMat.setText("Apellido Materno:");
         getContentPane().add(TapMat);
         TapMat.setBounds(10, 213, 115, 16);
+
+        apPat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apPatKeyTyped(evt);
+            }
+        });
         getContentPane().add(apPat);
         apPat.setBounds(140, 180, 200, 22);
+
+        apMat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apMatKeyTyped(evt);
+            }
+        });
         getContentPane().add(apMat);
         apMat.setBounds(140, 210, 200, 22);
 
@@ -225,6 +243,11 @@ public class ventanaMantCli extends javax.swing.JFrame {
         namae.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaeActionPerformed(evt);
+            }
+        });
+        namae.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                namaeKeyTyped(evt);
             }
         });
         getContentPane().add(namae);
@@ -301,6 +324,17 @@ public class ventanaMantCli extends javax.swing.JFrame {
         TnumDoc.setText("Num Documento:");
         getContentPane().add(TnumDoc);
         TnumDoc.setBounds(10, 93, 120, 16);
+
+        numDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numDocActionPerformed(evt);
+            }
+        });
+        numDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                numDocKeyTyped(evt);
+            }
+        });
         getContentPane().add(numDoc);
         numDoc.setBounds(140, 90, 200, 22);
 
@@ -967,6 +1001,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             ventanaHome.regresar();
+            anterior.dispose();
             this.dispose();
         }
         
@@ -981,6 +1016,11 @@ public class ventanaMantCli extends javax.swing.JFrame {
         int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventana anterior?","Volver", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             anterior.setVisible(true);
+            anterior.jButton1.setEnabled(true);
+            anterior.jButton2.setEnabled(true);
+            anterior.jButton3.setEnabled(true);
+            anterior.jButton4.setEnabled(true);
+            anterior.jButton5.setEnabled(true);
             this.dispose();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -1102,6 +1142,40 @@ public class ventanaMantCli extends javax.swing.JFrame {
             model.addRow(o);
         }
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void numDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numDocActionPerformed
+
+    }//GEN-LAST:event_numDocActionPerformed
+
+    private void numDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numDocKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') evt.consume();
+    }//GEN-LAST:event_numDocKeyTyped
+
+    private void namaeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaeKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ')) evt.consume();
+    }//GEN-LAST:event_namaeKeyTyped
+
+    private void apPatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apPatKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ')) evt.consume();
+    }//GEN-LAST:event_apPatKeyTyped
+
+    private void apMatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apMatKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ')) evt.consume();
+    }//GEN-LAST:event_apMatKeyTyped
+
+    private void tlfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlfKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') evt.consume();
+    }//GEN-LAST:event_tlfKeyTyped
 
     /**
      * @param args the command line arguments

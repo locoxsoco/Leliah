@@ -467,6 +467,11 @@ public class ventanaManProd extends javax.swing.JFrame {
         int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea volver a la ventana anterior?","Volver", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             ventanaAnterior.setVisible(true);
+            ventanaAnterior.jButton1.setEnabled(true);
+            ventanaAnterior.jButton2.setEnabled(true);
+            ventanaAnterior.jButton3.setEnabled(true);
+            ventanaAnterior.jButton4.setEnabled(true);
+            ventanaAnterior.jButton5.setEnabled(true);
             this.dispose();
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -533,6 +538,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
         if(YesOrNo == 0){
             ventanaHome.regresar();
+            ventanaAnterior.dispose();
             this.dispose();
         }
     }//GEN-LAST:event_jButton4ActionPerformed

@@ -23,6 +23,7 @@ public class ventanaLogin extends javax.swing.JFrame {
         LogicaNegocio = new TrabajadorBL();
         this.setLocationRelativeTo(null);
         this.setTitle("Ventana Log In");
+        this.getRootPane().setDefaultButton(Login);
     }
 
     /**
@@ -97,20 +98,7 @@ public class ventanaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void regresar(){
-        this.setVisible(true);
-        if(!recor.isSelected()){
-           this.user.setText("");
-           this.pass.setText(""); 
-        }
-        
-        /*if(recor.get){
-            
-        }*/
-    }
-    
-    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        // TODO add your handling code here:
+    public void log(){
         usuario u = null;
         //System.out.println("hola");
   
@@ -142,6 +130,54 @@ public class ventanaLogin extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "Error Autentificacion", JOptionPane.PLAIN_MESSAGE);
         }
+    }
+    
+    public void regresar(){
+        this.setVisible(true);
+        if(!recor.isSelected()){
+           this.user.setText("");
+           this.pass.setText(""); 
+        }
+        
+        /*if(recor.get){
+            
+        }*/
+    }
+    
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        // TODO add your handling code here:
+        /*usuario u = null;
+        //System.out.println("hola");
+  
+        try {
+            u=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //System.out.println(privi);
+        
+        if(u.getPriv()==2){
+            ventanaAdmin v1 = new ventanaAdmin();
+            v1.ventanaHome = this;
+            v1.setVisible(true);
+            v1.nomb.setText(u.getNomb());
+            v1.anterior = "Home";
+            
+            this.setVisible(false);
+        }else if( u.getPriv()==1){
+            VentanaPrincipal v1 = new VentanaPrincipal();
+            v1.ventanaHome = this;
+            v1.setLocationRelativeTo(null);
+            v1.setVisible(true);
+            v1.nomb1.setText(user.getText());
+            
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "Error Autentificacion", JOptionPane.PLAIN_MESSAGE);
+        }*/
+        log();
     }//GEN-LAST:event_LoginActionPerformed
 
     private void recorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorActionPerformed

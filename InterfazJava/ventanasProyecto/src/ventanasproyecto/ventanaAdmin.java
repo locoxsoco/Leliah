@@ -81,7 +81,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(12, 117, 170, 60);
+        jButton1.setBounds(12, 117, 180, 70);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 204));
         jButton2.setText("Mantener Clientes");
@@ -91,7 +91,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(12, 195, 167, 60);
+        jButton2.setBounds(12, 200, 180, 70);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
         jButton3.setText("Mantener Productos");
@@ -101,7 +101,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(220, 260, 167, 60);
+        jButton3.setBounds(220, 280, 180, 70);
 
         jButton4.setBackground(new java.awt.Color(255, 255, 204));
         jButton4.setText("Mantener Servicios");
@@ -111,7 +111,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(12, 273, 167, 60);
+        jButton4.setBounds(12, 280, 180, 70);
 
         jButton5.setBackground(new java.awt.Color(255, 255, 204));
         jButton5.setText("Mantener Proveedores");
@@ -121,7 +121,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(220, 180, 167, 60);
+        jButton5.setBounds(220, 200, 180, 70);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton6.setText("Cerrar Sesión");
@@ -159,7 +159,13 @@ public class ventanaAdmin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+            jButton5.setEnabled(false);
             ventanaManTrab v1 = new ventanaManTrab();
+            
             v1.ventanaHome = this.ventanaHome;
             v1.anterior = this;
             v1.setVisible(true);
@@ -174,11 +180,17 @@ public class ventanaAdmin extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-        ventanaMantCli v1 = new ventanaMantCli();
-        v1.ventanaHome = this.ventanaHome;
-        v1.anterior = this;
-        v1.setVisible(true);
-        this.setVisible(false);
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+            jButton5.setEnabled(false);
+            ventanaMantCli v1 = new ventanaMantCli();
+            
+            v1.ventanaHome = this.ventanaHome;
+            v1.anterior = this;
+            v1.setVisible(true);
+            this.setVisible(false);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaAdmin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -190,12 +202,18 @@ public class ventanaAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         ventanaManProv vp;
         try {
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+            jButton5.setEnabled(false);
             vp = new ventanaManProv();
+            
             vp.ventanaAnterior = this;
-        vp.ventanaHome = this.ventanaHome;
-        vp.setLocationRelativeTo(null);
-        vp.setVisible(true);
-        this.setVisible(false);
+            vp.ventanaHome = this.ventanaHome;
+            vp.setLocationRelativeTo(null);
+            vp.setVisible(true);
+            this.setVisible(false);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaAdmin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -207,7 +225,13 @@ public class ventanaAdmin extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
             // TODO add your handling code here:
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+            jButton5.setEnabled(false);
             ventanaManServ vp = new ventanaManServ();
+            
             vp.ventanaAnterior = this;
             vp.ventanaHome = this.ventanaHome;
             vp.setVisible(true);
@@ -222,7 +246,13 @@ public class ventanaAdmin extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             // TODO add your handling code here:
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+            jButton5.setEnabled(false);
             ventanaManProd vp = new ventanaManProd();
+            
             vp.ventanaHome = this.ventanaHome;
             vp.ventanaAnterior = this;
             vp.setLocationRelativeTo(null);
@@ -258,11 +288,11 @@ public class ventanaAdmin extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton3;
+    public javax.swing.JButton jButton4;
+    public javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
