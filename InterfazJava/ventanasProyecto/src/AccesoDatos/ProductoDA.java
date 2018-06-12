@@ -250,6 +250,7 @@ public class ProductoDA {
             p.setCantMinima(rs.getInt("cantidadMinima"));
             p.setMarca(rs.getString("marca"));
             p.setDescripcion(rs.getString("descripcion"));
+            p.setEsConsumible(rs.getInt("consumible"));
             
             lista.add(p);
         }

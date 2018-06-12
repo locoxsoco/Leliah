@@ -6,10 +6,12 @@
 package LogicaNegocio;
 
 import AccesoDatos.CompraDA;
+import AccesoDatos.LineaxCompraDA;
 import clases.Compra;
 import clases.LineaxCompra;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -17,19 +19,19 @@ import java.util.ArrayList;
  */
 public class CompraBL {
     private CompraDA accesoDatosCompra;
-    private LineaxCompra accesoDatosDetCompra; 
+    private LineaxCompraDA accesoDatosDetCompra; 
     public CompraBL(){
         accesoDatosCompra = new CompraDA();
-        accesoDatosDetCompra = new LineaxCompra();
+        accesoDatosDetCompra = new LineaxCompraDA();
     }
     
     
     public void registrarCompras(Compra c) throws ClassNotFoundException, SQLException{
         accesoDatosCompra.registrarCompras(c);
+        for (LineaxCompra lineaxProd : c.getListLineaxProd()) {
+            accesoDatosDetCompra.registrarDetCompra(lineaxProd,c.getIdCompra());
+        }
     }
     
-    public void eliminarCompras(int id) throws ClassNotFoundException, SQLException{
-        accesoDatosCompra.eliminarCompras(id);
-    }
     
 }

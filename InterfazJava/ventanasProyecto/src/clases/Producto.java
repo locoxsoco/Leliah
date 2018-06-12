@@ -14,6 +14,7 @@ public class Producto{
     private String marca;
     private String moneda;
     private String descripcion;
+    private int esConsumible;
 
     @Override
     public String toString() {
@@ -74,6 +75,13 @@ public class Producto{
 
     public void setMarca (String _marca){
 	this.marca=_marca;
+    }
+    public int getEsConsumible(){
+	return cantMinima;
+    }
+
+    public void setEsConsumible (int _esConsumible){
+        this.cantMinima=_esConsumible;
     }
 
     public Producto(int idProducto,String nombre,double precio,int cantMinima,String marca){

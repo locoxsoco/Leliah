@@ -19,7 +19,19 @@ import javax.swing.JOptionPane;
  * @author Andres
  */
 public class ventanaCompra extends javax.swing.JFrame {
+    private boolean isDouble(String cadena) {
 
+        boolean resultado;
+
+        try {
+            Double.parseDouble(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
+    }
     /**
      * Creates new form ventanaCompra
      */
@@ -35,8 +47,6 @@ public class ventanaCompra extends javax.swing.JFrame {
     public int idProd;
     public ventanaCompra() {
         initComponents();
-        comp = new Compra();
-        prod = new Producto();
         logicaNegocio = new CompraBL();
         buscarProd.setEnabled(false);
         buscarProv.setEnabled(false);
@@ -45,6 +55,7 @@ public class ventanaCompra extends javax.swing.JFrame {
         razon.setEnabled(false);
         ruc.setEnabled(false);
         nombreProd.setEnabled(false);
+        fecha.setEnabled(false);
         model = (javax.swing.table.DefaultTableModel)dvgDetalle_compra.getModel();
         
     }
@@ -93,6 +104,8 @@ public class ventanaCompra extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        fecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Compra");
@@ -146,6 +159,12 @@ public class ventanaCompra extends javax.swing.JFrame {
         jLabel3.setText("Razon Social:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 113, 78, 16);
+
+        razon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                razonActionPerformed(evt);
+            }
+        });
         getContentPane().add(razon);
         razon.setBounds(110, 110, 200, 22);
         getContentPane().add(ruc);
@@ -194,6 +213,12 @@ public class ventanaCompra extends javax.swing.JFrame {
         });
         getContentPane().add(pu);
         pu.setBounds(130, 260, 70, 22);
+
+        cant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantActionPerformed(evt);
+            }
+        });
         getContentPane().add(cant);
         cant.setBounds(130, 290, 70, 22);
         getContentPane().add(nombreProd);
@@ -232,11 +257,17 @@ public class ventanaCompra extends javax.swing.JFrame {
         jScrollPane2.setViewportView(dvgDetalle_compra);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(20, 340, 350, 210);
+        jScrollPane2.setBounds(20, 420, 350, 130);
 
         jLabel9.setText("Total:");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(190, 560, 41, 20);
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField7);
         jTextField7.setBounds(250, 560, 110, 22);
 
@@ -262,7 +293,7 @@ public class ventanaCompra extends javax.swing.JFrame {
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(15, 70, 355, 10);
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(15, 320, 355, 2);
+        jSeparator2.setBounds(15, 368, 355, 2);
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator3);
@@ -280,15 +311,21 @@ public class ventanaCompra extends javax.swing.JFrame {
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator8);
-        jSeparator8.setBounds(370, 195, 2, 125);
+        jSeparator8.setBounds(370, 195, 2, 170);
 
         jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator9);
-        jSeparator9.setBounds(15, 195, 2, 125);
+        jSeparator9.setBounds(15, 195, 2, 170);
 
         jSeparator10.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator10);
-        jSeparator10.setBounds(15, 195, 2, 125);
+        jSeparator10.setBounds(15, 195, 2, 170);
+
+        jLabel4.setText("Fecha de Caducidad:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(20, 330, 130, 16);
+        getContentPane().add(fecha);
+        fecha.setBounds(150, 330, 200, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -327,15 +364,34 @@ public class ventanaCompra extends javax.swing.JFrame {
         String s = this.pu.getText();
         if(s.equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos vacio", "Error Precio Unitario", JOptionPane.PLAIN_MESSAGE);
+            return;
         }
         
         s = this.cant.getText();
         if(s.equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos vacio", "Error Cantidad", JOptionPane.PLAIN_MESSAGE);
+            return;
         }
-        for (int i=0; i<s.length(); i++){
-            if(!(s.charAt(i)>='0' && s.charAt(i)<='9')){
-                JOptionPane.showMessageDialog(null, "Este campo solo puede contener numeros", "Error Cantidad", JOptionPane.PLAIN_MESSAGE);
+        if(!isDouble(pu.getText())){
+                JOptionPane.showMessageDialog(null, "Precio Unitario debe ser un valor real", "Error Precio Unitario", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+        Object o[]={prod.getNombre(), pu.getText(), cant.getText(), Float.parseFloat(pu.getText())*Float.parseFloat(cant.getText())};
+        for(int i=0;i<comp.getListLineaxProd().size();i++){
+            if(comp.getListLineaxProd().get(i).getProducto().getIdProducto()==prod.getIdProducto()){
+                total-=(float)comp.getListLineaxProd().get(i).getCantidad()*comp.getListLineaxProd().get(i).getPrecioUnit();
+                int aux=comp.getListLineaxProd().get(i).getCantidad()+Integer.parseInt(this.cant.getText());
+                comp.getListLineaxProd().get(i).setCantidad(aux);
+                comp.getListLineaxProd().get(i).setPrecioUnit(Float.parseFloat(this.pu.getText()));
+                comp.getListLineaxProd().get(i).setFechaCaducidad(fecha.getDate());
+                model.setValueAt(Float.parseFloat(pu.getText()), i, 1);
+                model.setValueAt(aux, i, 2);
+                model.setValueAt((float)aux*Float.parseFloat(pu.getText()), i, 3);
+                total+=Float.parseFloat(pu.getText())*aux;
+                jTextField7.setText(Float.toString(total));
+                pu.setText("");
+                cant.setText("");
+                return;
             }
         }
         counterId++;
@@ -344,21 +400,37 @@ public class ventanaCompra extends javax.swing.JFrame {
         dCompra.setIdLineaxCompra(counterId);
         dCompra.setCantidad(Integer.parseInt(this.cant.getText()));
         dCompra.setPrecioUnit(Float.parseFloat(this.pu.getText()));
+        dCompra.setFechaCaducidad(fecha.getDate());
         comp.getListLineaxProd().add(dCompra);
-        Object o[]={prod.getNombre(), pu.getText(), cant.getText(), Float.parseFloat(pu.getText())*Integer.parseInt(cant.getText())};
+        
         model.addRow(o);
-        total+=Float.parseFloat(pu.getText())*Integer.parseInt(cant.getText());
+        total+=Float.parseFloat(pu.getText())*Float.parseFloat(cant.getText());
         jTextField7.setText(Float.toString(total));
+        pu.setText("");
+        cant.setText("");
+        
     }//GEN-LAST:event_agregarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        comp = new Compra();
+        prod = new Producto();
         buscarProd.setEnabled(true);
         buscarProv.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String s = this.razon.getText();
+        if(s.equals("")){
+            JOptionPane.showMessageDialog(null, "No puede dejar campos vacio", "Error Proveedor", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        if(dvgDetalle_compra.getRowCount()==0){
+            JOptionPane.showMessageDialog(null, "No puede compra vacia", "Error Lista de compras", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        comp.setMonto(total);
         try {
             logicaNegocio.registrarCompras(comp);
             
@@ -372,6 +444,7 @@ public class ventanaCompra extends javax.swing.JFrame {
         nombreProd.setText("");
         pu.setText("");
         cant.setText("");
+        jTextField7.setText("");
         razon.setEnabled(false);
         ruc.setEnabled(false);
         nombreProd.setEnabled(false);
@@ -379,10 +452,14 @@ public class ventanaCompra extends javax.swing.JFrame {
         cant.setEnabled(false);
         buscarProd.setEnabled(false);
         buscarProv.setEnabled(false);
+        fecha.cleanup();
+        fecha.setEnabled(false);
+        jTextField7.setText("");
         for (int i = 0; i < dvgDetalle_compra.getRowCount(); i++) {
             model.removeRow(i);
             i-=1;
         }
+        total=0;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -392,6 +469,8 @@ public class ventanaCompra extends javax.swing.JFrame {
         nombreProd.setText("");
         pu.setText("");
         cant.setText("");
+        fecha.cleanup();
+        fecha.setEnabled(false);
         razon.setEnabled(false);
         ruc.setEnabled(false);
         nombreProd.setEnabled(false);
@@ -403,6 +482,7 @@ public class ventanaCompra extends javax.swing.JFrame {
             model.removeRow(i);
             i-=1;
         }
+        total=0;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void puActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puActionPerformed
@@ -412,13 +492,32 @@ public class ventanaCompra extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         int currentIndex = dvgDetalle_compra.getSelectedRow();
+        if(currentIndex==-1){
+            JOptionPane.showMessageDialog(null, "No se selecciono producto", "Error Eliminar", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
         total-=Float.parseFloat(model.getValueAt(currentIndex, 3).toString());
         jTextField7.setText(Float.toString(total));
         model.removeRow(currentIndex);
         comp.getListLineaxProd().remove(currentIndex);
         counterId--;
+        for (int i = 0; i < dvgDetalle_compra.getRowCount(); i++) {
+            System.out.println(comp.getListLineaxProd().get(i).getProducto().getNombre());
+        }
         
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void cantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cantActionPerformed
+
+    private void razonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_razonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_razonActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -462,6 +561,7 @@ public class ventanaCompra extends javax.swing.JFrame {
     public javax.swing.JTextField cant;
     private javax.swing.JButton cerrarSesion;
     private javax.swing.JTable dvgDetalle_compra;
+    public com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -469,6 +569,7 @@ public class ventanaCompra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

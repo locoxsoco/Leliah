@@ -12,6 +12,18 @@ public class LineaxCompra{
 	private int cantidad;
 	private float precioUnit;
 	private Producto producto;
+        private Date fechaCaducidad;
+        
+        public Date getFechaCaducidad() {
+            return fechaCaducidad;
+        }
+
+        /**
+         * @param fechaCaducidad the fechaCaducidad to set
+         */
+        public void setFechaCaducidad(Date fechaCaducidad) {
+            this.fechaCaducidad = fechaCaducidad;
+        }
         
         public int getIdLineaxCompra(){
 		return idLineaxCompra;

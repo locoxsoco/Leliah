@@ -157,7 +157,7 @@ import javax.swing.table.DefaultTableModel;
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
+                        // TODO add your handling code here:
         int cons;
         if (consum.isSelected()) cons = 1;
         else if (no_consum.isSelected()) cons =0;
@@ -201,6 +201,11 @@ import javax.swing.table.DefaultTableModel;
         ventanaAnterior.idProd = list.get(n).getIdProducto();
         ventanaAnterior.setEnabled(true);
         ventanaAnterior.prod= list.get(n);
+        if(list.get(n).getEsConsumible()==1){
+            ventanaAnterior.fecha.setEnabled(true);
+        }else{
+            ventanaAnterior.fecha.setEnabled(false);
+        }
         ventanaAnterior.pu.setEnabled(true);
         ventanaAnterior.cant.setEnabled(true);
         this.dispose();
