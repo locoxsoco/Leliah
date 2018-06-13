@@ -161,10 +161,28 @@ public class ventanaManTrab extends javax.swing.JFrame {
         Ttipo.setText("Frecuencia Pago:");
         getContentPane().add(Ttipo);
         Ttipo.setBounds(460, 226, 120, 16);
+
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(nombre);
         nombre.setBounds(142, 48, 200, 22);
+
+        apPat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apPatKeyTyped(evt);
+            }
+        });
         getContentPane().add(apPat);
         apPat.setBounds(142, 83, 200, 22);
+
+        apMat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apMatKeyTyped(evt);
+            }
+        });
         getContentPane().add(apMat);
         apMat.setBounds(142, 118, 200, 22);
         getContentPane().add(user);
@@ -175,11 +193,22 @@ public class ventanaManTrab extends javax.swing.JFrame {
         pass.setBounds(142, 188, 200, 22);
 
         sueldo.setMinimumSize(new java.awt.Dimension(850, 650));
+        sueldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sueldoKeyTyped(evt);
+            }
+        });
         getContentPane().add(sueldo);
         sueldo.setBounds(600, 153, 140, 22);
 
         getContentPane().add(frec);
         frec.setBounds(600, 223, 140, 22);
+
+        horas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                horasKeyTyped(evt);
+            }
+        });
         getContentPane().add(horas);
         horas.setBounds(600, 188, 200, 22);
 
@@ -284,6 +313,12 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel10.setText("Número Documento:");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(460, 86, 140, 16);
+
+        numDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                numDocKeyTyped(evt);
+            }
+        });
         getContentPane().add(numDoc);
         numDoc.setBounds(600, 83, 200, 22);
 
@@ -891,6 +926,46 @@ public class ventanaManTrab extends javax.swing.JFrame {
             Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+    }//GEN-LAST:event_nombreKeyTyped
+
+    private void apPatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apPatKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+    }//GEN-LAST:event_apPatKeyTyped
+
+    private void apMatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apMatKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+    }//GEN-LAST:event_apMatKeyTyped
+
+    private void numDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numDocKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') evt.consume();
+    }//GEN-LAST:event_numDocKeyTyped
+
+    private void sueldoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sueldoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String s = sueldo.getText();
+        if(s.contains(".")){
+            if(c =='.') evt.consume();
+        }
+        if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
+    }//GEN-LAST:event_sueldoKeyTyped
+
+    private void horasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_horasKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') evt.consume();
+    }//GEN-LAST:event_horasKeyTyped
     
 
 

@@ -1156,25 +1156,28 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private void namaeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaeKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ')) evt.consume();
+        if(namaetxt.getText().equals("Nombre:")){
+            if( c == '.' || c == ',') evt.consume();
+        }
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || c =='.' || c == ',')) evt.consume();
     }//GEN-LAST:event_namaeKeyTyped
 
     private void apPatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apPatKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ')) evt.consume();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
     }//GEN-LAST:event_apPatKeyTyped
 
     private void apMatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apMatKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ')) evt.consume();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
     }//GEN-LAST:event_apMatKeyTyped
 
     private void tlfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlfKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(c<'0' || c>'9') evt.consume();
+        if(!((c>='0' && c<='9') || c == '+' || c == '-' || c == ' ')) evt.consume();
     }//GEN-LAST:event_tlfKeyTyped
 
     /**

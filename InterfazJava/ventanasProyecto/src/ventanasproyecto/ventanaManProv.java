@@ -139,10 +139,28 @@ public class ventanaManProv extends javax.swing.JFrame {
         });
         getContentPane().add(dir);
         dir.setBounds(500, 130, 200, 22);
+
+        ruc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                rucKeyTyped(evt);
+            }
+        });
         getContentPane().add(ruc);
         ruc.setBounds(120, 70, 200, 22);
+
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(nombre);
         nombre.setBounds(120, 40, 200, 22);
+
+        tlf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tlfKeyTyped(evt);
+            }
+        });
         getContentPane().add(tlf);
         tlf.setBounds(120, 130, 200, 22);
 
@@ -714,6 +732,24 @@ public class ventanaManProv extends javax.swing.JFrame {
             model.addRow(o);
         }
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || c =='.' || c == ',')) evt.consume();
+    }//GEN-LAST:event_nombreKeyTyped
+
+    private void rucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rucKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') evt.consume();
+    }//GEN-LAST:event_rucKeyTyped
+
+    private void tlfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlfKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c>='0' && c<='9') || c == '+' || c == '-' || c == ' ')) evt.consume();
+    }//GEN-LAST:event_tlfKeyTyped
 
     /**
      * @param args the command line arguments
