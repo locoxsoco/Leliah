@@ -375,7 +375,11 @@ public class ventanaCompra extends javax.swing.JFrame {
         if(!isDouble(pu.getText())){
                 JOptionPane.showMessageDialog(null, "Precio Unitario debe ser un valor real", "Error Precio Unitario", JOptionPane.PLAIN_MESSAGE);
                 return;
-            }
+        }
+        if(fecha.getDate()==null && fecha.isEnabled()){
+                JOptionPane.showMessageDialog(null, "Fecha de Caducidad no debe ser estar vacio", "Error Fecha de Caducidad", JOptionPane.PLAIN_MESSAGE);
+                return;
+        }
         Object o[]={prod.getNombre(), pu.getText(), cant.getText(), Float.parseFloat(pu.getText())*Float.parseFloat(cant.getText())};
         for(int i=0;i<comp.getListLineaxProd().size();i++){
             if(comp.getListLineaxProd().get(i).getProducto().getIdProducto()==prod.getIdProducto()){
