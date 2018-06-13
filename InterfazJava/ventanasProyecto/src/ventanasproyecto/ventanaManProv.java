@@ -436,26 +436,29 @@ public class ventanaManProv extends javax.swing.JFrame {
         p.setProvincia((Provincia) provincia.getSelectedItem());
         p.setDistrito((Distrito) distrito.getSelectedItem());
         p.setDireccion(dir.getText());
-        
+        int err = 0;
         try {
-            LogicaNegocio.registrarProveedor(p);
+            err = LogicaNegocio.registrarProveedor(p);
             listarProveedores();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        nombre.setText("");
-        ruc.setText("");
-        dir.setText("");
-        email.setText("");
-        tlf.setText("");
-        dia.setSelectedItem(dia.getItemAt(0));
-        departamento.setSelectedItem(departamento.getItemAt(0));
-        provincia.setVisible(false);
-        distrito.setVisible(false);
-        dir.setVisible(false);
+        if(err == 0){
+            nombre.setText("");
+            ruc.setText("");
+            dir.setText("");
+            email.setText("");
+            tlf.setText("");
+            dia.setSelectedItem(dia.getItemAt(0));
+            departamento.setSelectedItem(departamento.getItemAt(0));
+            provincia.setVisible(false);
+            distrito.setVisible(false);
+            dir.setVisible(false);
+        }else if(err == 1){
+            JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Trabajador ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_registrarActionPerformed
 
     private void dirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirActionPerformed
@@ -551,7 +554,9 @@ public class ventanaManProv extends javax.swing.JFrame {
         departamento.setSelectedItem(departamento.getItemAt(pos));
         
         try {
-            llenarComboProv(lista.get(n).getDepartamento().getIdDep());
+            if(provincia.getItemCount()<1){
+                llenarComboProv(lista.get(n).getDepartamento().getIdDep());
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -667,7 +672,9 @@ public class ventanaManProv extends javax.swing.JFrame {
     private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
         Departamento d = (Departamento) departamento.getSelectedItem();
         try {
-            llenarComboProv(d.getIdDep());
+            if(provincia.getItemCount()<1){
+                llenarComboProv(d.getIdDep());
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

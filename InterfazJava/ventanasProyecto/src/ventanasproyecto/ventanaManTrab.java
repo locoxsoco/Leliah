@@ -741,8 +741,9 @@ public class ventanaManTrab extends javax.swing.JFrame {
         t.setNumDoc(numDoc.getText());
         t.setTipoDoc((TipoDocumentoIdentidad) tipoDoc.getSelectedItem());
         t.setId(idU);
+        int err =0;
         try {
-            LogicaNegocio.modificarTrabajador(t);
+            err = LogicaNegocio.modificarTrabajador(t);
             listarTrabajadores();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
@@ -750,29 +751,35 @@ public class ventanaManTrab extends javax.swing.JFrame {
             Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        nombre.setText("");
-        apPat.setText("");
-        apMat.setText("");
-        user.setText("");
-        pass.setText("");
-        java.util.Date fecha1 = new java.util.Date();
-        fecha.setDate(fecha1);
-        tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
-        numDoc.setText("");
-        tipoUser.setSelectedItem(tipoUser.getItemAt(0));
-        sueldo.setText("");
-        horas.setText("");
-        frec.setSelectedItem(frec.getItemAt(0));
-        registrar.setEnabled(false);
-        modificar.setEnabled(false);
-        eliminar.setEnabled(false);
-        sueldo.setVisible(false);
-        Tsueldo.setVisible(false);
-        Thoras.setVisible(false);
-        horas.setVisible(false);
-        Ttipo.setVisible(false);
-        frec.setVisible(false);
-        moneda.setVisible(false);
+        if(err == 0){
+            nombre.setText("");
+            apPat.setText("");
+            apMat.setText("");
+            user.setText("");
+            pass.setText("");
+            java.util.Date fecha1 = new java.util.Date();
+            fecha.setDate(fecha1);
+            tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
+            numDoc.setText("");
+            tipoUser.setSelectedItem(tipoUser.getItemAt(0));
+            sueldo.setText("");
+            horas.setText("");
+            frec.setSelectedItem(frec.getItemAt(0));
+            registrar.setEnabled(false);
+            modificar.setEnabled(false);
+            eliminar.setEnabled(false);
+            sueldo.setVisible(false);
+            Tsueldo.setVisible(false);
+            Thoras.setVisible(false);
+            horas.setVisible(false);
+            Ttipo.setVisible(false);
+            frec.setVisible(false);
+            moneda.setVisible(false);
+        }else if(err == 1){
+            JOptionPane.showMessageDialog(null, "El numero de documento de identidad ya se encuentra asociado a otro trabajador", "Trabajador ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }else if(err == 2){
+            JOptionPane.showMessageDialog(null, "El username ya se encuentra asociado a otro trabajador", "Trabajador ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }
 
     }//GEN-LAST:event_modificarActionPerformed
 

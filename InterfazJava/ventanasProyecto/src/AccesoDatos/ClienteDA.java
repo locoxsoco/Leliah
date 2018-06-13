@@ -1,8 +1,4 @@
-/*
- * Nombre: Luis Alberto Carranza Cobenas
- * Codigo: 20151110
- * and open the template in the editor.
- */
+
 package AccesoDatos;
 
 import clases.Cliente;
@@ -18,10 +14,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-/**
- *
- * @author Luis Alberto Carranza Cobenas <20151110>
- */
+
 public class ClienteDA {
     public ClienteDA(){
         
@@ -150,10 +143,10 @@ public class ClienteDA {
         return lista;
     }
     
-    public void registrarCliente(Cliente c) throws ClassNotFoundException, SQLException{
+    public int registrarCliente(Cliente c) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call REGISTRAR_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(c instanceof Persona){
@@ -187,17 +180,20 @@ public class ClienteDA {
         
         
         stmt.registerOutParameter("_id", java.sql.Types.INTEGER); //1
+        stmt.registerOutParameter("_error", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
         
+        int err = stmt.getInt("_error");
         c.setIdCliente(stmt.getInt("_id"));
         con.close();
+        return err;
     }
     
-    public void modificarCliente(Cliente c) throws ClassNotFoundException, SQLException{
+    public int modificarCliente(Cliente c) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call MODIFICAR_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call MODIFICAR_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(c instanceof Persona){
@@ -229,10 +225,12 @@ public class ClienteDA {
         stmt.setInt("_FidProvincia", c.getProvincia().getIdProv());
         stmt.setInt("_FidDistrito", c.getDistrito().getIdDist());
         stmt.setInt("_id", c.getIdCliente());
+        stmt.registerOutParameter("_error", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
-        
+        int err = stmt.getInt("_error");
         con.close();
+        return err;
     }
     
     public void eliminarCliente(int id) throws ClassNotFoundException, SQLException{

@@ -44,12 +44,12 @@ public class ProveedorBL {
         return accesoDatos.listarProveedores();
     }
     
-    public void registrarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
-        accesoDatos.registrarProveedor(p);
+    public int registrarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
+        return accesoDatos.registrarProveedor(p);
     }
     
-    public void modificarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
-        accesoDatos.modificarProveedor(p);
+    public int modificarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
+        return accesoDatos.modificarProveedor(p);
     }
     
     public void eliminarServicio(int id) throws ClassNotFoundException, SQLException{

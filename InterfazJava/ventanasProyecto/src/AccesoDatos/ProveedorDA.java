@@ -138,10 +138,10 @@ public class ProveedorDA {
         return lista;
     }
     
-    public void registrarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
+    public int registrarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_PROVEEDOR(?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call REGISTRAR_PROVEEDOR(?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         stmt.setString("_nombre", p.getNombre());
@@ -154,18 +154,19 @@ public class ProveedorDA {
         stmt.setInt("_FidProvincia", p.getProvincia().getIdProv());
         stmt.setInt("_FidDistrito", p.getDistrito().getIdDist());
         stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
-        
+        stmt.registerOutParameter("_error", java.sql.Types.INTEGER);
         stmt.executeUpdate();
         
         p.setId(stmt.getInt("_id"));
-        
+        int err = stmt.getInt("_error");
         con.close();
+        return err;
     }
     
-    public void modificarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
+    public int modificarProveedor(Proveedor p) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call MODIFICAR_PROVEEDOR(?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call MODIFICAR_PROVEEDOR(?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         stmt.setString("_nombre", p.getNombre());
@@ -178,10 +179,12 @@ public class ProveedorDA {
         stmt.setInt("_FidProvincia", p.getProvincia().getIdProv());
         stmt.setInt("_FidDistrito", p.getDistrito().getIdDist());
         stmt.setInt("_id", p.getId());
-        
+        stmt.registerOutParameter("_error", java.sql.Types.INTEGER);
         stmt.executeUpdate();
         
+        int err = stmt.getInt("_error");
         con.close();
+        return err;
     }
     
     public void eliminarServicio(int id) throws ClassNotFoundException, SQLException{

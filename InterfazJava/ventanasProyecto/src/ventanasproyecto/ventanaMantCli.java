@@ -470,9 +470,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
         c.setDepartamento(((Departamento)departamento.getSelectedItem()));
         c.setProvincia(((Provincia)provincia.getSelectedItem()));
         c.setDistrito(((Distrito)distrito.getSelectedItem()));
-
+        int err =0;
         try {
-            LogicaNegocio.registrarCliente(c);
+            err = LogicaNegocio.registrarCliente(c);
             listarClientes();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
@@ -483,39 +483,49 @@ public class ventanaMantCli extends javax.swing.JFrame {
         //Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), numDoc.getText(), apPat.getText(), apMat.getText(), dir.getText(), tlf.getText(), email.getText()};
         
         //model.addRow(s);
-        dir.setText("");
-        email.setText("");
-        tlf.setText("");
-        namae.setText("");
-        numDoc.setText("");
-        apPat.setText("");
-        tipoCli.setSelectedItem(tipoCli.getItemAt(0));
-        apMat.setText("");
-        TapPat.setVisible(false);
-        TapMat.setVisible(false);
-        apPat.setVisible(false);
-        apMat.setVisible(false);
-        dir.setVisible(false);
-        email.setVisible(false);
-        tlf.setVisible(false);
-        dirtxt.setVisible(false);
-        emailtxt.setVisible(false);
-        tlftxt.setVisible(false);
-        namae.setVisible(false);
-        namaetxt.setVisible(false);
-        tipoDoc.setVisible(false);
-        numDoc.setVisible(false);
-        TnumDoc.setVisible(false);
-        TtipoDoc.setVisible(false);
-        departamento.setVisible(false);
-        provincia.setVisible(false);
-        distrito.setVisible(false);
-        Tdepartamento.setVisible(false);
-        Tprovincia.setVisible(false);
-        Tdistrito.setVisible(false);
-        registrar.setEnabled(false);
-        modificar.setEnabled(false);
-        eliminar.setEnabled(false);
+        if(err ==0){
+            dir.setText("");
+            email.setText("");
+            tlf.setText("");
+            namae.setText("");
+            numDoc.setText("");
+            apPat.setText("");
+            tipoCli.setSelectedItem(tipoCli.getItemAt(0));
+            apMat.setText("");
+            TapPat.setVisible(false);
+            TapMat.setVisible(false);
+            apPat.setVisible(false);
+            apMat.setVisible(false);
+            dir.setVisible(false);
+            email.setVisible(false);
+            tlf.setVisible(false);
+            dirtxt.setVisible(false);
+            emailtxt.setVisible(false);
+            tlftxt.setVisible(false);
+            namae.setVisible(false);
+            namaetxt.setVisible(false);
+            tipoDoc.setVisible(false);
+            numDoc.setVisible(false);
+            TnumDoc.setVisible(false);
+            TtipoDoc.setVisible(false);
+            departamento.setVisible(false);
+            provincia.setVisible(false);
+            distrito.setVisible(false);
+            Tdepartamento.setVisible(false);
+            Tprovincia.setVisible(false);
+            Tdistrito.setVisible(false);
+            registrar.setEnabled(false);
+            modificar.setEnabled(false);
+            eliminar.setEnabled(false);
+        }else if(err == 1){
+            if(tipo.equals("Persona")){
+                JOptionPane.showMessageDialog(null, "El numero de documento de identidad ya se encuentra asociado a otro cliente", "Cliente ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }else if(tipo.equals("Empresa")){
+                JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro cliente", "Cliente ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
+            
+        }
+        
         
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -735,7 +745,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
         
         try {
             //System.out.println(lista.get(n).getDepartamento().getNombDep());
-            llenarComboBoxProv(lista.get(n).getDepartamento().getIdDep());
+            if(provincia.getItemCount()<1){
+                llenarComboBoxProv(lista.get(n).getDepartamento().getIdDep());
+            }
             //System.out.println(lista.get(n).getProvincia().getNombProv());
             llenarComboBoxDist(lista.get(n).getProvincia().getIdProv());
             //dni.setText(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 6)));
@@ -892,9 +904,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
             c.setProvincia(((Provincia)provincia.getSelectedItem()));
             c.setDistrito(((Distrito)distrito.getSelectedItem()));
             c.setIdCliente(idU);
-
+            int err = 0;
             try {
-                LogicaNegocio.modificarCliente(c);
+                err = LogicaNegocio.modificarCliente(c);
                 listarClientes();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
@@ -905,6 +917,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             //Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), numDoc.getText(), apPat.getText(), apMat.getText(), dir.getText(), tlf.getText(), email.getText()};
 
             //model.addRow(s);
+            if(err ==0){
             dir.setText("");
             email.setText("");
             tlf.setText("");
@@ -938,6 +951,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
             registrar.setEnabled(false);
             modificar.setEnabled(false);
             eliminar.setEnabled(false);
+        }else if(err == 1){
+            if(tipo.equals("Persona")){
+                JOptionPane.showMessageDialog(null, "El numero de documento de identidad ya se encuentra asociado a otro cliente", "Cliente ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }else if(tipo.equals("Empresa")){
+                JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro cliente", "Cliente ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
+            
+        }
         }
         
        
@@ -1053,7 +1074,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             Departamento d = (Departamento) departamento.getSelectedItem();
-            llenarComboBoxProv(d.getIdDep());
+            if(provincia.getItemCount()<1){
+                llenarComboBoxProv(d.getIdDep());
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

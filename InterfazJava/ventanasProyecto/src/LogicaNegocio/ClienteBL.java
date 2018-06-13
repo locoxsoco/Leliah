@@ -44,12 +44,12 @@ public class ClienteBL {
         return accesoDatos.listarClientes();
     }
     
-    public void registrarCliente(Cliente c) throws ClassNotFoundException, SQLException{
-        accesoDatos.registrarCliente(c);
+    public int registrarCliente(Cliente c) throws ClassNotFoundException, SQLException{
+        return accesoDatos.registrarCliente(c);
     }
     
-    public void modificarCliente(Cliente c) throws ClassNotFoundException, SQLException{
-        accesoDatos.modificarCliente(c);
+    public int modificarCliente(Cliente c) throws ClassNotFoundException, SQLException{
+        return accesoDatos.modificarCliente(c);
     }
     
     public void eliminarCliente(int id) throws ClassNotFoundException, SQLException{
