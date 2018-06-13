@@ -68,7 +68,7 @@ import javax.swing.table.DefaultTableModel;
 
         jLabel1.setText("Consumible:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(12, 26, 71, 16);
+        jLabel1.setBounds(12, 26, 58, 14);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +77,7 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(101, 22, 95, 25);
+        consum.setBounds(101, 22, 79, 23);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -86,26 +86,26 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(214, 22, 113, 25);
+        no_consum.setBounds(214, 22, 95, 23);
 
         jLabel2.setText("Categoria:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 59, 60, 16);
+        jLabel2.setBounds(12, 59, 51, 14);
 
         getContentPane().add(categoria);
-        categoria.setBounds(101, 56, 170, 22);
+        categoria.setBounds(101, 56, 170, 20);
 
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(12, 99, 50, 16);
+        jLabel3.setBounds(12, 99, 41, 14);
         getContentPane().add(nombre);
-        nombre.setBounds(101, 96, 230, 22);
+        nombre.setBounds(101, 96, 230, 20);
 
         jLabel4.setText("Marca:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(12, 139, 40, 16);
+        jLabel4.setBounds(12, 139, 33, 14);
         getContentPane().add(marca);
-        marca.setBounds(101, 136, 194, 22);
+        marca.setBounds(101, 136, 194, 20);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,7 +186,7 @@ import javax.swing.table.DefaultTableModel;
                 con = "No";
                 cat = ((NoConsumible) list.get(i)).getCategoria().toString();
             }
-            Object o[] = {list.get(i).getIdProducto(), list.get(i).getNombre(), list.get(i).getPrecio(), list.get(i).getMarca(), con, cat};
+            Object o[] = {list.get(i).getNombre(), list.get(i).getMarca(), con, cat,list.get(i).getIdProducto(),  list.get(i).getPrecio()};
             model.addRow(o);
         }
     }//GEN-LAST:event_buscarActionPerformed
