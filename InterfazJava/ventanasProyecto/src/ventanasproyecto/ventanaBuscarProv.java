@@ -135,7 +135,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
             model.removeRow(0);
         }
         for (int i=0; i<n; i++){
-            Object o[] = {lista.get(i).getId(), lista.get(i).getNombre(), lista.get(i).getRuc(), lista.get(i).getCorreo(), lista.get(i).getTelefono(),lista.get(i).getDiaSemana().toString(), lista.get(i).getDireccion()+", "+lista.get(i).getDistrito().toString()+", "+lista.get(i).getProvincia().toString()+", "+lista.get(i).getDepartamento().toString()};
+            Object o[] = {lista.get(i).getRuc(), lista.get(i).getNombre(),lista.get(i).getId() , lista.get(i).getCorreo(), lista.get(i).getTelefono(),lista.get(i).getDiaSemana().toString(), lista.get(i).getDireccion()+", "+lista.get(i).getDistrito().toString()+", "+lista.get(i).getProvincia().toString()+", "+lista.get(i).getDepartamento().toString()};
             model.addRow(o);
         }
     }//GEN-LAST:event_buscarActionPerformed
