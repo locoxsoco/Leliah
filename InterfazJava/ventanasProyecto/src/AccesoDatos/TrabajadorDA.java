@@ -71,10 +71,10 @@ public class TrabajadorDA {
         return lista;
     }
     
-    public void registrarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
+    public int registrarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String sql = "{call REGISTRAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(t instanceof Jefe){
@@ -113,11 +113,14 @@ public class TrabajadorDA {
         stmt.setInt("_FidTipoDocumentoIdentidad", t.getTipoDoc().getIdTipo());
         
         stmt.registerOutParameter("_id", java.sql.Types.INTEGER); //1
+        stmt.registerOutParameter("_error", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
         
+        int err = stmt.getInt("_error");
         t.setId(stmt.getInt("_id"));
         con.close();
+        return err;
     }
     
     public void modificarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{

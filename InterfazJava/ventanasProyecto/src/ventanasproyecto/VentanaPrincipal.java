@@ -37,7 +37,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         optionLbel = new javax.swing.JLabel();
         nomb1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -51,6 +50,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane2.setBounds(0, 0, 0, 0);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton1.setText("Venta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,9 +58,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(30, 150, 80, 25);
+        jButton1.setBounds(30, 150, 150, 70);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton2.setText("Administrador");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,9 +69,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(30, 190, 140, 25);
+        jButton2.setBounds(30, 240, 150, 70);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton3.setText("Reportes");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,9 +80,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(30, 270, 100, 25);
+        jButton3.setBounds(200, 240, 150, 70);
 
         compras.setBackground(new java.awt.Color(255, 255, 204));
+        compras.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         compras.setText("Compras");
         compras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -93,7 +96,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(compras);
-        compras.setBounds(30, 230, 100, 25);
+        compras.setBounds(200, 150, 150, 70);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Bienvenido");
@@ -120,11 +123,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton6);
-        jButton6.setBounds(220, 370, 150, 29);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/jefe.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(170, 130, 220, 220);
+        jButton6.setBounds(220, 340, 150, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -157,6 +156,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         ventanaAdmin v1 = new ventanaAdmin();
         v1.vAnterior = this;
+        v1.jButton7.setVisible(true);
+        v1.jButton1.setVisible(false);
         v1.anterior = "Jefe";
         v1.nomb.setText(nomb1.getText());
         v1.ventanaHome = this.ventanaHome;
@@ -220,7 +221,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane jTextPane2;
     public static javax.swing.JLabel nomb1;

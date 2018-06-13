@@ -125,10 +125,27 @@ public class ventanaManProd extends javax.swing.JFrame {
                 nombreActionPerformed(evt);
             }
         });
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(nombre);
         nombre.setBounds(154, 48, 200, 22);
+
+        precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                precioKeyTyped(evt);
+            }
+        });
         getContentPane().add(precio);
         precio.setBounds(154, 77, 170, 22);
+
+        cantMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantMinKeyTyped(evt);
+            }
+        });
         getContentPane().add(cantMin);
         cantMin.setBounds(154, 106, 200, 22);
         getContentPane().add(marca);
@@ -641,6 +658,28 @@ public class ventanaManProd extends javax.swing.JFrame {
     private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_categoriaActionPerformed
+
+    private void precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String s = precio.getText();
+        if(s.contains(".")){
+            if(c =='.') evt.consume();
+        }
+        if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
+    }//GEN-LAST:event_precioKeyTyped
+
+    private void cantMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantMinKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') evt.consume();
+    }//GEN-LAST:event_cantMinKeyTyped
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || (c>='0' && c<='9'))) evt.consume();
+    }//GEN-LAST:event_nombreKeyTyped
 
     /**
      * @param args the command line arguments

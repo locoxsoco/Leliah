@@ -85,8 +85,20 @@ public class ventanaManServ extends javax.swing.JFrame {
         jLabel3.setText("Precio Unitario:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(15, 85, 110, 16);
+
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(nombre);
         nombre.setBounds(135, 55, 200, 22);
+
+        pu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                puKeyTyped(evt);
+            }
+        });
         getContentPane().add(pu);
         pu.setBounds(135, 82, 70, 22);
 
@@ -420,6 +432,22 @@ public class ventanaManServ extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void puKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_puKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String s = pu.getText();
+        if(s.contains(".")){
+            if(c =='.') evt.consume();
+        }
+        if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
+    }//GEN-LAST:event_puKeyTyped
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || (c>='0' && c<='9'))) evt.consume();
+    }//GEN-LAST:event_nombreKeyTyped
 
     /**
      * @param args the command line arguments

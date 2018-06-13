@@ -27,8 +27,9 @@ public class TrabajadorBL {
         return accesoDatos.listarTrabajadores();
     }
     
-    public void registrarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
-        accesoDatos.registrarTrabajador(t);
+    public int registrarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{
+        int err = accesoDatos.registrarTrabajador(t);
+        return err;
     }
     
     public void modificarTrabajador(Trabajador t) throws ClassNotFoundException, SQLException{

@@ -114,6 +114,7 @@ public class ventanaLogin extends javax.swing.JFrame {
         if(u.getPriv()==2){
             ventanaAdmin v1 = new ventanaAdmin();
             v1.ventanaHome = this;
+            v1.jButton7.setVisible(false);
             v1.setVisible(true);
             v1.nomb.setText(u.getNomb());
             v1.anterior = "Home";

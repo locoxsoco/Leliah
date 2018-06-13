@@ -268,6 +268,8 @@ public class ventanaAdmin extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         ventanaHome.regresar();
+        if (anterior == "Jefe")
+            vAnterior.dispose();
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -294,7 +296,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
     public javax.swing.JButton jButton4;
     public javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    public javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
