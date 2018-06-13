@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.isInteger;
 
 /**
  *
@@ -211,12 +212,22 @@ public class ventanaCompra extends javax.swing.JFrame {
                 puActionPerformed(evt);
             }
         });
+        pu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                puKeyTyped(evt);
+            }
+        });
         getContentPane().add(pu);
         pu.setBounds(130, 260, 70, 22);
 
         cant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cantActionPerformed(evt);
+            }
+        });
+        cant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantKeyTyped(evt);
             }
         });
         getContentPane().add(cant);
@@ -376,6 +387,10 @@ public class ventanaCompra extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Precio Unitario debe ser un valor real", "Error Precio Unitario", JOptionPane.PLAIN_MESSAGE);
                 return;
         }
+        if(!isInteger(cant.getText())){
+                JOptionPane.showMessageDialog(null, "Cantidad debe ser un valor entero", "Error Cantidad", JOptionPane.PLAIN_MESSAGE);
+                return;
+        }
         if(fecha.getDate()==null && fecha.isEnabled()){
                 JOptionPane.showMessageDialog(null, "Fecha de Caducidad no debe ser estar vacio", "Error Fecha de Caducidad", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -522,6 +537,18 @@ public class ventanaCompra extends javax.swing.JFrame {
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void puKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_puKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c>='0' && c<='9') || c == '+' || c == '-' || c == '.')) evt.consume();
+    }//GEN-LAST:event_puKeyTyped
+
+    private void cantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c>='0' && c<='9') || c == '+' || c == '-' )) evt.consume();
+    }//GEN-LAST:event_cantKeyTyped
 
     /**
      * @param args the command line arguments

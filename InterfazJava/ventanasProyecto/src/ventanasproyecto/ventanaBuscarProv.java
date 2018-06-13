@@ -27,11 +27,21 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
     private ArrayList<Proveedor> lista;
     
     public ventanaBuscarProv() {
+        addWindowListener(new java.awt.event.WindowAdapter(){
+            
+            public void windowClosing(java.awt.event.WindowEvent evt){
+                cerrar();
+            }
+        });
         initComponents();
         LogicaNegocio = new ProveedorBL();
         lista = new ArrayList<Proveedor>();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         seleccionar.setEnabled(false);
+    }
+    private void cerrar(){
+        ventanaAnterior.setEnabled(true);
+        this.dispose();
     }
 
     /**
@@ -52,7 +62,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         seleccionar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Buscar Proveedor");
         setMinimumSize(new java.awt.Dimension(400, 420));
         getContentPane().setLayout(null);

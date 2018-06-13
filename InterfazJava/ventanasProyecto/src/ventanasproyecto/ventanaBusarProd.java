@@ -31,11 +31,21 @@ import javax.swing.table.DefaultTableModel;
     private ProductoBL LogicaNegocio;
     private ArrayList<Producto> list;
     public ventanaBusarProd() {
+        addWindowListener(new java.awt.event.WindowAdapter(){
+            
+            public void windowClosing(java.awt.event.WindowEvent evt){
+                cerrar();
+            }
+        });
         initComponents();
         seleccionar.setEnabled(false);
         LogicaNegocio = new ProductoBL();
         list = new ArrayList<Producto>();
         inicializarCon();
+    }
+    private void cerrar(){
+        ventanaAnterior.setEnabled(true);
+        this.dispose();
     }
 
     /**
@@ -61,14 +71,14 @@ import javax.swing.table.DefaultTableModel;
         buscar = new javax.swing.JButton();
         seleccionar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Buscar Producto");
         setPreferredSize(new java.awt.Dimension(400, 510));
         getContentPane().setLayout(null);
 
         jLabel1.setText("Consumible:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(12, 26, 58, 14);
+        jLabel1.setBounds(12, 26, 71, 16);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +87,7 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(101, 22, 79, 23);
+        consum.setBounds(101, 22, 95, 25);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -86,26 +96,26 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(214, 22, 95, 23);
+        no_consum.setBounds(214, 22, 113, 25);
 
         jLabel2.setText("Categoria:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 59, 51, 14);
+        jLabel2.setBounds(12, 59, 60, 16);
 
         getContentPane().add(categoria);
-        categoria.setBounds(101, 56, 170, 20);
+        categoria.setBounds(101, 56, 170, 22);
 
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(12, 99, 41, 14);
+        jLabel3.setBounds(12, 99, 50, 16);
         getContentPane().add(nombre);
-        nombre.setBounds(101, 96, 230, 20);
+        nombre.setBounds(101, 96, 230, 22);
 
         jLabel4.setText("Marca:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(12, 139, 33, 14);
+        jLabel4.setBounds(12, 139, 40, 16);
         getContentPane().add(marca);
-        marca.setBounds(101, 136, 194, 20);
+        marca.setBounds(101, 136, 194, 22);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -210,7 +220,8 @@ import javax.swing.table.DefaultTableModel;
         ventanaAnterior.cant.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
-
+    
+    
     private void consumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consumActionPerformed
         // TODO add your handling code here:
         if (consum.isSelected()==true){
