@@ -73,12 +73,12 @@ import javax.swing.table.DefaultTableModel;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Buscar Producto");
-        setPreferredSize(new java.awt.Dimension(400, 510));
+        setPreferredSize(new java.awt.Dimension(420, 560));
         getContentPane().setLayout(null);
 
         jLabel1.setText("Consumible:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(12, 26, 71, 16);
+        jLabel1.setBounds(12, 26, 90, 16);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +87,7 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(101, 22, 95, 25);
+        consum.setBounds(101, 22, 110, 25);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -96,12 +96,17 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(214, 22, 113, 25);
+        no_consum.setBounds(214, 22, 140, 25);
 
         jLabel2.setText("Categoria:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(12, 59, 60, 16);
 
+        categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaActionPerformed(evt);
+            }
+        });
         getContentPane().add(categoria);
         categoria.setBounds(101, 56, 170, 22);
 
@@ -243,9 +248,13 @@ import javax.swing.table.DefaultTableModel;
         seleccionar.setEnabled(true);
     }//GEN-LAST:event_tablaMouseClicked
 
+    private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoriaActionPerformed
+
     private void inicializarCon(){
         ArrayList<String> s = new ArrayList<String>();
-        s.add("Escoja");
+        s.add("Todos");
         int n = s.size();
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         for(int i=0; i<n; i++){
@@ -257,14 +266,14 @@ import javax.swing.table.DefaultTableModel;
     private void inicializarComboCon(int tipo){
         ArrayList<String> s = new ArrayList<String>();
         if(tipo == 1){
-            s.add("Escoja");
+            s.add("Todos");
             s.add(Categoria_Consumible.Bebida.toString());
             s.add(Categoria_Consumible.Caramelo.toString());
             s.add(Categoria_Consumible.Helado.toString());
             s.add(Categoria_Consumible.Postre.toString());
             s.add(Categoria_Consumible.Snack.toString());
         }else if(tipo == 2){
-            s.add("Escoja");
+            s.add("Todos");
             s.add(Categoria_NoConsumible.Adorno.toString());
             s.add(Categoria_NoConsumible.Juguete.toString());
             s.add(Categoria_NoConsumible.UtilOficina.toString());

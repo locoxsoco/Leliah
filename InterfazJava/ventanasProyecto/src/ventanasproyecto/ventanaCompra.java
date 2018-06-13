@@ -107,6 +107,8 @@ public class ventanaCompra extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         fecha = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Compra");
@@ -149,9 +151,9 @@ public class ventanaCompra extends javax.swing.JFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(270, 15, 100, 29);
 
-        jLabel1.setText("Proveedor:");
+        jLabel1.setText("Buscar");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 80, 63, 16);
+        jLabel1.setBounds(130, 205, 100, 16);
 
         jLabel2.setText("Ruc:");
         getContentPane().add(jLabel2);
@@ -337,6 +339,14 @@ public class ventanaCompra extends javax.swing.JFrame {
         jLabel4.setBounds(20, 330, 130, 16);
         getContentPane().add(fecha);
         fecha.setBounds(150, 330, 200, 22);
+
+        jLabel10.setText("Proveedor:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(20, 80, 63, 16);
+
+        jLabel11.setText("Buscar");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(150, 80, 120, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -598,6 +608,8 @@ public class ventanaCompra extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
