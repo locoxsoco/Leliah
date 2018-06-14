@@ -125,13 +125,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton6.setText("Cerrar Sesión");
+        jButton6.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton6);
-        jButton6.setBounds(200, 340, 150, 29);
+        jButton6.setBounds(220, 340, 130, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

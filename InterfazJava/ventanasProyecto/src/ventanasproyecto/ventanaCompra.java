@@ -287,23 +287,25 @@ public class ventanaCompra extends javax.swing.JFrame {
 
         volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         volver.setText("Volver");
+        volver.setMargin(new java.awt.Insets(2, 4, 2, 4));
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
             }
         });
         getContentPane().add(volver);
-        volver.setBounds(100, 600, 110, 29);
+        volver.setBounds(130, 600, 90, 29);
 
         cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setMargin(new java.awt.Insets(2, 4, 2, 4));
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerrarSesionActionPerformed(evt);
             }
         });
         getContentPane().add(cerrarSesion);
-        cerrarSesion.setBounds(230, 600, 140, 29);
+        cerrarSesion.setBounds(240, 600, 130, 29);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(15, 70, 355, 10);
         getContentPane().add(jSeparator2);

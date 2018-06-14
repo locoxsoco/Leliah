@@ -222,23 +222,25 @@ public class ventanaManProd extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton4.setText("Cerrar Sesión");
+        jButton4.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(390, 480, 140, 29);
+        jButton4.setBounds(400, 480, 130, 29);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton5.setText("Volver");
+        jButton5.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(260, 480, 110, 29);
+        jButton5.setBounds(290, 480, 90, 29);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {

@@ -303,23 +303,25 @@ public class ventanaMantCli extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton4.setText("Volver");
+        jButton4.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(440, 540, 120, 29);
+        jButton4.setBounds(470, 540, 90, 29);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton5.setText("Cerrar Sesión");
+        jButton5.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(570, 540, 140, 29);
+        jButton5.setBounds(580, 540, 130, 29);
 
         tipoCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja...", "Persona", "Empresa" }));
         tipoCli.addActionListener(new java.awt.event.ActionListener() {

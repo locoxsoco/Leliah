@@ -501,6 +501,7 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         ButtRepCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         ButtRepCerrar.setText("Volver");
+        ButtRepCerrar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         ButtRepCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ButtRepCerrarMouseClicked(evt);
@@ -512,17 +513,18 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ButtRepCerrar);
-        ButtRepCerrar.setBounds(200, 280, 93, 29);
+        ButtRepCerrar.setBounds(200, 280, 90, 29);
 
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         logout.setText("Cerrar Sesión");
+        logout.setMargin(new java.awt.Insets(2, 4, 2, 4));
         logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutActionPerformed(evt);
             }
         });
         getContentPane().add(logout);
-        logout.setBounds(310, 280, 135, 29);
+        logout.setBounds(310, 280, 130, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

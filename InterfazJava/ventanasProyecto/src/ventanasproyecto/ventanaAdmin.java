@@ -136,13 +136,14 @@ public class ventanaAdmin extends javax.swing.JFrame {
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton6.setText("Cerrar Sesión");
+        jButton6.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton6);
-        jButton6.setBounds(250, 380, 140, 29);
+        jButton6.setBounds(250, 380, 130, 29);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/admin.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -151,13 +152,14 @@ public class ventanaAdmin extends javax.swing.JFrame {
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         jButton7.setText("Volver");
+        jButton7.setMargin(new java.awt.Insets(2, 4, 2, 4));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton7);
-        jButton7.setBounds(120, 380, 110, 29);
+        jButton7.setBounds(120, 380, 90, 29);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Elija una opcion:");
