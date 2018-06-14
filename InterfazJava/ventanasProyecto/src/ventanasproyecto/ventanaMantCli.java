@@ -449,6 +449,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             //modelo.addElement(dep.get(i));
             departamento.addItem(dep.get(i));
         }
+        departamento.setSelectedItem(departamento.getItemAt(0));
         //departamento.setModel(modelo);
     }
     
