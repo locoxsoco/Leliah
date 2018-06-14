@@ -20,9 +20,14 @@ namespace Inicio
         private StockXProducto prdoStock;
         private VentaBL logicaNegocio;
         private ProductoBL logicaNegocioP;
+        private Servicio servTemp;
+        private BindingList<DetalleVentaPS> detalleVentaProdServ;
+        private int posicion;
+
         double acum;
         double valorIGV = 0.18F;
         double tipoCambio = 3.24F;
+
         public enum estado
         {
             Inicial, Nuevo, Guardar
@@ -34,9 +39,12 @@ namespace Inicio
             logicaNegocioP = new ProductoBL();
             estadoComponentes(estado.Inicial);
             venta = new VentaAnticipada();
-            dgvDetalleVenta.AutoGenerateColumns = false;
+
             venta.Detalles_venta = new BindingList<Detalle_Venta>();
-            dgvDetalleVenta.DataSource = venta.Detalles_venta;
+            venta.Detalles_servicio = new BindingList<Detalle_Venta_Servicio>();
+            detalleVentaProdServ = new BindingList<DetalleVentaPS>();
+            dgvDetalleVenta.AutoGenerateColumns = false;
+            dgvDetalleVenta.DataSource = detalleVentaProdServ;
         }
 
         public void estadoComponentes(estado e)
@@ -48,53 +56,58 @@ namespace Inicio
                     ToolStripGuardar.Enabled = false;
                     radioBtnBoleta.Enabled = false;
                     radioBtnFactura.Enabled = false;
-                    comboBoxMoneda.Enabled = false;
-                    radioBtnSi.Enabled = false;
-                    radioBtnNo.Enabled = false;
                     radioBtnEfectivo.Enabled = false;
                     radioBtnTarjeta.Enabled = false;
                     textDNI.Enabled = false;
                     textRUC.Enabled = false;
-                    comboBoxMoneda.Enabled = false;
                     radioBtnInmediata.Enabled = false;
                     radioBtnAntcipada.Enabled = false;
-                    dgvDetalleVenta.Enabled = false;
+                    //dgvDetalleVenta.Enabled = false;
                     btnListaClientesN.Enabled = false;
                     btnListaClientesJ.Enabled = false;
                     btnListaProd.Enabled = false;
+                    btnListaServ.Enabled = false;
                     textCantidad.Enabled = false;
                     textDescuento.Enabled = false;
                     textPrecioVendido.Enabled = false;
+                    textCantServ.Enabled = true;
+                    textDescServ.Enabled = true;
+
                     btnAgregar.Enabled = false;
+                    btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+
+                    btnAgregarServ.Enabled = false;
+                    btnModificarServ.Enabled = false;
+                    btnEliminarServ.Enabled = false;
+
                     toolStripCancelar.Enabled = false;
+                    limpiarCamposProducto();
+                    limpiarCamposServicio();
+                    dgvDetalleVenta.Rows.Clear();
                     limpiarCampos();
-                    
+                    panelProductoServicio.Visible = false;
                     break;
 
                 case estado.Nuevo:
-                    comboBoxMoneda.Enabled = true;
                     TooStripNuevo.Enabled = false;
                     ToolStripGuardar.Enabled = true;
                     radioBtnBoleta.Enabled = true;
-                    radioBtnSi.Enabled = true;
-                    radioBtnNo.Enabled = true;
+                    btnListaClientesN.Enabled = true;
                     radioBtnFactura.Enabled = true;
                     radioBtnEfectivo.Enabled = true;
                     radioBtnTarjeta.Enabled = true;
-                    comboBoxMoneda.Enabled = true;
                     radioBtnInmediata.Enabled = true;
                     radioBtnAntcipada.Enabled = true;
-                    textCantidad.Enabled = true;
-                    textDescuento.Enabled = true;
-                    textPrecioVendido.Enabled = true;
+                    textPrecioVendido.Enabled = false; ;
                     dgvDetalleVenta.Enabled = true;
                     btnListaProd.Enabled = true;
-                    btnAgregar.Enabled = true;
-                    btnEliminar.Enabled = true;
+                    btnListaServ.Enabled = true;                   
+
                     toolStripCancelar.Enabled = true;
                     dgvDetalleVenta.Rows.Clear();
                     limpiarCampos();
+                    panelProductoServicio.Visible = false;
                     acum = 0.0F;
                     break;
                 case estado.Guardar:
@@ -102,7 +115,6 @@ namespace Inicio
                     ToolStripGuardar.Enabled = false;
                     textDNI.Enabled = false;
                     textRUC.Enabled = false;
-                    comboBoxMoneda.Enabled = false;
                     textBoxNombre.Enabled = false;
                     textFV.Enabled = false;
                     textAdelanto.Enabled = false;
@@ -121,71 +133,71 @@ namespace Inicio
 
         public void limpiarCampos()
         {
-            
+            textSubtotal.Text = "";
+            textIGV.Text = "";
+            textTotal.Text = "";
+            textAdelanto.Text = "";
             textDNI.Text = "";
             textRUC.Text = "";
+        }
+        public void limpiarCamposProducto()
+        {
             textBoxNombre.Text = "";
             textBoxCU.Text = "";
+            textPrecioVendido.Text = "";
             textDescuento.Text = "";
-            textAdelanto.Text = "";
-            textFV.Text = "";
             textCantidad.Text = "";
+            textStock.Text = "";
+            textFV.Text = "";
         }
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        public void limpiarCamposServicio()
         {
-
+            textNombServ.Text = "";
+            textCUserv.Text = "";
+            textPVserv.Text = "";
+            textDescServ.Text = "";
+            textCantServ.Text = "";
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private bool productoAgregado(int idProd, BindingList<DetalleVentaPS> lista)
         {
-            
-        }
+            foreach (DetalleVentaPS detVentPS in lista)
+            {
+                if (detVentPS.Tipo == 'P' && detVentPS.IdPS == idProd)
+                    return true;
+            }
+            return false;
 
-        private void label2_Click(object sender, EventArgs e)
+        }
+        private bool servicioAgregado(int idServ, BindingList<DetalleVentaPS> lista)
         {
+            foreach (DetalleVentaPS detVentPS in lista)
+            {
+                if (detVentPS.Tipo == 'S' && detVentPS.IdPS == idServ)
+                    return true;
+            }
+            return false;
 
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+      
 
         private void btnRegresar_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            VentanaVendedor nuevaVentana = new VentanaVendedor();
-            nuevaVentana.Show();
+            if (MessageBox.Show("¿Esta seguro que desea salir?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Hide();
+                VentanaVendedor nuevaVentana = new VentanaVendedor();
+                nuevaVentana.Show();
+
+            }
+            else
+            {
+                return;
+            }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxCU_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-        }
+     
 
         private void btnListaProd_Click(object sender, EventArgs e)
         {
@@ -199,178 +211,164 @@ namespace Inicio
                 prodTemp.Nombre = prdoStock.Nombre;
                 prodTemp.Marca = prdoStock.Marca;
                 prodTemp.Descripcion = prdoStock.Descripcion;
-                prodTemp.Moneda = prdoStock.Moneda;
                 prodTemp.Precio = prdoStock.Precio;
 
-
-                textBoxNombre.Text = prodTemp.Nombre;
-                if (comboBoxMoneda.Text == "Sol")
-                {
-                    if (prodTemp.Moneda == "Dólares")
-                        prodTemp.Precio = prodTemp.Precio*tipoCambio;
-                }
-                else { 
-                    if (prodTemp.Moneda == "Soles")
-                        prodTemp.Precio = prodTemp.Precio /tipoCambio;
-                }
+                textBoxNombre.Text = prodTemp.Nombre;               
                 textBoxCU.Text= prodTemp.Precio.ToString();
                 textStock.Text = prdoStock.Stock.ToString();
                 textFV.Text = prdoStock.FechaVencimiento.ToString();
+
+                btnAgregar.Enabled = true;
+                textCantidad.Enabled = true;
+                textDescuento.Enabled = true;
             }
-        }
-
-        private void textBoxNombre_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
-        private void Registrar_Venta_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupProducto_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupCliente_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textNombCli_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+    
+       
 
         private void radioBtnAntcipada_CheckedChanged(object sender, EventArgs e)
         {
-
+            label8.Visible = true;
+            textAdelanto.Visible = true;
             textAdelanto.Enabled = true;
             dateTimeEntrega.Enabled = true;
             dateTimeVenta.Enabled = false;
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
+     
 
         private void radioBtnInmediata_CheckedChanged(object sender, EventArgs e)
         {
-            dateTimeVenta.Enabled = true;
+            dateTimeVenta.Enabled = false;
             textAdelanto.Enabled = false;
             dateTimeEntrega.Enabled = false;
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int i = dgvDetalleVenta.CurrentRow.Index;
-            venta.Monto = venta.Monto - venta.Detalles_venta[i].Subtotal;
-            venta.Detalles_venta.RemoveAt(i);
-            textTotal.Text = venta.Monto.ToString();
+            double monto;
+            int idProd = detalleVentaProdServ[posicion].IdPS;
+            monto = logicaNegocio.eliminarProducto(idProd, venta.Detalles_venta);
+
+
+            acum = acum - monto;
+            acum = Math.Round(acum, 4);
+            venta.IGV = acum * valorIGV;
+            venta.Monto = venta.IGV + acum;
+
+            textSubtotal.Text = Math.Round(acum, 4).ToString();
+            textIGV.Text = Math.Round(venta.IGV, 4).ToString();
+            textTotal.Text = Math.Round(venta.Monto, 4).ToString();
+
+            detalleVentaProdServ.RemoveAt(posicion);
+            limpiarCamposProducto();
         }
 
 
-        private void dgvDetalleVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
 
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            
+            int cant = 0;
+            double desc;
 
+            //validaciones 
             if (textCantidad.Text == "")
             {
                 MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            int cant = Int32.Parse(textCantidad.Text);
-            int stockProd= Int32.Parse(textStock.Text);
+
+            bool result = int.TryParse(textCantidad.Text, out cant);
+            if (result == false)
+            {
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int stockProd = Int32.Parse(textStock.Text);
             if (cant > stockProd)
             {
                 MessageBox.Show(this, "No hay producto suficiente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
             }
-            else {
+            else
+            {
                 stockProd = stockProd - cant;
                 textStock.Text = stockProd.ToString();
             }
 
-            if (radioBtnAntcipada.Checked == true) {
-                if (textAdelanto.Text == "") {
-                    MessageBox.Show(this, "Faltan ingresar adelanto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (textDescuento.Text == "") desc = 0.0F;
+            else
+            {
+                bool resultDes = double.TryParse(textDescuento.Text, out desc);
+                if (resultDes == false)
+                {
+                    MessageBox.Show(this, "Ingrese un numero decimal en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+                else
+                {
+                    if (desc > 0.5)
+                    {
+                        MessageBox.Show(this, "Porcenatje muy grande en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                }
+
             }
 
-            //verificar los stock de los productos
-
-
-            Detalle_Venta dv = new Detalle_Venta();
-            double desc;
-            
-            dv.Producto = prodTemp;
-            dv.Cantidad = Int32.Parse(textCantidad.Text);
-           
-
-            if (textDescuento.Text == "") desc = 0.0F;
-            else desc = double.Parse(textDescuento.Text);
-
-            dv.PrecioVendido = dv.Producto.Precio * (1 - desc);
-            dv.Subtotal = dv.Cantidad * dv.PrecioVendido;
-            textPrecioVendido.Text = dv.PrecioVendido.ToString();
-
-            venta.Detalles_venta.Add(dv);
-            //actualizar el stock
-            string date = textFV.Text;
-            DateTime fechaVencimiento = Convert.ToDateTime(date);
-            int idProd = prodTemp.IdProducto;
-            logicaNegocioP.actualizarStock(idProd, stockProd, fechaVencimiento);
-
-            acum = acum + dv.Subtotal;
-            acum = Math.Round(acum,4);
-            textSubtotal.Text = acum.ToString();
-            venta.IGV = acum * valorIGV;
-            textIGV.Text = Math.Round(venta.IGV, 4).ToString();
-            venta.Monto = acum+ venta.IGV;
-
-            textTotal.Text = Math.Round(venta.Monto, 4).ToString();
-
-            if (radioBtnAntcipada.Checked == true)
+            //verificar que el producto no este antes en el datagridview
+            if (productoAgregado(prodTemp.IdProducto, detalleVentaProdServ) == true)
             {
-                venta.Adelanto = double.Parse(textAdelanto.Text);
-                venta.FechaEntrega = dateTimeEntrega.Value;
-                venta.SaldoPendiente = venta.Monto - venta.Adelanto;
+                MessageBox.Show(this, "Producto ya agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else {
-                venta.Adelanto = -1;
-                venta.SaldoPendiente = 0.0F;
+            else
+            {
+
+                //Se maneja el detalle de productos por separado
+                Detalle_Venta dv = new Detalle_Venta();
+
+                dv.Producto = prodTemp;
+                dv.Cantidad = Int32.Parse(textCantidad.Text);
+                dv.PrecioVendido = dv.Producto.Precio * (1 - desc);
+                dv.Subtotal = dv.Cantidad * dv.PrecioVendido;
+                venta.Detalles_venta.Add(dv);
+
+                acum = acum + dv.Subtotal;
+                acum = Math.Round(acum, 4);
+                venta.IGV = acum * valorIGV;
+                venta.Monto = acum + venta.IGV;
+
+                textIGV.Text = Math.Round(venta.IGV, 4).ToString();
+                textSubtotal.Text = Math.Round(acum, 4).ToString();
+                textTotal.Text = Math.Round(venta.Monto, 4).ToString();
+
+
+                //solo para mostrar en la tabla
+                DetalleVentaPS dvPS = new DetalleVentaPS();
+
+                dvPS.Tipo = 'P';
+                dvPS.IdPS = prodTemp.IdProducto;
+                dvPS.NombrePS = textBoxNombre.Text;
+                dvPS.Precio = prodTemp.Precio;
+                dvPS.Cantidad = Int32.Parse(textCantidad.Text);
+                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc), 4);
+                dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido, 4);
+
+                textPrecioVendido.Text = Math.Round(dvPS.PrecioVendido, 4).ToString();
+                detalleVentaProdServ.Add(dvPS);
+
+                limpiarCamposProducto();
+
             }
-                            
-            textSaldo.Text = venta.SaldoPendiente.ToString();
-            
+         
             
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
+     
    
 
         private void TooStripNuevo_Click(object sender, EventArgs e)
@@ -380,11 +378,26 @@ namespace Inicio
 
         private void ToolSGuardar_Click(object sender, EventArgs e)
         {
- 
-            
+            if (radioBtnAntcipada.Checked == true)
+            {
+                if (textAdelanto.Text == "")
+                {
+                    MessageBox.Show(this, "Faltan ingresar adelanto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                venta.Adelanto = double.Parse(textAdelanto.Text);
+                venta.FechaEntrega = dateTimeEntrega.Value;
+                venta.SaldoPendiente = venta.Monto - venta.Adelanto;
+            }
+            else
+            {
+                venta.Adelanto = -1;
+                venta.SaldoPendiente = 0.0F;
+            }
 
-            if (textBoxNombre.Text=="" || ((textAdelanto.Enabled is true) && textAdelanto.Text=="" )) {
-                MessageBox.Show(this, "Faltan datos", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            if (((radioBtnAntcipada.Checked==true) && textAdelanto.Text=="" ) || textTotal.Text == ""){
+                MessageBox.Show(this, "Faltan llenar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -401,15 +414,18 @@ namespace Inicio
                 else
                     venta.TipoPago = TipoPago.TARJETA;
 
-
-                if (radioBtnNo.Checked == true) {
-                    venta.Cliente = new Cliente();
-                    venta.Cliente.IdCliente = -1;
-                }
                 
                 logicaNegocio.registrarVenta(venta);
                 estadoComponentes(estado.Guardar);
-                MessageBox.Show("Se ha realizado correctamente el registro", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (radioBtnInmediata.Checked == true)
+                {
+                    MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (radioBtnAntcipada.Checked == true) {
+                    
+                    MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles con un saldo pendiente de " + Math.Round(venta.SaldoPendiente,4).ToString(), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
               
             }
             else {
@@ -419,40 +435,31 @@ namespace Inicio
             return;
         }
 
-        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void dgvDetalleVenta_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void toolStripLabel1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void toolStripCancelar_Click(object sender, EventArgs e)
         {
-            estadoComponentes(estado.Inicial);
+            if (MessageBox.Show("¿Esta seguro que desear cancelar la venta?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                estadoComponentes(estado.Inicial);
+            
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void radioBtnBoleta_CheckedChanged(object sender, EventArgs e)
         {
-          
+            btnListaClientesN.Enabled = true;
+            btnListaClientesJ.Enabled = false;
 
         }
 
         private void radioBtnFactura_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBoxId_TextChanged(object sender, EventArgs e)
-        {
-
+            btnListaClientesJ.Enabled = true;
+            btnListaClientesN.Enabled = false;
         }
 
         private void btnListaClientes_Click(object sender, EventArgs e)
@@ -477,30 +484,7 @@ namespace Inicio
 
         }
 
-        private void textAdelanto_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textDescuento_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         private void btnNo_CheckedChanged(object sender, EventArgs e)
         {
@@ -527,6 +511,254 @@ namespace Inicio
                 textDNI.Text = "";
             }
 
+        }
+
+
+        private void btnListaServ_Click(object sender, EventArgs e)
+        {
+            formListarServicios frm = new formListarServicios();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                servTemp = frm.ServicioSeleccionado;
+                textNombServ.Text = servTemp.Nombre;
+                textCUserv.Text = servTemp.Precio.ToString();
+
+                btnAgregarServ.Enabled = true;
+                textDescServ.Enabled = true;
+                textCantServ.Enabled = true;
+            }
+        }
+
+        private void btnAgregarServ_Click(object sender, EventArgs e)
+        {
+            int cant = 0;
+            double desc;
+
+            //validaciones 
+            if (textCantServ.Text == "")
+            {
+                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            bool result = int.TryParse(textCantServ.Text, out cant);
+            if (result == false)
+            {
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (textDescServ.Text == "") desc = 0.0F;
+            else
+            {
+                bool resultDes = double.TryParse(textDescServ.Text, out desc);
+                if (resultDes == false)
+                {
+                    MessageBox.Show(this, "Ingrese un numero decimal en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    if (desc > 0.5)
+                    {
+                        MessageBox.Show(this, "Porcenatje muy grande en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                }
+            }
+
+
+            //verificar que el servicio no este en el datagridview
+            if (servicioAgregado(servTemp.IdServicio, detalleVentaProdServ) == true)
+            {
+                MessageBox.Show(this, "Servicio ya agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                //Se maneja el detalle de servicios por separado
+                Detalle_Venta_Servicio dvServ = new Detalle_Venta_Servicio();
+
+                dvServ.Servicio = servTemp;
+                dvServ.PrecioVendido = dvServ.Servicio.Precio * (1 - desc);
+                dvServ.Cantidad = cant;
+                dvServ.Subtotal = dvServ.Cantidad * dvServ.PrecioVendido;
+                venta.Detalles_servicio.Add(dvServ);
+
+                acum = acum + dvServ.Subtotal;
+                acum = Math.Round(acum, 4);
+                venta.IGV = acum * valorIGV;
+                venta.Monto = acum + venta.IGV;
+
+                textIGV.Text = Math.Round(venta.IGV, 4).ToString();
+                textSubtotal.Text = Math.Round(acum, 4).ToString();
+                textTotal.Text = Math.Round(venta.Monto, 4).ToString();
+
+
+                //solo para mostar en la tabla
+                DetalleVentaPS dvPS = new DetalleVentaPS();
+
+                dvPS.Tipo = 'S';
+                dvPS.IdPS = servTemp.IdServicio;
+                dvPS.NombrePS = textNombServ.Text;
+                dvPS.Precio = servTemp.Precio;
+                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc), 4);
+                dvPS.Cantidad = Int32.Parse(textCantServ.Text);
+                dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido, 4);
+
+                textPVserv.Text = Math.Round(dvPS.PrecioVendido, 4).ToString();
+
+                detalleVentaProdServ.Add(dvPS);
+                limpiarCamposServicio();
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            int cant = 0;
+            double desc;
+
+            //validaciones 
+            if (textCantidad.Text == "")
+            {
+                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            bool result = int.TryParse(textCantidad.Text, out cant);
+            if (result == false)
+            {
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            detalleVentaProdServ[posicion].Cantidad = cant;
+            detalleVentaProdServ.ResetBindings();
+
+            //modificar en la lista de productos vendidos
+            int idProd = detalleVentaProdServ[posicion].IdPS;
+            logicaNegocio.modificarCantidadVentaProducto(idProd, cant, venta.Detalles_venta);
+
+            limpiarCamposProducto();
+            btnAgregar.Enabled = true;
+        }
+
+        private void btnModificarServ_Click(object sender, EventArgs e)
+        {
+            int cant = 0;
+            double desc;
+
+            //validaciones 
+            if (textCantServ.Text == "")
+            {
+                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            bool result = int.TryParse(textCantServ.Text, out cant);
+            if (result == false)
+            {
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            detalleVentaProdServ[posicion].Cantidad = cant;
+            detalleVentaProdServ.ResetBindings();
+
+            //modificar en la lista de servicios ofrecidos
+            int idServ = detalleVentaProdServ[posicion].IdPS;
+            logicaNegocio.modificarCantidadVentaServicio(idServ, cant, venta.Detalles_servicio);
+
+            limpiarCamposServicio();
+            btnAgregarServ.Enabled = true;
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            if (textDNI.Text == "" && textRUC.Text == "")
+            {
+                MessageBox.Show(this, "Faltan ingresar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                panelProductoServicio.Visible = true;
+            }
+            
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            panelProductoServicio.Visible = false;
+        }
+
+        private void btnSalirPC_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Esta seguro que desea salir de la ventana?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Hide();
+                VentanaVendedor nuevaVentana = new VentanaVendedor();
+                nuevaVentana.Show();
+
+            }
+            else
+            {
+                return;
+            }
+            
+        }
+
+        private void dgvDetalleVenta_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                posicion = dgvDetalleVenta.CurrentRow.Index;
+                if (detalleVentaProdServ[posicion].Tipo == 'P')
+                {
+                    textBoxNombre.Text = detalleVentaProdServ[posicion].NombrePS;
+                    textBoxCU.Text = detalleVentaProdServ[posicion].Precio.ToString();
+                    textCantidad.Text = detalleVentaProdServ[posicion].Cantidad.ToString();
+                    btnAgregar.Enabled = false;
+                    btnModificar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    btnModificarServ.Enabled = false;
+                    btnEliminarServ.Enabled = false; ;
+                    limpiarCamposServicio();
+
+                    //producto.Presentaciones.RemoveAt(indice);
+                }
+                else
+                {
+                    textNombServ.Text = detalleVentaProdServ[posicion].NombrePS;
+                    textCUserv.Text = detalleVentaProdServ[posicion].Precio.ToString();
+                    textCantServ.Text = detalleVentaProdServ[posicion].Cantidad.ToString();
+                    btnAgregarServ.Enabled = false;
+                    btnModificarServ.Enabled = true;
+                    btnEliminarServ.Enabled = true;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    limpiarCamposProducto();
+
+                }
+
+
+            }
+            catch (Exception ex) { MessageBox.Show("Debe seleccionar una presentacion a modificar", "Mensaje de Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+        }
+
+        private void btnEliminarServ_Click(object sender, EventArgs e)
+        {
+            double monto;
+            int idServ = detalleVentaProdServ[posicion].IdPS;
+            monto = logicaNegocio.eliminarServicio(idServ, venta.Detalles_servicio);
+
+            acum = acum - monto;
+            acum = Math.Round(acum, 4);
+            venta.IGV = acum * valorIGV;
+            venta.Monto = venta.IGV + acum;
+
+            textSubtotal.Text = Math.Round(acum, 4).ToString();
+            textIGV.Text = Math.Round(venta.IGV, 4).ToString();
+            textTotal.Text = Math.Round(venta.Monto, 4).ToString();
+
+            detalleVentaProdServ.RemoveAt(posicion);
+            limpiarCamposServicio();
         }
     }
 }

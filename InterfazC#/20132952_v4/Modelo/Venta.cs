@@ -7,18 +7,15 @@ using Modelo;
 
 public class Venta{
     public static int i = 0;
-    //private int _anticipada;
     private int _idVenta;
     private DateTime _fechaVenta;
     private Double _monto;
     private TipoRecibo _tipoDocumentoPago;
     private TipoPago _tipoPago;
-    //private Double _adelanto;
-    //private DateTime _fechaEntrega;
-    //private Double _saldoPendiente;
     private Double _IGV;
     private Cliente cliente;
     private BindingList<Detalle_Venta> _detalles_venta;
+    private BindingList<Detalle_Venta_Servicio> _detalles_servicio;
 
 
     public Venta()
@@ -62,32 +59,6 @@ public class Venta{
             _tipoDocumentoPago = value;
 		}		
 	}
-	//public Double adelanto
- //   {
-	//	get{
-	//		return _adelanto;
-	//	}
-	//	set{
-	//		_adelanto = value;
-	//	}		
-	//}
-	//public DateTime fechaEntrega{
-	//	get{
-	//		return _fechaEntrega;
-	//	}
-	//	set{
-	//		_fechaEntrega = value;
-	//	}		
-	//}
-	//public Double saldoPendiente
- //   {
-	//	get{
-	//		return _saldoPendiente;
-	//	}
-	//	set{
-	//		_saldoPendiente = value;
-	//	}		
-	//}
 
     
     public Double Monto { get => _monto; set => _monto = value; }
@@ -96,25 +67,27 @@ public class Venta{
     public Cliente Cliente { get => cliente; set => cliente = value; }
     public double IGV { get => _IGV; set => _IGV = value; }
     public BindingList<Detalle_Venta> Detalles_venta { get => _detalles_venta; set => _detalles_venta = value; }
+    public BindingList<Detalle_Venta_Servicio> Detalles_servicio { get => _detalles_servicio; set => _detalles_servicio = value; }
+
 
     //setter especiales
- //   public void setFechaEntregaString(string fecha){
-	//	this.fechaEntrega = DateTime.ParseExact(fecha,"dd/MM/yy",CultureInfo.InvariantCulture);
-	//}
-	//public void setFechaVentaString(string fecha){
-	//	this.fechaVenta = DateTime.ParseExact(fecha,"dd/MM/yyyy",CultureInfo.InvariantCulture);
-	//}
-	////getter especiales
-	//public string getFechaEntregaString(){
-	//	return this.fechaEntrega.ToString("dd/MM/yy");
-	//}
-	//public string getFechaVentaString(){
-	//	return this.fechaVenta.ToString("dd/MM/yyyy");
-	//}
+    //   public void setFechaEntregaString(string fecha){
+    //	this.fechaEntrega = DateTime.ParseExact(fecha,"dd/MM/yy",CultureInfo.InvariantCulture);
+    //}
+    //public void setFechaVentaString(string fecha){
+    //	this.fechaVenta = DateTime.ParseExact(fecha,"dd/MM/yyyy",CultureInfo.InvariantCulture);
+    //}
+    ////getter especiales
+    //public string getFechaEntregaString(){
+    //	return this.fechaEntrega.ToString("dd/MM/yy");
+    //}
+    //public string getFechaVentaString(){
+    //	return this.fechaVenta.ToString("dd/MM/yyyy");
+    //}
 
 
 
 
-    
-   
+
+
 }

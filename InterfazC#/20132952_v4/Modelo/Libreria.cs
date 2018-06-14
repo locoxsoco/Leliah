@@ -7,7 +7,7 @@ public class Libreria{
 	private int _telefono;
 	private List<Venta> _lista_ventas;
 	private List<Producto> _lista_productos;
-	private List<Compra> _lista_compras;
+	//private List<Compra> _lista_compras;
 
 	public Libreria(string nombre, string direccion, int telefono){
 		this._nombre = nombre;
@@ -15,7 +15,7 @@ public class Libreria{
 		this._telefono = telefono;
 		_lista_productos =  new List<Producto>();
 		_lista_ventas =  new List<Venta>();
-		_lista_compras =  new List<Compra>();
+		//_lista_compras =  new List<Compra>();
 	}
 
 	public string nombre{
@@ -63,14 +63,6 @@ public class Libreria{
 		}
 	}
 
-	public List<Compra> lista_compras{
-		get{
-			return _lista_compras;
-		}
-		set{
-			_lista_compras = value;
-		}
-	}
 
 	public void reporteVentas(string nombArch, DateTime fecha){
 
@@ -88,32 +80,7 @@ public class Libreria{
 		this.lista_ventas.Add(v);
 	}
 
-	public void agregarCompra_Lista(Compra c){
-		this.lista_compras.Add(c);
-	}
 
-	public void alertarCaducidad(){
-		
-	}
-	public void alertarFaltaStock(){
-		
-	}
-
-	public void reporteProds(){
-
-	}
-
-	public void eliminarVenta_Lista(Venta v){
-		
-	}
-
-	public void eliminarProd_Lista(Producto p){
-		
-	}
-
-	public void eliminarCompra_Lista(Compra c){
-		
-	}
 
 
 }

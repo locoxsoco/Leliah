@@ -4,21 +4,16 @@ using System.Text;
 
 public class Servicio
 {
-    private string _nombre;
+    private int idServicio;
+    private string nombre;
+    private double precio;
+    public int IdServicio { get => idServicio; set => idServicio = value; }
+    public string Nombre { get => nombre; set => nombre = value; }
+    public double Precio { get => precio; set => precio = value; }
+    
 
-    public Servicio(string nombre)
-    {
-        this._nombre = nombre;
-    }
 
-    public string Nombre{
-		set{
-			this._nombre = value;
-		}
-		get{
-			return _nombre;
-		}
-	}
 
-    //public string Nombre { get => _nombre; set => _nombre = value; }
+
+
 }

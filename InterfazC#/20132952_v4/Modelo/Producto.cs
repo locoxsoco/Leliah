@@ -9,7 +9,6 @@ public class Producto{
     private string nombre;
     private double precio;
     private string marca;
-    private string moneda;
     private string descripcion;
     private int cantMinima;
 
@@ -84,7 +83,7 @@ public class Producto{
         }
     }
 
-    public string Moneda { get => moneda; set => moneda = value; }
+
 
    
 

@@ -16,13 +16,18 @@ namespace Inicio
     {
         private ProductoBL logicaNegocio;
         private StockXProducto productoStockSeleccionado;
+        private BindingList<StockXProducto> lista;
         int cons;
+        int posicion;
         public frmListarProductos()
         {
             InitializeComponent();
             logicaNegocio = new ProductoBL();
             productoStockSeleccionado = new StockXProducto();
-            dgvProductos.DataSource = logicaNegocio.listarProductosStock(-1, textNombre.Text, textMarca.Text, textCategoria.Text);
+            lista = new BindingList<StockXProducto>();
+            lista = logicaNegocio.listarProductosStock(-1, textNombre.Text, textMarca.Text, textCategoria.Text);
+            dgvProductos.DataSource = lista;
+            btnSeleccionar.Enabled = false;
             //dgvProductos.DataSource = logicaNegocio.listarProductos();
         }
 
@@ -44,10 +49,6 @@ namespace Inicio
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            
-            //if (textConsumible.Text == "") cons = -1; //por defecto consumible
-            //else if (textConsumible.Text == "consumible") cons = 1;
-            //else if (textConsumible.Text == "no consumible") cons = 0;
 
             if (radioBtnC.Checked == true) cons = 1;
             else if (radioBtnNC.Checked == true) cons = 0;
@@ -56,6 +57,16 @@ namespace Inicio
 
         private void frmListarProductos_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnSeleccionar.Enabled = true;
+            posicion = dgvProductos.CurrentRow.Index;
+            textNombre.Text = lista[posicion].Nombre;
+            textMarca.Text = lista[posicion].Marca;
+            textCategoria.Text = lista[posicion].Categoria;
 
         }
     }

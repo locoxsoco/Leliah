@@ -7,6 +7,7 @@ package ventanasproyecto;
 
 import LogicaNegocio.TrabajadorBL;
 import clases.usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,6 @@ public class ventanaLogin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Login = new javax.swing.JButton();
         user = new javax.swing.JTextField();
-        recor = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(391, 536));
@@ -86,19 +86,10 @@ public class ventanaLogin extends javax.swing.JFrame {
         getContentPane().add(user);
         user.setBounds(180, 320, 155, 28);
 
-        recor.setText("Recuerdame");
-        recor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recorActionPerformed(evt);
-            }
-        });
-        getContentPane().add(recor);
-        recor.setBounds(70, 430, 110, 30);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void log() throws ClassNotFoundException, SQLException{
+    public void log() throws ClassNotFoundException, SQLException, IOException{
         usuario u = null;
         //System.out.println("hola");
   
@@ -118,16 +109,19 @@ public class ventanaLogin extends javax.swing.JFrame {
             v1.setVisible(true);
             v1.nomb.setText(u.getNomb());
             v1.anterior = "Home";
-            
+            Login.setEnabled(false);
             this.setVisible(false);
         }else if( u.getPriv()==1){
             VentanaPrincipal v1 = new VentanaPrincipal();
             v1.ventanaHome = this;
             v1.setLocationRelativeTo(null);
             v1.setVisible(true);
-            v1.nomb1.setText(user.getText());
-            
+            v1.nomb1.setText(u.getNomb());
+            Login.setEnabled(false);
             this.setVisible(false);
+        }else if( u.getPriv()==3){
+            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe");
+            System.exit(0);
         }else{
             JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "Error Autentificacion", JOptionPane.PLAIN_MESSAGE);
         }
@@ -135,10 +129,8 @@ public class ventanaLogin extends javax.swing.JFrame {
     
     public void regresar(){
         this.setVisible(true);
-        if(!recor.isSelected()){
-           this.user.setText("");
-           this.pass.setText(""); 
-        }
+       this.user.setText("");
+       this.pass.setText(""); 
         
         /*if(recor.get){
             
@@ -148,18 +140,16 @@ public class ventanaLogin extends javax.swing.JFrame {
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         try {
             // TODO add your handling code here:
-            Login.setEnabled(false);
+            
             log();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_LoginActionPerformed
-
-    private void recorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,7 +193,6 @@ public class ventanaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField pass;
-    private javax.swing.JCheckBox recor;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

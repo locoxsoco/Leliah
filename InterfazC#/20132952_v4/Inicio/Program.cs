@@ -12,11 +12,16 @@ namespace Inicio
         /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogIn());
+            VentanaVendedor v = new VentanaVendedor();
+            if(args.Length == 0)
+            {
+                v.button2.Visible = false;
+            }
+            Application.Run(v);
         }
     }
 }

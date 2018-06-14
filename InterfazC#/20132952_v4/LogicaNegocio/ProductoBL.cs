@@ -24,9 +24,5 @@ namespace LogicaNegocio
             return accesoDatos.listarProductosStock(consumible, nombre, marca, categoria);
         }
 
-        public void actualizarStock(int idProd, int stock, DateTime fechaV)
-        {
-            accesoDatos.actualizarStock(idProd, stock, fechaV);
-        }
     }
 }

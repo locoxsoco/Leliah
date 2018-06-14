@@ -7,9 +7,12 @@ package ventanasproyecto;
 
 import LogicaNegocio.ProductoBL;
 import clases.LineaxCompra;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -119,9 +122,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         optionLbel.setBounds(27, 107, 160, 22);
 
         nomb1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        nomb1.setText("usuario");
         getContentPane().add(nomb1);
-        nomb1.setBounds(220, 40, 140, 29);
+        nomb1.setBounds(220, 40, 140, 0);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         jButton6.setText("Cerrar Sesión");
@@ -152,7 +154,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1");
+            System.exit(0);
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comprasMouseClicked

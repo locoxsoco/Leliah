@@ -34,7 +34,6 @@ namespace AccesoDatos
             comando.ExecuteNonQuery();
             conexion.Close();
         }
-
         
     }
 

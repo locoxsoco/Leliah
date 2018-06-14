@@ -49,8 +49,10 @@ namespace AccesoDatos
 
             string pago;
             string recibo;
+
             if (v.TipoPago == TipoPago.EFECTIVO) pago = "EFECTIVO";
             else pago = "TARJETA";
+
             if (v.tipoDocumentoPago == TipoRecibo.BOLETA) recibo = "BOLETA";
             else recibo = "FACTURA";
 
@@ -74,15 +76,8 @@ namespace AccesoDatos
             comando.ExecuteNonQuery();
 
             conexion.Close();
-            return Int32.Parse
-            (comando.Parameters["_id"].Value.ToString());
 
-        }
-
-        public void actualizarStock(BindingList<Detalle_Venta> listaDetVent)
-        {
-            foreach (Detalle_Venta dv in listaDetVent) { }
-                
+            return Int32.Parse(comando.Parameters["_id"].Value.ToString());
 
         }
 

@@ -57,6 +57,18 @@
     <Compile Include="formListarClientesNatural.Designer.cs">
       <DependentUpon>formListarClientesNatural.cs</DependentUpon>
     </Compile>
+    <Compile Include="formListarServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formListarServicios.Designer.cs">
+      <DependentUpon>formListarServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formVentaInmediata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formVentaInmediata.Designer.cs">
+      <DependentUpon>formVentaInmediata.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmListarProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +100,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formListarClientesNatural.resx">
       <DependentUpon>formListarClientesNatural.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formListarServicios.resx">
+      <DependentUpon>formListarServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formVentaInmediata.resx">
+      <DependentUpon>formVentaInmediata.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmListarProductos.resx">
       <DependentUpon>frmListarProductos.cs</DependentUpon>
