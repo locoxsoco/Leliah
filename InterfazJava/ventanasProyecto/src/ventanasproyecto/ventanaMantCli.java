@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import static ventanasproyecto.ventanaManTrab.tabla;
 
 /**
@@ -69,6 +71,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
         registrar.setEnabled(false);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
     }
     int idU;
     ventanaAdmin anterior;

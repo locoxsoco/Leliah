@@ -17,6 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -53,6 +55,15 @@ public class ventanaManProv extends javax.swing.JFrame {
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
         idU = 0;
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(6).setCellRenderer(tcr);
     }
     int idU;
     /**
@@ -457,7 +468,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             distrito.setVisible(false);
             dir.setVisible(false);
         }else if(err == 1){
-            JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Trabajador ya registrado", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_registrarActionPerformed
 

@@ -22,6 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -54,6 +56,14 @@ public class ventanaManTrab extends javax.swing.JFrame {
         eliminar.setEnabled(false);
         //this.setTitle("Ventana Mantener Trabajadores");
         this.setLocationRelativeTo(null);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
     }
     int idU;
     ventanaAdmin anterior;

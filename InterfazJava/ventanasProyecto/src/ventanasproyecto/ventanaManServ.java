@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -37,6 +39,11 @@ public class ventanaManServ extends javax.swing.JFrame {
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
         idU = 0;
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
     }
     int idU;
     private ServicioBL LogicaNegocio;
@@ -282,23 +289,22 @@ public class ventanaManServ extends javax.swing.JFrame {
         Servicio s = new Servicio();
         s.setNombre(nombre.getText());
         s.setprecioxUnit(Double.parseDouble(pu.getText()));
+        int err = 0;
         try {
-            LogicaNegocio.registrarServicio(s);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            //model.addRow(o);
+            err = LogicaNegocio.registrarServicio(s);
             listarServicios();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
-        nombre.setText("");
-        pu.setText("");
+        if(err == 0){
+            nombre.setText("");
+            pu.setText("");
+        }else if(err == 1){
+            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }
+        
     }//GEN-LAST:event_registrarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -332,23 +338,21 @@ public class ventanaManServ extends javax.swing.JFrame {
         s.SetId(Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0))));
         s.setNombre(nombre.getText());
         s.setprecioxUnit(Double.parseDouble(pu.getText()));
-        
+        int err = 0;
         try {
-            LogicaNegocio.modificarServicio(s);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
+            err = LogicaNegocio.modificarServicio(s);
             listarServicios();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        if(err == 0){
+            nombre.setText("");
+            pu.setText("");
+        }else if(err == 1){
+            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }
         //model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
         //model.setValueAt(pu.getText(), tabla.getSelectedRow(), 2);
         

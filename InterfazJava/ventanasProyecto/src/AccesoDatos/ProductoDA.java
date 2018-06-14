@@ -8,6 +8,7 @@ package AccesoDatos;
 import clases.Categoria_Consumible;
 import clases.Categoria_NoConsumible;
 import clases.Consumible;
+import clases.LineaxCompra;
 import clases.NoConsumible;
 import clases.Producto;
 import java.sql.CallableStatement;
@@ -69,10 +70,10 @@ public class ProductoDA {
         return lista;
     }
     
-    public void registrarProducto(Producto p) throws ClassNotFoundException, SQLException{
+    public int registrarProducto(Producto p) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call REGISTRAR_PRODUCTO(?,?,?,?,?,?,?,?)}";
+        String sql = "{call REGISTRAR_PRODUCTO(?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(p instanceof Consumible){
@@ -90,18 +91,20 @@ public class ProductoDA {
         stmt.setString("_descripcion", p.getDescripcion());
         
         stmt.registerOutParameter("_id", java.sql.Types.INTEGER);
+        stmt.registerOutParameter("_error", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
         
         p.setIdProducto(stmt.getInt("_id"));
-        
+        int err = stmt.getInt("_error");
         con.close();
+        return err;
     }
     
-    public void modificarProducto(Producto p) throws ClassNotFoundException, SQLException{
+    public int modificarProducto(Producto p) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
-        String sql = "{call MODIFICAR_PRODUCTO(?,?,?,?,?,?,?,?)}";
+        String sql = "{call MODIFICAR_PRODUCTO(?,?,?,?,?,?,?,?,?)}";
         CallableStatement stmt = con.prepareCall(sql);
         
         if(p instanceof Consumible){
@@ -118,10 +121,13 @@ public class ProductoDA {
         stmt.setString("_marca", p.getMarca());
         stmt.setString("_descripcion", p.getDescripcion());
         stmt.setInt("_id", p.getIdProducto());
+        stmt.registerOutParameter("_error", java.sql.Types.INTEGER);
         
         stmt.executeUpdate();
         
+        int err = stmt.getInt("_error");
         con.close();
+        return err;
     }
     
     public void eliminarProducto(int id) throws ClassNotFoundException, SQLException{
@@ -253,6 +259,32 @@ public class ProductoDA {
             p.setEsConsumible(rs.getInt("consumible"));
             
             lista.add(p);
+        }
+        con.close();
+        
+        return lista;
+    }
+    
+    public ArrayList<LineaxCompra> listarProxVencimiento(String fecha) throws ClassNotFoundException, SQLException{
+        ArrayList<LineaxCompra> lista = new ArrayList<LineaxCompra>();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");
+        String sql = "{call LISTAR_PRODUCTOS_PROXIMOS_VENCER(?)}";
+        CallableStatement stmt = con.prepareCall(sql);
+        
+        stmt.setString("_fecha", fecha);
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            LineaxCompra l = new LineaxCompra();
+            
+            l.setCantidad(rs.getInt("cantidad"));
+            Producto p = new Producto();
+            p.setNombre(rs.getString("nombre"));
+            l.setProducto(p);
+            l.setFechaCaducidad(rs.getDate("fechaCaducidad"));
+            
+            lista.add(l);
         }
         con.close();
         

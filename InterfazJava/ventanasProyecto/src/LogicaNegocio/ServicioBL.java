@@ -26,12 +26,12 @@ public class ServicioBL {
         return accesoDatos.listarServicios();
     }
     
-    public void registrarServicio(Servicio s) throws ClassNotFoundException, SQLException{
-        accesoDatos.registrarServicio(s);
+    public int registrarServicio(Servicio s) throws ClassNotFoundException, SQLException{
+        return accesoDatos.registrarServicio(s);
     }
     
-    public void modificarServicio(Servicio s) throws ClassNotFoundException, SQLException{
-        accesoDatos.modificarServicio(s);
+    public int modificarServicio(Servicio s) throws ClassNotFoundException, SQLException{
+        return accesoDatos.modificarServicio(s);
     }
     
     public void eliminarServicio(int id) throws ClassNotFoundException, SQLException{

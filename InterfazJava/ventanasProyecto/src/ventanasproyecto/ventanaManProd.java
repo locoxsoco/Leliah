@@ -17,6 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -45,6 +47,14 @@ public class ventanaManProd extends javax.swing.JFrame {
         eliminar.setEnabled(false);
         
         idU =0;
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
     }
     ventanaAdmin ventanaAnterior;
     int idU;
@@ -402,31 +412,29 @@ public class ventanaManProd extends javax.swing.JFrame {
         p.setMarca(marca.getText());
         p.setDescripcion(desc.getText());
         
-        
+        int err = 0;
         try {
-            LogicaNegocio.registrarProducto(p);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
+            err = LogicaNegocio.registrarProducto(p);
             listarProductos();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        nombre.setText("");
-        precio.setText("");
-        cantMin.setText("");
-        marca.setText("");
-        desc.setText("");
-        categoria.setSelectedItem(categoria.getItemAt(0));
-        consum.setSelected(false);
-        no_consum.setSelected(false);
+        
+        if(err == 0){
+            nombre.setText("");
+            precio.setText("");
+            cantMin.setText("");
+            marca.setText("");
+            desc.setText("");
+            categoria.setSelectedItem(categoria.getItemAt(0));
+            consum.setSelected(false);
+            no_consum.setSelected(false);
+        }else if(err == 1){
+            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }
+        
         
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -453,15 +461,9 @@ public class ventanaManProd extends javax.swing.JFrame {
         p.setMarca(marca.getText());
         p.setDescripcion(desc.getText());
         
+        int err = 0;
         try {
-            LogicaNegocio.modificarProducto(p);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
+            err = LogicaNegocio.modificarProducto(p);
             listarProductos();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
@@ -469,14 +471,18 @@ public class ventanaManProd extends javax.swing.JFrame {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        nombre.setText("");
-        precio.setText("");
-        cantMin.setText("");
-        marca.setText("");
-        desc.setText("");
-        consum.setSelected(true);
-        no_consum.setSelected(false);
-        categoria.removeAllItems();
+        if(err == 0){
+            nombre.setText("");
+            precio.setText("");
+            cantMin.setText("");
+            marca.setText("");
+            desc.setText("");
+            categoria.setSelectedItem(categoria.getItemAt(0));
+            consum.setSelected(false);
+            no_consum.setSelected(false);
+        }else if(err == 1){
+            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

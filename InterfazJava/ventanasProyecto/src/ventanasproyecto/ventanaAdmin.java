@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -267,10 +268,13 @@ public class ventanaAdmin extends javax.swing.JFrame {
     ventanaLogin ventanaHome;
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        ventanaHome.regresar();
-        if (anterior == "Jefe")
-            vAnterior.dispose();
-        this.dispose();
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?","Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if(YesOrNo == 0){
+            ventanaHome.regresar();
+            if (anterior == "Jefe")
+                vAnterior.dispose();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

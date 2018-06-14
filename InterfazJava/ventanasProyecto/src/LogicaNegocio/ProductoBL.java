@@ -6,6 +6,7 @@
 package LogicaNegocio;
 
 import AccesoDatos.ProductoDA;
+import clases.LineaxCompra;
 import clases.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,12 +29,12 @@ public class ProductoBL {
         //return l;
     }
     
-    public void registrarProducto(Producto p) throws ClassNotFoundException, SQLException{
-        accesoDatos.registrarProducto(p);
+    public int registrarProducto(Producto p) throws ClassNotFoundException, SQLException{
+        return accesoDatos.registrarProducto(p);
     }
     
-    public void modificarProducto(Producto p) throws ClassNotFoundException, SQLException{
-        accesoDatos.modificarProducto(p);
+    public int modificarProducto(Producto p) throws ClassNotFoundException, SQLException{
+        return accesoDatos.modificarProducto(p);
     }
     
     public void eliminarProducto(int id) throws ClassNotFoundException, SQLException{
@@ -46,6 +47,10 @@ public class ProductoBL {
     
     public ArrayList<Producto> buscarProductos(String nombre, String marca, String cat, int cons) throws ClassNotFoundException, SQLException{
         return accesoDatos.buscarProductos(nombre, marca, cat, cons);
+    }
+    
+    public ArrayList<LineaxCompra> listarProxVencimiento(String fecha) throws ClassNotFoundException, SQLException{
+        return accesoDatos.listarProxVencimiento(fecha);
     }
 
 }

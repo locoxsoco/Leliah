@@ -98,7 +98,7 @@ public class ventanaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void log(){
+    public void log() throws ClassNotFoundException, SQLException{
         usuario u = null;
         //System.out.println("hola");
   
@@ -146,39 +146,14 @@ public class ventanaLogin extends javax.swing.JFrame {
     }
     
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        // TODO add your handling code here:
-        /*usuario u = null;
-        //System.out.println("hola");
-  
         try {
-            u=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
+            // TODO add your handling code here:
+            log();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //System.out.println(privi);
-        
-        if(u.getPriv()==2){
-            ventanaAdmin v1 = new ventanaAdmin();
-            v1.ventanaHome = this;
-            v1.setVisible(true);
-            v1.nomb.setText(u.getNomb());
-            v1.anterior = "Home";
-            
-            this.setVisible(false);
-        }else if( u.getPriv()==1){
-            VentanaPrincipal v1 = new VentanaPrincipal();
-            v1.ventanaHome = this;
-            v1.setLocationRelativeTo(null);
-            v1.setVisible(true);
-            v1.nomb1.setText(user.getText());
-            
-            this.setVisible(false);
-        }else{
-            JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "Error Autentificacion", JOptionPane.PLAIN_MESSAGE);
-        }*/
-        log();
     }//GEN-LAST:event_LoginActionPerformed
 
     private void recorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorActionPerformed
