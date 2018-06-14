@@ -33,6 +33,11 @@ public class ventanaAdmin extends javax.swing.JFrame {
         
         this.setTitle("Ventana Administrador de Sistema");
         initComponents();
+        jButton1.setText("<html><p>Mantener</p><p>Trabajadores</p></html>");
+        jButton2.setText("<html><p>Mantener</p><p>Clientes</p></html>");
+        jButton3.setText("<html><p>Mantener</p><p>Productos</p></html>");
+        jButton4.setText("<html><p>Mantener</p><p>Servicios</p></html>");
+        jButton5.setText("<html><p>Mantener</p><p>Proveedores</p></html>");
     }
     VentanaPrincipal vAnterior;
     String anterior;
@@ -74,6 +79,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
         nomb.setBounds(171, 13, 236, 29);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton1.setText("Mantener Trabajadores");
         jButton1.setMaximumSize(new java.awt.Dimension(167, 30));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +91,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
         jButton1.setBounds(12, 117, 180, 70);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton2.setText("Mantener Clientes");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +102,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
         jButton2.setBounds(12, 200, 180, 70);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton3.setText("Mantener Productos");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +113,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
         jButton3.setBounds(220, 280, 180, 70);
 
         jButton4.setBackground(new java.awt.Color(255, 255, 204));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton4.setText("Mantener Servicios");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +124,7 @@ public class ventanaAdmin extends javax.swing.JFrame {
         jButton4.setBounds(12, 280, 180, 70);
 
         jButton5.setBackground(new java.awt.Color(255, 255, 204));
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton5.setText("Mantener Proveedores");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

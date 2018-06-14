@@ -43,6 +43,7 @@ public class VentanaReportes extends javax.swing.JFrame {
     ventanaLogin ventanaHome;
     public VentanaReportes() {
         initComponents();
+        ButtProdMasVend.setText("<html><p>Productos</p><p>más vendidos</p></html>");
     }
 
     /**
@@ -374,61 +375,61 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         jLabel3.setText("Ventas totales");
         BalanceFrameReport.getContentPane().add(jLabel3);
-        jLabel3.setBounds(19, 62, 140, 14);
+        jLabel3.setBounds(19, 62, 140, 16);
 
         jLabel4.setText("Servicios");
         BalanceFrameReport.getContentPane().add(jLabel4);
-        jLabel4.setBounds(19, 93, 150, 14);
+        jLabel4.setBounds(19, 93, 150, 16);
 
         jLabel5.setText("Alquiler");
         BalanceFrameReport.getContentPane().add(jLabel5);
-        jLabel5.setBounds(19, 124, 160, 14);
+        jLabel5.setBounds(19, 124, 160, 16);
 
         jLabel6.setText("Pago empleados");
         BalanceFrameReport.getContentPane().add(jLabel6);
-        jLabel6.setBounds(19, 153, 170, 14);
+        jLabel6.setBounds(19, 153, 170, 16);
 
         jLabel7.setText("Compras");
         BalanceFrameReport.getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 178, 150, 14);
+        jLabel7.setBounds(19, 178, 150, 16);
 
         jLabel8.setText("Otros");
         BalanceFrameReport.getContentPane().add(jLabel8);
-        jLabel8.setBounds(19, 209, 150, 14);
+        jLabel8.setBounds(19, 209, 150, 16);
 
         jTextField1.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField1);
-        jTextField1.setBounds(200, 60, 88, 20);
+        jTextField1.setBounds(200, 60, 88, 22);
 
         jTextField2.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField2);
-        jTextField2.setBounds(200, 90, 88, 20);
+        jTextField2.setBounds(200, 90, 88, 22);
 
         jTextField3.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField3);
-        jTextField3.setBounds(200, 120, 88, 20);
+        jTextField3.setBounds(200, 120, 88, 22);
 
         jTextField4.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField4);
-        jTextField4.setBounds(200, 180, 88, 20);
+        jTextField4.setBounds(200, 180, 88, 22);
 
         jTextField5.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField5);
-        jTextField5.setBounds(200, 150, 88, 20);
+        jTextField5.setBounds(200, 150, 88, 22);
 
         jTextField6.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField6);
-        jTextField6.setBounds(200, 250, 88, 20);
+        jTextField6.setBounds(200, 250, 88, 22);
         BalanceFrameReport.getContentPane().add(jSeparator1);
         jSeparator1.setBounds(19, 237, 280, 10);
 
         jLabel9.setText("Utilidad");
         BalanceFrameReport.getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 250, 150, 14);
+        jLabel9.setBounds(20, 250, 150, 16);
 
         jTextField7.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField7);
-        jTextField7.setBounds(200, 210, 88, 20);
+        jTextField7.setBounds(200, 210, 88, 22);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Reporte de Ingresos y Egresos");
@@ -436,10 +437,16 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel10.setBounds(77, 11, 274, 22);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 370));
+        getContentPane().setLayout(null);
 
-        SelecionRep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        SelecionRep.setText("Seleccione un reporte a generar");
+        SelecionRep.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        SelecionRep.setText("Seleccione un reporte a generar:");
+        getContentPane().add(SelecionRep);
+        SelecionRep.setBounds(29, 21, 308, 28);
 
+        ButtRepClientes.setBackground(new java.awt.Color(255, 255, 204));
+        ButtRepClientes.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         ButtRepClientes.setText("Clientes frecuentes");
         ButtRepClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -451,27 +458,46 @@ public class VentanaReportes extends javax.swing.JFrame {
                 ButtRepClientesActionPerformed(evt);
             }
         });
+        getContentPane().add(ButtRepClientes);
+        ButtRepClientes.setBounds(25, 80, 200, 70);
 
+        ButtProdMasVend.setBackground(new java.awt.Color(255, 255, 204));
+        ButtProdMasVend.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         ButtProdMasVend.setText("Productos más vendidos");
         ButtProdMasVend.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ButtProdMasVendMouseClicked(evt);
             }
         });
+        ButtProdMasVend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtProdMasVendActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtProdMasVend);
+        ButtProdMasVend.setBounds(250, 80, 200, 70);
 
+        ButtRepMensVentas.setBackground(new java.awt.Color(255, 255, 204));
+        ButtRepMensVentas.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         ButtRepMensVentas.setText("Ventas");
         ButtRepMensVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ButtRepMensVentasMouseClicked(evt);
             }
         });
+        getContentPane().add(ButtRepMensVentas);
+        ButtRepMensVentas.setBounds(25, 175, 200, 70);
 
+        ButtRepBalance.setBackground(new java.awt.Color(255, 255, 204));
+        ButtRepBalance.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         ButtRepBalance.setText("Ingresos y egresos");
         ButtRepBalance.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ButtRepBalanceMouseClicked(evt);
             }
         });
+        getContentPane().add(ButtRepBalance);
+        ButtRepBalance.setBounds(250, 175, 200, 70);
 
         ButtRepCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         ButtRepCerrar.setText("Volver");
@@ -485,6 +511,8 @@ public class VentanaReportes extends javax.swing.JFrame {
                 ButtRepCerrarActionPerformed(evt);
             }
         });
+        getContentPane().add(ButtRepCerrar);
+        ButtRepCerrar.setBounds(200, 280, 93, 29);
 
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         logout.setText("Cerrar Sesión");
@@ -493,46 +521,8 @@ public class VentanaReportes extends javax.swing.JFrame {
                 logoutActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ButtRepBalance)
-                    .addComponent(ButtRepMensVentas)
-                    .addComponent(ButtProdMasVend)
-                    .addComponent(ButtRepClientes)
-                    .addComponent(SelecionRep, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(259, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtRepCerrar)
-                .addGap(18, 18, 18)
-                .addComponent(logout)
-                .addGap(41, 41, 41))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(SelecionRep, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(ButtRepClientes)
-                .addGap(30, 30, 30)
-                .addComponent(ButtProdMasVend)
-                .addGap(26, 26, 26)
-                .addComponent(ButtRepMensVentas)
-                .addGap(33, 33, 33)
-                .addComponent(ButtRepBalance)
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ButtRepCerrar)
-                    .addComponent(logout))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        getContentPane().add(logout);
+        logout.setBounds(310, 280, 135, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -795,6 +785,10 @@ DriverManager.getConnection
     private void txtPagoServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagoServiciosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPagoServiciosActionPerformed
+
+    private void ButtProdMasVendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtProdMasVendActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtProdMasVendActionPerformed
 
     /**
      * @param args the command line arguments

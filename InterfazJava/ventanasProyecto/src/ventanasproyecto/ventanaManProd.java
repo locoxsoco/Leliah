@@ -55,6 +55,9 @@ public class ventanaManProd extends javax.swing.JFrame {
         tabla.getColumnModel().getColumn(3).setCellRenderer(tcr);
         tabla.getColumnModel().getColumn(4).setCellRenderer(tcr);
         tabla.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        consum.setSelected(true);
+        inicializarComboCon(1);
+        registrar.setEnabled(true);
     }
     ventanaAdmin ventanaAnterior;
     int idU;
