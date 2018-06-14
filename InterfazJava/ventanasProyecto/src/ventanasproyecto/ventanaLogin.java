@@ -120,7 +120,7 @@ public class ventanaLogin extends javax.swing.JFrame {
             Login.setEnabled(false);
             this.setVisible(false);
         }else if( u.getPriv()==3){
-            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe");
+            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1");
             System.exit(0);
         }else{
             JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "Error Autentificacion", JOptionPane.PLAIN_MESSAGE);
@@ -129,9 +129,9 @@ public class ventanaLogin extends javax.swing.JFrame {
     
     public void regresar(){
         this.setVisible(true);
-       this.user.setText("");
-       this.pass.setText(""); 
-        
+        this.user.setText("");
+        this.pass.setText(""); 
+        Login.setEnabled(true);
         /*if(recor.get){
             
         }*/

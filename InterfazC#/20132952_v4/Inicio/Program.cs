@@ -16,12 +16,25 @@ namespace Inicio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            VentanaVendedor v = new VentanaVendedor();
+            
             if(args.Length == 0)
             {
-                v.button2.Visible = false;
+                LogIn v = new LogIn();
+                Application.Run(v);
             }
-            Application.Run(v);
+            else if(args.Length == 2)
+            {
+                VentanaVendedor v = new VentanaVendedor();
+                v.button2.Visible = true;
+                Application.Run(v);
+            }
+            else if (args.Length == 1)
+            {
+                VentanaVendedor v = new VentanaVendedor();
+                v.button2.Visible = false;
+                Application.Run(v);
+            }
+            
         }
     }
 }

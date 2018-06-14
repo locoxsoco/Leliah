@@ -156,7 +156,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1");
+            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1 1");
             System.exit(0);
         } catch (IOException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
