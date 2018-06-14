@@ -148,6 +148,7 @@ public class ventanaLogin extends javax.swing.JFrame {
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         try {
             // TODO add your handling code here:
+            Login.setEnabled(false);
             log();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);

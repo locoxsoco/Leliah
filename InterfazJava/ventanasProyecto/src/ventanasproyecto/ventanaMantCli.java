@@ -1089,6 +1089,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
             if(provincia.getItemCount()<1){
                 llenarComboBoxProv(d.getIdDep());
             }
+            provincia.setVisible(true);
+            Tprovincia.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
