@@ -10,6 +10,7 @@ import clases.Compra;
 import clases.LineaxCompra;
 import clases.Producto;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -401,9 +402,20 @@ public class ventanaCompra extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cantidad debe ser un valor entero", "Error Cantidad", JOptionPane.PLAIN_MESSAGE);
                 return;
         }
-        if(fecha.getDate()==null && fecha.isEnabled()){
-                JOptionPane.showMessageDialog(null, "Fecha de Caducidad no debe ser estar vacio", "Error Fecha de Caducidad", JOptionPane.PLAIN_MESSAGE);
+        if(fecha.isEnabled()){
+            if(fecha.getDate()==null){
+                    JOptionPane.showMessageDialog(null, "Fecha de Caducidad no debe ser estar vacio", "Error Fecha de Caducidad", JOptionPane.PLAIN_MESSAGE);
+                    return;
+            }
+            java.util.Date fecha1 = new java.util.Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fecha1);
+            java.sql.Date sqlDate = new java.sql.Date(fecha.getDate().getTime());
+            java.sql.Date fechaMin = new java.sql.Date(calendar.getTime().getTime());
+            if(!fechaMin.before(sqlDate)){
+                JOptionPane.showMessageDialog(null, "Ingresar Fecha Valida", "Error Fecha Vencimiento", JOptionPane.PLAIN_MESSAGE);
                 return;
+            }
         }
         Object o[]={prod.getNombre(), pu.getText(), cant.getText(), Float.parseFloat(pu.getText())*Float.parseFloat(cant.getText())};
         for(int i=0;i<comp.getListLineaxProd().size();i++){
@@ -442,6 +454,10 @@ public class ventanaCompra extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(buscarProv.isEnabled()){
+            JOptionPane.showMessageDialog(null, "Ya hay una compra en proceso", "Error Creacion Compra", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
         comp = new Compra();
         prod = new Producto();
         buscarProd.setEnabled(true);
@@ -473,7 +489,7 @@ public class ventanaCompra extends javax.swing.JFrame {
         nombreProd.setText("");
         pu.setText("");
         cant.setText("");
-        jTextField7.setText("");
+        
         razon.setEnabled(false);
         ruc.setEnabled(false);
         nombreProd.setEnabled(false);
@@ -489,6 +505,7 @@ public class ventanaCompra extends javax.swing.JFrame {
             i-=1;
         }
         total=0;
+        jTextField7.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -512,6 +529,7 @@ public class ventanaCompra extends javax.swing.JFrame {
             i-=1;
         }
         total=0;
+        jTextField7.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void puActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puActionPerformed

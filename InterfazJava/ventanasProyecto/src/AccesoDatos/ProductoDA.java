@@ -224,7 +224,7 @@ public class ProductoDA {
         
         stmt.setString("_nombre", nombre);
         stmt.setString("_marca", marca);
-        if(cat.equals("Escoja")){
+        if(cat.equals("Todos")){
             stmt.setString("_categoria", "");
         }else{
             stmt.setString("_categoria", cat);
