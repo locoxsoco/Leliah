@@ -156,6 +156,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            compras.setEnabled(false);
             Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1 1");
             System.exit(0);
         } catch (IOException ex) {
@@ -164,17 +168,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comprasMouseClicked
-    ventanaCompra ventCmp = new ventanaCompra();
-    ventCmp.setLocationRelativeTo(null);
-    ventCmp.setVisible(true);
-    ventCmp.vAnterior = this;
-    ventCmp.ventanaHome = this.ventanaHome;
-    this.setVisible(false);
+    
 // TODO add your handling code here:
     }//GEN-LAST:event_comprasMouseClicked
 
     private void comprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprasActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        compras.setEnabled(false);
+        ventanaCompra ventCmp = new ventanaCompra();
+        ventCmp.setLocationRelativeTo(null);
+        ventCmp.setVisible(true);
+        ventCmp.vAnterior = this;
+        ventCmp.ventanaHome = this.ventanaHome;
+        this.setVisible(false);
     }//GEN-LAST:event_comprasActionPerformed
     ventanaLogin ventanaHome;
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -188,6 +197,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        compras.setEnabled(false);
         ventanaAdmin v1 = new ventanaAdmin();
         v1.vAnterior = this;
         v1.jButton7.setVisible(true);
@@ -202,6 +215,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        compras.setEnabled(false);
         VentanaReportes v1 = new VentanaReportes();
         v1.vAnterior = this;
         v1.ventanaHome = this.ventanaHome;
@@ -212,10 +229,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton compras;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    public javax.swing.JButton compras;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;

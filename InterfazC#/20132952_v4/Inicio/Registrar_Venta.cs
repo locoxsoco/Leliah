@@ -24,6 +24,7 @@ namespace Inicio
         private BindingList<DetalleVentaPS> detalleVentaProdServ;
         private int posicion;
 
+        double descMax = 20;
         double acum;
         double valorIGV = 0.18F;
         double tipoCambio = 3.24F;
@@ -58,6 +59,10 @@ namespace Inicio
                     radioBtnFactura.Enabled = false;
                     radioBtnEfectivo.Enabled = false;
                     radioBtnTarjeta.Enabled = false;
+                    labelSoles.Visible = false;
+                    label8.Visible = false;
+                    textAdelanto.Visible = false;
+                    
                     textDNI.Enabled = false;
                     textRUC.Enabled = false;
                     radioBtnInmediata.Enabled = false;
@@ -221,6 +226,10 @@ namespace Inicio
                 btnAgregar.Enabled = true;
                 textCantidad.Enabled = true;
                 textDescuento.Enabled = true;
+
+                textDescuento.Text = "";
+                textPrecioVendido.Text = "";
+                textCantidad.Text = "";
             }
 
         }
@@ -231,6 +240,7 @@ namespace Inicio
         private void radioBtnAntcipada_CheckedChanged(object sender, EventArgs e)
         {
             label8.Visible = true;
+            labelSoles.Visible = true;
             textAdelanto.Visible = true;
             textAdelanto.Enabled = true;
             dateTimeEntrega.Enabled = true;
@@ -263,6 +273,8 @@ namespace Inicio
             textTotal.Text = Math.Round(venta.Monto, 4).ToString();
 
             detalleVentaProdServ.RemoveAt(posicion);
+            btnEliminar.Enabled = false;
+            btnModificar.Enabled = false;
             limpiarCamposProducto();
         }
 
@@ -273,9 +285,16 @@ namespace Inicio
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             int cant = 0;
-            double desc;
+            int desc;
+
 
             //validaciones 
+            if (textBoxNombre.Text == "")
+            {
+                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (textCantidad.Text == "")
             {
                 MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -293,6 +312,7 @@ namespace Inicio
             if (cant > stockProd)
             {
                 MessageBox.Show(this, "No hay producto suficiente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
             else
             {
@@ -300,18 +320,18 @@ namespace Inicio
                 textStock.Text = stockProd.ToString();
             }
 
-            if (textDescuento.Text == "") desc = 0.0F;
+            if (textDescuento.Text == "") desc = 0;
             else
             {
-                bool resultDes = double.TryParse(textDescuento.Text, out desc);
+                bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
                 if (resultDes == false)
                 {
-                    MessageBox.Show(this, "Ingrese un numero decimal en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Ingrese un numero entero en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
-                    if (desc > 0.5)
+                    if (desc > descMax)
                     {
                         MessageBox.Show(this, "Porcenatje muy grande en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
@@ -331,9 +351,11 @@ namespace Inicio
                 //Se maneja el detalle de productos por separado
                 Detalle_Venta dv = new Detalle_Venta();
 
+                double descAux;
+                descAux = desc;
                 dv.Producto = prodTemp;
                 dv.Cantidad = Int32.Parse(textCantidad.Text);
-                dv.PrecioVendido = dv.Producto.Precio * (1 - desc);
+                dv.PrecioVendido = dv.Producto.Precio * (1 - descAux / 100);
                 dv.Subtotal = dv.Cantidad * dv.PrecioVendido;
                 venta.Detalles_venta.Add(dv);
 
@@ -354,15 +376,17 @@ namespace Inicio
                 dvPS.IdPS = prodTemp.IdProducto;
                 dvPS.NombrePS = textBoxNombre.Text;
                 dvPS.Precio = prodTemp.Precio;
+                dvPS.Descuento = descAux/100;
+                dvPS.Stock = prdoStock.Stock;
                 dvPS.Cantidad = Int32.Parse(textCantidad.Text);
-                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc), 4);
+                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - descAux / 100), 4);
                 dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido, 4);
 
                 textPrecioVendido.Text = Math.Round(dvPS.PrecioVendido, 4).ToString();
                 detalleVentaProdServ.Add(dvPS);
 
                 limpiarCamposProducto();
-
+                btnAgregar.Enabled = false;
             }
          
             
@@ -453,13 +477,14 @@ namespace Inicio
         {
             btnListaClientesN.Enabled = true;
             btnListaClientesJ.Enabled = false;
-
+            textRUC.Text = "";
         }
 
         private void radioBtnFactura_CheckedChanged(object sender, EventArgs e)
         {
             btnListaClientesJ.Enabled = true;
             btnListaClientesN.Enabled = false;
+            textDNI.Text = "";
         }
 
         private void btnListaClientes_Click(object sender, EventArgs e)
@@ -526,15 +551,24 @@ namespace Inicio
                 btnAgregarServ.Enabled = true;
                 textDescServ.Enabled = true;
                 textCantServ.Enabled = true;
+
+                textDescuento.Text = "";
+                textPrecioVendido.Text = "";
+                textCantidad.Text = "";
             }
         }
 
         private void btnAgregarServ_Click(object sender, EventArgs e)
         {
             int cant = 0;
-            double desc;
+            int desc;
 
             //validaciones 
+            if (textNombServ.Text == "")
+            {
+                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             if (textCantServ.Text == "")
             {
                 MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -547,20 +581,20 @@ namespace Inicio
                 MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if (textDescServ.Text == "") desc = 0.0F;
+            if (textDescServ.Text == "") desc = 0;
             else
             {
-                bool resultDes = double.TryParse(textDescServ.Text, out desc);
+                bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
                 if (resultDes == false)
                 {
-                    MessageBox.Show(this, "Ingrese un numero decimal en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Ingrese un numero entero en el campo descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
-                    if (desc > 0.5)
+                    if (desc > descMax)
                     {
-                        MessageBox.Show(this, "Porcenatje muy grande en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                 }
@@ -577,8 +611,10 @@ namespace Inicio
                 //Se maneja el detalle de servicios por separado
                 Detalle_Venta_Servicio dvServ = new Detalle_Venta_Servicio();
 
+                double descAux;
+                descAux = desc;
                 dvServ.Servicio = servTemp;
-                dvServ.PrecioVendido = dvServ.Servicio.Precio * (1 - desc);
+                dvServ.PrecioVendido = dvServ.Servicio.Precio * (1 - descAux / 100);
                 dvServ.Cantidad = cant;
                 dvServ.Subtotal = dvServ.Cantidad * dvServ.PrecioVendido;
                 venta.Detalles_servicio.Add(dvServ);
@@ -600,7 +636,8 @@ namespace Inicio
                 dvPS.IdPS = servTemp.IdServicio;
                 dvPS.NombrePS = textNombServ.Text;
                 dvPS.Precio = servTemp.Precio;
-                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc), 4);
+                dvPS.Descuento = descAux/100;
+                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - descAux / 100), 4);
                 dvPS.Cantidad = Int32.Parse(textCantServ.Text);
                 dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido, 4);
 
@@ -608,6 +645,7 @@ namespace Inicio
 
                 detalleVentaProdServ.Add(dvPS);
                 limpiarCamposServicio();
+                btnAgregarServ.Enabled = false;
             }
         }
 
@@ -637,6 +675,8 @@ namespace Inicio
             logicaNegocio.modificarCantidadVentaProducto(idProd, cant, venta.Detalles_venta);
 
             limpiarCamposProducto();
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
             btnAgregar.Enabled = true;
         }
 
@@ -666,9 +706,11 @@ namespace Inicio
             logicaNegocio.modificarCantidadVentaServicio(idServ, cant, venta.Detalles_servicio);
 
             limpiarCamposServicio();
+            btnModificarServ.Enabled = false;
+            btnEliminarServ.Enabled = false;
             btnAgregarServ.Enabled = true;
         }
-
+        
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
             if (textDNI.Text == "" && textRUC.Text == "")
@@ -714,6 +756,9 @@ namespace Inicio
                     textBoxNombre.Text = detalleVentaProdServ[posicion].NombrePS;
                     textBoxCU.Text = detalleVentaProdServ[posicion].Precio.ToString();
                     textCantidad.Text = detalleVentaProdServ[posicion].Cantidad.ToString();
+                    textDescuento.Text = (detalleVentaProdServ[posicion].Descuento*100).ToString();
+                    textStock.Text = detalleVentaProdServ[posicion].Stock.ToString();
+                    textPrecioVendido.Text = detalleVentaProdServ[posicion].PrecioVendido.ToString();
                     btnAgregar.Enabled = false;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
@@ -728,6 +773,8 @@ namespace Inicio
                     textNombServ.Text = detalleVentaProdServ[posicion].NombrePS;
                     textCUserv.Text = detalleVentaProdServ[posicion].Precio.ToString();
                     textCantServ.Text = detalleVentaProdServ[posicion].Cantidad.ToString();
+                    textDescServ.Text = (detalleVentaProdServ[posicion].Descuento*100).ToString();
+                    textPVserv.Text = detalleVentaProdServ[posicion].PrecioVendido.ToString();
                     btnAgregarServ.Enabled = false;
                     btnModificarServ.Enabled = true;
                     btnEliminarServ.Enabled = true;
@@ -758,8 +805,67 @@ namespace Inicio
             textTotal.Text = Math.Round(venta.Monto, 4).ToString();
 
             detalleVentaProdServ.RemoveAt(posicion);
+            btnEliminarServ.Enabled = false;
+            btnModificarServ.Enabled = false;
             limpiarCamposServicio();
         }
+
+        private void textDescuento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (textDescuento.Text != "")
+            {
+                if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                {
+                    int desc;
+                    bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
+                    if (resultDes == false)
+                    {
+                        MessageBox.Show(this, "Ingrese un numero entero en el campo Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    else
+                    {
+                        if (desc > descMax)
+                        {
+                            MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                    double descAux;
+                    descAux = desc;
+                    textPrecioVendido.Text = (prdoStock.Precio * (1 - descAux/100)).ToString();
+                }
+            }
+        }
+
+        private void textDescServ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (textDescServ.Text != "")
+            {
+                if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                {
+                    int desc;
+                    bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
+                    if (resultDes == false)
+                    {
+                        MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    else
+                    {
+                        if (desc > descMax)
+                        {
+                            MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                    double descAux;
+                    descAux = desc;
+                    textPVserv.Text = (servTemp.Precio * (1 - descAux/100)).ToString();
+                }
+            }
+        }
+
     }
 }
 

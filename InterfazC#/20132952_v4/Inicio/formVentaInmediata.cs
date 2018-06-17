@@ -23,7 +23,7 @@ namespace Inicio
         private ProductoBL logicaNegocioP;
         private int posicion;
 
-
+        double descMax = 20;
         double acum;
         double valorIGV = 0.18F;
         double tipoCambio = 3.24F;
@@ -188,8 +188,11 @@ namespace Inicio
 
                 btnAgregar.Enabled = true;
                 textCantidad.Enabled = true;               
-                textDescuento.Enabled = true;               
+                textDescuento.Enabled = true;
 
+                textDescuento.Text = "";
+                textPrecioVendido.Text = "";
+                textCantidad.Text = "";
             }
 
         }
@@ -213,12 +216,18 @@ namespace Inicio
             return false;
 
         }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             int cant = 0;
-            double desc;
+            int desc;
 
             //validaciones 
+            if (textBoxNombre.Text == "")
+            {
+                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             if (textCantidad.Text == "")
             {
                 MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -238,25 +247,21 @@ namespace Inicio
                 MessageBox.Show(this, "No hay producto suficiente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            else
-            {
-                stockProd = stockProd - cant;
-                textStock.Text = stockProd.ToString();
-            }
 
-            if (textDescuento.Text == "") desc = 0.0F;
+
+            if (textDescuento.Text == "") desc = 0;
             else {
-                bool resultDes = double.TryParse(textDescuento.Text, out desc);
+                bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
                 if (resultDes == false)
                 {
-                    MessageBox.Show(this, "Ingrese un numero decimal en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
-                    if (desc > 0.5)
+                    if (desc > descMax)
                     {
-                        MessageBox.Show(this, "Porcenatje muy grande en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                 }
@@ -275,9 +280,11 @@ namespace Inicio
                 //Se maneja el detalle de productos por separado
                 Detalle_Venta dv = new Detalle_Venta();
 
+                double descAux;
+                descAux = desc;
                 dv.Producto = prodTemp;
                 dv.Cantidad = Int32.Parse(textCantidad.Text);
-                dv.PrecioVendido = dv.Producto.Precio * (1 - desc);
+                dv.PrecioVendido = dv.Producto.Precio * (1 - descAux / 100);
                 dv.Subtotal = dv.Cantidad * dv.PrecioVendido;
                 venta.Detalles_venta.Add(dv);
 
@@ -302,15 +309,17 @@ namespace Inicio
                 dvPS.IdPS = prodTemp.IdProducto;
                 dvPS.NombrePS = textBoxNombre.Text;
                 dvPS.Precio = prodTemp.Precio;
+                dvPS.Descuento = descAux / 100;
+                dvPS.Stock = prdoStock.Stock;
                 dvPS.Cantidad = Int32.Parse(textCantidad.Text);
-                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc),4);
+                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - descAux / 100),4);
                 dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido,4);
 
-                textPrecioVendido.Text = Math.Round(dvPS.PrecioVendido,4).ToString();
+                textPrecioVendido.Text = dvPS.PrecioVendido.ToString();
                 detalleVentaProdServ.Add(dvPS);
 
                 limpiarCamposProducto();
-
+                btnAgregar.Enabled = false;
             }
            
         }
@@ -327,6 +336,10 @@ namespace Inicio
                 btnAgregarServ.Enabled = true;
                 textDescServ.Enabled = true;
                 textCantServ.Enabled = true;
+
+                textDescServ.Text = "";
+                textPVserv.Text = "";
+                textCantServ.Text = "";
             }
             
         }
@@ -335,9 +348,14 @@ namespace Inicio
         {
 
             int cant = 0;
-            double desc;
+            int desc;
 
             //validaciones 
+            if (textNombServ.Text == "")
+            {
+                MessageBox.Show(this, "Falta seleccionar servicio", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             if (textCantServ.Text == "")
             {
                 MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -351,26 +369,26 @@ namespace Inicio
                 return;
             }
 
-            if (textDescServ.Text == "") desc = 0.0F;
+            if (textDescServ.Text == "") desc = 0;
             else
             {
-                bool resultDes = double.TryParse(textDescServ.Text, out desc);
+                bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
                 if (resultDes == false)
                 {
-                    MessageBox.Show(this, "Ingrese un numero decimal en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
-                    if (desc > 0.5)
+                    if (desc > descMax)
                     {
-                        MessageBox.Show(this, "Porcenatje muy grande en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Porcenatje mator al 20%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                 }
             }
             
-
+            
 
             //verificar que el servicio no este en el datagridview
             if (servicioAgregado(servTemp.IdServicio, detalleVentaProdServ) == true)
@@ -381,8 +399,10 @@ namespace Inicio
                 //Se maneja el detalle de servicios por separado
                 Detalle_Venta_Servicio dvServ = new Detalle_Venta_Servicio();
 
+                double descAux;
+                descAux = desc;
                 dvServ.Servicio = servTemp;
-                dvServ.PrecioVendido = dvServ.Servicio.Precio * (1 - desc);
+                dvServ.PrecioVendido = dvServ.Servicio.Precio * (1 - descAux / 100);
                 dvServ.Cantidad = cant;
                 dvServ.Subtotal = dvServ.Cantidad * dvServ.PrecioVendido;
                 venta.Detalles_servicio.Add(dvServ);
@@ -404,7 +424,8 @@ namespace Inicio
                 dvPS.IdPS = servTemp.IdServicio;
                 dvPS.NombrePS = textNombServ.Text;
                 dvPS.Precio = servTemp.Precio;
-                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc),4);
+                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc/100),4);
+                dvPS.Descuento = desc/100;
                 dvPS.Cantidad = Int32.Parse(textCantServ.Text);              
                 dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido,4);
 
@@ -412,6 +433,7 @@ namespace Inicio
 
                 detalleVentaProdServ.Add(dvPS);
                 limpiarCamposServicio();
+                btnAgregarServ.Enabled = false;
             }
             
         }
@@ -445,6 +467,8 @@ namespace Inicio
             logicaNegocio.modificarCantidadVentaProducto(idProd, cant, venta.Detalles_venta);
 
             limpiarCamposProducto();
+            btnModificarProd.Enabled = false;
+            btnEliminar.Enabled = false;
             btnAgregar.Enabled = true;
         }
 
@@ -458,6 +482,9 @@ namespace Inicio
                     textBoxNombre.Text = detalleVentaProdServ[posicion].NombrePS;
                     textBoxCU.Text = detalleVentaProdServ[posicion].Precio.ToString();
                     textCantidad.Text = detalleVentaProdServ[posicion].Cantidad.ToString();
+                    textDescuento.Text = (detalleVentaProdServ[posicion].Descuento*100).ToString();
+                    textStock.Text = detalleVentaProdServ[posicion].Stock.ToString();
+                    textPrecioVendido.Text = detalleVentaProdServ[posicion].PrecioVendido.ToString();
                     btnAgregar.Enabled = false;
                     btnModificarProd.Enabled = true;
                     btnEliminar.Enabled = true;
@@ -465,13 +492,14 @@ namespace Inicio
                     btnEliminarServ.Enabled = false; ;
                     limpiarCamposServicio();
 
-                    //producto.Presentaciones.RemoveAt(indice);
                 }
                 else
                 {
                     textNombServ.Text = detalleVentaProdServ[posicion].NombrePS;
                     textCUserv.Text = detalleVentaProdServ[posicion].Precio.ToString();
                     textCantServ.Text = detalleVentaProdServ[posicion].Cantidad.ToString();
+                    textDescServ.Text = (detalleVentaProdServ[posicion].Descuento*100).ToString();
+                    textPVserv.Text = detalleVentaProdServ[posicion].PrecioVendido.ToString();
                     btnAgregarServ.Enabled = false;
                     btnModificarServ.Enabled = true;
                     btnEliminarServ.Enabled = true;
@@ -488,7 +516,9 @@ namespace Inicio
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+
             double monto;
+            //if (dgvDetalleVenta.Rows.Count != 0) { }
             int idProd = detalleVentaProdServ[posicion].IdPS;
             monto = logicaNegocio.eliminarProducto(idProd, venta.Detalles_venta);
 
@@ -503,6 +533,8 @@ namespace Inicio
             textTotal.Text = Math.Round(venta.Monto,4).ToString();
 
             detalleVentaProdServ.RemoveAt(posicion);
+            btnEliminar.Enabled = false;
+            btnModificarProd.Enabled = false;
             limpiarCamposProducto();
         }
 
@@ -522,6 +554,8 @@ namespace Inicio
             textTotal.Text = Math.Round(venta.Monto, 4).ToString();
 
             detalleVentaProdServ.RemoveAt(posicion);
+            btnEliminarServ.Enabled = false;
+            btnModificarServ.Enabled = false;
             limpiarCamposServicio();
         }
 
@@ -550,6 +584,8 @@ namespace Inicio
             int idServ = detalleVentaProdServ[posicion].IdPS;
             logicaNegocio.modificarCantidadVentaServicio(idServ, cant, venta.Detalles_servicio);
             limpiarCamposServicio();
+            btnModificarServ.Enabled = false;
+            btnEliminarServ.Enabled = false;
             btnAgregarServ.Enabled = true;
         }
 
@@ -599,6 +635,66 @@ namespace Inicio
                 return;
             }
                 
+        }
+
+        private void textDescuento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            if (textDescuento.Text != "") {
+                if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                {
+                    int desc;
+                    bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
+                    if (resultDes == false)
+                    {
+                        MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    else
+                    {
+                        if (desc > descMax)
+                        {
+                            MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+
+                    double descAux;
+                    descAux= desc;
+                    textPrecioVendido.Text = (prdoStock.Precio * (1 - descAux/ 100)).ToString();
+                }
+            }          
+        }
+
+
+        private void textDescServ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (textDescServ.Text != "")
+            {
+                if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                {
+                    int desc;
+                    bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
+                    if (resultDes == false)
+                    {
+                        MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    else
+                    {
+                        if (desc > descMax)
+                        {
+                            MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+
+                    double descAux;
+                    descAux = desc;
+                    textPVserv.Text = (servTemp.Precio * (1 - descAux / 100)).ToString();
+                }
+            }
+
         }
     }
 }

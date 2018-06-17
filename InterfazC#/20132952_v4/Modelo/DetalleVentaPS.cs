@@ -12,6 +12,8 @@ namespace Modelo
         private int idPS;
         private string nombrePS;
         private double precio;
+        private double descuento;
+        private int stock;
         private double precioVendido;
         private int cantidad;
         private double subtotal;
@@ -23,5 +25,7 @@ namespace Modelo
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public double Subtotal { get => subtotal; set => subtotal = value; }
         public int IdPS { get => idPS; set => idPS = value; }
+        public double Descuento { get => descuento; set => descuento = value; }
+        public int Stock { get => stock; set => stock = value; }
     }
 }

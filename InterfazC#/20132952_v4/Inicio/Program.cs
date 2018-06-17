@@ -19,8 +19,7 @@ namespace Inicio
             
             if(args.Length == 0)
             {
-                LogIn v = new LogIn();
-                Application.Run(v);
+                Application.Exit();
             }
             else if(args.Length == 2)
             {

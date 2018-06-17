@@ -37,9 +37,16 @@ namespace Inicio
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                productoStockSeleccionado = (StockXProducto)dgvProductos.CurrentRow.DataBoundItem;
+                this.DialogResult = DialogResult.OK;
+            }
+            catch (Exception ex) {
+                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             
-            productoStockSeleccionado = (StockXProducto)dgvProductos.CurrentRow.DataBoundItem;
-            this.DialogResult = DialogResult.OK;
         }
 
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -53,6 +60,9 @@ namespace Inicio
             if (radioBtnC.Checked == true) cons = 1;
             else if (radioBtnNC.Checked == true) cons = 0;
             dgvProductos.DataSource = logicaNegocio.listarProductosStock(cons, textNombre.Text,textMarca.Text,textCategoria.Text);
+
+            if (dgvProductos.Rows.Count == 0) btnSeleccionar.Enabled = false;
+
         }
 
         private void frmListarProductos_Load(object sender, EventArgs e)
@@ -63,11 +73,48 @@ namespace Inicio
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             btnSeleccionar.Enabled = true;
-            posicion = dgvProductos.CurrentRow.Index;
-            textNombre.Text = lista[posicion].Nombre;
-            textMarca.Text = lista[posicion].Marca;
-            textCategoria.Text = lista[posicion].Categoria;
+            if (dgvProductos.CurrentRow == null) {
+                textNombre.Text = "";
+                textMarca.Text = "";
+                textCategoria.Text = "";
+                btnSeleccionar.Enabled = false;
+            }
+            else {
+                posicion = (dgvProductos.CurrentRow.Index);
+                textNombre.Text = lista[posicion].Nombre;
+                textMarca.Text = lista[posicion].Marca;
+                textCategoria.Text = lista[posicion].Categoria;
+            }
+            
 
+        }
+
+        private void radioBtnNC_CheckedChanged(object sender, EventArgs e)
+        {
+            textNombre.Text = "";
+            textMarca.Text = "";
+            textCategoria.Text = "";
+        }
+
+        private void radioBtnC_CheckedChanged(object sender, EventArgs e)
+        {
+            textNombre.Text = "";
+            textMarca.Text = "";
+            textCategoria.Text = "";
+        }
+
+        private void frmListarProductos_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void dgvProductos_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+        }
+
+        private void dgvProductos_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            return;
         }
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Registrar_Venta.resx">
       <DependentUpon>Registrar_Venta.cs</DependentUpon>
@@ -147,6 +148,51 @@
       <Project>{d073a57f-266d-465d-93a0-9768a0872b67}</Project>
       <Name>Modelo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\79467.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24639132-una-ilustración-de-un-carrito-de-la-compra-o-el-icono-del-carrito-de-compras.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1485477066-finger_78602.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seleccionar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_arrow_back_128_28226 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anterior.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\siguiente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anterior2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelar %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\libreria.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

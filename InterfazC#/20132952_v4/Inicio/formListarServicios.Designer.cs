@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.dgvServicios = new System.Windows.Forms.DataGridView();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,23 +42,12 @@
             this.dgvServicios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2,
             this.Column3});
-            this.dgvServicios.Location = new System.Drawing.Point(49, 99);
-            this.dgvServicios.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvServicios.Location = new System.Drawing.Point(48, 99);
+            this.dgvServicios.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvServicios.Name = "dgvServicios";
-            this.dgvServicios.Size = new System.Drawing.Size(360, 199);
+            this.dgvServicios.Size = new System.Drawing.Size(382, 199);
             this.dgvServicios.TabIndex = 2;
             this.dgvServicios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
-            // 
-            // btnSeleccionar
-            // 
-            this.btnSeleccionar.Location = new System.Drawing.Point(286, 38);
-            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(100, 28);
-            this.btnSeleccionar.TabIndex = 3;
-            this.btnSeleccionar.Text = "Seleccionar";
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // Column2
             // 
@@ -73,13 +62,28 @@
             this.Column3.HeaderText = "Precio Unitario";
             this.Column3.Name = "Column3";
             // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.Image = global::Inicio.Properties.Resources.seleccionar;
+            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeleccionar.Location = new System.Drawing.Point(313, 44);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(117, 37);
+            this.btnSeleccionar.TabIndex = 3;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            // 
             // formListarServicios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 311);
+            this.ClientSize = new System.Drawing.Size(486, 339);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvServicios);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "formListarServicios";
             this.Text = "formListarServicios";
             this.Load += new System.EventHandler(this.formListarServicios_Load);

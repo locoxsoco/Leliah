@@ -716,6 +716,10 @@ DriverManager.getConnection
 
     private void ButtRepCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtRepCerrarActionPerformed
         // TODO add your handling code here:
+        vAnterior.jButton1.setEnabled(true);
+        vAnterior.jButton2.setEnabled(true);
+        vAnterior.jButton3.setEnabled(true);
+        vAnterior.compras.setEnabled(true);
         vAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtRepCerrarActionPerformed
