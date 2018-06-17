@@ -518,12 +518,12 @@ public class ventanaManTrab extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        
-        if((s).length() != 8){
-            JOptionPane.showMessageDialog(null, "DNI debe tener 8 digitos", "Error DNI", JOptionPane.PLAIN_MESSAGE);
-            return false;
+        for (int i=0; i<s.length(); i++){
+            if(!(s.charAt(i)>='0' && s.charAt(i)<='9')){
+                JOptionPane.showMessageDialog(null, "campo telefono solo puede contener numeros", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
         }
-        
         s = this.tipoUser.getSelectedItem().toString();
         if(s =="Administrador del Sistema"){
             s1 = this.sueldo.getText();

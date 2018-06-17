@@ -593,12 +593,12 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
-            
-            if((s).length() != 8){
-                JOptionPane.showMessageDialog(null, "DNI debe tener 8 digitos", "Error DNI", JOptionPane.PLAIN_MESSAGE);
-                return false;
+            for (int i=0; i<s.length(); i++){
+                if(!(s.charAt(i)>='0' && s.charAt(i)<='9')){
+                    JOptionPane.showMessageDialog(null, "campo dni solo puede contener numeros", "Error dni", JOptionPane.PLAIN_MESSAGE);
+                    return false;
+                }
             }
-            
             s = this.apPat.getText();
             if((s).equals("")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
@@ -627,12 +627,12 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
-            
-            if((s).length() != 10){
-                JOptionPane.showMessageDialog(null, "RUC debe tener 10 digitos", "Error DNI", JOptionPane.PLAIN_MESSAGE);
-                return false;
+            for (int i=0; i<s.length(); i++){
+                if(!(s.charAt(i)>='0' && s.charAt(i)<='9')){
+                    JOptionPane.showMessageDialog(null, "campo ruc solo puede contener numeros", "Error RUC", JOptionPane.PLAIN_MESSAGE);
+                    return false;
+                }
             }
-
             s = this.namae.getText();
             if((s).equals("")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
