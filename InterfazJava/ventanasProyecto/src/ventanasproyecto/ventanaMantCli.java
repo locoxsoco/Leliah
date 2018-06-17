@@ -564,6 +564,23 @@ public class ventanaMantCli extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        int cant = s.length();
+        int cantA = 0;
+        int cantP = 0;
+        for(int i=0; i<cant; i++){
+            if(s.charAt(i) == '@'){
+                cantA++;
+            }
+            if(cantA == 1){
+                if(s.charAt(i)=='.'){
+                    cantP++;
+                }
+            }
+        }
+        if(cantA!=1 || cantP <1){
+            JOptionPane.showMessageDialog(null, "El correo debe tener una @ y almenos un punto", "Error Correo", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
         
         s = this.tlf.getText();
         if((s).equals("")){
@@ -1232,7 +1249,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private void tlfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlfKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!((c>='0' && c<='9') || c == '+' || c == '-' || c == ' ')) evt.consume();
+        if(!((c>='0' && c<='9'))) evt.consume();
     }//GEN-LAST:event_tlfKeyTyped
 
     private void tipoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDocActionPerformed
