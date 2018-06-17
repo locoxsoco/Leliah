@@ -248,7 +248,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         namaetxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         namaetxt.setText("Nombre:");
         getContentPane().add(namaetxt);
-        namaetxt.setBounds(10, 123, 120, 20);
+        namaetxt.setBounds(10, 93, 120, 20);
 
         namae.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,7 +261,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(namae);
-        namae.setBounds(140, 120, 200, 22);
+        namae.setBounds(140, 90, 200, 22);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
@@ -335,7 +335,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         TnumDoc.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TnumDoc.setText("Num Documento:");
         getContentPane().add(TnumDoc);
-        TnumDoc.setBounds(10, 93, 120, 16);
+        TnumDoc.setBounds(10, 123, 120, 16);
 
         numDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,15 +348,20 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(numDoc);
-        numDoc.setBounds(140, 90, 200, 22);
+        numDoc.setBounds(140, 120, 200, 22);
 
         TtipoDoc.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TtipoDoc.setText("Tipo Documento:");
         getContentPane().add(TtipoDoc);
-        TtipoDoc.setBounds(10, 153, 120, 16);
+        TtipoDoc.setBounds(10, 123, 120, 16);
 
+        tipoDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoDocActionPerformed(evt);
+            }
+        });
         getContentPane().add(tipoDoc);
-        tipoDoc.setBounds(140, 150, 200, 22);
+        tipoDoc.setBounds(140, 120, 200, 22);
 
         Tdepartamento.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Tdepartamento.setText("Departamento:");
@@ -594,8 +599,9 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 return false;
             }
             
-            if((s).length() != 8){
-                JOptionPane.showMessageDialog(null, "DNI debe tener 8 digitos", "Error DNI", JOptionPane.PLAIN_MESSAGE);
+            TipoDocumentoIdentidad t = (TipoDocumentoIdentidad) tipoDoc.getSelectedItem();
+            if(s.length() != t.getCantChar()){
+                JOptionPane.showMessageDialog(null, "El "+t.getNombTipo()+ " debe tener "+t.getCantChar()+" digitos", "Error Documento", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
             
@@ -691,6 +697,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
             namae.setVisible(true);
             namaetxt.setVisible(true);
             namaetxt.setText("Nombre:");
+            numDoc.setBounds(numDoc.getX(), 150, numDoc.getWidth(), numDoc.getHeight());
+            TnumDoc.setBounds(TnumDoc.getX(), 153, TnumDoc.getWidth(), TnumDoc.getHeight());
             tipoDoc.setVisible(true);
             numDoc.setVisible(true);
             TnumDoc.setVisible(true);
@@ -719,6 +727,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
             namae.setVisible(true);
             namaetxt.setVisible(true);
             namaetxt.setText("Razon Social:");
+            numDoc.setBounds(numDoc.getX(), 120, numDoc.getWidth(), numDoc.getHeight());
+            TnumDoc.setBounds(TnumDoc.getX(), 123, TnumDoc.getWidth(), TnumDoc.getHeight());
             tipoDoc.setVisible(false);
             numDoc.setVisible(true);
             TnumDoc.setVisible(true);
@@ -818,7 +828,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             
         }else if(lista.get(n) instanceof Empresa){
 
-            tipoCli.setSelectedItem(tipoCli.getItemAt(1));
+            tipoCli.setSelectedItem(tipoCli.getItemAt(2));
             numDoc.setVisible(true);
             TapPat.setVisible(false);
             TapMat.setVisible(false);
@@ -1189,6 +1199,13 @@ public class ventanaMantCli extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(c<'0' || c>'9') evt.consume();
+        if(this.tipoCli.getSelectedItem().toString() == "Empresa"){
+            if(numDoc.getText().length()>= 10) evt.consume();
+        }else{
+            TipoDocumentoIdentidad t = (TipoDocumentoIdentidad) tipoDoc.getSelectedItem();
+            if(numDoc.getText().length()>= t.getCantChar()) evt.consume();
+        }
+        
     }//GEN-LAST:event_numDocKeyTyped
 
     private void namaeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaeKeyTyped
@@ -1217,6 +1234,11 @@ public class ventanaMantCli extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if(!((c>='0' && c<='9') || c == '+' || c == '-' || c == ' ')) evt.consume();
     }//GEN-LAST:event_tlfKeyTyped
+
+    private void tipoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDocActionPerformed
+        // TODO add your handling code here:
+        //numDoc.setText("");
+    }//GEN-LAST:event_tipoDocActionPerformed
 
     /**
      * @param args the command line arguments

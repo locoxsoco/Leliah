@@ -12,6 +12,15 @@ package clases;
 public class TipoDocumentoIdentidad {
     private int idTipo;
     private String nombTipo;
+    private int cantChar;
+
+    public int getCantChar() {
+        return cantChar;
+    }
+
+    public void setCantChar(int cantChar) {
+        this.cantChar = cantChar;
+    }
 
     @Override
     public String toString(){

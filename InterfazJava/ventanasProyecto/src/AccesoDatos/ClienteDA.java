@@ -34,7 +34,7 @@ public class ClienteDA {
             
             d.setIdTipo(rs.getInt("idTipoDocumentoIdentidad"));
             d.setNombTipo(rs.getString("nombreDocumentoIdentidad"));
-            
+            d.setCantChar(rs.getInt("cantidadDigitos"));
             lista.add(d);
         }
         con.close();
@@ -123,7 +123,7 @@ public class ClienteDA {
                 ((Persona) c).setApPaterno(rs.getString("apellidoPaterno"));
                 ((Persona) c).setApMaterno(rs.getString("apellidoMaterno"));
                 ((Persona) c).setNumDoc(rs.getString("numeroDocumento"));
-                ((Persona) c).setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"), rs.getString("nombreDocumentoIdentidad"));
+                ((Persona) c).setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("nombreDocumentoIdentidad"),rs.getInt("cantidadDigitos"));
             }else if(priv == 2){
                 c = new Empresa();
                 ((Empresa) c).setNombre(rs.getString("razonSocial"));
@@ -282,7 +282,7 @@ public class ClienteDA {
                 ((Persona) c).setApPaterno(rs.getString("apellidoPaterno"));
                 ((Persona) c).setApMaterno(rs.getString("apellidoMaterno"));
                 ((Persona) c).setNumDoc(rs.getString("numeroDocumento"));
-                ((Persona) c).setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"), rs.getString("nombreDocumentoIdentidad"));
+                ((Persona) c).setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("TipoDocumentoIdentidad.nombreDocumentoIdentidad"),rs.getInt("TipoDocumentoIdentidad.cantidadDigitos"));
             }else if(priv == 2){
                 c = new Empresa();
                 ((Empresa) c).setNombre(rs.getString("razonSocial"));

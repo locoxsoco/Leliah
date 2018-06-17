@@ -318,6 +318,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
         getContentPane().add(jLabel9);
         jLabel9.setBounds(460, 51, 110, 16);
 
+        tipoDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoDocActionPerformed(evt);
+            }
+        });
         getContentPane().add(tipoDoc);
         tipoDoc.setBounds(600, 48, 200, 22);
 
@@ -518,9 +523,9 @@ public class ventanaManTrab extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        
-        if((s).length() != 8){
-            JOptionPane.showMessageDialog(null, "DNI debe tener 8 digitos", "Error DNI", JOptionPane.PLAIN_MESSAGE);
+        TipoDocumentoIdentidad t = (TipoDocumentoIdentidad) tipoDoc.getSelectedItem();
+        if(s.length() != t.getCantChar()){
+            JOptionPane.showMessageDialog(null, "El "+t.getNombTipo()+ " debe tener "+t.getCantChar()+" digitos", "Error Documento", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         
@@ -811,7 +816,14 @@ public class ventanaManTrab extends javax.swing.JFrame {
         user.setText(lista.get(n).getUsername());
         pass.setText(lista.get(n).getContrasena());
         fecha.setDate(lista.get(n).getFecha());
-        tipoDoc.setSelectedItem(lista.get(n).getTipoDoc().toString());
+        int k = tipoDoc.getItemCount();
+        for(int i=0; i<k; i++){
+            TipoDocumentoIdentidad t = (TipoDocumentoIdentidad) tipoDoc.getItemAt(i);
+            if(t.getIdTipo()==lista.get(n).getTipoDoc().getIdTipo()){
+                tipoDoc.setSelectedItem(tipoDoc.getItemAt(i));
+            }
+        }
+        
         numDoc.setText(lista.get(n).getNumDoc());
         if(lista.get(n) instanceof Jefe){
             sueldo.setVisible(false);
@@ -974,6 +986,8 @@ public class ventanaManTrab extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(c<'0' || c>'9') evt.consume();
+        TipoDocumentoIdentidad t = (TipoDocumentoIdentidad) tipoDoc.getSelectedItem();
+        if(numDoc.getText().length()>= t.getCantChar()) evt.consume();
     }//GEN-LAST:event_numDocKeyTyped
 
     private void sueldoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sueldoKeyTyped
@@ -991,6 +1005,11 @@ public class ventanaManTrab extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if(c<'0' || c>'9') evt.consume();
     }//GEN-LAST:event_horasKeyTyped
+
+    private void tipoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDocActionPerformed
+        // TODO add your handling code here:
+        numDoc.setText("");
+    }//GEN-LAST:event_tipoDocActionPerformed
     
 
 
@@ -1026,7 +1045,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JButton registrar;
     public static javax.swing.JTextField sueldo;
     public static javax.swing.JTable tabla;
-    private javax.swing.JComboBox<String> tipoDoc;
+    private javax.swing.JComboBox<Object> tipoDoc;
     public static javax.swing.JComboBox<String> tipoUser;
     public static javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables

@@ -25,9 +25,10 @@ public class Trabajador{
         this.tipoDoc.setNombTipo(tipo.getNombTipo());
     }
     
-    public void setTipoDoc(int id, String nomb){
+    public void setTipoDoc(int id, String nomb, int cant){
         this.tipoDoc.setIdTipo(id);
         this.tipoDoc.setNombTipo(nomb);
+        this.tipoDoc.setCantChar(cant);
     }
     
     public String getUsername(){

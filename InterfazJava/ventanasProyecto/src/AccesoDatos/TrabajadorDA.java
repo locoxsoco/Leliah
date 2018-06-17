@@ -63,7 +63,7 @@ public class TrabajadorDA {
             t.setFecha(rs.getDate("fechaNacimiento"));
             t.setUsername(rs.getString("username"));
             t.setContrasena(rs.getString("contrasena"));
-            t.setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("TipoDocumentoIdentidad.nombreDocumentoIdentidad"));
+            t.setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("TipoDocumentoIdentidad.nombreDocumentoIdentidad"),rs.getInt("TipoDocumentoIdentidad.cantidadDigitos"));
 
             lista.add(t);
         }
@@ -200,7 +200,7 @@ public class TrabajadorDA {
             
             t.setIdTipo(rs.getInt("idTipoDocumentoIdentidad"));
             t.setNombTipo(rs.getString("nombreDocumentoIdentidad"));
-            
+            t.setCantChar(rs.getInt("cantidadDigitos"));
             lista.add(t);
         }
         con.close();
@@ -289,7 +289,7 @@ public class TrabajadorDA {
             t.setFecha(rs.getDate("fechaNacimiento"));
             t.setUsername(rs.getString("username"));
             t.setContrasena(rs.getString("contrasena"));
-            t.setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("TipoDocumentoIdentidad.nombreDocumentoIdentidad"));
+            t.setTipoDoc(rs.getInt("FidTipoDocumentoIdentidad"),rs.getString("TipoDocumentoIdentidad.nombreDocumentoIdentidad"),rs.getInt("TipoDocumentoIdentidad.cantidadDigitos"));
 
             lista.add(t);
         }
