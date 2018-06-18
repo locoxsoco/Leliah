@@ -732,20 +732,23 @@ DriverManager.getConnection
 
     private void AcceptDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AcceptDialogMouseClicked
         fechaini = ReporteDate1.getDate();
-        fechafin = ReporteDate2.getDate();
+        fechafin = ReporteDate2.getDate();        
         if((fechaini!=null) && (fechafin!=null)){
-            jDialog1.dispose();
-            try {
-                abrirReporte(selector);
-            } catch (JRException ex) {
-                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            if(fechaini.compareTo(fechafin)<=0){
+                jDialog1.dispose();
+                try {
+                    abrirReporte(selector);
+                } catch (JRException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else
+                JOptionPane.showMessageDialog(this,"La segunda fecha debe ser posterior o igual a la primera");
         }else{
             JOptionPane.showMessageDialog(this,"Debe seleccionar un rango de fechas");
         }
@@ -764,30 +767,35 @@ DriverManager.getConnection
     }
     private void AceptarJD2ButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarJD2ButtActionPerformed
         mes = MesChooser.getMonth();
-        if(txtPagoServicios.getText().length()!=0 && 
-                txtPagoAlquiler.getText().length()!=0&& 
-                txtOtrosPagos.getText().length()!=0 ){
-            if(isNumeric(txtPagoServicios.getText())&& isNumeric(txtPagoAlquiler.getText()) && isNumeric(txtOtrosPagos.getText())){
-                alquiler = Double.parseDouble(txtPagoAlquiler.getText());
-                servicios = Double.parseDouble(txtPagoServicios.getText());
-                otros = Double.parseDouble(txtOtrosPagos.getText());
-                jDialog2.dispose();
-                try {
-                    abrirReporte(selector);
-                } catch (JRException ex) {
-                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ParseException ex) {
-                    Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        Date mesActual = new Date();
+        if(mes<=mesActual.getMonth()){
+            if(txtPagoServicios.getText().length()!=0 && 
+                    txtPagoAlquiler.getText().length()!=0&& 
+                    txtOtrosPagos.getText().length()!=0 ){
+                if(isNumeric(txtPagoServicios.getText())&& isNumeric(txtPagoAlquiler.getText()) && isNumeric(txtOtrosPagos.getText())){
+                    alquiler = Double.parseDouble(txtPagoAlquiler.getText());
+                    servicios = Double.parseDouble(txtPagoServicios.getText());
+                    otros = Double.parseDouble(txtOtrosPagos.getText());
+                    jDialog2.dispose();
+                    try {
+                        abrirReporte(selector);
+                    } catch (JRException ex) {
+                        Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this,"Ingrese datos numericos");
                 }
             }else{
-                JOptionPane.showMessageDialog(this,"Ingrese datos numericos");
+                JOptionPane.showMessageDialog(this,"No deje campos vacíos");
             }
         }else{
-            JOptionPane.showMessageDialog(this,"No deje campos vacíos");
+            JOptionPane.showMessageDialog(this,"Seleccione un mes anterior al actual");
         }
     }//GEN-LAST:event_AceptarJD2ButtActionPerformed
 
