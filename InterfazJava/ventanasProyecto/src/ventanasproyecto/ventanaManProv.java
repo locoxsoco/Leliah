@@ -102,6 +102,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         provincia = new javax.swing.JComboBox<>();
         distrito = new javax.swing.JComboBox<>();
         buscar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 540));
@@ -114,12 +115,12 @@ public class ventanaManProv extends javax.swing.JFrame {
         jLabel1.setBounds(12, 13, 206, 22);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel2.setText("Razon Social:");
+        jLabel2.setText("Razon Social: *");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 43, 90, 16);
+        jLabel2.setBounds(20, 43, 100, 16);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel3.setText("RUC:");
+        jLabel3.setText("RUC: *");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 73, 80, 16);
 
@@ -312,6 +313,10 @@ public class ventanaManProv extends javax.swing.JFrame {
         });
         getContentPane().add(buscar);
         buscar.setBounds(145, 205, 100, 29);
+
+        jLabel4.setText("La busqueda se realiza con los campos marcados con *.");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(20, 460, 390, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -809,6 +814,7 @@ public class ventanaManProv extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

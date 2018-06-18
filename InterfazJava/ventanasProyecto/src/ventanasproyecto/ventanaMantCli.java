@@ -127,6 +127,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         provincia = new javax.swing.JComboBox<>();
         distrito = new javax.swing.JComboBox<>();
         buscar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jTextField2.setText("jTextField2");
 
@@ -176,14 +177,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
         tlf.setBounds(490, 60, 200, 22);
 
         TapPat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        TapPat.setText("Apellido Paterno:");
+        TapPat.setText("Apellido Paterno: *");
         getContentPane().add(TapPat);
-        TapPat.setBounds(10, 183, 112, 16);
+        TapPat.setBounds(10, 183, 140, 16);
 
         TapMat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        TapMat.setText("Apellido Materno:");
+        TapMat.setText("Apellido Materno: *");
         getContentPane().add(TapMat);
-        TapMat.setBounds(10, 213, 115, 16);
+        TapMat.setBounds(10, 213, 140, 16);
 
         apPat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -246,7 +247,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         jScrollPane1.setBounds(10, 290, 700, 230);
 
         namaetxt.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        namaetxt.setText("Nombre:");
+        namaetxt.setText("Nombre: *");
         getContentPane().add(namaetxt);
         namaetxt.setBounds(10, 93, 120, 20);
 
@@ -333,9 +334,10 @@ public class ventanaMantCli extends javax.swing.JFrame {
         tipoCli.setBounds(140, 60, 200, 22);
 
         TnumDoc.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        TnumDoc.setText("Num Documento:");
+        TnumDoc.setText("Num Documento: *");
         getContentPane().add(TnumDoc);
-        TnumDoc.setBounds(10, 123, 120, 16);
+        TnumDoc.setBounds(10, 123, 130, 16);
+        TnumDoc.getAccessibleContext().setAccessibleName("Num Documento: *");
 
         numDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,6 +415,10 @@ public class ventanaMantCli extends javax.swing.JFrame {
         });
         getContentPane().add(buscar);
         buscar.setBounds(137, 250, 100, 29);
+
+        jLabel2.setText("La busqueda se realiza con los campos marcados con *.");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 540, 350, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -713,13 +719,13 @@ public class ventanaMantCli extends javax.swing.JFrame {
             tlftxt.setVisible(true);
             namae.setVisible(true);
             namaetxt.setVisible(true);
-            namaetxt.setText("Nombre:");
+            namaetxt.setText("Nombre: *");
             numDoc.setBounds(numDoc.getX(), 150, numDoc.getWidth(), numDoc.getHeight());
             TnumDoc.setBounds(TnumDoc.getX(), 153, TnumDoc.getWidth(), TnumDoc.getHeight());
             tipoDoc.setVisible(true);
             numDoc.setVisible(true);
             TnumDoc.setVisible(true);
-            TnumDoc.setText("Num Documento:");
+            TnumDoc.setText("Num Documento: *");
             TtipoDoc.setVisible(true);
             departamento.setVisible(true);
             Tdepartamento.setVisible(true);
@@ -743,13 +749,13 @@ public class ventanaMantCli extends javax.swing.JFrame {
             tlftxt.setVisible(true);
             namae.setVisible(true);
             namaetxt.setVisible(true);
-            namaetxt.setText("Razon Social:");
+            namaetxt.setText("Razon Social: *");
             numDoc.setBounds(numDoc.getX(), 120, numDoc.getWidth(), numDoc.getHeight());
             TnumDoc.setBounds(TnumDoc.getX(), 123, TnumDoc.getWidth(), TnumDoc.getHeight());
             tipoDoc.setVisible(false);
             numDoc.setVisible(true);
             TnumDoc.setVisible(true);
-            TnumDoc.setText("RUC:");
+            TnumDoc.setText("RUC: *");
             TtipoDoc.setVisible(false);
             departamento.setVisible(true);
             Tdepartamento.setVisible(true);
@@ -1282,6 +1288,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;

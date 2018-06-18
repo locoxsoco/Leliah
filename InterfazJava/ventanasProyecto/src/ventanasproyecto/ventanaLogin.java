@@ -113,6 +113,7 @@ public class ventanaLogin extends javax.swing.JFrame {
             this.setVisible(false);
         }else if( u.getPriv()==1){
             VentanaPrincipal v1 = new VentanaPrincipal();
+            v1.label.setText(u.getNomb());
             v1.ventanaHome = this;
             v1.setLocationRelativeTo(null);
             v1.setVisible(true);

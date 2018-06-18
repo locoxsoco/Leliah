@@ -47,6 +47,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         optionLbel = new javax.swing.JLabel();
         nomb1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana Jefe");
@@ -110,16 +111,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         compras.setBounds(200, 150, 150, 70);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Bienvenido");
+        jLabel1.setText("Hola :D");
         jLabel1.setHorizontalTextPosition(javax.swing.JLabel.CENTER);
         jLabel1.setPreferredSize(new java.awt.Dimension(100, 14));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 30, 147, 44);
+        jLabel1.setBounds(20, 30, 100, 44);
 
         optionLbel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         optionLbel.setText("Elija una opción:");
         getContentPane().add(optionLbel);
-        optionLbel.setBounds(27, 107, 160, 22);
+        optionLbel.setBounds(20, 107, 160, 22);
 
         nomb1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         getContentPane().add(nomb1);
@@ -135,6 +136,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton6);
         jButton6.setBounds(220, 340, 130, 29);
+
+        label.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        label.setText("jLabel2");
+        getContentPane().add(label);
+        label.setBounds(130, 30, 230, 44);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,11 +162,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
+            
+            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1 1");
             jButton1.setEnabled(false);
             jButton2.setEnabled(false);
             jButton3.setEnabled(false);
             compras.setEnabled(false);
-            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1 1");
             System.exit(0);
         } catch (IOException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -237,6 +244,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane jTextPane2;
+    public javax.swing.JLabel label;
     public static javax.swing.JLabel nomb1;
     private javax.swing.JLabel optionLbel;
     // End of variables declaration//GEN-END:variables

@@ -72,6 +72,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         eliminar = new javax.swing.JButton();
         buscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(510, 460));
@@ -84,9 +85,9 @@ public class ventanaManServ extends javax.swing.JFrame {
         jLabel1.setBounds(12, 13, 173, 22);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("Nombre: *");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(15, 57, 60, 16);
+        jLabel2.setBounds(15, 57, 90, 16);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("Precio Unitario:");
@@ -202,6 +203,10 @@ public class ventanaManServ extends javax.swing.JFrame {
         jLabel5.setText("S./");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(215, 85, 30, 16);
+
+        jLabel4.setText("La busqueda se realiza con los campos marcados con *.");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(15, 120, 350, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -464,6 +469,7 @@ public class ventanaManServ extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;

@@ -111,6 +111,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         numDoc = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         moneda = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 620));
@@ -123,19 +124,19 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel1.setBounds(12, 13, 213, 22);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("Nombre: *");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 51, 54, 16);
+        jLabel2.setBounds(12, 51, 90, 16);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel3.setText("Apellido Paterno:");
+        jLabel3.setText("Apellido Paterno: *");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(12, 86, 112, 16);
+        jLabel3.setBounds(12, 86, 130, 16);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel4.setText("Apellido Materno:");
+        jLabel4.setText("Apellido Materno: *");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(12, 121, 115, 16);
+        jLabel4.setBounds(12, 121, 130, 16);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("Usuario:");
@@ -327,9 +328,9 @@ public class ventanaManTrab extends javax.swing.JFrame {
         tipoDoc.setBounds(600, 48, 200, 22);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel10.setText("Número Documento:");
+        jLabel10.setText("Número Documento:*");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(460, 86, 140, 16);
+        jLabel10.setBounds(460, 86, 160, 16);
 
         numDoc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -355,6 +356,10 @@ public class ventanaManTrab extends javax.swing.JFrame {
         moneda.setText("S./");
         getContentPane().add(moneda);
         moneda.setBounds(750, 156, 48, 16);
+
+        jLabel11.setText("La busqueda se realiza con los campos marcados con *.");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(12, 540, 510, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1028,6 +1033,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

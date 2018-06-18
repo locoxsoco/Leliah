@@ -97,6 +97,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         categoria = new javax.swing.JComboBox<>();
         buscar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(550, 550));
@@ -109,9 +110,9 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel1.setBounds(12, 13, 175, 22);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("Nombre: *");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 51, 60, 16);
+        jLabel2.setBounds(12, 51, 100, 16);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("Precio:");
@@ -124,14 +125,14 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel4.setBounds(12, 109, 110, 16);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel5.setText("Marca:");
+        jLabel5.setText("Marca: *");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(12, 138, 50, 16);
+        jLabel5.setBounds(12, 138, 80, 16);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel6.setText("Tipo Producto:");
+        jLabel6.setText("Tipo Producto: *");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(12, 196, 100, 16);
+        jLabel6.setBounds(12, 196, 130, 16);
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +269,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         desc.setBounds(154, 164, 200, 22);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel8.setText("Categoria:");
+        jLabel8.setText("Categoria: *");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(12, 225, 110, 16);
 
@@ -296,6 +297,10 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel10.setText("S./");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(330, 80, 48, 16);
+
+        jLabel9.setText("La busqueda se realiza con los campos marcados con *.");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(12, 260, 400, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -715,6 +720,7 @@ public class ventanaManProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField marca;
     private javax.swing.JButton modificar;
