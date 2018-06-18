@@ -5,6 +5,7 @@
  */
 package ventanasproyecto;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -542,10 +543,11 @@ DriverManager.getConnection
         try{
         switch(n){
             case 1:
-                JasperReport jr1 = 
-                (JasperReport) 
-                JRLoader.loadObjectFromFile
-                (VentanaReportes.class.getResource("/ventanasproyecto/ClientesFrecReport.jasper").getFile());
+//                JasperReport jr1 = 
+//                (JasperReport) 
+//                JRLoader.loadObjectFromFile
+//                (VentanaReportes.class.getResource("/ventanasproyecto/ClientesFrecReport.jasper").getFile());
+                InputStream is = VentanaReportes.class.getResourceAsStream("/ventanasproyecto/ClientesFrecReport.jasper");
                 sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                 sdf2 = new SimpleDateFormat("dd-MM-yyyy");
                 
@@ -559,7 +561,7 @@ DriverManager.getConnection
                 hm1.put("fechafinP", datefin);
                 JasperPrint impresion1 
                  =JasperFillManager.fillReport(
-                    jr1, hm1,con);
+                    is, hm1,con);
 
                 JasperViewer viewer1 = 
                          new JasperViewer(impresion1,false);
@@ -568,10 +570,11 @@ DriverManager.getConnection
 //                ClientesFrameReport.setVisible(true);
                 break;
             case 2:
-                JasperReport jr2 = 
-                (JasperReport) 
-                JRLoader.loadObjectFromFile
-                (VentanaReportes.class.getResource("/ventanasproyecto/MasVendidosReport.jasper").getFile());
+//                JasperReport jr2 = 
+//                (JasperReport) 
+//                JRLoader.loadObjectFromFile
+//                (VentanaReportes.class.getResource("/ventanasproyecto/MasVendidosReport.jasper").getFile());
+                InputStream is2 = VentanaReportes.class.getResourceAsStream("/ventanasproyecto/MasVendidosReport.jasper");
                 sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                 sdf2 = new SimpleDateFormat("dd-MM-yyyy");
                 
@@ -586,7 +589,7 @@ DriverManager.getConnection
         
                 JasperPrint impresion2 
                  =JasperFillManager.fillReport(
-                    jr2, hm2,con);
+                    is2, hm2,con);
 
                 JasperViewer viewer2 = 
                          new JasperViewer(impresion2,false);
@@ -595,10 +598,11 @@ DriverManager.getConnection
                 break;
             case 3:
                 
-                JasperReport jr3 = 
-                (JasperReport) 
-                JRLoader.loadObjectFromFile
-                (VentanaReportes.class.getResource("/ventanasproyecto/VentasReport.jasper").getFile());
+//                JasperReport jr3 = 
+//                (JasperReport) 
+//                JRLoader.loadObjectFromFile
+//                (VentanaReportes.class.getResource("/ventanasproyecto/VentasReport.jasper").getFile());
+                InputStream is3 = VentanaReportes.class.getResourceAsStream("/ventanasproyecto/VentasReport.jasper");
                 sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                 sdf2 = new SimpleDateFormat("dd-MM-yyyy");
                 
@@ -613,18 +617,18 @@ DriverManager.getConnection
         
                 JasperPrint impresion3 
                  =JasperFillManager.fillReport(
-                    jr3, hm3,con);
+                    is3, hm3,con);
 
                 JasperViewer viewer3 = 
                          new JasperViewer(impresion3,false);
                         viewer3.setVisible(true);
                 break;
             case 4:
-                JasperReport jr4 = 
-                (JasperReport) 
-                JRLoader.loadObjectFromFile
-                (VentanaReportes.class.getResource("/ventanasproyecto/BalanceReport.jasper").getFile());
-
+//                JasperReport jr4 = 
+//                (JasperReport) 
+//                JRLoader.loadObjectFromFile
+//                (VentanaReportes.class.getResource("/ventanasproyecto/BalanceReport.jasper").getFile());
+                InputStream is4 = VentanaReportes.class.getResourceAsStream("/ventanasproyecto/BalanceReport.jasper");
                 HashMap hm4 = new HashMap();
                 switch(mes){
                     case 0:
@@ -670,7 +674,7 @@ DriverManager.getConnection
                 hm4.put("otros",otros);
                 JasperPrint impresion4 
                  =JasperFillManager.fillReport(
-                    jr4, hm4,con);
+                    is4, hm4,con);
 
                 JasperViewer viewer4 = 
                          new JasperViewer(impresion4,false);
