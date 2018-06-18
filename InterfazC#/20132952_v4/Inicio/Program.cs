@@ -23,8 +23,11 @@ namespace Inicio
             }
             else if(args.Length == 2)
             {
+                
                 VentanaVendedor v = new VentanaVendedor();
-                v.button2.Visible = true;
+                v.namae = (string) args[1];
+                v.button2.Visible =
+                    true;
                 Application.Run(v);
             }
             else if (args.Length == 1)

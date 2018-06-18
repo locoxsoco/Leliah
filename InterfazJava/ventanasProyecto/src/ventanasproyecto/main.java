@@ -29,6 +29,7 @@ public class main {
             v2.setLocationRelativeTo(null);
             v2.setVisible(true);
             v2.nomb1.setText("");
+            v2.label.setText(((String) args[0]));
             v1.setVisible(false);
         }
         

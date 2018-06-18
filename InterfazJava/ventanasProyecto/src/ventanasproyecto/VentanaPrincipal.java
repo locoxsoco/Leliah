@@ -163,7 +163,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             
-            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1 1");
+            Runtime.getRuntime().exec("../../../InterfazC#/20132952_v4/Inicio/bin/Debug/Inicio.exe 1 "+label.getText());
             jButton1.setEnabled(false);
             jButton2.setEnabled(false);
             jButton3.setEnabled(false);

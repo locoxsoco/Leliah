@@ -18,7 +18,7 @@ namespace Inicio
         {
             InitializeComponent();
         }
-
+        public string namae; 
         private void btnRegVenta_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -71,7 +71,7 @@ namespace Inicio
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C java -jar ventanasProyecto.jar 1";
+            startInfo.Arguments = "/C java -jar ventanasProyecto.jar "+namae;
             process.StartInfo = startInfo;
             process.Start();
             Application.Exit();

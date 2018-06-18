@@ -337,7 +337,6 @@ public class ventanaMantCli extends javax.swing.JFrame {
         TnumDoc.setText("Num Documento: *");
         getContentPane().add(TnumDoc);
         TnumDoc.setBounds(10, 123, 130, 16);
-        TnumDoc.getAccessibleContext().setAccessibleName("Num Documento: *");
 
         numDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
