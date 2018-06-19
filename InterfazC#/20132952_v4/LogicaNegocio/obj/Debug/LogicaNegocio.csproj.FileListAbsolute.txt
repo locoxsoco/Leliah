@@ -177,3 +177,14 @@ C:\Users\alulab14.INF.000\Downloads\InterfazC#_vLab10\20132952_v4\LogicaNegocio\
 C:\Users\alulab14.INF.000\Downloads\InterfazC#_vLab10\20132952_v4\LogicaNegocio\obj\Debug\LogicaNegocio.csprojResolveAssemblyReference.cache
 C:\Users\alulab14.INF.000\Downloads\InterfazC#_vLab10\20132952_v4\LogicaNegocio\obj\Debug\LogicaNegocio.dll
 C:\Users\alulab14.INF.000\Downloads\InterfazC#_vLab10\20132952_v4\LogicaNegocio\obj\Debug\LogicaNegocio.pdb
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\LogicaNegocio.dll
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\LogicaNegocio.pdb
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\AccesoDatos.dll
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\Modelo.dll
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\MySql.Data.dll
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\Google.Protobuf.dll
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\AccesoDatos.pdb
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\bin\Debug\Modelo.pdb
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\obj\Debug\LogicaNegocio.csprojResolveAssemblyReference.cache
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\obj\Debug\LogicaNegocio.dll
+C:\temp\rLeliah\InterfazC#\20132952_v4\LogicaNegocio\obj\Debug\LogicaNegocio.pdb

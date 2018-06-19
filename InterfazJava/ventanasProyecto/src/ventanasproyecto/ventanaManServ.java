@@ -233,6 +233,10 @@ public class ventanaManServ extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "nombre no puede tener más de 45 caracteres", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
         /*for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
                 JOptionPane.showMessageDialog(null, "campo nombre solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
@@ -245,9 +249,21 @@ public class ventanaManServ extends javax.swing.JFrame {
             return false;
         }
         if(!isDouble(s)){
-            JOptionPane.showMessageDialog(null, "Precio Unitario debe ser un valor real", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Precio debe ser un valor real", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
             return false;
-        }              
+        }
+        int hayP = 0;
+        int cantDec = 0;
+        for(int i=0; i<s.length(); i++){
+            if(hayP == 1){
+                cantDec++;
+            }
+            if(s.charAt(i) == '.') hayP = 1;
+        }
+        if(cantDec>2){
+            JOptionPane.showMessageDialog(null, "Precio solo puede tener 2 decimales", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }            
         return true;
     }
     

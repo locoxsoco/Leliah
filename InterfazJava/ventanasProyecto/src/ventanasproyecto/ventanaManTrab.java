@@ -180,7 +180,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(142, 48, 200, 22);
+        nombre.setBounds(142, 48, 200, 20);
 
         apPat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -188,7 +188,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(apPat);
-        apPat.setBounds(142, 83, 200, 22);
+        apPat.setBounds(142, 83, 200, 20);
 
         apMat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -196,13 +196,25 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(apMat);
-        apMat.setBounds(142, 118, 200, 22);
+        apMat.setBounds(142, 118, 200, 20);
+
+        user.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                userKeyTyped(evt);
+            }
+        });
         getContentPane().add(user);
-        user.setBounds(142, 153, 200, 22);
+        user.setBounds(142, 153, 200, 20);
         getContentPane().add(fecha);
-        fecha.setBounds(140, 223, 200, 22);
+        fecha.setBounds(140, 223, 200, 20);
+
+        pass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passKeyTyped(evt);
+            }
+        });
         getContentPane().add(pass);
-        pass.setBounds(142, 188, 200, 22);
+        pass.setBounds(142, 188, 200, 20);
 
         sueldo.setMinimumSize(new java.awt.Dimension(850, 650));
         sueldo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -211,10 +223,10 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(sueldo);
-        sueldo.setBounds(600, 153, 140, 22);
+        sueldo.setBounds(600, 153, 140, 20);
 
         getContentPane().add(frec);
-        frec.setBounds(600, 223, 140, 22);
+        frec.setBounds(600, 223, 140, 20);
 
         horas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -222,7 +234,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(horas);
-        horas.setBounds(600, 188, 200, 22);
+        horas.setBounds(600, 188, 200, 20);
 
         tipoUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja...", "Administrador del Sistema", "Jefe", "Vendedor" }));
         tipoUser.addActionListener(new java.awt.event.ActionListener() {
@@ -231,7 +243,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipoUser);
-        tipoUser.setBounds(600, 118, 200, 22);
+        tipoUser.setBounds(600, 118, 200, 20);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
@@ -326,7 +338,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipoDoc);
-        tipoDoc.setBounds(600, 48, 200, 22);
+        tipoDoc.setBounds(600, 48, 200, 20);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel10.setText("Número Documento:*");
@@ -339,7 +351,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(numDoc);
-        numDoc.setBounds(600, 83, 200, 22);
+        numDoc.setBounds(600, 83, 200, 20);
 
         buscar.setBackground(new java.awt.Color(255, 255, 204));
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
@@ -360,7 +372,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
 
         jLabel11.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(12, 540, 510, 16);
+        jLabel11.setBounds(12, 540, 510, 14);
 
         limpiar.setBackground(new java.awt.Color(255, 255, 204));
         limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
@@ -437,6 +449,10 @@ public class ventanaManTrab extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "nombre no puede tener más de 45 caracteres", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
         for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
                 JOptionPane.showMessageDialog(null, "campo nombre solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
@@ -446,6 +462,10 @@ public class ventanaManTrab extends javax.swing.JFrame {
         s = this.apPat.getText();
         if((s).equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "Apellido Paterno no puede tener más de 45 caracteres", "Error Apellido Paterno", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         for (int i=0; i<s.length(); i++){
@@ -460,9 +480,13 @@ public class ventanaManTrab extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "Apellido Materno no puede tener más de 45 caracteres", "Error Apellido Paterno", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
         for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
-                JOptionPane.showMessageDialog(null, "campo apellido Materno solo puede contener letras", "Error Apellido Paterno", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "campo apellido Materno solo puede contener letras", "Error Apellido Materno", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
         }
@@ -474,13 +498,21 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         }*/
         s = this.user.getText();
-         if((s).equals("")){
+        if((s).equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "Usuario no puede tener más de 20 caracteres", "Error Usuario", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         s = this.pass.getText();
         if((s).equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(s.length()>20){
+            JOptionPane.showMessageDialog(null, "Contraseña no puede tener más de 20 caracteres", "Error Contraseña", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         boolean tieneNum = false;
@@ -558,6 +590,18 @@ public class ventanaManTrab extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Sueldo debe ser un valor real", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
+            int hayP = 0;
+            int cantDec = 0;
+            for(int i=0; i<s1.length(); i++){
+                if(hayP == 1){
+                    cantDec++;
+                }
+                if(s1.charAt(i) == '.') hayP = 1;
+            }
+            if(cantDec>2){
+                JOptionPane.showMessageDialog(null, "Sueldo solo puede tener 2 decimales", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
         }else if(s == "Vendedor"){
             s1 = this.sueldo.getText();
             if((s1).equals("")){
@@ -573,9 +617,27 @@ public class ventanaManTrab extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Pago por Hora debe ser un valor real", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
+            int hayP = 0;
+            int cantDec = 0;
+            for(int i=0; i<s1.length(); i++){
+                if(hayP == 1){
+                    cantDec++;
+                }
+                if(s1.charAt(i) == '.') hayP = 1;
+            }
+            if(cantDec>2){
+                JOptionPane.showMessageDialog(null, "Pago por Hora solo puede tener 2 decimales", "Error Sueldo", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }    
+
             s1 = this.horas.getText();
             if((s1).equals("")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+            int cant = Integer.parseInt(s1);
+            if(cant>178){
+                JOptionPane.showMessageDialog(null, "La semana solo tiene 178 horas", "Error Horas Semanales", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
             for (int i=0; i<s1.length(); i++){
@@ -983,18 +1045,21 @@ public class ventanaManTrab extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+        if(nombre.getText().length()>=45) evt.consume();
     }//GEN-LAST:event_nombreKeyTyped
 
     private void apPatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apPatKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+        if(apPat.getText().length()>45) evt.consume();
     }//GEN-LAST:event_apPatKeyTyped
 
     private void apMatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apMatKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+        if(apMat.getText().length()>45) evt.consume();
     }//GEN-LAST:event_apMatKeyTyped
 
     private void numDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numDocKeyTyped
@@ -1013,12 +1078,14 @@ public class ventanaManTrab extends javax.swing.JFrame {
             if(c =='.') evt.consume();
         }
         if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
+        if(s.length()>=10) evt.consume();
     }//GEN-LAST:event_sueldoKeyTyped
 
     private void horasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_horasKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(c<'0' || c>'9') evt.consume();
+        if(horas.getText().length()>3) evt.consume();
     }//GEN-LAST:event_horasKeyTyped
 
     private void tipoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDocActionPerformed
@@ -1051,6 +1118,16 @@ public class ventanaManTrab extends javax.swing.JFrame {
         frec.setVisible(false);
         moneda.setVisible(false);
     }//GEN-LAST:event_limpiarActionPerformed
+
+    private void userKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userKeyTyped
+        // TODO add your handling code here:
+        if(user.getText().length()>20) evt.consume();
+    }//GEN-LAST:event_userKeyTyped
+
+    private void passKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passKeyTyped
+        // TODO add your handling code here:
+        if(pass.getText().length()>20) evt.consume();
+    }//GEN-LAST:event_passKeyTyped
     
 
 

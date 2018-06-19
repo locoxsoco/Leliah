@@ -171,7 +171,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dir);
-        dir.setBounds(490, 210, 200, 22);
+        dir.setBounds(490, 210, 200, 20);
 
         email.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -179,7 +179,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(email);
-        email.setBounds(490, 90, 200, 22);
+        email.setBounds(490, 90, 200, 20);
 
         tlf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -187,7 +187,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tlf);
-        tlf.setBounds(490, 60, 200, 22);
+        tlf.setBounds(490, 60, 200, 20);
 
         TapPat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TapPat.setText("Apellido Paterno: *");
@@ -205,7 +205,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(apPat);
-        apPat.setBounds(140, 180, 200, 22);
+        apPat.setBounds(140, 180, 200, 20);
 
         apMat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -213,7 +213,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(apMat);
-        apMat.setBounds(140, 210, 200, 22);
+        apMat.setBounds(140, 210, 200, 20);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -275,7 +275,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(namae);
-        namae.setBounds(140, 90, 200, 22);
+        namae.setBounds(140, 90, 200, 20);
 
         registrar.setBackground(new java.awt.Color(255, 255, 204));
         registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
@@ -344,7 +344,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipoCli);
-        tipoCli.setBounds(140, 60, 200, 22);
+        tipoCli.setBounds(140, 60, 200, 20);
 
         TnumDoc.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TnumDoc.setText("Num Documento: *");
@@ -362,7 +362,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(numDoc);
-        numDoc.setBounds(140, 120, 200, 22);
+        numDoc.setBounds(140, 120, 200, 20);
 
         TtipoDoc.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         TtipoDoc.setText("Tipo Documento:");
@@ -375,7 +375,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipoDoc);
-        tipoDoc.setBounds(140, 120, 200, 22);
+        tipoDoc.setBounds(140, 120, 200, 20);
 
         Tdepartamento.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Tdepartamento.setText("Departamento:");
@@ -398,7 +398,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(departamento);
-        departamento.setBounds(490, 120, 200, 22);
+        departamento.setBounds(490, 120, 200, 20);
 
         provincia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,7 +406,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(provincia);
-        provincia.setBounds(490, 150, 200, 22);
+        provincia.setBounds(490, 150, 200, 20);
 
         distrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -414,7 +414,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
         });
         getContentPane().add(distrito);
-        distrito.setBounds(490, 180, 200, 22);
+        distrito.setBounds(490, 180, 200, 20);
 
         buscar.setBackground(new java.awt.Color(255, 255, 204));
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
@@ -430,7 +430,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
 
         jLabel2.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 540, 350, 16);
+        jLabel2.setBounds(10, 540, 350, 14);
 
         limpiar.setBackground(new java.awt.Color(255, 255, 204));
         limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
@@ -585,6 +585,16 @@ public class ventanaMantCli extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "dirección no puede tener más de 45 caracteres", "Error Dirección", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        for (int i=0; i<s.length(); i++){
+            if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ' || s.charAt(i)== ',' || s.charAt(i)== '#' || s.charAt(i)== '.' || (s.charAt(i)>='0' && s.charAt(i)<='9'))){
+                JOptionPane.showMessageDialog(null, "campo direccion solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+        }
         /*for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ' || (s.charAt(i)>='0' && s.charAt(i)<='9'))){
                 JOptionPane.showMessageDialog(null, "campo direccion solo puede contener alfanumericos", "Error Direccion", JOptionPane.PLAIN_MESSAGE);
@@ -594,6 +604,10 @@ public class ventanaMantCli extends javax.swing.JFrame {
         s = this.email.getText();
         if((s).equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "Correo no puede tener más de 45 caracteres", "Error Correo", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         int cant = s.length();
@@ -636,8 +650,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 return false;
             }
         }
-        if(s.length()!=9){
-            JOptionPane.showMessageDialog(null, "campo telefono debe ser 9 digitos", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
+        if(s.length()<=6 || s.length()>9){
+            JOptionPane.showMessageDialog(null, "campo telefono debe ser entre 7 y 9 digitos", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         s = this.tipoCli.getSelectedItem().toString();
@@ -645,18 +659,23 @@ public class ventanaMantCli extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        s = this.namae.getText();
-        if((s).equals("")){
-            JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
-            return false;
-        }
-        for (int i=0; i<s.length(); i++){
-            if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
-                JOptionPane.showMessageDialog(null, "campo nombre solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+        
+        if(this.tipoCli.getSelectedItem().toString() == "Persona"){
+            s = this.namae.getText();
+            if((s).equals("")){
+                JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
-        }
-        if(this.tipoCli.getSelectedItem().toString() == "Persona"){
+            if(s.length()>45){
+                JOptionPane.showMessageDialog(null, "nombre no puede tener más de 45 caracteres", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+            for (int i=0; i<s.length(); i++){
+                if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
+                    JOptionPane.showMessageDialog(null, "campo nombre solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+                    return false;
+                }
+            }
             s = this.numDoc.getText();
             if((s).equals("")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
@@ -671,7 +690,11 @@ public class ventanaMantCli extends javax.swing.JFrame {
             
             s = this.apPat.getText();
             if((s).equals("")){
-                JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Apellido Paterno", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+            if(s.length()>45){
+                JOptionPane.showMessageDialog(null, "Apellido Paterno no puede tener más de 45 caracteres", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
             for (int i=0; i<s.length(); i++){
@@ -683,6 +706,10 @@ public class ventanaMantCli extends javax.swing.JFrame {
             s = this.apMat.getText();
             if((s).equals("")){
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+            if(s.length()>45){
+                JOptionPane.showMessageDialog(null, "Apellido Materno no puede tener más de 45 caracteres", "Error Apellido Materno", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
             for (int i=0; i<s.length(); i++){
@@ -698,7 +725,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 return false;
             }
             
-            if((s).length() != 10){
+            if((s).length() != 11){
                 JOptionPane.showMessageDialog(null, "RUC debe tener 10 digitos", "Error DNI", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
@@ -708,9 +735,13 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
+            if(s.length()>45){
+                JOptionPane.showMessageDialog(null, "Razon Social no puede tener más de 45 caracteres", "Error Razon Social", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
             for (int i=0; i<s.length(); i++){
-                if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ' || (s.charAt(i)>='0' && s.charAt(i)<='9'))){
-                    JOptionPane.showMessageDialog(null, "campo razon social materno solo puede contener alfanumericos", "Error Razon Social", JOptionPane.PLAIN_MESSAGE);
+                if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ' || s.charAt(i)== '.' || (s.charAt(i)>='0' && s.charAt(i)<='9'))){
+                    JOptionPane.showMessageDialog(null, "campo Razon Social solo puede contener alfanumericos y puntos", "Error Razon Social", JOptionPane.PLAIN_MESSAGE);
                     return false;
                 }
             }

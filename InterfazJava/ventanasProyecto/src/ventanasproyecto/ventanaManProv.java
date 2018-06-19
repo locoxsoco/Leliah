@@ -351,6 +351,10 @@ public class ventanaManProv extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "nombre no puede tener más de 45 caracteres", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
         for (int i=0; i<s.length(); i++){
             if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ')){
                 JOptionPane.showMessageDialog(null, "campo nombre solo puede contener letras", "Error Direccion", JOptionPane.PLAIN_MESSAGE);
@@ -362,7 +366,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        if((s).length() != 10){
+        if((s).length() != 11){
             JOptionPane.showMessageDialog(null, "RUC debe tener 10 digitos", "Error DNI", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
@@ -378,8 +382,8 @@ public class ventanaManProv extends javax.swing.JFrame {
                 return false;
             }
         }
-        if(s.length()!=9){
-            JOptionPane.showMessageDialog(null, "campo telefono debe ser 9 digitos", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
+        if(s.length()<=6 || s.length()>9){
+            JOptionPane.showMessageDialog(null, "campo telefono debe ser entre 7 y 9 digitos", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         
@@ -388,8 +392,12 @@ public class ventanaManProv extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "dirección no puede tener más de 45 caracteres", "Error Dirección", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
         for (int i=0; i<s.length(); i++){
-            if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ' || (s.charAt(i)>='0' && s.charAt(i)<='9'))){
+            if(!((s.charAt(i)>='a' && s.charAt(i)<='z')||(s.charAt(i)>='A' && s.charAt(i)<='Z') || s.charAt(i) == 'ñ' || s.charAt(i) == 'Ñ' || s.charAt(i)== ' ' || s.charAt(i)== ',' || s.charAt(i)== '#' || s.charAt(i)== '.' || (s.charAt(i)>='0' && s.charAt(i)<='9'))){
                 JOptionPane.showMessageDialog(null, "campo direccion solo puede contener letras", "Error Nombre", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
@@ -397,6 +405,10 @@ public class ventanaManProv extends javax.swing.JFrame {
         s = this.email.getText();
         if((s).equals("")){
             JOptionPane.showMessageDialog(null, "No puede dejar campos activos vacios", "Error Null", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(s.length()>45){
+            JOptionPane.showMessageDialog(null, "Correo no puede tener más de 45 caracteres", "Error Correo", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         int cant = s.length();
@@ -828,7 +840,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c>='0' && c<='9'))) evt.consume();
-        if(tlf.getText().length()>=15) evt.consume();
+        if(tlf.getText().length()>=9) evt.consume();
     }//GEN-LAST:event_tlfKeyTyped
 
     private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
