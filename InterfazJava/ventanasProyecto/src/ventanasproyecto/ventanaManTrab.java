@@ -112,6 +112,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         moneda = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 620));
@@ -360,6 +361,18 @@ public class ventanaManTrab extends javax.swing.JFrame {
         jLabel11.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel11);
         jLabel11.setBounds(12, 540, 510, 16);
+
+        limpiar.setBackground(new java.awt.Color(255, 255, 204));
+        limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        limpiar.setText("Limpiar Campos");
+        limpiar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(limpiar);
+        limpiar.setBounds(510, 270, 140, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -702,8 +715,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             apMat.setText("");
             user.setText("");
             pass.setText("");
-            java.util.Date fecha1 = new java.util.Date();
-            fecha.setDate(fecha1);
+            fecha.setDate(null);
             tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
             numDoc.setText("");
             tipoUser.setSelectedItem(tipoUser.getItemAt(0));
@@ -779,8 +791,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             apMat.setText("");
             user.setText("");
             pass.setText("");
-            java.util.Date fecha1 = new java.util.Date();
-            fecha.setDate(fecha1);
+            fecha.setDate(null);
             tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
             numDoc.setText("");
             tipoUser.setSelectedItem(tipoUser.getItemAt(0));
@@ -901,8 +912,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         apMat.setText("");
         user.setText("");
         pass.setText("");
-        java.util.Date fecha1 = new java.util.Date();
-        fecha.setDate(fecha1);
+        fecha.setDate(null);
         tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
         numDoc.setText("");
         tipoUser.setSelectedItem(tipoUser.getItemAt(0));
@@ -1015,6 +1025,32 @@ public class ventanaManTrab extends javax.swing.JFrame {
         // TODO add your handling code here:
         numDoc.setText("");
     }//GEN-LAST:event_tipoDocActionPerformed
+
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        // TODO add your handling code here:
+        nombre.setText("");
+        apPat.setText("");
+        apMat.setText("");
+        user.setText("");
+        pass.setText("");
+        fecha.setDate(null);
+        tipoDoc.setSelectedItem(tipoDoc.getItemAt(0));
+        numDoc.setText("");
+        tipoUser.setSelectedItem(tipoUser.getItemAt(0));
+        sueldo.setText("");
+        horas.setText("");
+        frec.setSelectedItem(frec.getItemAt(0));
+        registrar.setEnabled(false);
+        modificar.setEnabled(false);
+        eliminar.setEnabled(false);
+        sueldo.setVisible(false);
+        Tsueldo.setVisible(false);
+        Thoras.setVisible(false);
+        horas.setVisible(false);
+        Ttipo.setVisible(false);
+        frec.setVisible(false);
+        moneda.setVisible(false);
+    }//GEN-LAST:event_limpiarActionPerformed
     
 
 
@@ -1043,6 +1079,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton limpiar;
     private javax.swing.JButton modificar;
     private javax.swing.JLabel moneda;
     public static javax.swing.JTextField nombre;
