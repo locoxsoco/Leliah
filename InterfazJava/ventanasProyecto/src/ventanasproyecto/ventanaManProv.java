@@ -103,6 +103,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         distrito = new javax.swing.JComboBox<>();
         buscar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 540));
@@ -147,6 +148,11 @@ public class ventanaManProv extends javax.swing.JFrame {
         dir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dirActionPerformed(evt);
+            }
+        });
+        dir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dirKeyTyped(evt);
             }
         });
         getContentPane().add(dir);
@@ -260,6 +266,12 @@ public class ventanaManProv extends javax.swing.JFrame {
         });
         getContentPane().add(dia);
         dia.setBounds(120, 160, 118, 22);
+
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                emailKeyTyped(evt);
+            }
+        });
         getContentPane().add(email);
         email.setBounds(120, 100, 200, 22);
 
@@ -317,6 +329,18 @@ public class ventanaManProv extends javax.swing.JFrame {
         jLabel4.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 460, 390, 16);
+
+        limpiar.setBackground(new java.awt.Color(255, 255, 204));
+        limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        limpiar.setText("Limpiar Campos");
+        limpiar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(limpiar);
+        limpiar.setBounds(510, 205, 160, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -790,22 +814,41 @@ public class ventanaManProv extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || c =='.' || c == ',')) evt.consume();
+        if(nombre.getText().length()>=45) evt.consume();
     }//GEN-LAST:event_nombreKeyTyped
 
     private void rucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rucKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(c<'0' || c>'9') evt.consume();
-        if(ruc.getText().length()>=10)evt.consume();
-        
+        if(ruc.getText().length()>=11) evt.consume();
     }//GEN-LAST:event_rucKeyTyped
 
     private void tlfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlfKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c>='0' && c<='9'))) evt.consume();
-        if(tlf.getText().length()>=9) evt.consume();
+        if(tlf.getText().length()>=15) evt.consume();
     }//GEN-LAST:event_tlfKeyTyped
+
+    private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
+        // TODO add your handling code here:
+        if(email.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_emailKeyTyped
+
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        // TODO add your handling code here:
+        nombre.setText("");
+        ruc.setText("");
+        dir.setText("");
+        email.setText("");
+        tlf.setText("");
+    }//GEN-LAST:event_limpiarActionPerformed
+
+    private void dirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dirKeyTyped
+        // TODO add your handling code here:
+        if(dir.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_dirKeyTyped
 
     /**
      * @param args the command line arguments
@@ -834,6 +877,7 @@ public class ventanaManProv extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton limpiar;
     private javax.swing.JButton modificar;
     private javax.swing.JTextField nombre;
     private javax.swing.JComboBox<Object> provincia;

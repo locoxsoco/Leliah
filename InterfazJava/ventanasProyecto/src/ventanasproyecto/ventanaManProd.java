@@ -163,6 +163,12 @@ public class ventanaManProd extends javax.swing.JFrame {
         });
         getContentPane().add(cantMin);
         cantMin.setBounds(154, 106, 200, 22);
+
+        marca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                marcaKeyTyped(evt);
+            }
+        });
         getContentPane().add(marca);
         marca.setBounds(154, 135, 200, 22);
 
@@ -266,6 +272,12 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel7.setText("Descripción:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(12, 167, 130, 16);
+
+        desc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                descKeyTyped(evt);
+            }
+        });
         getContentPane().add(desc);
         desc.setBounds(154, 164, 200, 22);
 
@@ -306,7 +318,6 @@ public class ventanaManProd extends javax.swing.JFrame {
         limpiar.setBackground(new java.awt.Color(255, 255, 204));
         limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
         limpiar.setText("Limpiar Campos");
-        limpiar.setActionCommand("Limpiar Campos");
         limpiar.setMargin(new java.awt.Insets(2, 4, 2, 4));
         limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -697,18 +708,21 @@ public class ventanaManProd extends javax.swing.JFrame {
             if(c =='.') evt.consume();
         }
         if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
+        if(precio.getText().length()>=10) evt.consume();
     }//GEN-LAST:event_precioKeyTyped
 
     private void cantMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantMinKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(c<'0' || c>'9') evt.consume();
+        if(cantMin.getText().length()>=10) evt.consume();
     }//GEN-LAST:event_cantMinKeyTyped
 
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || (c>='0' && c<='9'))) evt.consume();
+        if(nombre.getText().length()>=45) evt.consume();
     }//GEN-LAST:event_nombreKeyTyped
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
@@ -718,6 +732,16 @@ public class ventanaManProd extends javax.swing.JFrame {
         cantMin.setText("");
         marca.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
+
+    private void marcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_marcaKeyTyped
+        // TODO add your handling code here:
+        if(marca.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_marcaKeyTyped
+
+    private void descKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descKeyTyped
+        // TODO add your handling code here:
+        if(desc.getText().length()>=100) evt.consume();
+    }//GEN-LAST:event_descKeyTyped
 
     /**
      * @param args the command line arguments

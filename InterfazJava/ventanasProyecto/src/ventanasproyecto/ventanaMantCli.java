@@ -164,8 +164,20 @@ public class ventanaMantCli extends javax.swing.JFrame {
         jLabel5.setText("Tipo Cliente:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(10, 63, 79, 16);
+
+        dir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dirKeyTyped(evt);
+            }
+        });
         getContentPane().add(dir);
         dir.setBounds(490, 210, 200, 22);
+
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                emailKeyTyped(evt);
+            }
+        });
         getContentPane().add(email);
         email.setBounds(490, 90, 200, 22);
 
@@ -738,6 +750,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
             eliminar.setEnabled(false);
             
         }else if (s == "Persona"){
+            namae.setText("");
+            numDoc.setText("");         
             TapPat.setVisible(true);
             TapMat.setVisible(true);
             apPat.setVisible(true);
@@ -767,7 +781,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if (s == "Empresa"){
-            
+            namae.setText("");
+            numDoc.setText("");
             TapPat.setVisible(false);
             TapMat.setVisible(false);
             apPat.setVisible(false);
@@ -1252,11 +1267,12 @@ public class ventanaMantCli extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if(c<'0' || c>'9') evt.consume();
         if(this.tipoCli.getSelectedItem().toString() == "Empresa"){
-            if(numDoc.getText().length()>= 10) evt.consume();
+            if(numDoc.getText().length()>= 11) evt.consume();
         }else{
             TipoDocumentoIdentidad t = (TipoDocumentoIdentidad) tipoDoc.getSelectedItem();
             if(numDoc.getText().length()>= t.getCantChar()) evt.consume();
         }
+        
         
     }//GEN-LAST:event_numDocKeyTyped
 
@@ -1267,18 +1283,21 @@ public class ventanaMantCli extends javax.swing.JFrame {
             if( c == '.' || c == ',') evt.consume();
         }
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || c =='.' || c == ',')) evt.consume();
+        if(namae.getText().length()>=45) evt.consume();
     }//GEN-LAST:event_namaeKeyTyped
 
     private void apPatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apPatKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+        if(apPat.getText().length()>=45) evt.consume();
     }//GEN-LAST:event_apPatKeyTyped
 
     private void apMatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apMatKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-')) evt.consume();
+        if(apMat.getText().length()>=45) evt.consume();
     }//GEN-LAST:event_apMatKeyTyped
 
     private void tlfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlfKeyTyped
@@ -1304,6 +1323,16 @@ public class ventanaMantCli extends javax.swing.JFrame {
         tipoCli.setSelectedItem(tipoCli.getItemAt(0));
         apMat.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
+
+    private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
+        // TODO add your handling code here:
+        if(email.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_emailKeyTyped
+
+    private void dirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dirKeyTyped
+        // TODO add your handling code here:
+        if(dir.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_dirKeyTyped
 
     /**
      * @param args the command line arguments

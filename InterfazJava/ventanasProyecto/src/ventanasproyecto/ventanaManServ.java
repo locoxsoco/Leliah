@@ -450,12 +450,14 @@ public class ventanaManServ extends javax.swing.JFrame {
             if(c =='.') evt.consume();
         }
         if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
+        if(pu.getText().length()>=10) evt.consume();
     }//GEN-LAST:event_puKeyTyped
 
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || (c>='0' && c<='9'))) evt.consume();
+        if(nombre.getText().length()>=45) evt.consume();
     }//GEN-LAST:event_nombreKeyTyped
 
     /**
