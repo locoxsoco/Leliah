@@ -525,24 +525,26 @@ public class ventanaManProv extends javax.swing.JFrame {
         try {
             err = LogicaNegocio.registrarProveedor(p);
             listarProveedores();
+            if(err == 0){
+                nombre.setText("");
+                ruc.setText("");
+                dir.setText("");
+                email.setText("");
+                tlf.setText("");
+                dia.setSelectedItem(dia.getItemAt(0));
+                departamento.setSelectedItem(departamento.getItemAt(0));
+                provincia.setSelectedIndex(0);
+                distrito.setSelectedIndex(0);
+                JOptionPane.showMessageDialog(null, "Se registró correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
+            }else if(err == 1){
+                JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(err == 0){
-            nombre.setText("");
-            ruc.setText("");
-            dir.setText("");
-            email.setText("");
-            tlf.setText("");
-            dia.setSelectedItem(dia.getItemAt(0));
-            departamento.setSelectedItem(departamento.getItemAt(0));
-            provincia.setSelectedIndex(0);
-            distrito.setSelectedIndex(0);
-        }else if(err == 1){
-            JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
-        }
+        
     }//GEN-LAST:event_registrarActionPerformed
 
     private void dirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirActionPerformed
@@ -582,24 +584,26 @@ public class ventanaManProv extends javax.swing.JFrame {
         try {
             err = LogicaNegocio.modificarProveedor(p);
             listarProveedores();
+            if(err == 0){
+                nombre.setText("");
+                ruc.setText("");
+                dir.setText("");
+                email.setText("");
+                tlf.setText("");
+                dia.setSelectedItem(dia.getItemAt(0));
+                departamento.setSelectedItem(departamento.getItemAt(0));
+                provincia.setSelectedIndex(0);
+                distrito.setSelectedIndex(0);
+                JOptionPane.showMessageDialog(null, "Se modificó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
+            }else if(err == 1){
+                JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(err == 0){
-            nombre.setText("");
-            ruc.setText("");
-            dir.setText("");
-            email.setText("");
-            tlf.setText("");
-            dia.setSelectedItem(dia.getItemAt(0));
-            departamento.setSelectedItem(departamento.getItemAt(0));
-            provincia.setSelectedIndex(0);
-            distrito.setSelectedIndex(0);
-        }else if(err == 1){
-            JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
-        }
+        
         
         
     }//GEN-LAST:event_modificarActionPerformed
@@ -706,6 +710,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             departamento.setSelectedItem(departamento.getItemAt(0));
             provincia.setSelectedIndex(0);
             distrito.setSelectedIndex(0);
+            JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

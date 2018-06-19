@@ -155,41 +155,46 @@ public class ventanaCompra extends javax.swing.JFrame {
 
         jLabel1.setText("Buscar");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(130, 205, 100, 16);
+        jLabel1.setBounds(130, 205, 100, 14);
 
         jLabel2.setText("Ruc:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 143, 26, 16);
+        jLabel2.setBounds(20, 143, 22, 14);
 
         jLabel3.setText("Razon Social:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 113, 78, 16);
+        jLabel3.setBounds(20, 113, 64, 14);
 
         razon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 razonActionPerformed(evt);
             }
         });
+        razon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                razonKeyTyped(evt);
+            }
+        });
         getContentPane().add(razon);
-        razon.setBounds(110, 110, 200, 22);
+        razon.setBounds(110, 110, 200, 20);
         getContentPane().add(ruc);
-        ruc.setBounds(110, 140, 140, 22);
+        ruc.setBounds(110, 140, 140, 20);
 
         jLabel5.setText("Producto:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(20, 200, 60, 16);
+        jLabel5.setBounds(20, 200, 60, 14);
 
         jLabel6.setText("Nombre:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(20, 230, 60, 16);
+        jLabel6.setBounds(20, 230, 60, 14);
 
         jLabel7.setText("Precio Unitario:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 260, 100, 16);
+        jLabel7.setBounds(20, 260, 100, 14);
 
         jLabel8.setText("Cantidad:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(20, 290, 70, 16);
+        jLabel8.setBounds(20, 290, 70, 14);
 
         buscarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         buscarProv.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -222,7 +227,7 @@ public class ventanaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(pu);
-        pu.setBounds(130, 260, 70, 22);
+        pu.setBounds(130, 260, 70, 20);
 
         cant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,9 +240,9 @@ public class ventanaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cant);
-        cant.setBounds(130, 290, 70, 22);
+        cant.setBounds(130, 290, 70, 20);
         getContentPane().add(nombreProd);
-        nombreProd.setBounds(90, 230, 150, 22);
+        nombreProd.setBounds(90, 230, 150, 20);
 
         agregar.setBackground(new java.awt.Color(255, 255, 204));
         agregar.setText("Agregar");
@@ -248,7 +253,7 @@ public class ventanaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(250, 260, 100, 25);
+        agregar.setBounds(250, 260, 100, 23);
 
         jButton7.setBackground(new java.awt.Color(255, 255, 204));
         jButton7.setText("Eliminar");
@@ -259,7 +264,7 @@ public class ventanaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton7);
-        jButton7.setBounds(250, 290, 100, 25);
+        jButton7.setBounds(250, 290, 100, 23);
 
         dvgDetalle_compra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -284,7 +289,7 @@ public class ventanaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField7);
-        jTextField7.setBounds(250, 560, 110, 22);
+        jTextField7.setBounds(250, 560, 110, 20);
 
         volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver.png"))); // NOI18N
         volver.setText("Volver");
@@ -340,17 +345,17 @@ public class ventanaCompra extends javax.swing.JFrame {
 
         jLabel4.setText("Fecha de Caducidad:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 330, 130, 16);
+        jLabel4.setBounds(20, 330, 130, 14);
         getContentPane().add(fecha);
-        fecha.setBounds(150, 330, 200, 22);
+        fecha.setBounds(150, 330, 200, 20);
 
         jLabel10.setText("Proveedor:");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(20, 80, 63, 16);
+        jLabel10.setBounds(20, 80, 54, 14);
 
         jLabel11.setText("Buscar");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(150, 80, 120, 16);
+        jLabel11.setBounds(150, 80, 120, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -576,14 +581,25 @@ public class ventanaCompra extends javax.swing.JFrame {
     private void puKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_puKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!((c>='0' && c<='9') || c == '+' || c == '-' || c == '.')) evt.consume();
+        String s = pu.getText();
+        if(s.contains(".")){
+            if(c =='.') evt.consume();
+        }
+        if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
+        if(pu.getText().length()>=7) evt.consume();
     }//GEN-LAST:event_puKeyTyped
 
     private void cantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!((c>='0' && c<='9') || c == '+' || c == '-' )) evt.consume();
+        if(!((c>='0' && c<='9'))) evt.consume();
+        if(cant.getText().length()>=5) evt.consume();
+        
     }//GEN-LAST:event_cantKeyTyped
+
+    private void razonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_razonKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_razonKeyTyped
 
     /**
      * @param args the command line arguments

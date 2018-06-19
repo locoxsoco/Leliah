@@ -79,7 +79,7 @@ import javax.swing.table.DefaultTableModel;
 
         jLabel1.setText("Consumible:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(12, 26, 90, 16);
+        jLabel1.setBounds(12, 26, 90, 14);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(101, 22, 110, 25);
+        consum.setBounds(101, 22, 110, 23);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +97,11 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(214, 22, 140, 25);
+        no_consum.setBounds(214, 22, 140, 23);
 
         jLabel2.setText("Categoria:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 59, 60, 16);
+        jLabel2.setBounds(12, 59, 51, 14);
 
         categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,19 +109,31 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(categoria);
-        categoria.setBounds(101, 56, 170, 22);
+        categoria.setBounds(101, 56, 170, 20);
 
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(12, 99, 50, 16);
+        jLabel3.setBounds(12, 99, 41, 14);
+
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(nombre);
-        nombre.setBounds(101, 96, 230, 22);
+        nombre.setBounds(101, 96, 230, 20);
 
         jLabel4.setText("Marca:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(12, 139, 40, 16);
+        jLabel4.setBounds(12, 139, 33, 14);
+
+        marca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                marcaKeyTyped(evt);
+            }
+        });
         getContentPane().add(marca);
-        marca.setBounds(101, 136, 194, 22);
+        marca.setBounds(101, 136, 194, 20);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,6 +268,18 @@ import javax.swing.table.DefaultTableModel;
     private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_categoriaActionPerformed
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || (c>='0' && c<='9'))) evt.consume();
+        if(nombre.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_nombreKeyTyped
+
+    private void marcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_marcaKeyTyped
+        // TODO add your handling code here:
+        if(marca.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_marcaKeyTyped
 
     private void inicializarCon(){
         ArrayList<String> s = new ArrayList<String>();

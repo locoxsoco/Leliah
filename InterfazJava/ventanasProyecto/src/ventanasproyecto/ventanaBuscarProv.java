@@ -70,15 +70,27 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
 
         jLabel1.setText("Razon Social:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(23, 35, 90, 16);
+        jLabel1.setBounds(23, 35, 90, 14);
 
         jLabel2.setText("RUC:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(23, 75, 60, 16);
+        jLabel2.setBounds(23, 75, 60, 14);
+
+        razon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                razonKeyTyped(evt);
+            }
+        });
         getContentPane().add(razon);
-        razon.setBounds(119, 32, 210, 22);
+        razon.setBounds(119, 32, 210, 20);
+
+        ruc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                rucKeyTyped(evt);
+            }
+        });
         getContentPane().add(ruc);
-        ruc.setBounds(119, 72, 111, 22);
+        ruc.setBounds(119, 72, 111, 20);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,7 +130,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
             }
         });
         getContentPane().add(seleccionar);
-        seleccionar.setBounds(210, 120, 123, 29);
+        seleccionar.setBounds(210, 120, 111, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,6 +174,20 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
         ventanaAnterior.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
+
+    private void razonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_razonKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || c =='.' || c == ',')) evt.consume();
+        if(razon.getText().length()>=45) evt.consume();
+    }//GEN-LAST:event_razonKeyTyped
+
+    private void rucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rucKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') evt.consume();
+        if(ruc.getText().length()>=11) evt.consume();
+    }//GEN-LAST:event_rucKeyTyped
 
     /**
      * @param args the command line arguments

@@ -485,24 +485,26 @@ public class ventanaManProd extends javax.swing.JFrame {
         try {
             err = LogicaNegocio.registrarProducto(p);
             listarProductos();
+            if(err == 0){
+                nombre.setText("");
+                precio.setText("");
+                cantMin.setText("");
+                marca.setText("");
+                desc.setText("");
+                categoria.setSelectedItem(categoria.getItemAt(0));
+                consum.setSelected(false);
+                no_consum.setSelected(false);
+                JOptionPane.showMessageDialog(null, "Se registró correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
+            }else if(err == 1){
+                JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(err == 0){
-            nombre.setText("");
-            precio.setText("");
-            cantMin.setText("");
-            marca.setText("");
-            desc.setText("");
-            categoria.setSelectedItem(categoria.getItemAt(0));
-            consum.setSelected(false);
-            no_consum.setSelected(false);
-        }else if(err == 1){
-            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
-        }
+        
         
         
     }//GEN-LAST:event_registrarActionPerformed
@@ -534,24 +536,26 @@ public class ventanaManProd extends javax.swing.JFrame {
         try {
             err = LogicaNegocio.modificarProducto(p);
             listarProductos();
+            if(err == 0){
+                nombre.setText("");
+                precio.setText("");
+                cantMin.setText("");
+                marca.setText("");
+                desc.setText("");
+                categoria.setSelectedItem(categoria.getItemAt(0));
+                consum.setSelected(false);
+                no_consum.setSelected(false);
+                JOptionPane.showMessageDialog(null, "Se modificó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
+            }else if(err == 1){
+                JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(err == 0){
-            nombre.setText("");
-            precio.setText("");
-            cantMin.setText("");
-            marca.setText("");
-            desc.setText("");
-            categoria.setSelectedItem(categoria.getItemAt(0));
-            consum.setSelected(false);
-            no_consum.setSelected(false);
-        }else if(err == 1){
-            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
-        }
+        
     }//GEN-LAST:event_modificarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -600,6 +604,15 @@ public class ventanaManProd extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             LogicaNegocio.eliminarProducto(idMod);
+            eliminar.setEnabled(false);
+            modificar.setEnabled(false);
+            nombre.setText("");
+            precio.setText("");
+            cantMin.setText("");
+            marca.setText("");
+            no_consum.setSelected(false);
+            consum.setSelected(false);
+            JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -614,14 +627,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        eliminar.setEnabled(false);
-        modificar.setEnabled(false);
-        nombre.setText("");
-        precio.setText("");
-        cantMin.setText("");
-        marca.setText("");
-        no_consum.setSelected(false);
-        consum.setSelected(false);
+        
         
     }//GEN-LAST:event_eliminarActionPerformed
     ventanaLogin ventanaHome;
@@ -742,7 +748,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             if(c =='.') evt.consume();
         }
         if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
-        if(precio.getText().length()>=10) evt.consume();
+        if(precio.getText().length()>=7) evt.consume();
     }//GEN-LAST:event_precioKeyTyped
 
     private void cantMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantMinKeyTyped

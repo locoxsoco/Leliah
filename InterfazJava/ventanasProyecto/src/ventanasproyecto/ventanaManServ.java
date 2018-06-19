@@ -314,17 +314,19 @@ public class ventanaManServ extends javax.swing.JFrame {
         try {
             err = LogicaNegocio.registrarServicio(s);
             listarServicios();
+            if(err == 0){
+                nombre.setText("");
+                pu.setText("");
+                JOptionPane.showMessageDialog(null, "Se registró correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
+            }else if(err == 1){
+                JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(err == 0){
-            nombre.setText("");
-            pu.setText("");
-        }else if(err == 1){
-            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
-        }
+        
         
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -363,17 +365,19 @@ public class ventanaManServ extends javax.swing.JFrame {
         try {
             err = LogicaNegocio.modificarServicio(s);
             listarServicios();
+            if(err == 0){
+                nombre.setText("");
+                pu.setText("");
+                JOptionPane.showMessageDialog(null, "Se modificó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
+            }else if(err == 1){
+                JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(err == 0){
-            nombre.setText("");
-            pu.setText("");
-        }else if(err == 1){
-            JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
-        }
+        
         //model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
         //model.setValueAt(pu.getText(), tabla.getSelectedRow(), 2);
         
@@ -390,19 +394,20 @@ public class ventanaManServ extends javax.swing.JFrame {
         
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         try {
-            LogicaNegocio.eliminarServicio(Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0))));
+            LogicaNegocio.eliminarServicio(Integer.parseInt(String.valueOf(model.getValueAt(tabla.getSelectedRow(), 0))));model.removeRow(tabla.getSelectedRow());
+            eliminar.setEnabled(false);
+            modificar.setEnabled(false);
+
+            nombre.setText("");
+            pu.setText("");
+            JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        model.removeRow(tabla.getSelectedRow());
-        eliminar.setEnabled(false);
-        modificar.setEnabled(false);
         
-        nombre.setText("");
-        pu.setText("");
     }//GEN-LAST:event_eliminarActionPerformed
     
     
@@ -466,7 +471,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             if(c =='.') evt.consume();
         }
         if(!((c>='0' && c<='9')|| c=='.')) evt.consume();
-        if(pu.getText().length()>=10) evt.consume();
+        if(pu.getText().length()>=7) evt.consume();
     }//GEN-LAST:event_puKeyTyped
 
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
