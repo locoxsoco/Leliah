@@ -42,6 +42,7 @@ import javax.swing.table.DefaultTableModel;
         LogicaNegocio = new ProductoBL();
         list = new ArrayList<Producto>();
         inicializarCon();
+        buscar.doClick();
     }
     private void cerrar(){
         ventanaAnterior.setEnabled(true);
@@ -218,8 +219,12 @@ import javax.swing.table.DefaultTableModel;
         ventanaAnterior.prod= list.get(n);
         if(list.get(n).getEsConsumible()==1){
             ventanaAnterior.fecha.setEnabled(true);
+            ventanaAnterior.fecha.setVisible(true);
+            ventanaAnterior.jLabel4.setVisible(true);
         }else{
             ventanaAnterior.fecha.setEnabled(false);
+            ventanaAnterior.fecha.setVisible(false);
+            ventanaAnterior.jLabel4.setVisible(false);
         }
         ventanaAnterior.pu.setEnabled(true);
         ventanaAnterior.cant.setEnabled(true);

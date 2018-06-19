@@ -572,18 +572,29 @@ public class ventanaMantCli extends javax.swing.JFrame {
         int cant = s.length();
         int cantA = 0;
         int cantP = 0;
+        int posA = 0;
         for(int i=0; i<cant; i++){
             if(s.charAt(i) == '@'){
                 cantA++;
+                posA = i;
             }
-            if(cantA == 1){
+            if((cantA == 1) && (i > posA+1)){
                 if(s.charAt(i)=='.'){
                     cantP++;
                 }
             }
         }
+        
         if(cantA!=1 || cantP <1){
-            JOptionPane.showMessageDialog(null, "El correo debe tener una @ y almenos un punto", "Error Correo", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El correo deber tener una @ y almenos un punto luego de la arroba separado por minimo un caracter", "Error Correo", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(s.charAt(posA+1) == '.'){
+            JOptionPane.showMessageDialog(null, "El correo no puede tener un punto inmediatamente luego de un @", "Error Correo", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(!(s.charAt(cant-2)>='a' && s.charAt(cant-2)<='z') || !(s.charAt(cant-1)>='a' && s.charAt(cant-1)<='z')){
+            JOptionPane.showMessageDialog(null, "Los ultimos 2 caracteres del correo deben ser letras minusculas", "Error Correo", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         
@@ -597,6 +608,10 @@ public class ventanaMantCli extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "campo telefono solo puede contener numeros", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
+        }
+        if(s.length()!=9){
+            JOptionPane.showMessageDialog(null, "campo telefono debe ser 9 digitos", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
+            return false;
         }
         s = this.tipoCli.getSelectedItem().toString();
         if((s).equals("")){
@@ -1255,6 +1270,7 @@ public class ventanaMantCli extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c>='0' && c<='9'))) evt.consume();
+        if(tlf.getText().length()>=9) evt.consume();
     }//GEN-LAST:event_tlfKeyTyped
 
     private void tipoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDocActionPerformed

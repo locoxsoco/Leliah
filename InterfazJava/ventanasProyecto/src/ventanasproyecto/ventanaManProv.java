@@ -51,7 +51,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(200);
-        registrar.setEnabled(false);
+        registrar.setEnabled(true);
         modificar.setEnabled(false);
         eliminar.setEnabled(false);
         idU = 0;
@@ -354,6 +354,10 @@ public class ventanaManProv extends javax.swing.JFrame {
                 return false;
             }
         }
+        if(s.length()!=9){
+            JOptionPane.showMessageDialog(null, "campo telefono debe ser 9 digitos", "Error Telefono", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
         
         s = this.dir.getText();
         if((s).equals("")){
@@ -374,18 +378,29 @@ public class ventanaManProv extends javax.swing.JFrame {
         int cant = s.length();
         int cantA = 0;
         int cantP = 0;
+        int posA = 0;
         for(int i=0; i<cant; i++){
             if(s.charAt(i) == '@'){
                 cantA++;
+                posA = i;
             }
-            if(cantA == 1){
+            if((cantA == 1) && (i > posA+1)){
                 if(s.charAt(i)=='.'){
                     cantP++;
                 }
             }
         }
+        
         if(cantA!=1 || cantP <1){
-            JOptionPane.showMessageDialog(null, "El correo debe tener una @ y almenos un punto", "Error Correo", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El correo deber tener una @ y almenos un punto luego de la arroba separado por minimo un caracter", "Error Correo", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(s.charAt(posA+1) == '.'){
+            JOptionPane.showMessageDialog(null, "El correo no puede tener un punto inmediatamente luego de un @", "Error Correo", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        if(!(s.charAt(cant-2)>='a' && s.charAt(cant-2)<='z') || !(s.charAt(cant-1)>='a' && s.charAt(cant-1)<='z')){
+            JOptionPane.showMessageDialog(null, "Los ultimos 2 caracteres del correo deben ser letras minusculas", "Error Correo", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         
@@ -417,6 +432,7 @@ public class ventanaManProv extends javax.swing.JFrame {
             dia.addItem(dias.get(i));
             //modelo.addElement(dias.get(i));
         }
+        dia.setSelectedIndex(0);
         //dia.setModel(modelo);
     }
     
@@ -486,9 +502,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             tlf.setText("");
             dia.setSelectedItem(dia.getItemAt(0));
             departamento.setSelectedItem(departamento.getItemAt(0));
-            provincia.setVisible(false);
-            distrito.setVisible(false);
-            dir.setVisible(false);
+            provincia.setSelectedIndex(0);
+            distrito.setSelectedIndex(0);
         }else if(err == 1){
             JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
         }
@@ -500,13 +515,7 @@ public class ventanaManProv extends javax.swing.JFrame {
 
     private void diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaActionPerformed
         // TODO add your handling code here:
-        if (this.dia.getSelectedItem().toString() == "Escoja..."){
-            registrar.setEnabled(false);
-            modificar.setEnabled(false);
-            eliminar.setEnabled(false);
-        }else{
-            registrar.setEnabled(true);
-        }
+        
     }//GEN-LAST:event_diaActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
@@ -533,25 +542,30 @@ public class ventanaManProv extends javax.swing.JFrame {
         //System.out.println(p.getProvincia().getIdProv());
         p.setDireccion(dir.getText());
         p.setId(idU);
+        int err = 0;
         try {
-            LogicaNegocio.modificarProveedor(p);
+            err = LogicaNegocio.modificarProveedor(p);
             listarProveedores();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if(err == 0){
+            nombre.setText("");
+            ruc.setText("");
+            dir.setText("");
+            email.setText("");
+            tlf.setText("");
+            dia.setSelectedItem(dia.getItemAt(0));
+            departamento.setSelectedItem(departamento.getItemAt(0));
+            provincia.setSelectedIndex(0);
+            distrito.setSelectedIndex(0);
+        }else if(err == 1){
+            JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
+        }
         
-        nombre.setText("");
-        ruc.setText("");
-        dir.setText("");
-        email.setText("");
-        tlf.setText("");
-        dia.setSelectedItem(dia.getItemAt(0));
-        departamento.setSelectedItem(departamento.getItemAt(0));
-        provincia.setVisible(false);
-        distrito.setVisible(false);
-        dir.setVisible(false);
+        
     }//GEN-LAST:event_modificarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
@@ -654,9 +668,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             tlf.setText("");
             dia.setSelectedItem(dia.getItemAt(0));
             departamento.setSelectedItem(departamento.getItemAt(0));
-            provincia.setVisible(false);
-            distrito.setVisible(false);
-            dir.setVisible(false);
+            provincia.setSelectedIndex(0);
+            distrito.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -791,6 +804,7 @@ public class ventanaManProv extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!((c>='0' && c<='9'))) evt.consume();
+        if(tlf.getText().length()>=9) evt.consume();
     }//GEN-LAST:event_tlfKeyTyped
 
     /**

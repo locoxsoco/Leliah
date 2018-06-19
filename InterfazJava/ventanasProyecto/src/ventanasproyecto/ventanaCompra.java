@@ -57,7 +57,8 @@ public class ventanaCompra extends javax.swing.JFrame {
         razon.setEnabled(false);
         ruc.setEnabled(false);
         nombreProd.setEnabled(false);
-        fecha.setEnabled(false);
+        fecha.setVisible(false);
+        jLabel4.setVisible(false);
         model = (javax.swing.table.DefaultTableModel)dvgDetalle_compra.getModel();
         
     }
@@ -636,7 +637,7 @@ public class ventanaCompra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

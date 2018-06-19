@@ -38,6 +38,7 @@ public class ventanaBuscarProv extends javax.swing.JFrame {
         lista = new ArrayList<Proveedor>();
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
         seleccionar.setEnabled(false);
+        buscar.doClick();
     }
     private void cerrar(){
         ventanaAnterior.setEnabled(true);
