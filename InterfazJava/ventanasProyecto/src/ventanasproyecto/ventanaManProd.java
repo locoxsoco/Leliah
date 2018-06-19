@@ -98,6 +98,7 @@ public class ventanaManProd extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(550, 550));
@@ -301,6 +302,19 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel9.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(12, 260, 400, 16);
+
+        limpiar.setBackground(new java.awt.Color(255, 255, 204));
+        limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        limpiar.setText("Limpiar Campos");
+        limpiar.setActionCommand("Limpiar Campos");
+        limpiar.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(limpiar);
+        limpiar.setBounds(10, 480, 150, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -697,6 +711,14 @@ public class ventanaManProd extends javax.swing.JFrame {
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || (c>='0' && c<='9'))) evt.consume();
     }//GEN-LAST:event_nombreKeyTyped
 
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        // TODO add your handling code here:
+        nombre.setText("");
+        precio.setText("");
+        cantMin.setText("");
+        marca.setText("");
+    }//GEN-LAST:event_limpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -722,6 +744,7 @@ public class ventanaManProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton limpiar;
     private javax.swing.JTextField marca;
     private javax.swing.JButton modificar;
     private javax.swing.JRadioButton no_consum;

@@ -73,6 +73,7 @@ public class ventanaManServ extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        eliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(510, 460));
@@ -207,6 +208,19 @@ public class ventanaManServ extends javax.swing.JFrame {
         jLabel4.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(15, 120, 350, 16);
+
+        eliminar1.setBackground(new java.awt.Color(255, 255, 204));
+        eliminar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        eliminar1.setText("Limpiar Campos");
+        eliminar1.setActionCommand("Limpiar \\n Campos");
+        eliminar1.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        eliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(eliminar1);
+        eliminar1.setBounds(20, 380, 140, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -458,6 +472,12 @@ public class ventanaManServ extends javax.swing.JFrame {
         if(!((c<='Z' && c>='A')||(c<='z' && c>='a')|| c == 'ñ' || c == 'Ñ' || c==' ' || c == '-' || (c>='0' && c<='9'))) evt.consume();
     }//GEN-LAST:event_nombreKeyTyped
 
+    private void eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar1ActionPerformed
+        // TODO add your handling code here:
+        nombre.setText("");
+        pu.setText("");
+    }//GEN-LAST:event_eliminar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -465,6 +485,7 @@ public class ventanaManServ extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;
     private javax.swing.JButton eliminar;
+    private javax.swing.JButton eliminar1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
