@@ -725,12 +725,16 @@ DriverManager.getConnection
         vAnterior.jButton3.setEnabled(true);
         vAnterior.compras.setEnabled(true);
         vAnterior.setVisible(true);
+        jDialog1.dispose();
+        jDialog2.dispose();
         this.dispose();
     }//GEN-LAST:event_ButtRepCerrarActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
         ventanaHome.regresar();
+        jDialog1.dispose();
+        jDialog2.dispose();
         this.dispose();
     }//GEN-LAST:event_logoutActionPerformed
 
