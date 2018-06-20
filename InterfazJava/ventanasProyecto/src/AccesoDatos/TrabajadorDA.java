@@ -228,7 +228,7 @@ public class TrabajadorDA {
         return lista;
      }
      
-     public usuario validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
+     public usuario validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException, Exception{
         
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g9?useSSL=false","inf282g9","Yf9bS1");

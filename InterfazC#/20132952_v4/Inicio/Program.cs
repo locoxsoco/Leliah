@@ -19,15 +19,13 @@ namespace Inicio
             
             if(args.Length == 0)
             {
-                Application.Exit();
+                LogIn v = new LogIn();
+                Application.Run(v);
             }
             else if(args.Length == 2)
             {
-                
                 VentanaVendedor v = new VentanaVendedor();
-                v.namae = (string) args[1];
-                v.button2.Visible =
-                    true;
+                v.button2.Visible = true;
                 Application.Run(v);
             }
             else if (args.Length == 1)

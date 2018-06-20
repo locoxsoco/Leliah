@@ -24,20 +24,27 @@ namespace Inicio
             dgvServicios.DataSource = logicaNegocio.listarServicios();
         }
 
-        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
         public Servicio ServicioSeleccionado { get => servicioSeleccionado; set => servicioSeleccionado = value; }
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            servicioSeleccionado = (Servicio)dgvServicios.CurrentRow.DataBoundItem;
-            this.DialogResult = DialogResult.OK;
+            try
+            {
+                servicioSeleccionado = (Servicio)dgvServicios.CurrentRow.DataBoundItem;
+                this.DialogResult = DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "Falta seleccionar servicio", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
-        private void formListarServicios_Load(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
+            dgvServicios.DataSource = logicaNegocio.buscarServicios(textNombre.Text);
 
+            if (dgvServicios.Rows.Count == 0) btnSeleccionar.Enabled = false;
         }
     }
 }

@@ -16,7 +16,7 @@ public class Venta{
     private Cliente cliente;
     private BindingList<Detalle_Venta> _detalles_venta;
     private BindingList<Detalle_Venta_Servicio> _detalles_servicio;
-
+    private string estado;
 
     public Venta()
     {
@@ -68,6 +68,7 @@ public class Venta{
     public double IGV { get => _IGV; set => _IGV = value; }
     public BindingList<Detalle_Venta> Detalles_venta { get => _detalles_venta; set => _detalles_venta = value; }
     public BindingList<Detalle_Venta_Servicio> Detalles_servicio { get => _detalles_servicio; set => _detalles_servicio = value; }
+    public string Estado { get => estado; set => estado = value; }
 
 
     //setter especiales

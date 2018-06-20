@@ -11,6 +11,7 @@ public class Producto{
     private string marca;
     private string descripcion;
     private int cantMinima;
+    private int consumible;
 
     public Producto(int idProducto, string nombre, float precio, string marca, string descripcion)
     {
@@ -83,9 +84,11 @@ public class Producto{
         }
     }
 
+    public int Consumible { get => consumible; set => consumible = value; }
 
 
-   
+
+
 
     /*public int IdProducto { get => idProducto; set => idProducto = value; }
     public string Nombre { get => nombre; set => nombre = value; }

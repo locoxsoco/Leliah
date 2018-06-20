@@ -10,6 +10,7 @@ namespace Modelo
     {
         private char tipo;
         private int idPS;
+        private int consumible;
         private string nombrePS;
         private double precio;
         private double descuento;
@@ -17,6 +18,7 @@ namespace Modelo
         private double precioVendido;
         private int cantidad;
         private double subtotal;
+        private DateTime fechaVencimiento;
 
         public char Tipo { get => tipo; set => tipo = value; }
         public string NombrePS { get => nombrePS; set => nombrePS = value; }
@@ -27,5 +29,7 @@ namespace Modelo
         public int IdPS { get => idPS; set => idPS = value; }
         public double Descuento { get => descuento; set => descuento = value; }
         public int Stock { get => stock; set => stock = value; }
+        public int Consumible { get => consumible; set => consumible = value; }
+        public DateTime FechaVencimiento { get => fechaVencimiento; set => fechaVencimiento = value; }
     }
 }

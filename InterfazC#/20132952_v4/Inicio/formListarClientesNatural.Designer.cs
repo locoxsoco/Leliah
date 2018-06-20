@@ -44,7 +44,9 @@
             this.textNombre = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientesNaturales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvClientesNaturales
@@ -119,6 +121,7 @@
             // 
             this.textNumDoc.Location = new System.Drawing.Point(192, 59);
             this.textNumDoc.Margin = new System.Windows.Forms.Padding(4);
+            this.textNumDoc.MaxLength = 7;
             this.textNumDoc.Name = "textNumDoc";
             this.textNumDoc.Size = new System.Drawing.Size(132, 22);
             this.textNumDoc.TabIndex = 3;
@@ -127,16 +130,18 @@
             // 
             this.textApellPat.Location = new System.Drawing.Point(192, 127);
             this.textApellPat.Margin = new System.Windows.Forms.Padding(4);
+            this.textApellPat.MaxLength = 40;
             this.textApellPat.Name = "textApellPat";
-            this.textApellPat.Size = new System.Drawing.Size(132, 22);
+            this.textApellPat.Size = new System.Drawing.Size(187, 22);
             this.textApellPat.TabIndex = 5;
             // 
             // textApellMat
             // 
             this.textApellMat.Location = new System.Drawing.Point(192, 167);
             this.textApellMat.Margin = new System.Windows.Forms.Padding(4);
+            this.textApellMat.MaxLength = 40;
             this.textApellMat.Name = "textApellMat";
-            this.textApellMat.Size = new System.Drawing.Size(132, 22);
+            this.textApellMat.Size = new System.Drawing.Size(187, 22);
             this.textApellMat.TabIndex = 6;
             // 
             // label2
@@ -148,7 +153,6 @@
             this.label2.Size = new System.Drawing.Size(112, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "Apellido Paterno";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -169,21 +173,21 @@
             this.label4.Size = new System.Drawing.Size(58, 17);
             this.label4.TabIndex = 9;
             this.label4.Text = "Nombre";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // textNombre
             // 
             this.textNombre.Location = new System.Drawing.Point(192, 91);
             this.textNombre.Margin = new System.Windows.Forms.Padding(4);
+            this.textNombre.MaxLength = 40;
             this.textNombre.Name = "textNombre";
-            this.textNombre.Size = new System.Drawing.Size(132, 22);
+            this.textNombre.Size = new System.Drawing.Size(187, 22);
             this.textNombre.TabIndex = 10;
             // 
             // btnBuscar
             // 
             this.btnBuscar.Image = global::Inicio.Properties.Resources.buscar;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(495, 197);
+            this.btnBuscar.Location = new System.Drawing.Point(445, 191);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(113, 31);
@@ -196,7 +200,7 @@
             // 
             this.btnSeleccionar.Image = global::Inicio.Properties.Resources.seleccionar;
             this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(627, 197);
+            this.btnSeleccionar.Location = new System.Drawing.Point(627, 450);
             this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(118, 35);
@@ -206,11 +210,22 @@
             this.btnSeleccionar.UseVisualStyleBackColor = true;
             this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Inicio.Properties.Resources.cliente2;
+            this.pictureBox1.Location = new System.Drawing.Point(427, 36);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(151, 131);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
             // formListarClientesNatural
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 466);
+            this.ClientSize = new System.Drawing.Size(783, 509);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textNombre);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -224,9 +239,9 @@
             this.Controls.Add(this.dgvClientesNaturales);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "formListarClientesNatural";
-            this.Text = "Cliente Naturales";
-            this.Load += new System.EventHandler(this.formListarClientesNatural_Load);
+            this.Text = "Buscar persona";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientesNaturales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,5 +265,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

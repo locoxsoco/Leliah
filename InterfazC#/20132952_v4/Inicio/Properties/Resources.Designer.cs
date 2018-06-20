@@ -144,6 +144,26 @@ namespace Inicio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cliente2 {
+            get {
+                object obj = ResourceManager.GetObject("cliente2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fotocopiadora {
+            get {
+                object obj = ResourceManager.GetObject("fotocopiadora", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_arrow_back_128_28226__1_ {
             get {
                 object obj = ResourceManager.GetObject("ic_arrow_back_128_28226 (1)", resourceCulture);
@@ -197,6 +217,26 @@ namespace Inicio.Properties {
         internal static System.Drawing.Bitmap siguiente {
             get {
                 object obj = ResourceManager.GetObject("siguiente", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap util1 {
+            get {
+                object obj = ResourceManager.GetObject("util1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap util2 {
+            get {
+                object obj = ResourceManager.GetObject("util2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

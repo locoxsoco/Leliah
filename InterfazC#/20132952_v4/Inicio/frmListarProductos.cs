@@ -26,6 +26,7 @@ namespace Inicio
             productoStockSeleccionado = new StockXProducto();
             lista = new BindingList<StockXProducto>();
             lista = logicaNegocio.listarProductosStock(-1, textNombre.Text, textMarca.Text, textCategoria.Text);
+            dgvProductos.AutoGenerateColumns = false;
             dgvProductos.DataSource = lista;
             btnSeleccionar.Enabled = false;
             //dgvProductos.DataSource = logicaNegocio.listarProductos();
@@ -43,17 +44,13 @@ namespace Inicio
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex) {
-                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             
         }
 
-        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+   
         private void btnBuscar_Click(object sender, EventArgs e)
         {
 
@@ -65,14 +62,10 @@ namespace Inicio
 
         }
 
-        private void frmListarProductos_Load(object sender, EventArgs e)
-        {
-
-        }
-
+ 
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnSeleccionar.Enabled = true;
+            
             if (dgvProductos.CurrentRow == null) {
                 textNombre.Text = "";
                 textMarca.Text = "";
@@ -80,10 +73,8 @@ namespace Inicio
                 btnSeleccionar.Enabled = false;
             }
             else {
+                btnSeleccionar.Enabled = true;
                 posicion = (dgvProductos.CurrentRow.Index);
-                textNombre.Text = lista[posicion].Nombre;
-                textMarca.Text = lista[posicion].Marca;
-                textCategoria.Text = lista[posicion].Categoria;
             }
             
 
@@ -103,18 +94,5 @@ namespace Inicio
             textCategoria.Text = "";
         }
 
-        private void frmListarProductos_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void dgvProductos_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-        }
-
-        private void dgvProductos_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            return;
-        }
     }
 }

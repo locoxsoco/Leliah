@@ -32,13 +32,15 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
             this.textRUC = new System.Windows.Forms.TextBox();
             this.textRS = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientesJuridicos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvClientesJuridicos
@@ -55,7 +57,7 @@
             this.dgvClientesJuridicos.Name = "dgvClientesJuridicos";
             this.dgvClientesJuridicos.ReadOnly = true;
             this.dgvClientesJuridicos.RowTemplate.Height = 24;
-            this.dgvClientesJuridicos.Size = new System.Drawing.Size(404, 150);
+            this.dgvClientesJuridicos.Size = new System.Drawing.Size(424, 150);
             this.dgvClientesJuridicos.TabIndex = 0;
             this.dgvClientesJuridicos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientesJuridicos_CellClick);
             // 
@@ -65,7 +67,6 @@
             this.Column1.HeaderText = "IdCliente";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 50;
             // 
             // Column2
             // 
@@ -83,24 +84,11 @@
             this.Column3.ReadOnly = true;
             this.Column3.Width = 150;
             // 
-            // btnSeleccionar
-            // 
-            this.btnSeleccionar.Image = global::Inicio.Properties.Resources.seleccionar;
-            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(343, 133);
-            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(118, 41);
-            this.btnSeleccionar.TabIndex = 1;
-            this.btnSeleccionar.Text = "Seleccionar";
-            this.btnSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
-            // 
             // textRUC
             // 
             this.textRUC.Location = new System.Drawing.Point(148, 38);
             this.textRUC.Margin = new System.Windows.Forms.Padding(4);
+            this.textRUC.MaxLength = 11;
             this.textRUC.Name = "textRUC";
             this.textRUC.Size = new System.Drawing.Size(160, 22);
             this.textRUC.TabIndex = 3;
@@ -109,6 +97,7 @@
             // 
             this.textRS.Location = new System.Drawing.Point(148, 72);
             this.textRS.Margin = new System.Windows.Forms.Padding(4);
+            this.textRS.MaxLength = 8;
             this.textRS.Name = "textRS";
             this.textRS.Size = new System.Drawing.Size(160, 22);
             this.textRS.TabIndex = 4;
@@ -133,11 +122,21 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Razón Social";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Inicio.Properties.Resources.cliente2;
+            this.pictureBox1.Location = new System.Drawing.Point(343, 29);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(118, 108);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
             // btnBuscar
             // 
             this.btnBuscar.Image = global::Inicio.Properties.Resources.buscar;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(229, 133);
+            this.btnBuscar.Location = new System.Drawing.Point(213, 124);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(95, 37);
@@ -146,11 +145,26 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.Image = global::Inicio.Properties.Resources.seleccionar;
+            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeleccionar.Location = new System.Drawing.Point(343, 357);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(118, 41);
+            this.btnSeleccionar.TabIndex = 1;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            // 
             // formListarClientesJuridicos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 450);
+            this.ClientSize = new System.Drawing.Size(509, 422);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textRS);
@@ -160,9 +174,9 @@
             this.Controls.Add(this.dgvClientesJuridicos);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "formListarClientesJuridicos";
-            this.Text = "Clientes Juridicos";
-            this.Load += new System.EventHandler(this.formListarClientesJuridicos_Load);
+            this.Text = "Buscar empresa";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientesJuridicos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +194,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

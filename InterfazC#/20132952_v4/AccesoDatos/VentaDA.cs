@@ -81,6 +81,66 @@ namespace AccesoDatos
 
         }
 
+        public BindingList<VentaAnticipada> actualizarVentaAnticipada(int numeroComprobante, string tipoDoc)
+        {
+
+            string cadena = "server=quilla.lab.inf.pucp.edu.pe;" +
+             "user=inf282g9;database=inf282g9;" +
+             "port=3306;password=Yf9bS1;SslMode=none;" +
+             "";
+
+            MySqlConnection conexion = new MySqlConnection(cadena);
+            conexion.Open();
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = conexion;
+            comando.CommandText = "BUSCAR_ANTICIPADA";
+
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+
+            comando.Parameters.Add("_numeroComprobante", MySqlDbType.Int32).Value = numeroComprobante;
+            comando.Parameters.Add("_tipoDocumentoPago", MySqlDbType.String).Value = tipoDoc;
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            BindingList<VentaAnticipada> lista = new BindingList<VentaAnticipada>();
+            while (reader.Read())
+            {
+                VentaAnticipada va = new VentaAnticipada();
+                va.idVenta = reader.GetInt32("idVenta");
+                va.Adelanto = reader.GetDouble("adelanto");
+                va.Monto = reader.GetDouble("montoTotal");
+                va.SaldoPendiente= reader.GetDouble("saldoPendiente");
+                int tipoCliente= reader.GetInt32("tipoCliente");
+                va.Cliente = new Cliente();
+                if (tipoCliente==1) va.Cliente.NumDocumento = reader.GetString("numeroDocumento");
+                else if(tipoCliente==2) va.Cliente.Ruc = reader.GetString("ruc");
+                lista.Add(va);
+            }
+
+            conexion.Close();
+            return lista;
+        }
+
+        public void actualizarVentaAnticipada(int idVenta)
+        {
+            string cadena = "server=quilla.lab.inf.pucp.edu.pe;" +
+             "user=inf282g9;database=inf282g9;" +
+             "port=3306;password=Yf9bS1;SslMode=none;" +
+             "";
+
+            MySqlConnection conexion = new MySqlConnection(cadena);
+            conexion.Open();
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = conexion;
+            comando.CommandText = "CANCELAR_ANTICIPADA";
+
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+
+            comando.Parameters.Add("_idVenta", MySqlDbType.Int32).Value = idVenta;
+
+            comando.ExecuteNonQuery();
+
+            conexion.Close();
+        }
     }
     
 }

@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actualizar_Venta_Detallada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actualizar_Venta_Detallada.Designer.cs">
+      <DependentUpon>Actualizar_Venta_Detallada.cs</DependentUpon>
+    </Compile>
     <Compile Include="formListarClientesJuridicos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="VentanaVendedor.Designer.cs">
       <DependentUpon>VentanaVendedor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Actualizar_Venta_Detallada.resx">
+      <DependentUpon>Actualizar_Venta_Detallada.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formListarClientesJuridicos.resx">
       <DependentUpon>formListarClientesJuridicos.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +202,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\libreria.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\util1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fotocopiadora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\util2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cliente2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

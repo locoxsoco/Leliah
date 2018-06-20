@@ -223,7 +223,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }
         });
         getContentPane().add(sueldo);
-        sueldo.setBounds(600, 153, 140, 20);
+        sueldo.setBounds(630, 153, 100, 20);
 
         getContentPane().add(frec);
         frec.setBounds(600, 223, 140, 20);
@@ -368,7 +368,7 @@ public class ventanaManTrab extends javax.swing.JFrame {
         moneda.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         moneda.setText("S./");
         getContentPane().add(moneda);
-        moneda.setBounds(750, 156, 48, 16);
+        moneda.setBounds(600, 156, 80, 16);
 
         jLabel11.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel11);

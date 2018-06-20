@@ -47,7 +47,7 @@ public class TrabajadorBL {
         return accesoDatos.listarTiempoPago();
     }
     
-    public usuario validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException{
+    public usuario validarUsuario(String _username,String _password) throws ClassNotFoundException, SQLException, Exception{
         return accesoDatos.validarUsuario(_username, _password);
     }
     

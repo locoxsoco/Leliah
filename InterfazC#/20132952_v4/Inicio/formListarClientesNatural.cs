@@ -43,16 +43,12 @@ namespace Inicio
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Falta seleccionar cliente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Falta seleccionar cliente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             
         }
 
-        private void formListarClientesNatural_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -62,35 +58,20 @@ namespace Inicio
             if (dgvClientesNaturales.Rows.Count == 0) btnSeleccionar.Enabled = false;
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dgvClientesNaturales_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnSeleccionar.Enabled = true;
             if (dgvClientesNaturales.CurrentRow == null)
             {
-                textNombre.Text = "";
-                textNumDoc.Text = "";
-                textApellMat.Text = "";
-                textApellPat.Text = "";
                 btnSeleccionar.Enabled = false;
             }
             else
             {
+                btnSeleccionar.Enabled = true;
                 posicion = (dgvClientesNaturales.CurrentRow.Index);
-                textNombre.Text = lista[posicion].Nombre;
-                textNumDoc.Text = lista[posicion].NumDocumento;
-                textApellMat.Text = lista[posicion].ApellidoMaterno;
-                textApellPat.Text = lista[posicion].ApellidoPaterno;
             }
         }
+
+
     }
 }

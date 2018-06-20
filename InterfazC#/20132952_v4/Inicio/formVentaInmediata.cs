@@ -141,7 +141,33 @@ namespace Inicio
             }
         }
 
-        
+        public void soloLetras(KeyPressEventArgs e)
+        {
+            try
+            {
+                if (Char.IsLetter(e.KeyChar)) e.Handled = false;
+                else if (Char.IsControl(e.KeyChar)) e.Handled = false;
+                else if (Char.IsSeparator(e.KeyChar)) e.Handled = false;
+                else e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public void soloNumeros(KeyPressEventArgs e)
+        {
+            try
+            {
+                if (Char.IsNumber(e.KeyChar)) e.Handled = false;
+                else if (Char.IsControl(e.KeyChar)) e.Handled = false;
+                else e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         private void formVentaInmediata_Load(object sender, EventArgs e)
         {
 
@@ -180,11 +206,14 @@ namespace Inicio
                 prodTemp.Marca = prdoStock.Marca;
                 prodTemp.Descripcion = prdoStock.Descripcion;
                 prodTemp.Precio = prdoStock.Precio;
+                prodTemp.Consumible = prdoStock.Consumible;
 
                 textBoxNombre.Text = prodTemp.Nombre;
                 textBoxCU.Text = prodTemp.Precio.ToString();
                 textStock.Text = prdoStock.Stock.ToString();
-                textFV.Text = prdoStock.FechaVencimiento.ToString();
+                if (prdoStock.Consumible==0)
+                    textFV.Text = "";
+                else textFV.Text = prdoStock.FechaVencimiento.ToString("dd/MM/yyyy");
 
                 btnAgregar.Enabled = true;
                 textCantidad.Enabled = true;               
@@ -225,26 +254,26 @@ namespace Inicio
             //validaciones 
             if (textBoxNombre.Text == "")
             {
-                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Falta seleccionar producto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (textCantidad.Text == "")
             {
-                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             bool result = int.TryParse(textCantidad.Text, out cant);
             if (result == false)
             {
-                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             int stockProd = Int32.Parse(textStock.Text);
             if (cant > stockProd)
             {
-                MessageBox.Show(this, "No hay producto suficiente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "No hay producto suficiente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -254,14 +283,14 @@ namespace Inicio
                 bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
                 if (resultDes == false)
                 {
-                    MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else
                 {
                     if (desc > descMax)
                     {
-                        MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -311,6 +340,8 @@ namespace Inicio
                 dvPS.Precio = prodTemp.Precio;
                 dvPS.Descuento = descAux / 100;
                 dvPS.Stock = prdoStock.Stock;
+                dvPS.FechaVencimiento = prdoStock.FechaVencimiento;
+                dvPS.Consumible = prodTemp.Consumible;
                 dvPS.Cantidad = Int32.Parse(textCantidad.Text);
                 dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - descAux / 100),4);
                 dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido,4);
@@ -353,19 +384,19 @@ namespace Inicio
             //validaciones 
             if (textNombServ.Text == "")
             {
-                MessageBox.Show(this, "Falta seleccionar servicio", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Falta seleccionar servicio", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (textCantServ.Text == "")
             {
-                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             bool result = int.TryParse(textCantServ.Text, out cant);
             if (result == false)
             {
-                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -375,14 +406,14 @@ namespace Inicio
                 bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
                 if (resultDes == false)
                 {
-                    MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else
                 {
                     if (desc > descMax)
                     {
-                        MessageBox.Show(this, "Porcenatje mator al 20%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Porcenatje mayor al 20%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -424,8 +455,9 @@ namespace Inicio
                 dvPS.IdPS = servTemp.IdServicio;
                 dvPS.NombrePS = textNombServ.Text;
                 dvPS.Precio = servTemp.Precio;
-                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - desc/100),4);
-                dvPS.Descuento = desc/100;
+                dvPS.Consumible = prodTemp.Consumible;
+                dvPS.PrecioVendido = Math.Round(dvPS.Precio * (1 - descAux / 100),4);
+                dvPS.Descuento = descAux / 100;
                 dvPS.Cantidad = Int32.Parse(textCantServ.Text);              
                 dvPS.Subtotal = Math.Round(dvPS.Cantidad * dvPS.PrecioVendido,4);
 
@@ -444,27 +476,56 @@ namespace Inicio
         {
             
             int cant=0;
-            double desc;
+            int desc;
 
             //validaciones 
             if (textCantidad.Text == "")
             {
-                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             bool result = int.TryParse(textCantidad.Text, out cant);
             if (result == false)
             {
-                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
- 
+
+            if (textDescuento.Text == "") desc = 0;
+            else
+            {
+                bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
+                if (resultDes == false)
+                {
+                    MessageBox.Show(this, "Ingrese un numero entero en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    if (desc > descMax)
+                    {
+                        MessageBox.Show(this, "Porcentaje muy grande en Descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+            }
+
+            double descDouble;
+            double pvProducto;
+            descDouble = (desc*100)/100;
+
             detalleVentaProdServ[posicion].Cantidad = cant;
-            detalleVentaProdServ.ResetBindings();
+            detalleVentaProdServ[posicion].Descuento = descDouble/100;
+            
 
             //modificar en la lista de productos vendidos
             int idProd = detalleVentaProdServ[posicion].IdPS;
+            pvProducto = detalleVentaProdServ[posicion].Precio * (1 - descDouble/100);
+            logicaNegocio.modificarPrecioVendidoProducto(idProd, pvProducto, venta.Detalles_venta);
+            detalleVentaProdServ[posicion].PrecioVendido = pvProducto;
             logicaNegocio.modificarCantidadVentaProducto(idProd, cant, venta.Detalles_venta);
+            detalleVentaProdServ.ResetBindings();
 
             limpiarCamposProducto();
             btnModificarProd.Enabled = false;
@@ -479,12 +540,16 @@ namespace Inicio
                 posicion = dgvDetalleVenta.CurrentRow.Index;
                 if (detalleVentaProdServ[posicion].Tipo == 'P')
                 {
+
                     textBoxNombre.Text = detalleVentaProdServ[posicion].NombrePS;
                     textBoxCU.Text = detalleVentaProdServ[posicion].Precio.ToString();
                     textCantidad.Text = detalleVentaProdServ[posicion].Cantidad.ToString();
                     textDescuento.Text = (detalleVentaProdServ[posicion].Descuento*100).ToString();
                     textStock.Text = detalleVentaProdServ[posicion].Stock.ToString();
                     textPrecioVendido.Text = detalleVentaProdServ[posicion].PrecioVendido.ToString();
+                    if (detalleVentaProdServ[posicion].Consumible == 0) textFV.Text = "";
+                    else textFV.Text= detalleVentaProdServ[posicion].FechaVencimiento.ToString("dd/MM/yyyy");
+
                     btnAgregar.Enabled = false;
                     btnModificarProd.Enabled = true;
                     btnEliminar.Enabled = true;
@@ -562,27 +627,56 @@ namespace Inicio
         private void btnModificarServ_Click(object sender, EventArgs e)
         {
             int cant = 0;
-            double desc;
+            int desc;
 
             //validaciones 
             if (textCantServ.Text == "")
             {
-                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Faltan ingresar cantidad", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             bool result = int.TryParse(textCantServ.Text, out cant);
             if (result == false)
             {
-                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Ingrese un numero entero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            if (textDescServ.Text == "") desc = 0;
+            else
+            {
+                bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
+                if (resultDes == false)
+                {
+                    MessageBox.Show(this, "Ingrese un numero entero en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    if (desc > descMax)
+                    {
+                        MessageBox.Show(this, "Porcentaje muy grande en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+            }
+
+            double descDouble;
+            double pvServicio;
+            descDouble = (desc*100)/ 100;
+
             detalleVentaProdServ[posicion].Cantidad = cant;
-            detalleVentaProdServ.ResetBindings();
+            detalleVentaProdServ[posicion].Descuento = descDouble/100;
 
             //modificar en la lista de servicios ofrecidos
             int idServ = detalleVentaProdServ[posicion].IdPS;
+            pvServicio = detalleVentaProdServ[posicion].Precio * (1 - descDouble/100);
+            logicaNegocio.modificarPrecioVendidoServicio(idServ, pvServicio, venta.Detalles_servicio);
+            detalleVentaProdServ[posicion].PrecioVendido = pvServicio;
             logicaNegocio.modificarCantidadVentaServicio(idServ, cant, venta.Detalles_servicio);
+            detalleVentaProdServ.ResetBindings();
+
             limpiarCamposServicio();
             btnModificarServ.Enabled = false;
             btnEliminarServ.Enabled = false;
@@ -594,7 +688,7 @@ namespace Inicio
 
             if (textTotal.Text == "")
             {
-                MessageBox.Show(this, "Faltan llenar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Faltan llenar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
             else
@@ -639,7 +733,7 @@ namespace Inicio
 
         private void textDescuento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            soloNumeros(e);
             if (textDescuento.Text != "") {
                 if (e.KeyChar == Convert.ToChar(Keys.Enter))
                 {
@@ -647,14 +741,14 @@ namespace Inicio
                     bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
                     if (resultDes == false)
                     {
-                        MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     else
                     {
                         if (desc > descMax)
                         {
-                            MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(this, "Porcentaje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
@@ -669,6 +763,7 @@ namespace Inicio
 
         private void textDescServ_KeyPress(object sender, KeyPressEventArgs e)
         {
+            soloNumeros(e);
             if (textDescServ.Text != "")
             {
                 if (e.KeyChar == Convert.ToChar(Keys.Enter))
@@ -677,14 +772,14 @@ namespace Inicio
                     bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
                     if (resultDes == false)
                     {
-                        MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Ingrese un numero entero en el campos Descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     else
                     {
                         if (desc > descMax)
                         {
-                            MessageBox.Show(this, "Porcenatje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(this, "Porcentaje mayor al 20% en descuento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
@@ -695,6 +790,16 @@ namespace Inicio
                 }
             }
 
+        }
+
+        private void textCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            soloNumeros(e);
+        }
+
+        private void textCantServ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            soloNumeros(e);
         }
     }
 }

@@ -146,7 +146,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(154, 48, 200, 22);
+        nombre.setBounds(154, 48, 200, 20);
 
         precio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -154,7 +154,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(precio);
-        precio.setBounds(154, 77, 170, 22);
+        precio.setBounds(184, 77, 170, 20);
 
         cantMin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -162,7 +162,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cantMin);
-        cantMin.setBounds(154, 106, 200, 22);
+        cantMin.setBounds(154, 106, 200, 20);
 
         marca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -170,7 +170,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(marca);
-        marca.setBounds(154, 135, 200, 22);
+        marca.setBounds(154, 135, 200, 20);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -257,7 +257,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(150, 193, 95, 25);
+        consum.setBounds(150, 193, 79, 23);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +266,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(250, 193, 120, 25);
+        no_consum.setBounds(250, 193, 120, 23);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Descripción:");
@@ -279,7 +279,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(desc);
-        desc.setBounds(154, 164, 200, 22);
+        desc.setBounds(154, 164, 200, 20);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel8.setText("Categoria: *");
@@ -292,7 +292,7 @@ public class ventanaManProd extends javax.swing.JFrame {
             }
         });
         getContentPane().add(categoria);
-        categoria.setBounds(154, 222, 200, 22);
+        categoria.setBounds(154, 222, 200, 20);
 
         buscar.setBackground(new java.awt.Color(255, 255, 204));
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
@@ -309,11 +309,11 @@ public class ventanaManProd extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel10.setText("S./");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(330, 80, 48, 16);
+        jLabel10.setBounds(154, 80, 48, 16);
 
         jLabel9.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(12, 260, 400, 16);
+        jLabel9.setBounds(12, 260, 400, 14);
 
         limpiar.setBackground(new java.awt.Color(255, 255, 204));
         limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N

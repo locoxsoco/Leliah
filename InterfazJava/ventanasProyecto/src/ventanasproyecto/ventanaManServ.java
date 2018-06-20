@@ -100,7 +100,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(135, 55, 200, 22);
+        nombre.setBounds(135, 55, 200, 20);
 
         pu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -108,7 +108,7 @@ public class ventanaManServ extends javax.swing.JFrame {
             }
         });
         getContentPane().add(pu);
-        pu.setBounds(135, 82, 70, 22);
+        pu.setBounds(165, 82, 70, 20);
 
         tabla.setBackground(new java.awt.Color(255, 255, 204));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -202,11 +202,11 @@ public class ventanaManServ extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("S./");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(215, 85, 30, 16);
+        jLabel5.setBounds(135, 85, 30, 16);
 
         jLabel4.setText("La busqueda se realiza con los campos marcados con *.");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(15, 120, 350, 16);
+        jLabel4.setBounds(15, 120, 350, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

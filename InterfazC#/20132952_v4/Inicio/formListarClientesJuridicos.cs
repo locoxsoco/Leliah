@@ -39,15 +39,11 @@ namespace Inicio
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Falta seleccionar cliente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Falta seleccionar cliente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
 
-        private void formListarClientesJuridicos_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -57,19 +53,17 @@ namespace Inicio
 
         private void dgvClientesJuridicos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnSeleccionar.Enabled = true;
             if (dgvClientesJuridicos.CurrentRow == null)
             {
-                textRUC.Text = "";
-                textRS.Text = "";
-                btnSeleccionar.Enabled = false;
+                btnSeleccionar.Enabled = true;
             }
             else
             {
-                posicion = (dgvClientesJuridicos.CurrentRow.Index);
-                textRUC.Text = lista[posicion].Ruc;
-                textRS.Text = lista[posicion].RazonSocial;
+                btnSeleccionar.Enabled = true;
+                posicion = (dgvClientesJuridicos.CurrentRow.Index);              
             }
         }
+
+
     }
 }

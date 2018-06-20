@@ -89,17 +89,12 @@ public class ventanaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void log() throws ClassNotFoundException, SQLException, IOException{
+    public void log() throws ClassNotFoundException, SQLException, IOException, Exception{
         usuario u = null;
         //System.out.println("hola");
   
-        try {
-            u=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        u=LogicaNegocio.validarUsuario(user.getText(), pass.getText());
+
         //System.out.println(privi);
         
         if(u.getPriv()==2){
@@ -143,12 +138,8 @@ public class ventanaLogin extends javax.swing.JFrame {
             // TODO add your handling code here:
             
             log();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ventanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_LoginActionPerformed
 

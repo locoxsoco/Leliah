@@ -69,7 +69,7 @@ namespace AccesoDatos
                 ps.Precio = reader.GetDouble("precioUnitario");
                 ps.CantMinima = reader.GetInt32("cantidadMinima");
                 ps.Marca = reader.GetString("marca");
-                int consum = reader.GetInt32("consumible");
+                ps.Consumible = reader.GetInt32("consumible");
                 ps.Descripcion = reader.GetString("descripcion");
                 int activo = reader.GetInt32("activo");
                 ps.Categoria = reader.GetString("categoria");

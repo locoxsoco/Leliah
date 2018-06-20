@@ -21,5 +21,10 @@ namespace LogicaNegocio
         {
             return accesoDatos.listarServicios();
         }
+
+        public BindingList<Servicio> buscarServicios(string nombre)
+        {
+            return accesoDatos.buscarServicios(nombre);
+        }
     }
 }

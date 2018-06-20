@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSeleccionar = new System.Windows.Forms.Button();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,7 +36,6 @@
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaCaducidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.textNombre = new System.Windows.Forms.TextBox();
             this.textMarca = new System.Windows.Forms.TextBox();
             this.textCategoria = new System.Windows.Forms.TextBox();
@@ -46,22 +44,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.radioBtnC = new System.Windows.Forms.RadioButton();
             this.radioBtnNC = new System.Windows.Forms.RadioButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnSeleccionar
-            // 
-            this.btnSeleccionar.Image = global::Inicio.Properties.Resources.seleccionar;
-            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(816, 181);
-            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(126, 40);
-            this.btnSeleccionar.TabIndex = 0;
-            this.btnSeleccionar.Text = "Seleccionar";
-            this.btnSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // dgvProductos
             // 
@@ -76,14 +64,11 @@
             this.Stock,
             this.FechaCaducidad});
             this.dgvProductos.Location = new System.Drawing.Point(16, 257);
-            this.dgvProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvProductos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.Size = new System.Drawing.Size(1053, 192);
+            this.dgvProductos.Size = new System.Drawing.Size(899, 192);
             this.dgvProductos.TabIndex = 1;
             this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
-            this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
-            this.dgvProductos.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvProductos_CellMouseClick);
-            this.dgvProductos.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvProductos_RowHeaderMouseClick);
             // 
             // Column1
             // 
@@ -135,23 +120,11 @@
             this.FechaCaducidad.Name = "FechaCaducidad";
             this.FechaCaducidad.Width = 120;
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::Inicio.Properties.Resources.buscar;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(683, 185);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(100, 37);
-            this.btnBuscar.TabIndex = 2;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // textNombre
             // 
             this.textNombre.Location = new System.Drawing.Point(133, 103);
             this.textNombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textNombre.MaxLength = 60;
             this.textNombre.Name = "textNombre";
             this.textNombre.Size = new System.Drawing.Size(212, 22);
             this.textNombre.TabIndex = 4;
@@ -160,6 +133,7 @@
             // 
             this.textMarca.Location = new System.Drawing.Point(133, 142);
             this.textMarca.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textMarca.MaxLength = 50;
             this.textMarca.Name = "textMarca";
             this.textMarca.Size = new System.Drawing.Size(212, 22);
             this.textMarca.TabIndex = 5;
@@ -168,6 +142,7 @@
             // 
             this.textCategoria.Location = new System.Drawing.Point(133, 181);
             this.textCategoria.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textCategoria.MaxLength = 50;
             this.textCategoria.Name = "textCategoria";
             this.textCategoria.Size = new System.Drawing.Size(212, 22);
             this.textCategoria.TabIndex = 6;
@@ -225,11 +200,49 @@
             this.radioBtnNC.UseVisualStyleBackColor = true;
             this.radioBtnNC.CheckedChanged += new System.EventHandler(this.radioBtnNC_CheckedChanged);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Inicio.Properties.Resources.util2;
+            this.pictureBox1.Location = new System.Drawing.Point(565, 54);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(272, 182);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::Inicio.Properties.Resources.buscar;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(381, 199);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(100, 37);
+            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.Image = global::Inicio.Properties.Resources.seleccionar;
+            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeleccionar.Location = new System.Drawing.Point(789, 470);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(126, 40);
+            this.btnSeleccionar.TabIndex = 0;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            // 
             // frmListarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 507);
+            this.ClientSize = new System.Drawing.Size(954, 546);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.radioBtnNC);
             this.Controls.Add(this.radioBtnC);
             this.Controls.Add(this.label4);
@@ -241,13 +254,12 @@
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.dgvProductos);
             this.Controls.Add(this.btnSeleccionar);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmListarProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar Producto";
-            this.Load += new System.EventHandler(this.frmListarProductos_Load);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frmListarProductos_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,5 +285,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCaducidad;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

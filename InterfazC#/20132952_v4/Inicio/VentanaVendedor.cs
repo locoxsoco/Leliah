@@ -18,12 +18,10 @@ namespace Inicio
         {
             InitializeComponent();
         }
-        public string namae; 
+
         private void btnRegVenta_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Registrar_Venta NuevaVentana = new Registrar_Venta();
-            NuevaVentana.Show();
+            subMenuVentaDetallada.Visible = true;         
         }
 
         private void labelBienvenida_Click(object sender, EventArgs e)
@@ -48,9 +46,11 @@ namespace Inicio
 
         private void BtnVentaInmediata_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            formVentaInmediata NuevaVentana = new formVentaInmediata();
-            NuevaVentana.Show();
+            //this.Hide();
+            //this.Visible = false;
+            this.Dispose();
+            formVentaInmediata NuevaVentana = new formVentaInmediata();           
+            NuevaVentana.Visible= true;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -71,10 +71,31 @@ namespace Inicio
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C java -jar ventanasProyecto.jar "+namae;
+            startInfo.Arguments = "/C java -jar ventanasProyecto.jar 1";
             process.StartInfo = startInfo;
             process.Start();
             Application.Exit();
+        }
+
+        private void btnRegistrarVD_Click(object sender, EventArgs e)
+        {
+            subMenuVentaDetallada.Visible = false;
+
+            //this.Visible = false;
+            this.Dispose();
+            Registrar_Venta NuevaVentana = new Registrar_Venta();
+            NuevaVentana.Visible = true;
+        }
+
+        private void btnActualizarVD_Click(object sender, EventArgs e)
+        {
+            subMenuVentaDetallada.Visible = false;
+
+            //this.Visible = false;
+            this.Dispose();
+            Actualizar_Venta_Detallada NuevaVentana = new Actualizar_Venta_Detallada();
+            NuevaVentana.Visible = true;
+          
         }
     }
 }

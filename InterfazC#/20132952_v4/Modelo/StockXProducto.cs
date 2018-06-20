@@ -17,6 +17,7 @@ namespace Modelo
         private int stock;
         private DateTime fechaVencimiento;
         private string categoria;
+        private int consumible;
 
         public int IdProducto { get => idProducto; set => idProducto = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -27,5 +28,6 @@ namespace Modelo
         public int Stock { get => stock; set => stock = value; }
         public DateTime FechaVencimiento { get => fechaVencimiento; set => fechaVencimiento = value; }
         public string Categoria { get => categoria; set => categoria = value; }
+        public int Consumible { get => consumible; set => consumible = value; }
     }
 }

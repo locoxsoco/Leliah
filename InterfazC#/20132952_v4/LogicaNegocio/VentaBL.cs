@@ -40,6 +40,10 @@ namespace LogicaNegocio
 
         }
 
+        public BindingList<VentaAnticipada> actualizarVentaAnticipada(int numeroComprobante, string tipoDoc)
+        {
+            return accesoDatosVenta.actualizarVentaAnticipada(numeroComprobante, tipoDoc);
+        }
         public void modificarCantidadVentaProducto(int idProd,int cant, BindingList<Detalle_Venta> lista)
         {
             foreach (Detalle_Venta dv in lista)
@@ -52,6 +56,10 @@ namespace LogicaNegocio
             }
         }
 
+        public void actualizarVentaAnticipada(int idVenta)
+        {
+            accesoDatosVenta.actualizarVentaAnticipada(idVenta);
+        }
         public void modificarCantidadVentaServicio(int idServ, int cant, BindingList<Detalle_Venta_Servicio> lista)
         {
             foreach (Detalle_Venta_Servicio dvServ in lista)
@@ -94,5 +102,28 @@ namespace LogicaNegocio
             return monto;
         }
 
+        public void modificarPrecioVendidoProducto(int idProd,double precioVend ,BindingList<Detalle_Venta> lista)
+        {
+            foreach (Detalle_Venta dv in lista)
+            {
+                if (dv.Producto.IdProducto == idProd)
+                {
+                    dv.PrecioVendido = precioVend;
+                    break;
+                }
+            }
+        }
+
+        public void modificarPrecioVendidoServicio(int idServ, double precioVend, BindingList<Detalle_Venta_Servicio> lista)
+        {
+            foreach (Detalle_Venta_Servicio dvServ in lista)
+            {
+                if (dvServ.Servicio.IdServicio == idServ) 
+                {
+                    dvServ.PrecioVendido = precioVend;
+                    break;
+                }
+            }
+        }
     }
 }

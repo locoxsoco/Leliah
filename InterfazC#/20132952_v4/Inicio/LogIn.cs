@@ -37,7 +37,7 @@ namespace Inicio
             if (privi==3) {
                 //MessageBox.Show("Se ha iniciado sesion");
                 this.Hide();
-
+                //this.Dispose();
                 VentanaVendedor NuevaVentana = new VentanaVendedor();
                 NuevaVentana.Show();
             }

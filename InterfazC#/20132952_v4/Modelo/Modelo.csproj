@@ -45,7 +45,6 @@
     <Compile Include="DetalleVentaPS.cs" />
     <Compile Include="Detalle_Venta.cs" />
     <Compile Include="Detalle_Venta_Servicio.cs" />
-    <Compile Include="Libreria.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="ProductoxCant.cs" />
@@ -54,7 +53,6 @@
     <Compile Include="StockXProducto.cs" />
     <Compile Include="TipoPago.cs" />
     <Compile Include="TipoRecibo.cs" />
-    <Compile Include="Vendedor.cs" />
     <Compile Include="Venta.cs" />
     <Compile Include="VentaAnticipada.cs" />
   </ItemGroup>
