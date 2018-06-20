@@ -79,7 +79,7 @@ import javax.swing.table.DefaultTableModel;
 
         jLabel1.setText("Consumible:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(12, 26, 90, 14);
+        jLabel1.setBounds(12, 26, 90, 16);
 
         consum.setText("Consumible");
         consum.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(consum);
-        consum.setBounds(101, 22, 110, 23);
+        consum.setBounds(101, 22, 110, 25);
 
         no_consum.setText("No Consumible");
         no_consum.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +97,11 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(no_consum);
-        no_consum.setBounds(214, 22, 140, 23);
+        no_consum.setBounds(214, 22, 140, 25);
 
         jLabel2.setText("Categoria:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(12, 59, 51, 14);
+        jLabel2.setBounds(12, 59, 60, 16);
 
         categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,11 +109,11 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(categoria);
-        categoria.setBounds(101, 56, 170, 20);
+        categoria.setBounds(101, 56, 170, 22);
 
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(12, 99, 41, 14);
+        jLabel3.setBounds(12, 99, 50, 16);
 
         nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -121,11 +121,11 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(101, 96, 230, 20);
+        nombre.setBounds(101, 96, 230, 22);
 
         jLabel4.setText("Marca:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(12, 139, 33, 14);
+        jLabel4.setBounds(12, 139, 40, 16);
 
         marca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -133,7 +133,7 @@ import javax.swing.table.DefaultTableModel;
             }
         });
         getContentPane().add(marca);
-        marca.setBounds(101, 136, 194, 20);
+        marca.setBounds(101, 136, 194, 22);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

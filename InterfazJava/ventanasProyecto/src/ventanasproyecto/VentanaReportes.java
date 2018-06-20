@@ -118,6 +118,11 @@ public class VentanaReportes extends javax.swing.JFrame {
         ButtDetalleVenta = new javax.swing.JButton();
 
         jDialog3.setMinimumSize(new java.awt.Dimension(283, 180));
+        jDialog3.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jDialog3WindowClosing(evt);
+            }
+        });
         jDialog3.getContentPane().setLayout(null);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -134,11 +139,16 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         });
         jDialog3.getContentPane().add(AccetpJD3Butt);
-        AccetpJD3Butt.setBounds(100, 100, 71, 30);
+        AccetpJD3Butt.setBounds(100, 100, 77, 30);
 
         jDialog2.setMinimumSize(new java.awt.Dimension(300, 300));
         jDialog2.setResizable(false);
         jDialog2.setSize(new java.awt.Dimension(300, 300));
+        jDialog2.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jDialog2WindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Seleccione un mes:");
@@ -218,6 +228,11 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jDialog1.setMinimumSize(new java.awt.Dimension(300, 300));
+        jDialog1.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jDialog1WindowClosing(evt);
+            }
+        });
 
         LabelSeleccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LabelSeleccion.setText("Seleccione un rango de fecha");
@@ -402,61 +417,61 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         jLabel3.setText("Ventas totales");
         BalanceFrameReport.getContentPane().add(jLabel3);
-        jLabel3.setBounds(19, 62, 140, 14);
+        jLabel3.setBounds(19, 62, 140, 16);
 
         jLabel4.setText("Servicios");
         BalanceFrameReport.getContentPane().add(jLabel4);
-        jLabel4.setBounds(19, 93, 150, 14);
+        jLabel4.setBounds(19, 93, 150, 16);
 
         jLabel5.setText("Alquiler");
         BalanceFrameReport.getContentPane().add(jLabel5);
-        jLabel5.setBounds(19, 124, 160, 14);
+        jLabel5.setBounds(19, 124, 160, 16);
 
         jLabel6.setText("Pago empleados");
         BalanceFrameReport.getContentPane().add(jLabel6);
-        jLabel6.setBounds(19, 153, 170, 14);
+        jLabel6.setBounds(19, 153, 170, 16);
 
         jLabel7.setText("Compras");
         BalanceFrameReport.getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 178, 150, 14);
+        jLabel7.setBounds(19, 178, 150, 16);
 
         jLabel8.setText("Otros");
         BalanceFrameReport.getContentPane().add(jLabel8);
-        jLabel8.setBounds(19, 209, 150, 14);
+        jLabel8.setBounds(19, 209, 150, 16);
 
         jTextField1.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField1);
-        jTextField1.setBounds(200, 60, 88, 20);
+        jTextField1.setBounds(200, 60, 88, 22);
 
         jTextField2.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField2);
-        jTextField2.setBounds(200, 90, 88, 20);
+        jTextField2.setBounds(200, 90, 88, 22);
 
         jTextField3.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField3);
-        jTextField3.setBounds(200, 120, 88, 20);
+        jTextField3.setBounds(200, 120, 88, 22);
 
         jTextField4.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField4);
-        jTextField4.setBounds(200, 180, 88, 20);
+        jTextField4.setBounds(200, 180, 88, 22);
 
         jTextField5.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField5);
-        jTextField5.setBounds(200, 150, 88, 20);
+        jTextField5.setBounds(200, 150, 88, 22);
 
         jTextField6.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField6);
-        jTextField6.setBounds(200, 250, 88, 20);
+        jTextField6.setBounds(200, 250, 88, 22);
         BalanceFrameReport.getContentPane().add(jSeparator1);
         jSeparator1.setBounds(19, 237, 280, 10);
 
         jLabel9.setText("Utilidad");
         BalanceFrameReport.getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 250, 150, 14);
+        jLabel9.setBounds(20, 250, 150, 16);
 
         jTextField7.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField7);
-        jTextField7.setBounds(200, 210, 88, 20);
+        jTextField7.setBounds(200, 210, 88, 22);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Reporte de Ingresos y Egresos");
@@ -465,6 +480,14 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(550, 460));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         SelecionRep.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -763,7 +786,8 @@ DriverManager.getConnection
 
     private void ButtRepClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepClientesMouseClicked
         selector = 1;
-        jDialog1.setVisible(true);                
+        jDialog1.setVisible(true);    
+        this.setEnabled(false);
     }//GEN-LAST:event_ButtRepClientesMouseClicked
 
     private void ButtRepClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtRepClientesActionPerformed
@@ -777,16 +801,19 @@ DriverManager.getConnection
     private void ButtProdMasVendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtProdMasVendMouseClicked
         selector = 2;
         jDialog1.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_ButtProdMasVendMouseClicked
 
     private void ButtRepMensVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepMensVentasMouseClicked
         selector = 3;
         jDialog1.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_ButtRepMensVentasMouseClicked
 
     private void ButtRepBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepBalanceMouseClicked
         selector = 4;
         jDialog2.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_ButtRepBalanceMouseClicked
 
     private void ButtRepCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtRepCerrarActionPerformed
@@ -816,6 +843,7 @@ DriverManager.getConnection
         fechafin = ReporteDate2.getDate();        
         if((fechaini!=null) && (fechafin!=null)){
             if(fechaini.compareTo(fechafin)<=0){
+                this.setEnabled(true);
                 jDialog1.dispose();
                 try {
                     abrirReporte(selector);
@@ -833,6 +861,7 @@ DriverManager.getConnection
         }else{
             JOptionPane.showMessageDialog(this,"Debe seleccionar un rango de fechas");
         }
+        
     }//GEN-LAST:event_AcceptDialogMouseClicked
     public static boolean isNumeric(String str)
     {
@@ -857,6 +886,7 @@ DriverManager.getConnection
                     alquiler = Double.parseDouble(txtPagoAlquiler.getText());
                     servicios = Double.parseDouble(txtPagoServicios.getText());
                     otros = Double.parseDouble(txtOtrosPagos.getText());
+                    this.setEnabled(true);
                     jDialog2.dispose();
                     try {
                         abrirReporte(selector);
@@ -878,6 +908,7 @@ DriverManager.getConnection
         }else{
             JOptionPane.showMessageDialog(this,"Seleccione un mes anterior al actual");
         }
+        
     }//GEN-LAST:event_AceptarJD2ButtActionPerformed
 
     private void txtPagoServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagoServiciosActionPerformed
@@ -891,11 +922,13 @@ DriverManager.getConnection
     private void ButtDetalleVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtDetalleVentaMouseClicked
         selector=5;
         jDialog3.setVisible(true);       
+        this.setEnabled(false);
     }//GEN-LAST:event_ButtDetalleVentaMouseClicked
 
     private void AccetpJD3ButtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccetpJD3ButtMouseClicked
         if(isNumeric(txtNumVenta.getText())){
             idVenta = Integer.parseInt(txtNumVenta.getText());
+            this.setEnabled(true);
             jDialog3.dispose();
             try {
                 abrirReporte(selector);
@@ -911,7 +944,31 @@ DriverManager.getConnection
         }else{
             JOptionPane.showMessageDialog(this,"Ingrese un dato numérico");
         }
+        
     }//GEN-LAST:event_AccetpJD3ButtMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jDialog1WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog1WindowClosing
+        // TODO add your handling code here:
+        this.setEnabled(true);
+    }//GEN-LAST:event_jDialog1WindowClosing
+
+    private void jDialog2WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog2WindowClosing
+        // TODO add your handling code here:
+        this.setEnabled(true);
+    }//GEN-LAST:event_jDialog2WindowClosing
+
+    private void jDialog3WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog3WindowClosing
+        // TODO add your handling code here:
+        this.setEnabled(true);
+    }//GEN-LAST:event_jDialog3WindowClosing
 
     /**
      * @param args the command line arguments
