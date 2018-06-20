@@ -539,10 +539,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             }else if(err == 1){
                 JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
     }//GEN-LAST:event_registrarActionPerformed
@@ -598,10 +596,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             }else if(err == 1){
                 JOptionPane.showMessageDialog(null, "El RUC ya se encuentra asociado a otro proveedor", "Proveedor ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -644,10 +640,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             if(provincia.getItemCount()<1){
                 llenarComboProv(lista.get(n).getDepartamento().getIdDep());
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         //System.out.println(lista.get(n).getProvincia());
@@ -665,10 +659,8 @@ public class ventanaManProv extends javax.swing.JFrame {
         
         try {
             llenarComboDist(lista.get(n).getProvincia().getIdProv());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         pos =0;
@@ -711,10 +703,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             provincia.setSelectedIndex(0);
             distrito.setSelectedIndex(0);
             JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_eliminarActionPerformed
     
@@ -762,10 +752,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             if(provincia.getItemCount()<1){
                 llenarComboProv(d.getIdDep());
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
     }//GEN-LAST:event_departamentoActionPerformed
@@ -792,10 +780,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             Provincia p = (Provincia) provincia.getSelectedItem();
             //System.out.println(p.getNombProv());
             llenarComboDist(p.getIdProv());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_provinciaActionPerformed
 
@@ -810,10 +796,8 @@ public class ventanaManProv extends javax.swing.JFrame {
             // TODO add your handling code here:
 
             lista = LogicaNegocio.buscarProveedores(nombre.getText(), ruc.getText());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProv.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         int n = lista.size();

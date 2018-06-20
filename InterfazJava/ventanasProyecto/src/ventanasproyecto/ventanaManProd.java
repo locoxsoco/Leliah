@@ -498,10 +498,8 @@ public class ventanaManProd extends javax.swing.JFrame {
             }else if(err == 1){
                 JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -549,10 +547,8 @@ public class ventanaManProd extends javax.swing.JFrame {
             }else if(err == 1){
                 JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un producto con el mismo nombre", "Producto ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -613,18 +609,14 @@ public class ventanaManProd extends javax.swing.JFrame {
             no_consum.setSelected(false);
             consum.setSelected(false);
             JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         try {
             listarProductos();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -710,10 +702,8 @@ public class ventanaManProd extends javax.swing.JFrame {
         
         try {
             list = LogicaNegocio.buscarProductos(nombre.getText(), marca.getText(), categoria.getSelectedItem().toString(), cons);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManProd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         model = (javax.swing.table.DefaultTableModel)tabla.getModel();
         int n = list.size();

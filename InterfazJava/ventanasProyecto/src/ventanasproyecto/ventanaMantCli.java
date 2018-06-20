@@ -1074,10 +1074,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
                     }
 
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
             }
 
             //Object s[] ={idU, tipoCli.getSelectedItem().toString(), namae.getText(), numDoc.getText(), apPat.getText(), apMat.getText(), dir.getText(), tlf.getText(), email.getText()};
@@ -1135,10 +1133,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
             modificar.setEnabled(false);
             eliminar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -1206,10 +1202,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
             }
             provincia.setVisible(true);
             Tprovincia.setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_departamentoActionPerformed
 
@@ -1233,10 +1227,8 @@ public class ventanaMantCli extends javax.swing.JFrame {
             Provincia p = (Provincia) provincia.getSelectedItem();
             llenarComboBoxDist(p.getIdProv());
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_provinciaActionPerformed
 
@@ -1256,18 +1248,14 @@ public class ventanaMantCli extends javax.swing.JFrame {
         if(tipo == -1){
             try {
                 lista = LogicaNegocio.listarClientes();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
             }
         }else{
             try {
                 lista = LogicaNegocio.buscarClientes(tipo, namae.getText(), apPat.getText(), apMat.getText(), numDoc.getText(), numDoc.getText(), namae.getText());
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(ventanaMantCli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
             }
         }
         

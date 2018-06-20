@@ -795,10 +795,8 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }else if(err == 2){
                 JOptionPane.showMessageDialog(null, "El username ya se encuentra asociado a otro trabajador", "Trabajador ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -872,10 +870,8 @@ public class ventanaManTrab extends javax.swing.JFrame {
             }else if(err == 2){
                 JOptionPane.showMessageDialog(null, "El username ya se encuentra asociado a otro trabajador", "Trabajador ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
 
         
@@ -990,10 +986,8 @@ public class ventanaManTrab extends javax.swing.JFrame {
             frec.setVisible(false);
             moneda.setVisible(false);
             JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -1040,10 +1034,8 @@ public class ventanaManTrab extends javax.swing.JFrame {
                 Object o[] = {lista.get(i).getId(), lista.get(i).getNombre()+" "+lista.get(i).getApPaterno()+" "+lista.get(i).getApMaterno() , lista.get(i).getUsername(), lista.get(i).getContrasena(), lista.get(i).getFecha().toString(),tipo};
                 model.addRow(o);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManTrab.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_buscarActionPerformed
 

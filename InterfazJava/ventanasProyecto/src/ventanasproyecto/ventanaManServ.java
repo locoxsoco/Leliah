@@ -321,10 +321,8 @@ public class ventanaManServ extends javax.swing.JFrame {
             }else if(err == 1){
                 JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -372,10 +370,8 @@ public class ventanaManServ extends javax.swing.JFrame {
             }else if(err == 1){
                 JOptionPane.showMessageDialog(null, "Ya se encuentra registrado un servicio con el mismo nombre", "Servicio ya registrado", JOptionPane.PLAIN_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         //model.setValueAt(nombre.getText(), tabla.getSelectedRow(), 1);
@@ -401,10 +397,8 @@ public class ventanaManServ extends javax.swing.JFrame {
             nombre.setText("");
             pu.setText("");
             JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Éxito", JOptionPane.PLAIN_MESSAGE);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
         
@@ -437,10 +431,8 @@ public class ventanaManServ extends javax.swing.JFrame {
             try {
                 listarServicios();
                 return;
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
             }
         }
         try {
@@ -455,10 +447,8 @@ public class ventanaManServ extends javax.swing.JFrame {
                 Object o[] = {arr.get(i).getId(), arr.get(i).getNombre(), arr.get(i).getprecioxUnit()};
                 model.addRow(o);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ventanaManServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
         
     }//GEN-LAST:event_buscarActionPerformed
