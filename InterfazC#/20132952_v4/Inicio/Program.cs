@@ -26,7 +26,9 @@ namespace Inicio
             {
                 VentanaVendedor v = new VentanaVendedor();
                 v.button2.Visible = true;
+                v.nomb = args[1];
                 Application.Run(v);
+
             }
             else if (args.Length == 1)
             {

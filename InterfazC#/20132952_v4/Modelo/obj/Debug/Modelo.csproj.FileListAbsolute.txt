@@ -107,3 +107,9 @@ C:\Users\alulab14.INF\Downloads\SistemaVentas\SistemaVentas\20132952_v4\Modelo\b
 C:\Users\alulab14.INF\Downloads\SistemaVentas\SistemaVentas\20132952_v4\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
 C:\Users\alulab14.INF\Downloads\SistemaVentas\SistemaVentas\20132952_v4\Modelo\obj\Debug\Modelo.dll
 C:\Users\alulab14.INF\Downloads\SistemaVentas\SistemaVentas\20132952_v4\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Andres\Downloads\rLeliah\InterfazC#\20132952_v4\Modelo\bin\Debug\Modelo.dll
+C:\Users\Andres\Downloads\rLeliah\InterfazC#\20132952_v4\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Andres\Downloads\rLeliah\InterfazC#\20132952_v4\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Andres\Downloads\rLeliah\InterfazC#\20132952_v4\Modelo\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+C:\Users\Andres\Downloads\rLeliah\InterfazC#\20132952_v4\Modelo\obj\Debug\Modelo.dll
+C:\Users\Andres\Downloads\rLeliah\InterfazC#\20132952_v4\Modelo\obj\Debug\Modelo.pdb

@@ -27,6 +27,9 @@ namespace Inicio
         double acum;
         double valorIGV = 0.18F;
         double tipoCambio = 3.24F;
+
+        public VentanaVendedor vAnt;
+
         public enum estado
         {
             Inicial, Nuevo, Guardar
@@ -185,9 +188,10 @@ namespace Inicio
         {
             if (MessageBox.Show("¿Esta seguro que desear salir de la ventana?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.Hide();
-                VentanaVendedor nuevaVentana = new VentanaVendedor();
-                nuevaVentana.Show();
+                vAnt.Visible = true;
+                this.Dispose();
+                //VentanaVendedor nuevaVentana = new VentanaVendedor();
+                //nuevaVentana.Show();
             }
             else
             {
@@ -330,11 +334,11 @@ namespace Inicio
 
                 acum = acum + dv.Subtotal;
                 acum = Math.Round(acum, 4);
-                venta.IGV = acum * valorIGV;
-                venta.Monto = acum + venta.IGV;
+                venta.IGV = acum - acum / (1 + valorIGV);
+                venta.Monto = acum;
 
                 textIGV.Text = Math.Round(venta.IGV, 4).ToString();
-                textSubtotal.Text = Math.Round(acum,4).ToString();
+                textSubtotal.Text = Math.Round(venta.Monto - venta.IGV, 4).ToString();
                 textTotal.Text = Math.Round(venta.Monto, 4).ToString();
 
 
@@ -451,11 +455,11 @@ namespace Inicio
 
                 acum = acum + dvServ.Subtotal;
                 acum = Math.Round(acum, 4);
-                venta.IGV = acum * valorIGV;
-                venta.Monto = acum + venta.IGV;
+                venta.IGV = acum - acum / (1 + valorIGV);
+                venta.Monto = acum;
 
                 textIGV.Text = Math.Round(venta.IGV, 4).ToString();
-                textSubtotal.Text = Math.Round(acum,4).ToString();
+                textSubtotal.Text = Math.Round(venta.Monto - venta.IGV, 4).ToString();
                 textTotal.Text = Math.Round(venta.Monto, 4).ToString();
 
 

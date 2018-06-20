@@ -12,7 +12,8 @@ namespace Inicio
 {
     public partial class VentanaVendedor : Form
     {
-       
+
+        public string nomb;
         
         public VentanaVendedor()
         {
@@ -51,6 +52,7 @@ namespace Inicio
             //this.Dispose();
             formVentaInmediata NuevaVentana = new formVentaInmediata();           
             NuevaVentana.Visible= true;
+            NuevaVentana.vAnt = this;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -71,7 +73,7 @@ namespace Inicio
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C java -jar ventanasProyecto.jar 1";
+            startInfo.Arguments = "/C java -jar ventanasProyecto.jar "+nomb;
             process.StartInfo = startInfo;
             process.Start();
             Application.Exit();
@@ -85,6 +87,7 @@ namespace Inicio
             //this.Dispose();
             Registrar_Venta NuevaVentana = new Registrar_Venta();
             NuevaVentana.Visible = true;
+            NuevaVentana.vAnt = this;
         }
 
         private void btnActualizarVD_Click(object sender, EventArgs e)
@@ -92,8 +95,10 @@ namespace Inicio
             subMenuVentaDetallada.Visible = false;
 
             this.Visible = false;
+            
             //this.Dispose();
             Actualizar_Venta_Detallada NuevaVentana = new Actualizar_Venta_Detallada();
+            NuevaVentana.vAnt = this;
             NuevaVentana.Visible = true;
           
         }

@@ -37,6 +37,7 @@ namespace LogicaNegocio
             {
                 accesoDatosDetVentaServ.registrarDetVentaServicio(dvServ, v.idVenta);
             }
+            
 
         }
 

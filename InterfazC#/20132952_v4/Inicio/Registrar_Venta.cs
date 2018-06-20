@@ -29,6 +29,8 @@ namespace Inicio
         double valorIGV = 0.18F;
         double tipoCambio = 3.24F;
         int minDias = 7;
+
+        public VentanaVendedor vAnt;
         public enum estado
         {
             Inicial, Nuevo, Guardar
@@ -219,9 +221,10 @@ namespace Inicio
         {
             if (MessageBox.Show("¿Esta seguro que desea salir?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.Hide();
-                VentanaVendedor nuevaVentana = new VentanaVendedor();
-                nuevaVentana.Show();
+                vAnt.Visible = true;
+                this.Dispose();
+                //VentanaVendedor nuevaVentana = new VentanaVendedor();
+                //nuevaVentana.Show();
 
             }
             else
@@ -396,11 +399,11 @@ namespace Inicio
 
                 acum = acum + dv.Subtotal;
                 acum = Math.Round(acum, 4);
-                venta.IGV = acum * valorIGV;
-                venta.Monto = acum + venta.IGV;
+                venta.IGV = acum - acum/(1+ valorIGV);
+                venta.Monto = acum;
 
                 textIGV.Text = Math.Round(venta.IGV, 4).ToString();
-                textSubtotal.Text = Math.Round(acum, 4).ToString();
+                textSubtotal.Text = Math.Round(venta.Monto-venta.IGV, 4).ToString();
                 textTotal.Text = Math.Round(venta.Monto, 4).ToString();
 
 
@@ -511,7 +514,7 @@ namespace Inicio
                     else if (radioBtnAntcipada.Checked == true)
                     {
 
-                        MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles con un saldo pendiente de " + Math.Round(venta.SaldoPendiente, 4).ToString(), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Se ha registrado correctamente la venta numero: \n Tiene una venta de " + textTotal.Text + " soles con un saldo pendiente de " + Math.Round(venta.SaldoPendiente, 4).ToString(), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                 }
@@ -698,12 +701,16 @@ namespace Inicio
 
                 acum = acum + dvServ.Subtotal;
                 acum = Math.Round(acum, 4);
-                venta.IGV = acum * valorIGV;
-                venta.Monto = acum + venta.IGV;
+                venta.IGV = acum - acum / (1 + valorIGV);
+                venta.Monto = acum;
 
                 textIGV.Text = Math.Round(venta.IGV, 4).ToString();
-                textSubtotal.Text = Math.Round(acum, 4).ToString();
+                textSubtotal.Text = Math.Round(venta.Monto - venta.IGV, 4).ToString();
                 textTotal.Text = Math.Round(venta.Monto, 4).ToString();
+
+
+
+
 
 
                 //solo para mostar en la tabla
@@ -884,9 +891,10 @@ namespace Inicio
         {
             if (MessageBox.Show("¿Esta seguro que desea salir de la ventana?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.Hide();
-                VentanaVendedor nuevaVentana = new VentanaVendedor();
-                nuevaVentana.Show();
+                vAnt.Visible = true;
+                this.Dispose();
+                //VentanaVendedor nuevaVentana = new VentanaVendedor();
+                //nuevaVentana.Show();
 
             }
             else

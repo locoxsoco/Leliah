@@ -18,6 +18,7 @@ namespace Inicio
         private VentaBL logicaNegocio;
         private string tipoComp;
         private int idVenta;
+        public VentanaVendedor vAnt;
 
         public Actualizar_Venta_Detallada()
         {
@@ -86,9 +87,11 @@ namespace Inicio
         {
             if (MessageBox.Show("¿Esta seguro que desear salir de la ventana?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.Hide();
-                VentanaVendedor nuevaVentana = new VentanaVendedor();
-                nuevaVentana.Show();
+                vAnt.Visible = true;
+                this.Dispose();
+                
+                //VentanaVendedor nuevaVentana = new VentanaVendedor();
+                //nuevaVentana.Show();
             }
             else
             {
