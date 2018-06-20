@@ -339,6 +339,7 @@
             this.Controls.Add(this.textNroComprobante);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Actualizar_Venta_Detallada";
             this.Text = "Actualiza venta detallada";
             this.ResumeLayout(false);

@@ -52,11 +52,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnListaProd = new System.Windows.Forms.Button();
             this.dgvDetalleVenta = new System.Windows.Forms.DataGridView();
-            this.NombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textIGV = new System.Windows.Forms.TextBox();
             this.textSubtotal = new System.Windows.Forms.TextBox();
             this.textTotal = new System.Windows.Forms.TextBox();
@@ -92,6 +87,11 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.NombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVenta)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -127,12 +127,12 @@
             this.groupProducto.Size = new System.Drawing.Size(709, 128);
             this.groupProducto.TabIndex = 11;
             this.groupProducto.TabStop = false;
-            this.groupProducto.Text = "Prducto";
+            this.groupProducto.Text = "Producto";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(362, 59);
+            this.label1.Location = new System.Drawing.Point(283, 62);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 13);
@@ -142,7 +142,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(362, 87);
+            this.label21.Location = new System.Drawing.Point(283, 92);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(22, 13);
@@ -152,7 +152,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(362, 27);
+            this.label14.Location = new System.Drawing.Point(283, 31);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(22, 13);
@@ -164,7 +164,7 @@
             this.btnModificarProd.Image = ((System.Drawing.Image)(resources.GetObject("btnModificarProd.Image")));
             this.btnModificarProd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnModificarProd.Location = new System.Drawing.Point(605, 50);
-            this.btnModificarProd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnModificarProd.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificarProd.Name = "btnModificarProd";
             this.btnModificarProd.Size = new System.Drawing.Size(83, 28);
             this.btnModificarProd.TabIndex = 25;
@@ -212,7 +212,7 @@
             // textPrecioVendido
             // 
             this.textPrecioVendido.Enabled = false;
-            this.textPrecioVendido.Location = new System.Drawing.Point(291, 89);
+            this.textPrecioVendido.Location = new System.Drawing.Point(310, 89);
             this.textPrecioVendido.Name = "textPrecioVendido";
             this.textPrecioVendido.ReadOnly = true;
             this.textPrecioVendido.Size = new System.Drawing.Size(67, 20);
@@ -222,7 +222,7 @@
             // textDescuento
             // 
             this.textDescuento.Enabled = false;
-            this.textDescuento.Location = new System.Drawing.Point(291, 57);
+            this.textDescuento.Location = new System.Drawing.Point(310, 56);
             this.textDescuento.MaxLength = 2;
             this.textDescuento.Name = "textDescuento";
             this.textDescuento.Size = new System.Drawing.Size(67, 20);
@@ -233,7 +233,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(212, 89);
+            this.label16.Location = new System.Drawing.Point(210, 92);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(68, 13);
             this.label16.TabIndex = 17;
@@ -242,7 +242,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(212, 59);
+            this.label15.Location = new System.Drawing.Point(207, 62);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(59, 13);
             this.label15.TabIndex = 16;
@@ -285,7 +285,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(212, 29);
+            this.label5.Location = new System.Drawing.Point(210, 33);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 12;
@@ -304,7 +304,7 @@
             // 
             // textBoxCU
             // 
-            this.textBoxCU.Location = new System.Drawing.Point(291, 31);
+            this.textBoxCU.Location = new System.Drawing.Point(310, 30);
             this.textBoxCU.Name = "textBoxCU";
             this.textBoxCU.ReadOnly = true;
             this.textBoxCU.Size = new System.Drawing.Size(67, 20);
@@ -324,9 +324,10 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Nombre (*)";
+            this.label4.Text = "Nombre";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // btnListaProd
             // 
@@ -352,7 +353,7 @@
             this.Column2,
             this.Column4});
             this.dgvDetalleVenta.Location = new System.Drawing.Point(33, 339);
-            this.dgvDetalleVenta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvDetalleVenta.Margin = new System.Windows.Forms.Padding(2);
             this.dgvDetalleVenta.Name = "dgvDetalleVenta";
             this.dgvDetalleVenta.ReadOnly = true;
             this.dgvDetalleVenta.RowTemplate.Height = 24;
@@ -360,45 +361,9 @@
             this.dgvDetalleVenta.TabIndex = 17;
             this.dgvDetalleVenta.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleVenta_CellClick);
             // 
-            // NombreProd
-            // 
-            this.NombreProd.DataPropertyName = "NombrePS";
-            this.NombreProd.HeaderText = "Producto/Servicio";
-            this.NombreProd.Name = "NombreProd";
-            this.NombreProd.ReadOnly = true;
-            this.NombreProd.Width = 200;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "Precio";
-            this.Column3.HeaderText = "Precio Unitario";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "PrecioVendido";
-            this.Column1.HeaderText = "Precio Venta";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "Cantidad";
-            this.Column2.HeaderText = "Cantidad";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "Subtotal";
-            this.Column4.HeaderText = "Subtotal";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
             // textIGV
             // 
-            this.textIGV.Location = new System.Drawing.Point(448, 537);
+            this.textIGV.Location = new System.Drawing.Point(469, 537);
             this.textIGV.Name = "textIGV";
             this.textIGV.ReadOnly = true;
             this.textIGV.Size = new System.Drawing.Size(77, 20);
@@ -406,7 +371,7 @@
             // 
             // textSubtotal
             // 
-            this.textSubtotal.Location = new System.Drawing.Point(448, 518);
+            this.textSubtotal.Location = new System.Drawing.Point(469, 517);
             this.textSubtotal.Name = "textSubtotal";
             this.textSubtotal.ReadOnly = true;
             this.textSubtotal.Size = new System.Drawing.Size(77, 20);
@@ -414,7 +379,7 @@
             // 
             // textTotal
             // 
-            this.textTotal.Location = new System.Drawing.Point(448, 552);
+            this.textTotal.Location = new System.Drawing.Point(469, 553);
             this.textTotal.Name = "textTotal";
             this.textTotal.ReadOnly = true;
             this.textTotal.Size = new System.Drawing.Size(77, 20);
@@ -477,7 +442,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(362, 63);
+            this.label3.Location = new System.Drawing.Point(290, 61);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 13);
@@ -497,7 +462,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(362, 29);
+            this.label22.Location = new System.Drawing.Point(283, 27);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(22, 13);
@@ -509,7 +474,7 @@
             this.btnModificarServ.Image = ((System.Drawing.Image)(resources.GetObject("btnModificarServ.Image")));
             this.btnModificarServ.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnModificarServ.Location = new System.Drawing.Point(608, 46);
-            this.btnModificarServ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnModificarServ.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificarServ.Name = "btnModificarServ";
             this.btnModificarServ.Size = new System.Drawing.Size(82, 31);
             this.btnModificarServ.TabIndex = 26;
@@ -529,7 +494,7 @@
             // textDescServ
             // 
             this.textDescServ.Enabled = false;
-            this.textDescServ.Location = new System.Drawing.Point(291, 58);
+            this.textDescServ.Location = new System.Drawing.Point(310, 57);
             this.textDescServ.MaxLength = 2;
             this.textDescServ.Name = "textDescServ";
             this.textDescServ.Size = new System.Drawing.Size(67, 20);
@@ -571,9 +536,9 @@
             // 
             this.btnAgregarServ.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarServ.Image")));
             this.btnAgregarServ.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarServ.Location = new System.Drawing.Point(608, 12);
+            this.btnAgregarServ.Location = new System.Drawing.Point(608, 10);
             this.btnAgregarServ.Name = "btnAgregarServ";
-            this.btnAgregarServ.Size = new System.Drawing.Size(82, 28);
+            this.btnAgregarServ.Size = new System.Drawing.Size(82, 30);
             this.btnAgregarServ.TabIndex = 14;
             this.btnAgregarServ.Text = "Agregar";
             this.btnAgregarServ.UseVisualStyleBackColor = true;
@@ -609,7 +574,7 @@
             // 
             // textCUserv
             // 
-            this.textCUserv.Location = new System.Drawing.Point(291, 25);
+            this.textCUserv.Location = new System.Drawing.Point(310, 25);
             this.textCUserv.Name = "textCUserv";
             this.textCUserv.ReadOnly = true;
             this.textCUserv.Size = new System.Drawing.Size(67, 20);
@@ -628,9 +593,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(6, 74);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 13);
+            this.label13.Size = new System.Drawing.Size(44, 13);
             this.label13.TabIndex = 2;
-            this.label13.Text = "Nombre (*)";
+            this.label13.Text = "Nombre";
             // 
             // btnListaServ
             // 
@@ -714,7 +679,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(537, 556);
+            this.label24.Location = new System.Drawing.Point(442, 556);
             this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(22, 13);
@@ -724,7 +689,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(537, 520);
+            this.label25.Location = new System.Drawing.Point(442, 520);
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(22, 13);
@@ -734,7 +699,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(537, 539);
+            this.label26.Location = new System.Drawing.Point(442, 537);
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(22, 13);
@@ -746,13 +711,49 @@
             this.btnSalir.Image = global::Inicio.Properties.Resources.salir;
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSalir.Location = new System.Drawing.Point(656, 568);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(82, 32);
             this.btnSalir.TabIndex = 33;
             this.btnSalir.Text = "     Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // NombreProd
+            // 
+            this.NombreProd.DataPropertyName = "NombrePS";
+            this.NombreProd.HeaderText = "Producto/Servicio";
+            this.NombreProd.Name = "NombreProd";
+            this.NombreProd.ReadOnly = true;
+            this.NombreProd.Width = 200;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "Precio";
+            this.Column3.HeaderText = "Precio Unitario";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "PrecioVendido";
+            this.Column1.HeaderText = "Precio Venta";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Cantidad";
+            this.Column2.HeaderText = "Cantidad";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Subtotal";
+            this.Column4.HeaderText = "Subtotal";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // formVentaInmediata
             // 
@@ -776,7 +777,8 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgvDetalleVenta);
             this.Controls.Add(this.groupProducto);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "formVentaInmediata";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar venta rápida ";
@@ -838,11 +840,6 @@
         private System.Windows.Forms.Button btnModificarProd;
         private System.Windows.Forms.Button btnModificarServ;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolStripButton TooStripNuevo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -858,5 +855,10 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

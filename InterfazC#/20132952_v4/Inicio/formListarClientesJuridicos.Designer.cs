@@ -52,12 +52,12 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dgvClientesJuridicos.Location = new System.Drawing.Point(37, 186);
-            this.dgvClientesJuridicos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvClientesJuridicos.Location = new System.Drawing.Point(29, 151);
+            this.dgvClientesJuridicos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvClientesJuridicos.Name = "dgvClientesJuridicos";
             this.dgvClientesJuridicos.ReadOnly = true;
             this.dgvClientesJuridicos.RowTemplate.Height = 24;
-            this.dgvClientesJuridicos.Size = new System.Drawing.Size(424, 150);
+            this.dgvClientesJuridicos.Size = new System.Drawing.Size(451, 122);
             this.dgvClientesJuridicos.TabIndex = 0;
             this.dgvClientesJuridicos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientesJuridicos_CellClick);
             // 
@@ -86,48 +86,45 @@
             // 
             // textRUC
             // 
-            this.textRUC.Location = new System.Drawing.Point(148, 38);
-            this.textRUC.Margin = new System.Windows.Forms.Padding(4);
+            this.textRUC.Location = new System.Drawing.Point(111, 31);
             this.textRUC.MaxLength = 11;
             this.textRUC.Name = "textRUC";
-            this.textRUC.Size = new System.Drawing.Size(160, 22);
+            this.textRUC.Size = new System.Drawing.Size(121, 20);
             this.textRUC.TabIndex = 3;
             // 
             // textRS
             // 
-            this.textRS.Location = new System.Drawing.Point(148, 72);
-            this.textRS.Margin = new System.Windows.Forms.Padding(4);
+            this.textRS.Location = new System.Drawing.Point(111, 58);
             this.textRS.MaxLength = 8;
             this.textRS.Name = "textRS";
-            this.textRS.Size = new System.Drawing.Size(160, 22);
+            this.textRS.Size = new System.Drawing.Size(121, 20);
             this.textRS.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 41);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(26, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 17);
+            this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "RUC";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 72);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(26, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 17);
+            this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Razón Social";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Inicio.Properties.Resources.cliente2;
-            this.pictureBox1.Location = new System.Drawing.Point(343, 29);
+            this.pictureBox1.Location = new System.Drawing.Point(267, 31);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(118, 108);
+            this.pictureBox1.Size = new System.Drawing.Size(120, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -136,10 +133,9 @@
             // 
             this.btnBuscar.Image = global::Inicio.Properties.Resources.buscar;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(213, 124);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBuscar.Location = new System.Drawing.Point(160, 101);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(95, 37);
+            this.btnBuscar.Size = new System.Drawing.Size(71, 30);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -149,10 +145,10 @@
             // 
             this.btnSeleccionar.Image = global::Inicio.Properties.Resources.seleccionar;
             this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(343, 357);
-            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSeleccionar.Location = new System.Drawing.Point(392, 301);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(118, 41);
+            this.btnSeleccionar.Size = new System.Drawing.Size(88, 33);
             this.btnSeleccionar.TabIndex = 1;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -161,9 +157,9 @@
             // 
             // formListarClientesJuridicos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 422);
+            this.ClientSize = new System.Drawing.Size(507, 372);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -172,7 +168,8 @@
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvClientesJuridicos);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
             this.Name = "formListarClientesJuridicos";
             this.Text = "Buscar empresa";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientesJuridicos)).EndInit();

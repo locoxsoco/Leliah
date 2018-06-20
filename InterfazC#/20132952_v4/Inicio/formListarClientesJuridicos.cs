@@ -49,6 +49,7 @@ namespace Inicio
         {
             dgvClientesJuridicos.DataSource = logicaNegocio.buscarCliente(2, null,null, null, textRUC.Text, textRS.Text, null);
             if (dgvClientesJuridicos.Rows.Count == 0) btnSeleccionar.Enabled = false;
+            else btnSeleccionar.Enabled = true;
         }
 
         private void dgvClientesJuridicos_CellClick(object sender, DataGridViewCellEventArgs e)

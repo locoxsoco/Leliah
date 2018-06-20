@@ -59,6 +59,7 @@ namespace Inicio
             dgvProductos.DataSource = logicaNegocio.listarProductosStock(cons, textNombre.Text,textMarca.Text,textCategoria.Text);
 
             if (dgvProductos.Rows.Count == 0) btnSeleccionar.Enabled = false;
+            else btnSeleccionar.Enabled = true;
 
         }
 

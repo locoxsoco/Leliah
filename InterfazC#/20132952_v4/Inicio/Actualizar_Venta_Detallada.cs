@@ -38,6 +38,16 @@ namespace Inicio
             }
         }
 
+        public void limpiarCampos()
+        {
+            textCliente.Text = "";
+            textSaldo.Text = "";
+            textAdelanto.Text = "";
+            textMonto.Text = "";
+            textTotal.Text = "";
+            textEstado.Text = "";
+            textNroComprobante.Text = "";
+        }
         private void btnActualizarVD_Click(object sender, EventArgs e)
         {
             double saldo;
@@ -52,15 +62,16 @@ namespace Inicio
                 MessageBox.Show(this, "ingrese un numero", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            
-            
+
+            if (textEstado.Text == "CANCELADO") btnActualizarVD.Enabled = false;
+            else btnActualizarVD.Enabled = true;
 
             if (monto == saldo)
             {
                 MessageBox.Show(this, "Venta cancelada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //procedimiento actualizar
                 logicaNegocio.actualizarVentaAnticipada(idVenta);
-                textEstado.Text = "CANCELADO";
+                textEstado.Text = "CANCELADA";
                 textMonto.Enabled = false;
             }
             else {
@@ -68,7 +79,7 @@ namespace Inicio
                 return;
             }
 
-            
+            limpiarCampos();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -95,9 +106,9 @@ namespace Inicio
             {
                 double saldo;
                 btnActualizarVD.Enabled = true;
-                if (lista[0].Cliente.NumDocumento == "")
+                if (lista[0].Cliente.NumDocumento == null)
                     textCliente.Text = lista[0].Cliente.Ruc;
-                else if (lista[0].Cliente.Ruc == "")
+                else if (lista[0].Cliente.Ruc == null)
                     textCliente.Text = lista[0].Cliente.NumDocumento;
 
                 idVenta = lista[0].idVenta;
@@ -105,16 +116,20 @@ namespace Inicio
                 textTotal.Text = lista[0].Monto.ToString();
                 textAdelanto.Text = lista[0].Adelanto.ToString();
 
-                saldo= lista[0].SaldoPendiente;
+                saldo = lista[0].SaldoPendiente;
 
-                if (saldo > 0) textEstado.Text = "PENDIENTE";
+                if (saldo > 0)
+                {
+                    textMonto.Enabled = true;
+                    textEstado.Text = "PENDIENTE";
+                } 
                 else
                 {
                     textEstado.Text = "CANCELADO";
                     textMonto.Enabled = false;
                 } 
 
-                textMonto.Enabled = true;
+                
             }
             else {
                 MessageBox.Show(this, "No existe la venta anticipada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);

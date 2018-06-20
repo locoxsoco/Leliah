@@ -75,8 +75,8 @@ namespace Inicio
                     textCantidad.Enabled = false;
                     textDescuento.Enabled = false;
                     textPrecioVendido.Enabled = false;
-                    textCantServ.Enabled = true;
-                    textDescServ.Enabled = true;
+                    textCantServ.Enabled = false;
+                    textDescServ.Enabled = false;
 
                     btnAgregar.Enabled = false;
                     btnModificar.Enabled = false;
@@ -107,10 +107,13 @@ namespace Inicio
                     textPrecioVendido.Enabled = false; ;
                     dgvDetalleVenta.Enabled = true;
                     btnListaProd.Enabled = true;
-                    btnListaServ.Enabled = true;                   
+                    btnListaServ.Enabled = true;
+
 
                     toolStripCancelar.Enabled = true;
                     dgvDetalleVenta.Rows.Clear();
+                    limpiarCamposServicio();
+                    limpiarCamposProducto();
                     limpiarCampos();
                     panelProductoServicio.Visible = false;
                     acum = 0.0F;
@@ -258,6 +261,10 @@ namespace Inicio
                 textDescuento.Text = "";
                 textPrecioVendido.Text = "";
                 textCantidad.Text = "";
+
+                limpiarCamposServicio();
+                btnModificarServ.Enabled = false;
+                btnEliminarServ.Enabled = false;
             }
 
         }
@@ -432,80 +439,97 @@ namespace Inicio
 
         private void ToolSGuardar_Click(object sender, EventArgs e)
         {
-            if (radioBtnAntcipada.Checked == true)
-            {
-                if (textAdelanto.Text == "")
-                {
-                    MessageBox.Show(this, "Faltan ingresar adelanto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                double adelanto;
-                double total;
-                total = Double.Parse(textTotal.Text);
 
-                bool resultado = Double.TryParse(textAdelanto.Text, out adelanto);
-                if (resultado == false)
+            if (dgvDetalleVenta.Rows.Count != 0)
+            {
+                if (radioBtnAntcipada.Checked == true)
                 {
-                    MessageBox.Show(this, "Ingrese un numero en Adelanto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else {
-                    if (adelanto >= total) {
-                        MessageBox.Show(this, "Ingrese un menor al total", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (textAdelanto.Text == "")
+                    {
+                        MessageBox.Show(this, "Faltan ingresar adelanto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    venta.Adelanto = double.Parse(textAdelanto.Text);
-                    venta.FechaEntrega = dateTimeEntrega.Value;
-                    venta.SaldoPendiente = venta.Monto - venta.Adelanto;
-                    venta.Estado = "PENDIENTE";
+                    double adelanto;
+                    double total;
+                    total = Double.Parse(textTotal.Text);
+
+                    bool resultado = Double.TryParse(textAdelanto.Text, out adelanto);
+                    if (resultado == false)
+                    {
+                        MessageBox.Show(this, "Ingrese un numero en Adelanto", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        if (adelanto >= total)
+                        {
+                            MessageBox.Show(this, "Ingrese un menor al total", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        venta.Adelanto = double.Parse(textAdelanto.Text);
+                        venta.FechaEntrega = dateTimeEntrega.Value;
+                        venta.SaldoPendiente = venta.Monto - venta.Adelanto;
+                        venta.Estado = "PENDIENTE";
+                    }
+
                 }
-                
+                else
+                {
+                    venta.Adelanto = -1;
+                    venta.SaldoPendiente = 0.0F;
+                    venta.Estado = "CANCELADA";
+                }
+
+
+                if (((radioBtnAntcipada.Checked == true) && textAdelanto.Text == "") || textTotal.Text == "")
+                {
+                    MessageBox.Show(this, "Faltan llenar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (MessageBox.Show("¿Esta seguro que desear guadar los datos?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+
+                    if (radioBtnBoleta.Checked == true)
+                        venta.tipoDocumentoPago = TipoRecibo.BOLETA;
+                    else
+                        venta.tipoDocumentoPago = TipoRecibo.FACTURA;
+
+                    if (radioBtnEfectivo.Checked == true)
+                        venta.TipoPago = TipoPago.EFECTIVO;
+                    else
+                        venta.TipoPago = TipoPago.TARJETA;
+
+
+                    logicaNegocio.registrarVenta(venta);
+                    estadoComponentes(estado.Guardar);
+
+                    if (radioBtnInmediata.Checked == true)
+                    {
+                        MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (radioBtnAntcipada.Checked == true)
+                    {
+
+                        MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles con un saldo pendiente de " + Math.Round(venta.SaldoPendiente, 4).ToString(), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+                else
+                {
+                    return;
+                }
+
+                return;
+
             }
             else
             {
-                venta.Adelanto = -1;
-                venta.SaldoPendiente = 0.0F;
-                venta.Estado = "CANCELADO";
-            }
-
-
-            if (((radioBtnAntcipada.Checked==true) && textAdelanto.Text=="" ) || textTotal.Text == ""){
-                MessageBox.Show(this, "Faltan llenar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "No hay productos ni servicios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (MessageBox.Show("¿Esta seguro que desear guadar los datos?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                
-                if (radioBtnBoleta.Checked==true)
-                    venta.tipoDocumentoPago = TipoRecibo.BOLETA;
-                else
-                    venta.tipoDocumentoPago = TipoRecibo.FACTURA;
 
-                if (radioBtnEfectivo.Checked == true)
-                    venta.TipoPago = TipoPago.EFECTIVO;
-                else
-                    venta.TipoPago = TipoPago.TARJETA;
-
-                
-                logicaNegocio.registrarVenta(venta);
-                estadoComponentes(estado.Guardar);
-
-                if (radioBtnInmediata.Checked == true)
-                {
-                    MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else if (radioBtnAntcipada.Checked == true) {
-                    
-                    MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles con un saldo pendiente de " + Math.Round(venta.SaldoPendiente,4).ToString(), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-              
-            }
-            else {
-                return;
-            }
-
-            return;
         }
 
       
@@ -604,6 +628,10 @@ namespace Inicio
                 textDescuento.Text = "";
                 textPrecioVendido.Text = "";
                 textCantidad.Text = "";
+
+                limpiarCamposProducto();
+                btnModificar.Enabled = false;
+                btnEliminar.Enabled = false;
             }
         }
 
@@ -716,10 +744,10 @@ namespace Inicio
                 return;
             }
 
-            if (textDescServ.Text == "") desc = 0;
+            if (textDescuento.Text == "") desc = 0;
             else
             {
-                bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
+                bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
                 if (resultDes == false)
                 {
                     MessageBox.Show(this, "Ingrese un numero entero en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -741,13 +769,15 @@ namespace Inicio
             descDouble = (desc*100)/100;
             detalleVentaProdServ[posicion].Cantidad = cant;
             detalleVentaProdServ[posicion].Descuento = descDouble/100;
-            detalleVentaProdServ.ResetBindings();
 
             //modificar en la lista de productos vendidos
             int idProd = detalleVentaProdServ[posicion].IdPS;
             pvProducto = detalleVentaProdServ[posicion].Precio*(1 - descDouble/100);
+            detalleVentaProdServ[posicion].Subtotal = pvProducto * cant;
             logicaNegocio.modificarPrecioVendidoProducto(idProd,pvProducto, venta.Detalles_venta);
+            detalleVentaProdServ[posicion].PrecioVendido = pvProducto;
             logicaNegocio.modificarCantidadVentaProducto(idProd, cant, venta.Detalles_venta);
+            detalleVentaProdServ.ResetBindings();
 
             limpiarCamposProducto();
             btnModificar.Enabled = false;
@@ -773,10 +803,10 @@ namespace Inicio
                 return;
             }
 
-            if (textDescuento.Text == "") desc = 0;
+            if (textDescServ.Text == "") desc = 0;
             else
             {
-                bool resultDes = Int32.TryParse(textDescuento.Text, out desc);
+                bool resultDes = Int32.TryParse(textDescServ.Text, out desc);
                 if (resultDes == false)
                 {
                     MessageBox.Show(this, "Ingrese un numero entero en descuento", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -798,14 +828,16 @@ namespace Inicio
             descDouble = (desc*100)/ 100;
             detalleVentaProdServ[posicion].Cantidad = cant;
             detalleVentaProdServ[posicion].Descuento = descDouble/100;
-            detalleVentaProdServ.ResetBindings();
+
 
             //modificar en la lista de servicios ofrecidos
             int idServ = detalleVentaProdServ[posicion].IdPS;
             pvServicio = detalleVentaProdServ[posicion].Precio * (1 - descDouble/100);
+            detalleVentaProdServ[posicion].Subtotal = pvServicio * cant;
             logicaNegocio.modificarPrecioVendidoServicio(idServ, pvServicio, venta.Detalles_servicio);
             detalleVentaProdServ[posicion].PrecioVendido = pvServicio;
             logicaNegocio.modificarCantidadVentaServicio(idServ, cant, venta.Detalles_servicio);
+            detalleVentaProdServ.ResetBindings();
 
             limpiarCamposServicio();
             btnModificarServ.Enabled = false;
@@ -821,14 +853,15 @@ namespace Inicio
                 DateTime fecha;
                 fecha = hoy.AddDays(minDias);
 
-                if (dateTimeEntrega.Value.CompareTo(hoy) >= 0)
-                {
-                    MessageBox.Show(this, "Fecha menor a'"+ minDias+" dias", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (dateTimeEntrega.Value.CompareTo(fecha) < 0)
+
+                if (dateTimeEntrega.Value.CompareTo(hoy) < 0)
                 {
                     MessageBox.Show(this, "Fecha anterior o igual a la de hoy dia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (dateTimeEntrega.Value.CompareTo(fecha) < 0)
+                {
+                    MessageBox.Show(this, "Fecha menor a" + minDias + " dias", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }

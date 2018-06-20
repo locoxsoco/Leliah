@@ -59,17 +59,18 @@
             this.panelMenu.Controls.Add(this.BtnVentaInmediata);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelMenu.Margin = new System.Windows.Forms.Padding(2);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(208, 514);
             this.panelMenu.TabIndex = 6;
+            this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
             // 
             // subMenuVentaDetallada
             // 
             this.subMenuVentaDetallada.Controls.Add(this.btnRegistrarVD);
             this.subMenuVentaDetallada.Controls.Add(this.btnActualizarVD);
             this.subMenuVentaDetallada.Location = new System.Drawing.Point(58, 386);
-            this.subMenuVentaDetallada.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.subMenuVentaDetallada.Margin = new System.Windows.Forms.Padding(2);
             this.subMenuVentaDetallada.Name = "subMenuVentaDetallada";
             this.subMenuVentaDetallada.Size = new System.Drawing.Size(150, 81);
             this.subMenuVentaDetallada.TabIndex = 6;
@@ -83,7 +84,7 @@
             this.btnRegistrarVD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegistrarVD.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRegistrarVD.Location = new System.Drawing.Point(0, 0);
-            this.btnRegistrarVD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRegistrarVD.Margin = new System.Windows.Forms.Padding(2);
             this.btnRegistrarVD.Name = "btnRegistrarVD";
             this.btnRegistrarVD.Size = new System.Drawing.Size(150, 38);
             this.btnRegistrarVD.TabIndex = 5;
@@ -99,7 +100,7 @@
             this.btnActualizarVD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizarVD.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnActualizarVD.Location = new System.Drawing.Point(0, 43);
-            this.btnActualizarVD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnActualizarVD.Margin = new System.Windows.Forms.Padding(2);
             this.btnActualizarVD.Name = "btnActualizarVD";
             this.btnActualizarVD.Size = new System.Drawing.Size(150, 38);
             this.btnActualizarVD.TabIndex = 4;
@@ -112,7 +113,7 @@
             this.pictureBox2.Image = global::Inicio.Properties.Resources.libreria;
             this.pictureBox2.InitialImage = global::Inicio.Properties.Resources.libreria;
             this.pictureBox2.Location = new System.Drawing.Point(0, 109);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(213, 130);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -127,9 +128,9 @@
             this.btnRegVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnRegVenta.Image")));
             this.btnRegVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegVenta.Location = new System.Drawing.Point(0, 339);
+            this.btnRegVenta.Location = new System.Drawing.Point(0, 323);
             this.btnRegVenta.Name = "btnRegVenta";
-            this.btnRegVenta.Size = new System.Drawing.Size(243, 41);
+            this.btnRegVenta.Size = new System.Drawing.Size(243, 57);
             this.btnRegVenta.TabIndex = 0;
             this.btnRegVenta.Text = "Venta detallada";
             this.btnRegVenta.UseVisualStyleBackColor = true;
@@ -143,10 +144,10 @@
             this.BtnVentaInmediata.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnVentaInmediata.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentaInmediata.Image")));
             this.BtnVentaInmediata.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnVentaInmediata.Location = new System.Drawing.Point(0, 275);
-            this.BtnVentaInmediata.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnVentaInmediata.Location = new System.Drawing.Point(0, 269);
+            this.BtnVentaInmediata.Margin = new System.Windows.Forms.Padding(2);
             this.BtnVentaInmediata.Name = "BtnVentaInmediata";
-            this.BtnVentaInmediata.Size = new System.Drawing.Size(246, 43);
+            this.BtnVentaInmediata.Size = new System.Drawing.Size(246, 49);
             this.BtnVentaInmediata.TabIndex = 3;
             this.BtnVentaInmediata.Text = "Venta rapida";
             this.BtnVentaInmediata.UseVisualStyleBackColor = true;
@@ -157,7 +158,7 @@
             this.panelCabecera.BackColor = System.Drawing.Color.Brown;
             this.panelCabecera.Controls.Add(this.label1);
             this.panelCabecera.Location = new System.Drawing.Point(0, 32);
-            this.panelCabecera.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelCabecera.Margin = new System.Windows.Forms.Padding(2);
             this.panelCabecera.Name = "panelCabecera";
             this.panelCabecera.Size = new System.Drawing.Size(674, 63);
             this.panelCabecera.TabIndex = 7;
@@ -182,7 +183,7 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(208, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(465, 514);
             this.panel1.TabIndex = 8;
@@ -204,7 +205,7 @@
             this.button2.Image = global::Inicio.Properties.Resources.volver;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.Location = new System.Drawing.Point(190, 453);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(83, 50);
             this.button2.TabIndex = 5;
@@ -220,7 +221,7 @@
             this.button1.Image = global::Inicio.Properties.Resources.logout;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(316, 453);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 50);
             this.button1.TabIndex = 4;

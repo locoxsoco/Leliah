@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registrar_Venta));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.radioBtnBoleta = new System.Windows.Forms.RadioButton();
             this.radioBtnFactura = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
@@ -172,7 +172,7 @@
             // 
             // textTotal
             // 
-            this.textTotal.Location = new System.Drawing.Point(452, 612);
+            this.textTotal.Location = new System.Drawing.Point(484, 613);
             this.textTotal.Name = "textTotal";
             this.textTotal.ReadOnly = true;
             this.textTotal.Size = new System.Drawing.Size(77, 20);
@@ -213,7 +213,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(358, 86);
+            this.label30.Location = new System.Drawing.Point(273, 87);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(25, 17);
@@ -223,7 +223,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(358, 24);
+            this.label29.Location = new System.Drawing.Point(273, 27);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(25, 17);
@@ -254,7 +254,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(391, 55);
+            this.label20.Location = new System.Drawing.Point(380, 56);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(128, 17);
             this.label20.TabIndex = 22;
@@ -281,7 +281,7 @@
             // textPrecioVendido
             // 
             this.textPrecioVendido.Enabled = false;
-            this.textPrecioVendido.Location = new System.Drawing.Point(283, 84);
+            this.textPrecioVendido.Location = new System.Drawing.Point(296, 83);
             this.textPrecioVendido.Name = "textPrecioVendido";
             this.textPrecioVendido.Size = new System.Drawing.Size(77, 23);
             this.textPrecioVendido.TabIndex = 19;
@@ -290,7 +290,7 @@
             // textDescuento
             // 
             this.textDescuento.Enabled = false;
-            this.textDescuento.Location = new System.Drawing.Point(283, 50);
+            this.textDescuento.Location = new System.Drawing.Point(297, 51);
             this.textDescuento.MaxLength = 2;
             this.textDescuento.Name = "textDescuento";
             this.textDescuento.Size = new System.Drawing.Size(77, 23);
@@ -301,7 +301,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(194, 86);
+            this.label16.Location = new System.Drawing.Point(185, 87);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(89, 17);
             this.label16.TabIndex = 17;
@@ -310,7 +310,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(194, 58);
+            this.label15.Location = new System.Drawing.Point(184, 57);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(76, 17);
             this.label15.TabIndex = 16;
@@ -353,7 +353,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(186, 23);
+            this.label5.Location = new System.Drawing.Point(180, 27);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 17);
             this.label5.TabIndex = 12;
@@ -372,7 +372,7 @@
             // 
             // textBoxCU
             // 
-            this.textBoxCU.Location = new System.Drawing.Point(283, 21);
+            this.textBoxCU.Location = new System.Drawing.Point(297, 21);
             this.textBoxCU.Name = "textBoxCU";
             this.textBoxCU.ReadOnly = true;
             this.textBoxCU.Size = new System.Drawing.Size(77, 23);
@@ -412,14 +412,14 @@
             // 
             this.dgvDetalleVenta.AllowUserToAddRows = false;
             this.dgvDetalleVenta.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetalleVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalleVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetalleVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetalleVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NombreProd,
@@ -672,7 +672,7 @@
             // 
             // textSubtotal
             // 
-            this.textSubtotal.Location = new System.Drawing.Point(452, 576);
+            this.textSubtotal.Location = new System.Drawing.Point(484, 576);
             this.textSubtotal.Name = "textSubtotal";
             this.textSubtotal.ReadOnly = true;
             this.textSubtotal.Size = new System.Drawing.Size(77, 20);
@@ -683,7 +683,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(415, 598);
+            this.label18.Location = new System.Drawing.Point(417, 595);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 17);
             this.label18.TabIndex = 23;
@@ -693,7 +693,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(394, 580);
+            this.label19.Location = new System.Drawing.Point(394, 575);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(60, 17);
             this.label19.TabIndex = 24;
@@ -701,7 +701,7 @@
             // 
             // textIGV
             // 
-            this.textIGV.Location = new System.Drawing.Point(452, 594);
+            this.textIGV.Location = new System.Drawing.Point(484, 595);
             this.textIGV.Name = "textIGV";
             this.textIGV.ReadOnly = true;
             this.textIGV.Size = new System.Drawing.Size(77, 20);
@@ -778,7 +778,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(360, 76);
+            this.label1.Location = new System.Drawing.Point(278, 73);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 17);
@@ -788,7 +788,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(598, 40);
+            this.label32.Location = new System.Drawing.Point(500, 37);
             this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(25, 17);
@@ -798,7 +798,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(360, 37);
+            this.label31.Location = new System.Drawing.Point(281, 37);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(25, 17);
@@ -821,7 +821,7 @@
             // textPVserv
             // 
             this.textPVserv.Enabled = false;
-            this.textPVserv.Location = new System.Drawing.Point(518, 34);
+            this.textPVserv.Location = new System.Drawing.Point(531, 34);
             this.textPVserv.Name = "textPVserv";
             this.textPVserv.ReadOnly = true;
             this.textPVserv.Size = new System.Drawing.Size(77, 23);
@@ -831,7 +831,7 @@
             // textDescServ
             // 
             this.textDescServ.Enabled = false;
-            this.textDescServ.Location = new System.Drawing.Point(283, 70);
+            this.textDescServ.Location = new System.Drawing.Point(303, 70);
             this.textDescServ.MaxLength = 2;
             this.textDescServ.Name = "textDescServ";
             this.textDescServ.Size = new System.Drawing.Size(77, 23);
@@ -885,7 +885,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(394, 70);
+            this.label23.Location = new System.Drawing.Point(386, 70);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(139, 17);
             this.label23.TabIndex = 13;
@@ -894,7 +894,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(192, 37);
+            this.label24.Location = new System.Drawing.Point(185, 37);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(97, 17);
             this.label24.TabIndex = 12;
@@ -903,7 +903,7 @@
             // textCantServ
             // 
             this.textCantServ.Enabled = false;
-            this.textCantServ.Location = new System.Drawing.Point(518, 67);
+            this.textCantServ.Location = new System.Drawing.Point(531, 64);
             this.textCantServ.MaxLength = 4;
             this.textCantServ.Name = "textCantServ";
             this.textCantServ.Size = new System.Drawing.Size(77, 23);
@@ -913,7 +913,7 @@
             // 
             // textCUserv
             // 
-            this.textCUserv.Location = new System.Drawing.Point(283, 31);
+            this.textCUserv.Location = new System.Drawing.Point(303, 31);
             this.textCUserv.Name = "textCUserv";
             this.textCUserv.ReadOnly = true;
             this.textCUserv.Size = new System.Drawing.Size(77, 23);
@@ -983,7 +983,7 @@
             // 
             this.labelSoles.AutoSize = true;
             this.labelSoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSoles.Location = new System.Drawing.Point(302, 616);
+            this.labelSoles.Location = new System.Drawing.Point(205, 619);
             this.labelSoles.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSoles.Name = "labelSoles";
             this.labelSoles.Size = new System.Drawing.Size(25, 17);
@@ -995,7 +995,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(533, 616);
+            this.label35.Location = new System.Drawing.Point(457, 616);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(25, 17);
@@ -1006,7 +1006,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(533, 598);
+            this.label34.Location = new System.Drawing.Point(457, 595);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(25, 17);
@@ -1017,7 +1017,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(533, 578);
+            this.label33.Location = new System.Drawing.Point(459, 575);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(25, 17);
@@ -1048,7 +1048,7 @@
             // textAdelanto
             // 
             this.textAdelanto.Enabled = false;
-            this.textAdelanto.Location = new System.Drawing.Point(218, 614);
+            this.textAdelanto.Location = new System.Drawing.Point(235, 618);
             this.textAdelanto.MaxLength = 10;
             this.textAdelanto.Name = "textAdelanto";
             this.textAdelanto.Size = new System.Drawing.Size(77, 20);
@@ -1157,7 +1157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(772, 705);
             this.Controls.Add(this.panelProductoServicio);
             this.Controls.Add(this.btnSiguiente);
@@ -1170,6 +1170,7 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Registrar_Venta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar venta detallada";
@@ -1269,11 +1270,6 @@
         private System.Windows.Forms.TextBox textAdelanto;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnSalirPC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
@@ -1288,5 +1284,10 @@
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

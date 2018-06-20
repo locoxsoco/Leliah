@@ -71,20 +71,7 @@ public class Venta{
     public string Estado { get => estado; set => estado = value; }
 
 
-    //setter especiales
-    //   public void setFechaEntregaString(string fecha){
-    //	this.fechaEntrega = DateTime.ParseExact(fecha,"dd/MM/yy",CultureInfo.InvariantCulture);
-    //}
-    //public void setFechaVentaString(string fecha){
-    //	this.fechaVenta = DateTime.ParseExact(fecha,"dd/MM/yyyy",CultureInfo.InvariantCulture);
-    //}
-    ////getter especiales
-    //public string getFechaEntregaString(){
-    //	return this.fechaEntrega.ToString("dd/MM/yy");
-    //}
-    //public string getFechaVentaString(){
-    //	return this.fechaVenta.ToString("dd/MM/yyyy");
-    //}
+
 
 
 

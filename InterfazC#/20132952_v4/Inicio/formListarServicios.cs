@@ -45,6 +45,7 @@ namespace Inicio
             dgvServicios.DataSource = logicaNegocio.buscarServicios(textNombre.Text);
 
             if (dgvServicios.Rows.Count == 0) btnSeleccionar.Enabled = false;
+            else btnSeleccionar.Enabled = true;
         }
     }
 }

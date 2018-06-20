@@ -47,8 +47,8 @@ namespace Inicio
         private void BtnVentaInmediata_Click(object sender, EventArgs e)
         {
             //this.Hide();
-            //this.Visible = false;
-            this.Dispose();
+            this.Visible = false;
+            //this.Dispose();
             formVentaInmediata NuevaVentana = new formVentaInmediata();           
             NuevaVentana.Visible= true;
         }
@@ -81,8 +81,8 @@ namespace Inicio
         {
             subMenuVentaDetallada.Visible = false;
 
-            //this.Visible = false;
-            this.Dispose();
+            this.Visible = false;
+            //this.Dispose();
             Registrar_Venta NuevaVentana = new Registrar_Venta();
             NuevaVentana.Visible = true;
         }
@@ -91,11 +91,16 @@ namespace Inicio
         {
             subMenuVentaDetallada.Visible = false;
 
-            //this.Visible = false;
-            this.Dispose();
+            this.Visible = false;
+            //this.Dispose();
             Actualizar_Venta_Detallada NuevaVentana = new Actualizar_Venta_Detallada();
             NuevaVentana.Visible = true;
           
+        }
+
+        private void panelMenu_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

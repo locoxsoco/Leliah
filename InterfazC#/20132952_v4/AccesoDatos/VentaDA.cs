@@ -30,6 +30,9 @@ namespace AccesoDatos
             comando.Parameters.Add("_montoTotal", MySqlDbType.Decimal).Value =
                 v.Monto;
 
+            comando.Parameters.Add("_estado", MySqlDbType.String).Value = 
+               v.Estado;
+
             if (v.Adelanto < 0)
             {// es venta directa
                 comando.Parameters.Add("_adelanto", MySqlDbType.Decimal).Value = null;

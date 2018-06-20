@@ -56,6 +56,7 @@ namespace Inicio
 
             dgvClientesNaturales.DataSource = logicaNegocio.buscarCliente(1, textNombre.Text, textApellMat.Text, textApellPat.Text, null, null, textNumDoc.Text);
             if (dgvClientesNaturales.Rows.Count == 0) btnSeleccionar.Enabled = false;
+            else btnSeleccionar.Enabled = true;
         }
 
 

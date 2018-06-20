@@ -131,12 +131,15 @@ namespace Inicio
                     textBoxNombre.Enabled = false;
                     textFV.Enabled = false;
                     textPrecioVendido.Enabled = false;
+                    textDescServ.Enabled = false;
+                    textCantServ.Enabled = false;
                     dgvDetalleVenta.Enabled = false;
                     btnListaProd.Enabled = false;
                     btnAgregar.Enabled = false;
                     btnEliminar.Enabled = false;
                     limpiarCamposProducto();
                     limpiarCamposServicio();
+                    //dgvDetalleVenta.Rows.Clear();
                     break;
             }
         }
@@ -222,6 +225,10 @@ namespace Inicio
                 textDescuento.Text = "";
                 textPrecioVendido.Text = "";
                 textCantidad.Text = "";
+
+                limpiarCamposServicio();
+                btnModificarServ.Enabled = false;
+                btnEliminarServ.Enabled = false;
             }
 
         }
@@ -371,6 +378,10 @@ namespace Inicio
                 textDescServ.Text = "";
                 textPVserv.Text = "";
                 textCantServ.Text = "";
+
+                limpiarCamposProducto();
+                btnModificarProd.Enabled = false;
+                btnEliminar.Enabled = false;
             }
             
         }
@@ -522,6 +533,7 @@ namespace Inicio
             //modificar en la lista de productos vendidos
             int idProd = detalleVentaProdServ[posicion].IdPS;
             pvProducto = detalleVentaProdServ[posicion].Precio * (1 - descDouble/100);
+            detalleVentaProdServ[posicion].Subtotal = pvProducto * cant;
             logicaNegocio.modificarPrecioVendidoProducto(idProd, pvProducto, venta.Detalles_venta);
             detalleVentaProdServ[posicion].PrecioVendido = pvProducto;
             logicaNegocio.modificarCantidadVentaProducto(idProd, cant, venta.Detalles_venta);
@@ -672,6 +684,7 @@ namespace Inicio
             //modificar en la lista de servicios ofrecidos
             int idServ = detalleVentaProdServ[posicion].IdPS;
             pvServicio = detalleVentaProdServ[posicion].Precio * (1 - descDouble/100);
+            detalleVentaProdServ[posicion].Subtotal = pvServicio * cant;
             logicaNegocio.modificarPrecioVendidoServicio(idServ, pvServicio, venta.Detalles_servicio);
             detalleVentaProdServ[posicion].PrecioVendido = pvServicio;
             logicaNegocio.modificarCantidadVentaServicio(idServ, cant, venta.Detalles_servicio);
@@ -685,36 +698,45 @@ namespace Inicio
 
         private void ToolStripGuardar_Click(object sender, EventArgs e)
         {
-
-            if (textTotal.Text == "")
+            if (dgvDetalleVenta.Rows.Count != 0)
             {
-                MessageBox.Show(this, "Faltan llenar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-            }
-            else
-            {
-                if (MessageBox.Show("¿Esta seguro que desear guadar los datos?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (textTotal.Text == "")
                 {
-
-                    venta.Adelanto = -1;
-                    venta.SaldoPendiente = 0.0F;
-                    venta.TipoPago = TipoPago.EFECTIVO;
-                    venta.tipoDocumentoPago = TipoRecibo.BOLETA;
-                    venta.Cliente = new Cliente();
-                    venta.Cliente.IdCliente = -1;
-
-                    logicaNegocio.registrarVenta(venta);
-                    estadoComponentes(estado.Guardar);
-                    MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Faltan llenar campos obligatorios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
                 else
                 {
-                    return;
+                    if (MessageBox.Show("¿Esta seguro que desear guadar los datos?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+
+                        venta.Adelanto = -1;
+                        venta.SaldoPendiente = 0.0F;
+                        venta.TipoPago = TipoPago.EFECTIVO;
+                        venta.tipoDocumentoPago = TipoRecibo.BOLETA;
+                        venta.Cliente = new Cliente();
+                        venta.Cliente.IdCliente = -1;
+                        venta.Estado = "CANCELADA";
+
+                        logicaNegocio.registrarVenta(venta);
+                        estadoComponentes(estado.Guardar);
+                        MessageBox.Show("Se ha registrado correctamente la venta: \n Tiene una venta de " + textTotal.Text + " soles", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
+
+                return;
+
+            }
+            else {
+                MessageBox.Show(this, "No hay productos ni servicios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            return;
 
         }
 
@@ -800,6 +822,11 @@ namespace Inicio
         private void textCantServ_KeyPress(object sender, KeyPressEventArgs e)
         {
             soloNumeros(e);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
