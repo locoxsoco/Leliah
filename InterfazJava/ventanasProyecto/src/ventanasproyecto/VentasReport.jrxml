@@ -78,11 +78,11 @@
 				<text><![CDATA[Documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="213" y="22" width="132" height="20" uuid="1d690319-91f7-4a89-94ef-aeebb54e4747"/>
+				<reportElement x="245" y="22" width="105" height="20" uuid="1d690319-91f7-4a89-94ef-aeebb54e4747"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[N° de documento]]></text>
+				<text><![CDATA[N° de Venta]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="443" y="22" width="63" height="20" uuid="900d4f42-ef76-40d3-a98c-edb2bca93cb0"/>

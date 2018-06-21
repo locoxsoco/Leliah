@@ -6,8 +6,10 @@
 package ventanasproyecto;
 
 import java.io.InputStream;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -38,7 +40,7 @@ public class VentanaReportes extends javax.swing.JFrame {
     int selector = 0;
     Date fechaini;
     Date fechafin;
-    int mes;
+    int mes,idVenta;
     double alquiler, servicios, otros;
     VentanaPrincipal vAnterior;
     ventanaLogin ventanaHome;
@@ -56,6 +58,10 @@ public class VentanaReportes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog3 = new javax.swing.JDialog();
+        jLabel16 = new javax.swing.JLabel();
+        txtNumVenta = new javax.swing.JTextField();
+        AccetpJD3Butt = new javax.swing.JButton();
         jDialog2 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         MesChooser = new com.toedter.calendar.JMonthChooser();
@@ -109,6 +115,41 @@ public class VentanaReportes extends javax.swing.JFrame {
         ButtRepBalance = new javax.swing.JButton();
         ButtRepCerrar = new javax.swing.JButton();
         logout = new javax.swing.JButton();
+        ButtDetalleVenta = new javax.swing.JButton();
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("Ingrese un número de Venta:");
+
+        AccetpJD3Butt.setText("Aceptar");
+        AccetpJD3Butt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AccetpJD3ButtMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
+        jDialog3.getContentPane().setLayout(jDialog3Layout);
+        jDialog3Layout.setHorizontalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AccetpJD3Butt)
+                    .addComponent(jLabel16)
+                    .addComponent(txtNumVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+        jDialog3Layout.setVerticalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNumVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AccetpJD3Butt)
+                .addGap(33, 33, 33))
+        );
 
         jDialog2.setMinimumSize(new java.awt.Dimension(300, 300));
         jDialog2.setResizable(false);
@@ -376,61 +417,61 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         jLabel3.setText("Ventas totales");
         BalanceFrameReport.getContentPane().add(jLabel3);
-        jLabel3.setBounds(19, 62, 140, 16);
+        jLabel3.setBounds(19, 62, 140, 14);
 
         jLabel4.setText("Servicios");
         BalanceFrameReport.getContentPane().add(jLabel4);
-        jLabel4.setBounds(19, 93, 150, 16);
+        jLabel4.setBounds(19, 93, 150, 14);
 
         jLabel5.setText("Alquiler");
         BalanceFrameReport.getContentPane().add(jLabel5);
-        jLabel5.setBounds(19, 124, 160, 16);
+        jLabel5.setBounds(19, 124, 160, 14);
 
         jLabel6.setText("Pago empleados");
         BalanceFrameReport.getContentPane().add(jLabel6);
-        jLabel6.setBounds(19, 153, 170, 16);
+        jLabel6.setBounds(19, 153, 170, 14);
 
         jLabel7.setText("Compras");
         BalanceFrameReport.getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 178, 150, 16);
+        jLabel7.setBounds(19, 178, 150, 14);
 
         jLabel8.setText("Otros");
         BalanceFrameReport.getContentPane().add(jLabel8);
-        jLabel8.setBounds(19, 209, 150, 16);
+        jLabel8.setBounds(19, 209, 150, 14);
 
         jTextField1.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField1);
-        jTextField1.setBounds(200, 60, 88, 22);
+        jTextField1.setBounds(200, 60, 88, 20);
 
         jTextField2.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField2);
-        jTextField2.setBounds(200, 90, 88, 22);
+        jTextField2.setBounds(200, 90, 88, 20);
 
         jTextField3.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField3);
-        jTextField3.setBounds(200, 120, 88, 22);
+        jTextField3.setBounds(200, 120, 88, 20);
 
         jTextField4.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField4);
-        jTextField4.setBounds(200, 180, 88, 22);
+        jTextField4.setBounds(200, 180, 88, 20);
 
         jTextField5.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField5);
-        jTextField5.setBounds(200, 150, 88, 22);
+        jTextField5.setBounds(200, 150, 88, 20);
 
         jTextField6.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField6);
-        jTextField6.setBounds(200, 250, 88, 22);
+        jTextField6.setBounds(200, 250, 88, 20);
         BalanceFrameReport.getContentPane().add(jSeparator1);
         jSeparator1.setBounds(19, 237, 280, 10);
 
         jLabel9.setText("Utilidad");
         BalanceFrameReport.getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 250, 150, 16);
+        jLabel9.setBounds(20, 250, 150, 14);
 
         jTextField7.setEnabled(false);
         BalanceFrameReport.getContentPane().add(jTextField7);
-        jTextField7.setBounds(200, 210, 88, 22);
+        jTextField7.setBounds(200, 210, 88, 20);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Reporte de Ingresos y Egresos");
@@ -514,7 +555,7 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ButtRepCerrar);
-        ButtRepCerrar.setBounds(200, 280, 90, 29);
+        ButtRepCerrar.setBounds(200, 360, 90, 29);
 
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
         logout.setText("Cerrar Sesión");
@@ -525,7 +566,21 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         });
         getContentPane().add(logout);
-        logout.setBounds(310, 280, 130, 29);
+        logout.setBounds(310, 360, 130, 29);
+
+        ButtDetalleVenta.setBackground(new java.awt.Color(255, 255, 204));
+        ButtDetalleVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        ButtDetalleVenta.setText("Detalle Venta");
+        ButtDetalleVenta.setMaximumSize(new java.awt.Dimension(89, 29));
+        ButtDetalleVenta.setMinimumSize(new java.awt.Dimension(89, 29));
+        ButtDetalleVenta.setPreferredSize(new java.awt.Dimension(89, 29));
+        ButtDetalleVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtDetalleVentaMouseClicked(evt);
+            }
+        });
+        getContentPane().add(ButtDetalleVenta);
+        ButtDetalleVenta.setBounds(25, 270, 200, 70);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -680,10 +735,37 @@ DriverManager.getConnection
                          new JasperViewer(impresion4,false);
                         viewer4.setVisible(true);
                 break;
+            case 5:
+                
+                String sql = "{call MOSTRAR_DATOS_VENTA(?)}";
+                CallableStatement stmt = con.prepareCall(sql);                
+                stmt.setInt(1, idVenta);
+                ResultSet rs = stmt.executeQuery();
+                HashMap hm5 = new HashMap();
+                while(rs.next()){
+                    hm5.put("documento", rs.getString("documento"));
+                    hm5.put("numDocumento", rs.getInt("numDocumento"));
+                    hm5.put("monto", rs.getDouble("monto"));
+                    hm5.put("fecha", rs.getString("fecha"));
+                    
+                }
+                InputStream is5 = VentanaReportes.class.getResourceAsStream("/ventanasproyecto/DetalleVentaReport.jasper");
+                
+                hm5.put("idVenta",idVenta);
+                
+                JasperPrint impresion5 
+                 =JasperFillManager.fillReport(
+                    is5, hm5,con);
+
+                JasperViewer viewer5 = 
+                         new JasperViewer(impresion5,false);
+                        viewer5.setVisible(true);
+                break;
         }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage().toString());
         }
+        con.close();
     }
     
     private void ButtRepCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtRepCerrarMouseClicked
@@ -727,6 +809,7 @@ DriverManager.getConnection
         vAnterior.setVisible(true);
         jDialog1.dispose();
         jDialog2.dispose();
+        jDialog3.dispose();
         this.dispose();
     }//GEN-LAST:event_ButtRepCerrarActionPerformed
 
@@ -735,6 +818,7 @@ DriverManager.getConnection
         ventanaHome.regresar();
         jDialog1.dispose();
         jDialog2.dispose();
+        jDialog3.dispose();
         this.dispose();
     }//GEN-LAST:event_logoutActionPerformed
 
@@ -815,6 +899,31 @@ DriverManager.getConnection
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtProdMasVendActionPerformed
 
+    private void ButtDetalleVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtDetalleVentaMouseClicked
+        selector=5;
+        jDialog3.setVisible(true);       
+    }//GEN-LAST:event_ButtDetalleVentaMouseClicked
+
+    private void AccetpJD3ButtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccetpJD3ButtMouseClicked
+        if(isNumeric(txtNumVenta.getText())){
+            idVenta = Integer.parseInt(txtNumVenta.getText());
+            jDialog3.dispose();
+            try {
+                abrirReporte(selector);
+            } catch (JRException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(VentanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this,"Ingrese un dato numérico");
+        }
+    }//GEN-LAST:event_AccetpJD3ButtMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -853,8 +962,10 @@ DriverManager.getConnection
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AcceptDialog;
+    private javax.swing.JButton AccetpJD3Butt;
     private javax.swing.JButton AceptarJD2Butt;
     private javax.swing.JFrame BalanceFrameReport;
+    private javax.swing.JButton ButtDetalleVenta;
     private javax.swing.JButton ButtProdMasVend;
     private javax.swing.JButton ButtRepBalance;
     private javax.swing.JButton ButtRepCerrar;
@@ -872,6 +983,7 @@ DriverManager.getConnection
     private javax.swing.JFrame VentasFrameReport;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
+    private javax.swing.JDialog jDialog3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -879,6 +991,7 @@ DriverManager.getConnection
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -902,6 +1015,7 @@ DriverManager.getConnection
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JButton logout;
+    private javax.swing.JTextField txtNumVenta;
     private javax.swing.JTextField txtOtrosPagos;
     private javax.swing.JTextField txtPagoAlquiler;
     private javax.swing.JTextField txtPagoServicios;
