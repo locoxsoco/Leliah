@@ -117,8 +117,15 @@ public class VentanaReportes extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
         ButtDetalleVenta = new javax.swing.JButton();
 
+        jDialog3.setMinimumSize(new java.awt.Dimension(283, 180));
+        jDialog3.getContentPane().setLayout(null);
+
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Ingrese un número de Venta:");
+        jDialog3.getContentPane().add(jLabel16);
+        jLabel16.setBounds(26, 28, 180, 17);
+        jDialog3.getContentPane().add(txtNumVenta);
+        txtNumVenta.setBounds(26, 56, 70, 30);
 
         AccetpJD3Butt.setText("Aceptar");
         AccetpJD3Butt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -126,30 +133,8 @@ public class VentanaReportes extends javax.swing.JFrame {
                 AccetpJD3ButtMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
-        jDialog3.getContentPane().setLayout(jDialog3Layout);
-        jDialog3Layout.setHorizontalGroup(
-            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog3Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AccetpJD3Butt)
-                    .addComponent(jLabel16)
-                    .addComponent(txtNumVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(77, Short.MAX_VALUE))
-        );
-        jDialog3Layout.setVerticalGroup(
-            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNumVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AccetpJD3Butt)
-                .addGap(33, 33, 33))
-        );
+        jDialog3.getContentPane().add(AccetpJD3Butt);
+        AccetpJD3Butt.setBounds(100, 100, 71, 30);
 
         jDialog2.setMinimumSize(new java.awt.Dimension(300, 300));
         jDialog2.setResizable(false);
@@ -479,7 +464,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel10.setBounds(77, 11, 274, 22);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(500, 370));
+        setMinimumSize(new java.awt.Dimension(550, 460));
         getContentPane().setLayout(null);
 
         SelecionRep.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -742,14 +727,13 @@ DriverManager.getConnection
                 stmt.setInt(1, idVenta);
                 ResultSet rs = stmt.executeQuery();
                 HashMap hm5 = new HashMap();
-                while(rs.next()){
-                    hm5.put("documento", rs.getString("documento"));
+                
+                if(rs.next()){                                        
+                    hm5.put("documento", rs.getString("documento"));                    
                     hm5.put("numDocumento", rs.getInt("numDocumento"));
                     hm5.put("monto", rs.getDouble("monto"));
                     hm5.put("fecha", rs.getString("fecha"));
-                    
-                }
-                InputStream is5 = VentanaReportes.class.getResourceAsStream("/ventanasproyecto/DetalleVentaReport.jasper");
+                    InputStream is5 = VentanaReportes.class.getResourceAsStream("/ventanasproyecto/DetalleVentaReport.jasper");
                 
                 hm5.put("idVenta",idVenta);
                 
@@ -760,6 +744,11 @@ DriverManager.getConnection
                 JasperViewer viewer5 = 
                          new JasperViewer(impresion5,false);
                         viewer5.setVisible(true);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(this,"La venta ingresada no existe");
+                }
+                
                 break;
         }
         }catch(Exception e){

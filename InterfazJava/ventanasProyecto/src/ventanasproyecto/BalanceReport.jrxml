@@ -109,31 +109,31 @@
 			<line>
 				<reportElement x="38" y="140" width="257" height="1" uuid="2af61f43-3a22-481f-a703-f37d32023124"/>
 			</line>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="175" y="20" width="100" height="20" uuid="bb0feb9d-6f5a-4163-81f6-b5f7ba84dc81"/>
 				<textFieldExpression><![CDATA[$F{Ventas_Totales}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="175" y="80" width="120" height="20" uuid="ce79cc91-d6c2-4668-9d62-6eb5878e2f54"/>
 				<textFieldExpression><![CDATA[$F{Pago_Trabajadores}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="175" y="100" width="100" height="20" uuid="c361ac71-e7e5-44d6-b788-c8dbc5e52aab"/>
 				<textFieldExpression><![CDATA[$F{Compras}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="175" y="40" width="100" height="20" uuid="66abaef5-50ea-4f76-b600-0ee26f7b8fe1"/>
 				<textFieldExpression><![CDATA[$P{servicios}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="175" y="60" width="100" height="20" uuid="50b7d8c1-91f6-4b6f-8c56-66d12bf43ec3"/>
 				<textFieldExpression><![CDATA[$P{alquiler}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="175" y="120" width="100" height="20" uuid="20e4841c-0601-4a67-8130-03d1557a2467"/>
 				<textFieldExpression><![CDATA[$P{otros}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="175" y="151" width="120" height="20" uuid="d38880bd-a630-4c4c-b3ec-9a2d391836aa"/>
 				<textFieldExpression><![CDATA[+$F{Ventas_Totales}-$F{Pago_Trabajadores}-$F{Compras}-$P{servicios}-$P{alquiler}-$P{otros}]]></textFieldExpression>
 			</textField>

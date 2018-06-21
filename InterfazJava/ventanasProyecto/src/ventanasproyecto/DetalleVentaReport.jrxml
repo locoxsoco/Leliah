@@ -16,8 +16,8 @@
 	<field name="Producto" class="java.lang.String"/>
 	<field name="Cantidad" class="java.lang.Integer"/>
 	<field name="PU" class="java.lang.Double"/>
-	<field name="SubTotal" class="java.lang.Double"/>
-	<variable name="SubTotalV" class="java.lang.Double" calculation="Sum">
+	<field name="SubTotal" class="java.lang.Float"/>
+	<variable name="SubTotalV" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{SubTotal}]]></variableExpression>
 	</variable>
 	<background>
@@ -51,11 +51,15 @@
 				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement mode="Transparent" x="385" y="17" width="156" height="56" uuid="081e4651-3c7a-422a-8189-8dedd04172e5"/>
+				<reportElement mode="Transparent" x="380" y="17" width="156" height="56" uuid="081e4651-3c7a-422a-8189-8dedd04172e5"/>
 			</rectangle>
 			<line>
 				<reportElement x="27" y="98" width="518" height="1" uuid="2ddda584-e67b-4ea9-8f1b-aebbda07e44e"/>
 			</line>
+			<staticText>
+				<reportElement x="369" y="78" width="38" height="15" uuid="312160ff-8e94-4b34-a4c1-8ca38c1430b6"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
@@ -96,7 +100,7 @@
 				<reportElement x="226" y="4" width="68" height="15" uuid="0569b405-25e0-4772-a886-9c382f14c9e7"/>
 				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="351" y="4" width="50" height="15" uuid="770ca4ef-0880-46df-b431-01f371c891e0"/>
 				<textFieldExpression><![CDATA[$F{PU}]]></textFieldExpression>
 			</textField>
@@ -104,7 +108,7 @@
 				<reportElement x="17" y="4" width="111" height="15" uuid="acb8a1b2-9c53-4c0e-96c8-903ef73513ae"/>
 				<textFieldExpression><![CDATA["- "+$F{Producto}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="445" y="4" width="84" height="15" uuid="5e30ef10-eb32-49a9-adac-e0012872dd36"/>
 				<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
 			</textField>
@@ -141,23 +145,23 @@
 				<reportElement x="408" y="76" width="44" height="13" uuid="1ea0e29d-4b49-4fc2-b04a-d23345e471ca"/>
 				<text><![CDATA[Total: S/.]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="455" y="42" width="74" height="14" uuid="712dd409-7ae2-4dca-bcb9-016114179655"/>
 				<textFieldExpression><![CDATA[$V{SubTotalV}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="456" y="22" width="74" height="14" uuid="bfed3e97-ec06-4506-abff-8183b5df1e0c"/>
 				<textFieldExpression><![CDATA[$V{SubTotalV}*0.18]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="456" y="8" width="74" height="14" uuid="3093591e-e58c-47d6-8381-8b9e211b0a4d"/>
 				<textFieldExpression><![CDATA[$V{SubTotalV}/1.18]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="456" y="75" width="73" height="14" uuid="95734e56-3bc8-4838-922b-14b49b6b618d"/>
 				<textFieldExpression><![CDATA[$P{monto}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="455" y="56" width="73" height="14" uuid="d49edc89-369c-4085-8e14-b3038ddff144"/>
 				<textFieldExpression><![CDATA[+$P{monto}-$V{SubTotalV}]]></textFieldExpression>
 			</textField>
